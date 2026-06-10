@@ -1,104 +1,142 @@
-import { ArrowRight, Flame, Radio, Star } from "lucide-react";
-import { platformStats } from "@/lib/data";
+import { ArrowRight, Crown, Heart, Sparkles } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-      <div className="absolute inset-x-0 top-24 -z-10 mx-auto h-72 max-w-4xl rounded-full bg-cyan-400/20 blur-3xl" />
+    <section
+      id="home"
+      className="relative isolate min-h-[calc(100vh-4.75rem)] overflow-hidden bg-[#061126] px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+    >
+      <style>
+        {`
+          @keyframes alpineDrift {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.76; }
+            50% { transform: translate3d(1.5rem, -0.75rem, 0) scale(1.04); opacity: 0.96; }
+          }
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
-        <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-200/30 bg-amber-200/10 px-4 py-2 text-sm font-semibold text-amber-100">
-            <Radio className="size-4" aria-hidden="true" />
-            Live weekly creator rankings across the Caribbean
+          @keyframes goldShimmer {
+            0% { transform: translateX(-120%) rotate(10deg); }
+            55%, 100% { transform: translateX(220%) rotate(10deg); }
+          }
+
+          @keyframes slowReveal {
+            from { opacity: 0; transform: translateY(1rem); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          @keyframes snowFall {
+            from { transform: translateY(-12%); }
+            to { transform: translateY(12%); }
+          }
+        `}
+      </style>
+
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_18%_18%,rgba(245,211,122,0.2),transparent_28rem),radial-gradient(circle_at_84%_20%,rgba(135,168,210,0.22),transparent_30rem),linear-gradient(135deg,#041024_0%,#071833_45%,#0f172a_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(6,17,38,0.08)_0%,rgba(6,17,38,0.28)_45%,rgba(6,17,38,0.94)_100%)]" />
+
+      <div
+        className="absolute inset-x-[-10%] bottom-0 -z-10 h-[58%] bg-gradient-to-t from-[#061126] via-[#132744]/80 to-transparent"
+        aria-hidden="true"
+      >
+        <div className="absolute bottom-0 left-0 h-[72%] w-full bg-[#152641] [clip-path:polygon(0_88%,8%_54%,17%_76%,28%_22%,40%_69%,52%_30%,64%_78%,78%_18%,91%_70%,100%_38%,100%_100%,0_100%)]" />
+        <div className="absolute bottom-0 left-0 h-[84%] w-full bg-[#edf4ff]/90 [clip-path:polygon(0_92%,8%_56%,13%_68%,28%_18%,35%_46%,52%_26%,59%_52%,78%_14%,85%_43%,100%_34%,100%_100%,0_100%)]" />
+        <div className="absolute bottom-0 left-0 h-[65%] w-full bg-[#0a1830] [clip-path:polygon(0_72%,11%_46%,25%_78%,38%_32%,49%_70%,62%_38%,74%_80%,88%_40%,100%_64%,100%_100%,0_100%)]" />
+      </div>
+
+      <div
+        className="absolute inset-0 -z-10 opacity-40 [background-image:radial-gradient(circle,rgba(255,255,255,0.75)_1px,transparent_1px)] [background-size:3.5rem_3.5rem]"
+        style={{ animation: "snowFall 11s ease-in-out infinite alternate" }}
+        aria-hidden="true"
+      />
+
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
+        <div style={{ animation: "slowReveal 900ms ease-out both" }}>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#d7b46a]/45 bg-[#081a35]/70 px-4 py-2 text-sm font-semibold text-[#f8e7b7] shadow-2xl shadow-black/20 backdrop-blur-xl">
+            <Sparkles className="size-4" aria-hidden="true" />
+            Swiss Luxury Romantic Edition
           </div>
 
-          <h1 className="max-w-4xl text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Vote your favorite island creators to the top.
+          <h1 className="max-w-5xl font-serif text-5xl font-black leading-[0.95] tracking-[-0.04em] text-white sm:text-6xl lg:text-8xl">
+            A golden romance above the Swiss Alps.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 sm:text-xl">
-            Caribbean Popularity Arena is a fan-powered discovery platform for
-            music, dance, comedy, fashion, food, and travel creators competing
-            for regional bragging rights.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#dce8f7] sm:text-xl">
+            Discover a cinematic arena experience dressed in midnight navy,
+            alpine light, and champagne-gold detail for creators who deserve a
+            grand entrance.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
               href="#vote"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-300 to-orange-500 px-7 py-4 text-base font-black text-slate-950 shadow-xl shadow-orange-500/25 transition hover:-translate-y-1"
+              className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#f7e7aa] via-[#d7b46a] to-[#9f7a2d] px-7 py-4 text-base font-black text-[#071326] shadow-2xl shadow-[#d7b46a]/25 transition duration-500 hover:-translate-y-1"
             >
-              Start voting
-              <ArrowRight className="size-5" aria-hidden="true" />
+              <span
+                className="absolute inset-y-[-30%] left-0 w-12 bg-white/50 blur-md"
+                style={{ animation: "goldShimmer 4.5s ease-in-out infinite" }}
+                aria-hidden="true"
+              />
+              <span className="relative">Enter the arena</span>
+              <ArrowRight className="relative size-5 transition group-hover:translate-x-1" aria-hidden="true" />
             </a>
             <a
               href="#leaderboard"
-              className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/10 px-7 py-4 text-base font-bold text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/15"
+              className="inline-flex items-center justify-center rounded-full border border-[#d7b46a]/35 bg-[#071833]/55 px-7 py-4 text-base font-bold text-[#f8e7b7] shadow-xl shadow-black/10 backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-[#f7e7aa]/70 hover:bg-[#0d2448]/70"
             >
-              View leaderboard
+              View the crown list
             </a>
           </div>
 
-          <dl className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {platformStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-3xl border border-white/10 bg-white/[0.07] p-5 backdrop-blur"
-              >
-                <dt className="text-sm text-slate-300">{stat.label}</dt>
-                <dd className="mt-2 text-2xl font-black text-white">{stat.value}</dd>
+          <dl className="mt-12 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+            {[
+              { label: "Backdrop", value: "Swiss Alps" },
+              { label: "Mood", value: "Romantic" },
+              { label: "Finish", value: "Gold Luxe" }
+            ].map((stat) => (
+              <div key={stat.label} className="rounded-3xl border border-white/10 bg-[#071833]/55 p-5 shadow-2xl shadow-black/15 backdrop-blur-xl">
+                <dt className="text-sm text-[#b8c9e1]">{stat.label}</dt>
+                <dd className="mt-2 font-serif text-2xl font-black text-[#f8e7b7]">{stat.value}</dd>
               </div>
             ))}
           </dl>
         </div>
 
-        <div className="relative">
-          <div className="rounded-[2rem] border border-white/15 bg-white/[0.08] p-5 shadow-2xl shadow-black/30 backdrop-blur-xl">
-            <div className="rounded-[1.5rem] bg-slate-950/80 p-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-bold uppercase tracking-[0.3em] text-cyan-200">
-                    Live pulse
-                  </p>
-                  <h2 className="mt-2 text-2xl font-black">Carnival week surge</h2>
-                </div>
-                <span className="grid size-14 place-items-center rounded-2xl bg-rose-500/20 text-rose-200">
-                  <Flame className="size-7" aria-hidden="true" />
-                </span>
-              </div>
+        <div className="relative min-h-[34rem]" style={{ animation: "slowReveal 900ms 140ms ease-out both" }}>
+          <div
+            className="absolute left-1/2 top-8 h-72 w-72 -translate-x-1/2 rounded-full bg-[#f7e7aa]/20 blur-3xl"
+            style={{ animation: "alpineDrift 8s ease-in-out infinite" }}
+            aria-hidden="true"
+          />
 
-              <div className="mt-8 space-y-4">
-                {["Soca", "Dancehall", "Food", "Travel"].map((label, index) => (
-                  <div key={label} className="rounded-2xl bg-white/[0.06] p-4">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="font-bold">{label}</span>
-                      <span className="text-amber-200">+{24 - index * 4}%</span>
-                    </div>
-                    <div className="mt-3 h-2 rounded-full bg-white/10">
-                      <div
-                        className="h-2 rounded-full bg-gradient-to-r from-cyan-300 to-amber-300"
-                        style={{ width: `${88 - index * 12}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+          <div className="absolute right-0 top-0 hidden h-40 w-40 rounded-full border border-[#d7b46a]/30 md:block" />
+          <div className="absolute bottom-10 left-4 hidden h-24 w-24 rounded-full border border-white/15 md:block" />
 
-              <div className="mt-6 rounded-3xl bg-gradient-to-r from-cyan-400/15 to-orange-400/15 p-5">
-                <div className="flex items-start gap-4">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-amber-300 text-slate-950">
-                    <Star className="size-5 fill-current" aria-hidden="true" />
+          <article className="relative mx-auto max-w-lg rounded-[2.25rem] border border-[#d7b46a]/35 bg-[#071326]/70 p-4 shadow-2xl shadow-black/35 backdrop-blur-2xl">
+            <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-[#10284d] via-[#071833] to-[#030915] p-6">
+              <div className="relative min-h-80 rounded-[1.35rem] bg-[radial-gradient(circle_at_50%_14%,rgba(248,231,183,0.3),transparent_7rem),linear-gradient(to_bottom,#132e52_0%,#061126_72%)] p-5">
+                <div className="absolute inset-x-0 bottom-0 h-44 bg-[#f4f8ff] [clip-path:polygon(0_78%,16%_40%,28%_60%,45%_18%,58%_58%,72%_30%,88%_68%,100%_42%,100%_100%,0_100%)]" />
+                <div className="absolute inset-x-0 bottom-0 h-36 bg-[#091a34] [clip-path:polygon(0_74%,14%_48%,32%_72%,45%_30%,59%_70%,73%_40%,88%_76%,100%_56%,100%_100%,0_100%)]" />
+
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-[0.25em] text-[#f8e7b7] backdrop-blur">
+                    <Crown className="size-4" aria-hidden="true" />
+                    Alpine suite
                   </span>
-                  <div>
-                    <p className="font-black">Tonight&apos;s spotlight</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-300">
-                      Fans unlock bonus vote boosts when their island crosses a
-                      weekly support milestone.
-                    </p>
-                  </div>
+                  <span className="grid size-12 place-items-center rounded-2xl bg-[#d7b46a] text-[#071326] shadow-lg shadow-[#d7b46a]/30">
+                    <Heart className="size-5 fill-current" aria-hidden="true" />
+                  </span>
+                </div>
+
+                <div className="relative z-10 mt-24 max-w-xs">
+                  <p className="font-serif text-3xl font-black leading-tight text-white">
+                    Midnight navy meets champagne light.
+                  </p>
+                  <p className="mt-4 text-sm leading-6 text-[#dce8f7]">
+                    A refined, cinematic first impression designed for premium
+                    creator storytelling.
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
