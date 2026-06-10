@@ -30,27 +30,30 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the arena.
 
-## Firebase setup
+## Placeholder-first environment setup
 
-Copy the example environment file and fill in your Firebase web app values:
+Copy the example environment file for local development:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Required variables:
+All secrets and third-party credentials are placeholders during development.
+The application is designed to run without real production keys. Replace values
+only when connecting production services.
 
-```bash
-NEXT_PUBLIC_FIREBASE_API_KEY=
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
-NEXT_PUBLIC_FIREBASE_APP_ID=
-```
+Environment groups included in `.env.example`:
 
-Firebase helpers live in `src/lib/firebase/client.ts`, and typed collection
-contracts live in `src/lib/firebase/schema.ts`.
+- Application metadata and URLs
+- Feature flags for voting writes, checkout, and analytics
+- Firebase web app credentials
+- Stripe payment credentials and price IDs
+- Cloudflare account, API, and R2 placeholders
+- Google Analytics, Meta Pixel, and PostHog placeholders
+
+The shared environment helper lives in `src/lib/env.ts`. Firebase helpers live
+in `src/lib/firebase/client.ts`, and typed collection contracts live in
+`src/lib/firebase/schema.ts`.
 
 ## Scripts
 
