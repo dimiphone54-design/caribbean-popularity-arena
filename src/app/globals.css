@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #06141f;
-  --foreground: #fff7ed;
+  --background: #050d1d;
+  --foreground: #f7efe0;
+  --luxury-navy: #050d1d;
+  --luxury-navy-soft: #0b1a35;
+  --luxury-gold: #d7b46a;
+  --luxury-gold-bright: #f7e7aa;
+  --luxury-ivory: #f7efe0;
+  --luxury-mist: #b8c9e1;
 }
 
 * {
@@ -16,11 +22,11 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(20, 184, 166, 0.22), transparent 34rem),
-    radial-gradient(circle at top right, rgba(251, 146, 60, 0.2), transparent 32rem),
-    linear-gradient(135deg, #03111d 0%, #07192a 48%, #0d1b2a 100%);
+    radial-gradient(circle at 14% 0%, rgba(247, 231, 170, 0.16), transparent 28rem),
+    radial-gradient(circle at 88% 8%, rgba(64, 96, 146, 0.28), transparent 34rem),
+    linear-gradient(135deg, var(--luxury-navy) 0%, #08172f 46%, #0d1830 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Avenir Next", "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -29,6 +35,16 @@ a {
 }
 
 ::selection {
-  background: rgba(251, 191, 36, 0.35);
-  color: #fffbeb;
+  background: rgba(215, 180, 106, 0.36);
+  color: #fff8e6;
+}
+
+.font-luxury-serif {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.luxury-orb {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(247, 231, 170, 0.5), transparent 0.9rem),
+    linear-gradient(135deg, #f7e7aa 0%, #d7b46a 45%, #8a6420 100%);
 }
