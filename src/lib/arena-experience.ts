@@ -17,6 +17,12 @@ export type ArenaCreatorSlot = {
   language: string;
   likes: number;
   comments: number;
+  portrait: {
+    skin: string;
+    hair: string;
+    outfit: string;
+    accent: string;
+  };
   avatarIcon: string;
   avatarGradient: string;
   votes: number;
@@ -95,6 +101,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Trini Creole",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#9b5b3c", hair: "#191016", outfit: "#f5c842", accent: "#ff5c2b" },
     avatarIcon: "👑",
     avatarGradient: "linear-gradient(160deg,#1a0f3d,#2d1665)",
     votes: 102847,
@@ -116,6 +123,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Jamaican Patois",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#7a432d", hair: "#120b0b", outfit: "#00c853", accent: "#f5c842" },
     avatarIcon: "🎤",
     avatarGradient: "linear-gradient(160deg,#0a2010,#1a5020)",
     votes: 84201,
@@ -136,6 +144,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Bajan",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#a66845", hair: "#2b1411", outfit: "#1f6feb", accent: "#f5c842" },
     avatarIcon: "🌺",
     avatarGradient: "linear-gradient(160deg,#2e0a0a,#6b1515)",
     votes: 71504,
@@ -156,6 +165,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Guyanese Creolese",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#8d5036", hair: "#160d0b", outfit: "#e83030", accent: "#00c9a7" },
     avatarIcon: "🎭",
     avatarGradient: "linear-gradient(160deg,#0a1e2e,#103050)",
     votes: 58110,
@@ -177,6 +187,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Saint Lucian Kweyol",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#b77752", hair: "#25120f", outfit: "#49b6ff", accent: "#f5c842" },
     avatarIcon: "👗",
     avatarGradient: "linear-gradient(160deg,#1a0e2e,#3d1a60)",
     votes: 44892,
@@ -197,6 +208,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Grenadian Creole",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#6f3d2b", hair: "#100808", outfit: "#f44336", accent: "#f5c842" },
     avatarIcon: "📸",
     avatarGradient: "linear-gradient(160deg,#0e2010,#1e4020)",
     votes: 39045,
@@ -218,6 +230,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Vincentian Creole",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#9f6040", hair: "#20100d", outfit: "#0fbf6b", accent: "#3b82f6" },
     avatarIcon: "🎨",
     avatarGradient: "linear-gradient(160deg,#1e1a0a,#4a3a10)",
     votes: 31720,
@@ -238,6 +251,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Antiguan Creole",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#b16e4a", hair: "#1d0f0d", outfit: "#ff5c8a", accent: "#f5c842" },
     avatarIcon: "💄",
     avatarGradient: "linear-gradient(160deg,#10101e,#252050)",
     votes: 27481,
@@ -258,6 +272,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Dominican Kweyol",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#7d4932", hair: "#130b08", outfit: "#16a34a", accent: "#ff5c2b" },
     avatarIcon: "🍽️",
     avatarGradient: "linear-gradient(160deg,#0a1a10,#104020)",
     votes: 22914,
@@ -278,6 +293,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Kittitian Creole",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#a26342", hair: "#170d0b", outfit: "#111827", accent: "#f5c842" },
     avatarIcon: "⚽",
     avatarGradient: "linear-gradient(160deg,#1a100a,#402510)",
     votes: 18302,
@@ -298,6 +314,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Belizean Kriol",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#8f5639", hair: "#1a0e0c", outfit: "#2563eb", accent: "#e83030" },
     avatarIcon: "🎬",
     avatarGradient: "linear-gradient(160deg,#0a0e1a,#151a35)",
     votes: 14567,
@@ -318,6 +335,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     language: "Sranan Tongo",
     likes: 0,
     comments: 0,
+    portrait: { skin: "#7b4630", hair: "#0f0908", outfit: "#f5c842", accent: "#15803d" },
     avatarIcon: "🌿",
     avatarGradient: "linear-gradient(160deg,#10180a,#253510)",
     votes: 9841,

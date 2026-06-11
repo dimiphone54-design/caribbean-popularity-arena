@@ -411,8 +411,39 @@ export function LiveArenaExperience() {
                 style={slot.isOnFire ? { animation: "hotSlot 1.5s ease-in-out infinite,borderFire 1s ease-in-out infinite" } : undefined}
               >
                 <div className="relative flex h-40 items-end justify-center overflow-hidden">
-                  <div className="absolute inset-0 grid place-items-center text-6xl" style={{ background: slot.avatarGradient }}>
-                    {slot.avatarIcon}
+                  <div className="absolute inset-0" style={{ background: slot.avatarGradient }} />
+                  <div className="absolute inset-x-0 top-4 mx-auto h-36 w-28">
+                    <div
+                      className="absolute left-1/2 top-0 h-20 w-20 -translate-x-1/2 rounded-t-[2.5rem] rounded-b-[1.2rem] shadow-2xl"
+                      style={{ backgroundColor: slot.portrait.hair }}
+                    />
+                    <div
+                      className="absolute left-1/2 top-5 h-16 w-14 -translate-x-1/2 rounded-[42%] shadow-[inset_0_-10px_18px_rgba(0,0,0,.12)]"
+                      style={{ backgroundColor: slot.portrait.skin }}
+                    >
+                      <span className="absolute left-4 top-6 size-1.5 rounded-full bg-[#1b1110]" />
+                      <span className="absolute right-4 top-6 size-1.5 rounded-full bg-[#1b1110]" />
+                      <span className="absolute bottom-4 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-[#6b241f]/70" />
+                    </div>
+                    <div
+                      className="absolute left-1/2 top-[4.85rem] h-7 w-5 -translate-x-1/2 rounded-b-lg"
+                      style={{ backgroundColor: slot.portrait.skin }}
+                    />
+                    <div
+                      className="absolute bottom-0 left-1/2 h-16 w-24 -translate-x-1/2 rounded-t-[2rem] border border-white/15 shadow-2xl"
+                      style={{
+                        background: `linear-gradient(135deg, ${slot.portrait.outfit}, ${slot.portrait.accent})`
+                      }}
+                    />
+                    <div
+                      className="absolute bottom-8 left-0 h-4 w-12 -rotate-12 rounded-full"
+                      style={{ backgroundColor: slot.portrait.skin }}
+                    />
+                    <div
+                      className="absolute bottom-8 right-0 h-4 w-12 rotate-12 rounded-full"
+                      style={{ backgroundColor: slot.portrait.skin }}
+                    />
+                    <div className="absolute left-1/2 top-1 h-7 w-16 -translate-x-1/2 rounded-t-full bg-white/10 blur-sm" />
                   </div>
                   <span className="absolute left-2 top-2 rounded-md bg-[#0a0e1f]/70 px-1.5 py-1 text-lg">
                     {slot.flag}
@@ -457,13 +488,15 @@ export function LiveArenaExperience() {
                     <span>💬 Comments {slot.comments}</span>
                   </div>
                   <div className="mt-2 flex items-center justify-between">
-                    <span className="text-xs font-black text-[#f5c842]">{formatVotes(slot.votes)}</span>
+                    <span className="font-mono text-xs font-black tabular-nums text-[#f5c842]">
+                      {formatVotes(slot.votes)}
+                    </span>
                     <span className={`text-xs ${slot.trendTone === "down" ? "text-[#ff8060]" : "text-[#00c9a7]"}`}>
                       {slot.trend}
                     </span>
                   </div>
                   <div className="mt-1.5 h-1 overflow-hidden rounded bg-white/[0.08]">
-                    <div className="h-full rounded bg-gradient-to-r from-[#ff5c2b] to-[#f5c842] transition-all" style={{ width: `${slot.progress}%` }} />
+                    <div className="h-full rounded bg-gradient-to-r from-[#ff5c2b] to-[#f5c842]" style={{ width: `${slot.progress}%` }} />
                   </div>
                 </div>
 
