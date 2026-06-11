@@ -33,7 +33,13 @@ export const env = {
     stripeWebhookSecret: readEnv("STRIPE_WEBHOOK_SECRET"),
     fanPassPriceId: readEnv("STRIPE_FAN_PASS_PRICE_ID"),
     arenaPlusPriceId: readEnv("STRIPE_ARENA_PLUS_PRICE_ID"),
-    creatorCirclePriceId: readEnv("STRIPE_CREATOR_CIRCLE_PRICE_ID")
+    creatorCirclePriceId: readEnv("STRIPE_CREATOR_CIRCLE_PRICE_ID"),
+    wipayCheckoutUrl: readEnv("NEXT_PUBLIC_WIPAY_CHECKOUT_URL"),
+    wipayAccountName: readEnv("NEXT_PUBLIC_WIPAY_ACCOUNT_NAME"),
+    wipayAccountId: readEnv("WIPAY_ACCOUNT_ID"),
+    wipayApiKey: readEnv("WIPAY_API_KEY"),
+    wipayApiSecret: readEnv("WIPAY_API_SECRET"),
+    mensEntryAmountUsd: readEnv("WIPAY_MENS_ENTRY_AMOUNT_USD", "6")
   },
   cloudflare: {
     accountId: readEnv("CLOUDFLARE_ACCOUNT_ID"),
@@ -62,6 +68,12 @@ export const serviceReadiness = {
     env.payments.stripePublishableKey,
     env.payments.stripeSecretKey,
     env.payments.stripeWebhookSecret
+  ]),
+  wipay: hasUsableConfig([
+    env.payments.wipayCheckoutUrl,
+    env.payments.wipayAccountId,
+    env.payments.wipayApiKey,
+    env.payments.wipayApiSecret
   ]),
   cloudflareR2: hasUsableConfig([
     env.cloudflare.accountId,

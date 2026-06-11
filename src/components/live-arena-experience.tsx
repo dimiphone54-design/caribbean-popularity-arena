@@ -25,6 +25,12 @@ type SlotState = ArenaCreatorSlot & {
   hasVoted?: boolean;
 };
 
+const mensEntryAmountUsd = "6";
+const wipayCheckoutUrl = process.env.NEXT_PUBLIC_WIPAY_CHECKOUT_URL ?? "";
+const wipayAccountName = process.env.NEXT_PUBLIC_WIPAY_ACCOUNT_NAME ?? "WiPay";
+const isWipayCheckoutReady =
+  Boolean(wipayCheckoutUrl) && !["placeholder", "replace-me", "your-value-here"].includes(wipayCheckoutUrl);
+
 type ToastState = {
   message: string;
   tone?: "gold" | "warning";
@@ -57,6 +63,7 @@ export function LiveArenaExperience() {
   const [activeIsland, setActiveIsland] = useState(0);
   const [slots, setSlots] = useState<SlotState[]>(arenaCreators);
   const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
+  const [selectedEntrySlotId, setSelectedEntrySlotId] = useState<number | null>(null);
   const [selectedBoost, setSelectedBoost] = useState<BoostPack>(boostPacks[0]);
   const [toast, setToast] = useState<ToastState | null>(null);
   const [slotTimerSeconds, setSlotTimerSeconds] = useState(12 * 60 * 60);
@@ -64,6 +71,10 @@ export function LiveArenaExperience() {
   const selectedSlot = useMemo(
     () => slots.find((slot) => slot.id === selectedSlotId) ?? null,
     [selectedSlotId, slots]
+  );
+  const selectedEntrySlot = useMemo(
+    () => slots.find((slot) => slot.id === selectedEntrySlotId) ?? null,
+    [selectedEntrySlotId, slots]
   );
 
   useEffect(() => {
@@ -210,6 +221,22 @@ export function LiveArenaExperience() {
     burstAt(rect.left + rect.width / 2, rect.top, 30);
     setSelectedSlotId(slotId);
     setSelectedBoost(boostPacks[0]);
+  };
+
+  const openMensEntry = (slotId: number, event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setSelectedEntrySlotId(slotId);
+  };
+
+  const handleMensEntryCheckout = () => {
+    if (!selectedEntrySlot) return;
+
+    if (!isWipayCheckoutReady) {
+      showToast("WiPay checkout placeholder: add NEXT_PUBLIC_WIPAY_CHECKOUT_URL.", "warning");
+      return;
+    }
+
+    window.open(wipayCheckoutUrl, "_blank", "noopener,noreferrer");
   };
 
   const confirmFireUp = () => {
@@ -459,8 +486,14 @@ export function LiveArenaExperience() {
                       {slot.language}
                     </span>
                   </blockquote>
-                  <div className="mt-2 flex items-center justify-between text-[11px] font-bold text-[#7a82a8]">
-                    <span>♡ Likes {slot.likes}</span>
+                  <div className="mt-2 flex items-center justify-between gap-2 text-[11px] font-bold text-[#7a82a8]">
+                    <button
+                      type="button"
+                      onClick={(event) => openMensEntry(slot.id, event)}
+                      className="rounded-md border border-[#f5c842]/25 bg-[#f5c842]/10 px-2 py-1 text-[#f5c842] transition hover:border-[#f5c842]/60 hover:bg-[#f5c842]/20"
+                    >
+                      ♡ Like · Men ${mensEntryAmountUsd} Entry
+                    </button>
                     <span>💬 Comments {slot.comments}</span>
                   </div>
                   <div className="mt-2 flex items-center justify-between">
@@ -557,6 +590,53 @@ export function LiveArenaExperience() {
             >
               🔥 Fire Up Now — Pay with WiPay
             </button>
+          </div>
+        </div>
+      ) : null}
+
+      {selectedEntrySlot ? (
+        <div className="fixed inset-0 z-[90] grid place-items-center bg-black/75 p-4 backdrop-blur-lg" onClick={() => setSelectedEntrySlotId(null)}>
+          <div
+            className="relative w-full max-w-sm rounded-[1.25rem] border border-[#f5c842]/40 bg-[#0d1225] p-8 text-center shadow-[0_0_60px_rgba(245,200,66,.2),0_0_120px_rgba(255,92,43,.1)]"
+            onClick={(event) => event.stopPropagation()}
+            style={{ animation: "modalIn .25s ease-out both" }}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedEntrySlotId(null)}
+              className="absolute right-4 top-3 text-xl text-[#7a82a8] hover:text-[#f0edf8]"
+              aria-label="Close Men's Entry modal"
+            >
+              ×
+            </button>
+            <div className="mb-2 text-5xl">♡</div>
+            <h2 className="font-['Bebas_Neue',sans-serif] text-3xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#f5c842] to-[#ff5c2b]">
+              Men&apos;s Entry
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-[#7a82a8]">
+              This like is the only men&apos;s interaction. Entry is ${mensEntryAmountUsd} USD and routes through WiPay.
+            </p>
+            <div className="my-5 rounded-xl border border-white/[0.07] bg-[#111830] p-4 text-left">
+              <p className="text-sm font-black text-[#f0edf8]">♡ Like {selectedEntrySlot.name}</p>
+              <p className="mt-1 text-xs text-[#7a82a8]">
+                {selectedEntrySlot.flag} {selectedEntrySlot.country} · paid entry to {wipayAccountName}
+              </p>
+              <p className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-wide text-[#f5c842]">
+                ${mensEntryAmountUsd} USD
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleMensEntryCheckout}
+              className="w-full rounded-xl bg-gradient-to-r from-[#f5c842] to-[#ff5c2b] px-4 py-3.5 text-sm font-black text-[#0a0e1f] transition hover:opacity-90"
+            >
+              Continue to WiPay
+            </button>
+            {!isWipayCheckoutReady ? (
+              <p className="mt-3 text-xs leading-5 text-[#ff8060]">
+                Development placeholder active. Add a real WiPay checkout URL in .env.local for production.
+              </p>
+            ) : null}
           </div>
         </div>
       ) : null}
