@@ -29,7 +29,10 @@ const mensEntryAmountUsd = "6";
 const wipayCheckoutUrl = process.env.NEXT_PUBLIC_WIPAY_CHECKOUT_URL ?? "";
 const wipayAccountName = process.env.NEXT_PUBLIC_WIPAY_ACCOUNT_NAME ?? "WiPay";
 const isWipayCheckoutReady =
-  Boolean(wipayCheckoutUrl) && !["placeholder", "replace-me", "your-value-here"].includes(wipayCheckoutUrl);
+  Boolean(wipayCheckoutUrl) &&
+  wipayCheckoutUrl !== "placeholder" &&
+  wipayCheckoutUrl !== "replace-me" &&
+  wipayCheckoutUrl !== "your-value-here";
 
 type ToastState = {
   message: string;
