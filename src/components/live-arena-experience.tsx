@@ -59,7 +59,6 @@ export function LiveArenaExperience() {
   const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
   const [selectedBoost, setSelectedBoost] = useState<BoostPack>(boostPacks[0]);
   const [toast, setToast] = useState<ToastState | null>(null);
-  const [timerSeconds, setTimerSeconds] = useState(22 * 60 + 14);
   const [slotTimerSeconds, setSlotTimerSeconds] = useState(12 * 60 * 60);
 
   const selectedSlot = useMemo(
@@ -69,7 +68,6 @@ export function LiveArenaExperience() {
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setTimerSeconds((seconds) => (seconds <= 0 ? 3600 : seconds - 1));
       setSlotTimerSeconds((seconds) => (seconds <= 0 ? 12 * 60 * 60 : seconds - 1));
     }, 1000);
 
@@ -238,11 +236,6 @@ export function LiveArenaExperience() {
     setSelectedSlotId(null);
   };
 
-  const minutes = Math.floor(timerSeconds / 60);
-  const seconds = timerSeconds % 60;
-  const timerLabel = `${minutes.toString().padStart(2, "0")}:${seconds
-    .toString()
-    .padStart(2, "0")}`;
   const slotTimerLabel = formatCountdown(slotTimerSeconds);
   const countrySlideItems = [...islandTabs, ...islandTabs];
 
@@ -294,6 +287,11 @@ export function LiveArenaExperience() {
       </style>
 
       <canvas ref={canvasRef} className="fixed inset-0 z-0 h-full w-full opacity-35" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-35" aria-hidden="true">
+        <div className="absolute -left-10 bottom-20 text-[11rem] text-[#062512]/70 blur-[1px]">🌴</div>
+        <div className="absolute -right-8 bottom-28 scale-x-[-1] text-[9rem] text-[#062512]/60 blur-[1px]">🌴</div>
+        <div className="absolute left-[8%] top-32 h-20 w-72 bg-white/10 [clip-path:polygon(0_100%,18%_38%,28%_65%,42%_18%,58%_72%,72%_32%,100%_100%)]" />
+      </div>
 
       <nav className="fixed inset-x-0 top-0 z-50 flex h-[58px] items-center justify-between border-b border-[#ff5c2b]/25 bg-[#0a0e1f]/95 px-4 shadow-[0_1px_30px_rgba(255,92,43,.15)] backdrop-blur-2xl sm:px-7">
         <a href="#home" className="flex items-center font-['Bebas_Neue',sans-serif] text-[24px] tracking-[1px] sm:text-[26px]">
@@ -352,27 +350,6 @@ export function LiveArenaExperience() {
       </div>
 
       <div className="relative z-10 pt-[104px]">
-        <div className="relative flex min-h-[58px] items-center gap-4 overflow-hidden bg-gradient-to-r from-[#6b0a0a] via-[#e83030] to-[#6b0a0a] px-4 sm:px-7">
-          <div className="grid size-10 shrink-0 place-items-center rounded-lg border border-white/20 bg-black/30 text-xl">
-            ⚔️
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-[11px] font-black uppercase tracking-[0.12em] text-white/70">
-              🔥 Hourly Boss Battle — Fire Up your pick to claim the throne
-            </p>
-            <p className="truncate text-sm font-bold text-white">
-              No one in the lead this hour — claim the throne first 🔥 Win 1hr FREE VIP Incognito
-            </p>
-          </div>
-          <div
-            className="hidden items-center gap-2 rounded-lg border border-[#f5c842]/40 bg-black/40 px-3 py-1.5 font-['Bebas_Neue',sans-serif] text-2xl tracking-[0.12em] text-[#f5c842] sm:flex"
-          >
-            <span className="size-2 rounded-full bg-[#ff6b6b]" />
-            {timerLabel}
-            <span className="font-sans text-xs font-bold normal-case tracking-normal text-white/50">left</span>
-          </div>
-        </div>
-
         <div className="overflow-hidden bg-gradient-to-r from-[#ff5c2b] via-[#e8a800] to-[#ff5c2b] py-2 [background-size:200%_auto]">
           <div className="flex w-max gap-10 whitespace-nowrap">
             {[...tickerItems, ...tickerItems].map((item, index) => (
