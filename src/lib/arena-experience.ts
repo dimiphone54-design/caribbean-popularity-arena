@@ -40,7 +40,29 @@ export const islandTabs: IslandTab[] = [
   { label: "Dominica", flag: "🇩🇲" },
   { label: "St. Kitts", flag: "🇰🇳" },
   { label: "Belize", flag: "🇧🇿" },
-  { label: "Suriname", flag: "🇸🇷" }
+  { label: "Suriname", flag: "🇸🇷" },
+  { label: "Bahamas", flag: "🇧🇸" },
+  { label: "Cuba", flag: "🇨🇺" },
+  { label: "Dominican Republic", flag: "🇩🇴" },
+  { label: "Haiti", flag: "🇭🇹" },
+  { label: "Puerto Rico", flag: "🇵🇷" },
+  { label: "Aruba", flag: "🇦🇼" },
+  { label: "Curacao", flag: "🇨🇼" },
+  { label: "Bermuda", flag: "🇧🇲" },
+  { label: "Cayman Islands", flag: "🇰🇾" },
+  { label: "Turks & Caicos", flag: "🇹🇨" },
+  { label: "British Virgin Islands", flag: "🇻🇬" },
+  { label: "U.S. Virgin Islands", flag: "🇻🇮" },
+  { label: "Anguilla", flag: "🇦🇮" },
+  { label: "Montserrat", flag: "🇲🇸" },
+  { label: "Guadeloupe", flag: "🇬🇵" },
+  { label: "Martinique", flag: "🇲🇶" },
+  { label: "Saint Martin", flag: "🇲🇫" },
+  { label: "Sint Maarten", flag: "🇸🇽" },
+  { label: "Saint Barthelemy", flag: "🇧🇱" },
+  { label: "Bonaire", flag: "🇧🇶" },
+  { label: "Saba", flag: "🇧🇶" },
+  { label: "Sint Eustatius", flag: "🇧🇶" }
 ];
 
 export const tickerItems = [
