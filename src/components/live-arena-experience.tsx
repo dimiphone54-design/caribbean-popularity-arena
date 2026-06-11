@@ -366,16 +366,15 @@ export function LiveArenaExperience() {
           </div>
           <div
             className="hidden items-center gap-2 rounded-lg border border-[#f5c842]/40 bg-black/40 px-3 py-1.5 font-['Bebas_Neue',sans-serif] text-2xl tracking-[0.12em] text-[#f5c842] sm:flex"
-            style={{ animation: "glowPulse 1.5s ease-in-out infinite" }}
           >
-            <span className="size-2 rounded-full bg-[#ff6b6b]" style={{ animation: "blink .8s ease-in-out infinite" }} />
+            <span className="size-2 rounded-full bg-[#ff6b6b]" />
             {timerLabel}
             <span className="font-sans text-xs font-bold normal-case tracking-normal text-white/50">left</span>
           </div>
         </div>
 
-        <div className="overflow-hidden bg-gradient-to-r from-[#ff5c2b] via-[#e8a800] to-[#ff5c2b] py-2 [background-size:200%_auto]" style={{ animation: "shimmer 3s linear infinite" }}>
-          <div className="flex w-max gap-10 whitespace-nowrap" style={{ animation: "tick 28s linear infinite" }}>
+        <div className="overflow-hidden bg-gradient-to-r from-[#ff5c2b] via-[#e8a800] to-[#ff5c2b] py-2 [background-size:200%_auto]">
+          <div className="flex w-max gap-10 whitespace-nowrap">
             {[...tickerItems, ...tickerItems].map((item, index) => (
               <span key={`${item}-${index}`} className="flex items-center gap-2 text-xs font-black tracking-wide text-[#0a0e1f]">
                 {item}
