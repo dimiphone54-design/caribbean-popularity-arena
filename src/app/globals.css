@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+:root {
+  --background: #050d1d;
+  --foreground: #f7efe0;
+  --luxury-navy: #050d1d;
+  --luxury-navy-soft: #0b1a35;
+  --luxury-gold: #d7b46a;
+  --luxury-gold-bright: #f7e7aa;
+  --luxury-ivory: #f7efe0;
+  --luxury-mist: #b8c9e1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 14% 0%, rgba(247, 231, 170, 0.16), transparent 28rem),
+    radial-gradient(circle at 88% 8%, rgba(64, 96, 146, 0.28), transparent 34rem),
+    linear-gradient(135deg, var(--luxury-navy) 0%, #08172f 46%, #0d1830 100%);
+  color: var(--foreground);
+  font-family: "Inter", "Avenir Next", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(215, 180, 106, 0.36);
+  color: #fff8e6;
+}
+
+.font-luxury-serif {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.luxury-orb {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(247, 231, 170, 0.5), transparent 0.9rem),
+    linear-gradient(135deg, #f7e7aa 0%, #d7b46a 45%, #8a6420 100%);
+}
+
+.legal-markdown {
+  color: #d9e4f2;
+  line-height: 1.7;
+}
+
+.legal-markdown h1,
+.legal-markdown h2,
+.legal-markdown h3 {
+  color: #f7efe0;
+  font-weight: 700;
+  scroll-margin-top: 6rem;
+}
+
+.legal-markdown h1 {
+  font-size: 1.875rem;
+  margin: 0 0 1rem;
+}
+
+.legal-markdown h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(215, 180, 106, 0.15);
+}
+
+.legal-markdown h3 {
+  font-size: 1.05rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.legal-markdown p,
+.legal-markdown li {
+  color: #b8c9e1;
+  font-size: 0.95rem;
+}
+
+.legal-markdown p {
+  margin: 0.75rem 0;
+}
+
+.legal-markdown ul,
+.legal-markdown ol {
+  margin: 0.75rem 0 0.75rem 1.25rem;
+}
+
+.legal-markdown li {
+  margin: 0.35rem 0;
+}
+
+.legal-markdown hr {
+  border: 0;
+  border-top: 1px solid rgba(215, 180, 106, 0.15);
+  margin: 1.5rem 0;
+}
+
+.legal-markdown strong {
+  color: #f7e7aa;
+  font-weight: 700;
+}
+
+.legal-markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.legal-markdown th,
+.legal-markdown td {
+  border: 1px solid rgba(215, 180, 106, 0.18);
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.legal-markdown th {
+  color: #f7e7aa;
+  background: rgba(215, 180, 106, 0.08);
+}
+
+.legal-markdown code {
+  border-radius: 0.35rem;
+  background: rgba(0, 0, 0, 0.28);
+  padding: 0.1rem 0.35rem;
+  color: #f7efe0;
+}
