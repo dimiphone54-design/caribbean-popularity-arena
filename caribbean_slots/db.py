@@ -28,6 +28,21 @@ SEED_SLOTS = [
     (12, "Liana Fernandez", 23, "Suriname", "🇸🇷", "Lifestyle", "Mi e lobi den fans, wi e wini tide.", "Sranan Tongo", 9841),
 ]
 
+WAITING_SLOTS = [
+    (101, "Valentina Cruz", 24, "Puerto Rico", "🇵🇷", "Dance", "Boricua fire, corazón primero.", "Puerto Rican Spanish", 0),
+    (102, "Camila Reyes", 23, "Dominican Republic", "🇩🇴", "Music", "Yo vengo con flow y corazón.", "Dominican Spanish", 0),
+    (103, "Marisol Vega", 25, "Cuba", "🇨🇺", "Lifestyle", "Mi gente, vamos con alegría.", "Cuban Spanish", 0),
+    (104, "Anaya Pierre", 22, "Haiti", "🇭🇹", "Fashion", "Mwen la pou klere ak fòs.", "Haitian Creole", 0),
+    (105, "Kaya Rolle", 21, "Bahamas", "🇧🇸", "Beauty", "Big island glow, straight from Nassau.", "Bahamian Creole", 0),
+    (106, "Isabella Maduro", 24, "Aruba", "🇦🇼", "Travel", "Mi ta bria cu amor di isla.", "Papiamento", 0),
+    (107, "Sofia Martina", 26, "Curacao", "🇨🇼", "Art", "Nos kultura ta subi den lus.", "Papiamentu", 0),
+    (108, "Brielle Bean", 23, "Bermuda", "🇧🇲", "Content", "Bermy style, calm waves, big dreams.", "Bermudian English", 0),
+    (109, "Alana Ebanks", 22, "Cayman Islands", "🇰🇾", "Food", "Cayman flavor with a champion heart.", "Caymanian English", 0),
+    (110, "Sienna Missick", 25, "Turks & Caicos", "🇹🇨", "Photo", "Blue water, bold spirit, full grace.", "TCI English", 0),
+    (111, "Jasmine Hodge", 24, "British Virgin Islands", "🇻🇬", "Sailing", "BVI breeze, but I moving strong.", "BVI English", 0),
+    (112, "Leah Francis", 23, "U.S. Virgin Islands", "🇻🇮", "Culture", "VI pride, all heart, all shine.", "Virgin Islands English", 0),
+]
+
 
 def utc_now() -> datetime:
     return datetime.now(timezone.utc)
@@ -85,9 +100,41 @@ def initialize_database(db_path: Path | str = DB_PATH) -> None:
                 created_at TEXT NOT NULL,
                 FOREIGN KEY(slot_id) REFERENCES slots(id)
             );
+
+            CREATE TABLE IF NOT EXISTS waiting_slots (
+                id INTEGER PRIMARY KEY,
+                queue_position INTEGER NOT NULL UNIQUE,
+                name TEXT NOT NULL,
+                age INTEGER NOT NULL,
+                country TEXT NOT NULL,
+                flag TEXT NOT NULL,
+                category TEXT NOT NULL,
+                quote TEXT NOT NULL,
+                language TEXT NOT NULL,
+                likes INTEGER NOT NULL DEFAULT 0,
+                comments INTEGER NOT NULL DEFAULT 0,
+                votes INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS rotation_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                rotated_at TEXT NOT NULL,
+                front_count INTEGER NOT NULL,
+                waiting_count INTEGER NOT NULL,
+                source TEXT NOT NULL DEFAULT 'legal_placeholder_bot'
+            );
+
+            CREATE TABLE IF NOT EXISTS bot_config (
+                key TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+            );
             """
         )
         seed_slots(conn)
+        seed_waiting_slots(conn)
+        seed_bot_config(conn)
 
 
 def seed_slots(conn: sqlite3.Connection) -> None:
@@ -124,10 +171,52 @@ def seed_slots(conn: sqlite3.Connection) -> None:
         )
 
 
+def seed_waiting_slots(conn: sqlite3.Connection) -> None:
+    existing_count = conn.execute("SELECT COUNT(*) AS count FROM waiting_slots").fetchone()["count"]
+    if existing_count:
+        return
+
+    now = iso(utc_now())
+    for position, (slot_id, name, age, country, flag, category, quote, language, votes) in enumerate(WAITING_SLOTS, start=1):
+        conn.execute(
+            """
+            INSERT INTO waiting_slots (
+                id, queue_position, name, age, country, flag, category, quote,
+                language, likes, comments, votes, created_at, updated_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?)
+            """,
+            (slot_id, position, name, age, country, flag, category, quote, language, votes, now, now),
+        )
+
+
+def seed_bot_config(conn: sqlite3.Connection) -> None:
+    now = iso(utc_now())
+    defaults = {
+        "bot_mode": "legal_placeholder",
+        "fake_api_key": os.environ.get("CARIBBEAN_SLOTS_BOT_API_KEY", "fake_caribbean_slots_bot_key"),
+        "fake_webhook_secret": os.environ.get("CARIBBEAN_SLOTS_BOT_WEBHOOK_SECRET", "fake_caribbean_slots_webhook_secret"),
+        "rotation_interval_hours": "12",
+        "last_rotation_at": now,
+    }
+    for key, value in defaults.items():
+        conn.execute(
+            "INSERT OR IGNORE INTO bot_config (key, value) VALUES (?, ?)",
+            (key, value),
+        )
+
+
 def list_slots(db_path: Path | str = DB_PATH) -> list[dict[str, Any]]:
     initialize_database(db_path)
     with connect(db_path) as conn:
         rows = conn.execute("SELECT * FROM slots ORDER BY rank ASC").fetchall()
+        return [row_to_dict(row) for row in rows]
+
+
+def list_waiting_slots(db_path: Path | str = DB_PATH) -> list[dict[str, Any]]:
+    initialize_database(db_path)
+    with connect(db_path) as conn:
+        rows = conn.execute("SELECT * FROM waiting_slots ORDER BY queue_position ASC").fetchall()
         return [row_to_dict(row) for row in rows]
 
 
@@ -179,6 +268,96 @@ def reset_expired_countdowns(db_path: Path | str = DB_PATH) -> int:
             (iso(next_end), iso(now), iso(now)),
         )
         return cursor.rowcount
+
+
+def rotate_waiting_slots_to_front(db_path: Path | str = DB_PATH, source: str = "legal_placeholder_bot") -> dict[str, Any]:
+    initialize_database(db_path)
+    now = utc_now()
+    next_end = now + timedelta(hours=12)
+    with connect(db_path) as conn:
+        front_rows = conn.execute("SELECT * FROM slots ORDER BY rank ASC").fetchall()
+        waiting_rows = conn.execute("SELECT * FROM waiting_slots ORDER BY queue_position ASC").fetchall()
+        if len(front_rows) != 12 or len(waiting_rows) != 12:
+            raise ValueError("Rotation requires exactly 12 front slots and 12 waiting slots")
+
+        for rank, row in enumerate(waiting_rows, start=1):
+            conn.execute(
+                """
+                UPDATE slots
+                SET rank = ?, name = ?, age = ?, country = ?, flag = ?, category = ?,
+                    quote = ?, language = ?, likes = ?, comments = ?, votes = ?,
+                    countdown_ends_at = ?, updated_at = ?
+                WHERE id = ?
+                """,
+                (
+                    rank,
+                    row["name"],
+                    row["age"],
+                    row["country"],
+                    row["flag"],
+                    row["category"],
+                    row["quote"],
+                    row["language"],
+                    row["likes"],
+                    row["comments"],
+                    row["votes"],
+                    iso(next_end),
+                    iso(now),
+                    rank,
+                ),
+            )
+
+        for position, row in enumerate(front_rows, start=1):
+            conn.execute(
+                """
+                UPDATE waiting_slots
+                SET name = ?, age = ?, country = ?, flag = ?, category = ?,
+                    quote = ?, language = ?, likes = ?, comments = ?, votes = ?,
+                    updated_at = ?
+                WHERE queue_position = ?
+                """,
+                (
+                    row["name"],
+                    row["age"],
+                    row["country"],
+                    row["flag"],
+                    row["category"],
+                    row["quote"],
+                    row["language"],
+                    row["likes"],
+                    row["comments"],
+                    row["votes"],
+                    iso(now),
+                    position,
+                ),
+            )
+
+        conn.execute(
+            "INSERT INTO rotation_events (rotated_at, front_count, waiting_count, source) VALUES (?, 12, 12, ?)",
+            (iso(now), source),
+        )
+        conn.execute(
+            "INSERT OR REPLACE INTO bot_config (key, value) VALUES ('last_rotation_at', ?)",
+            (iso(now),),
+        )
+
+    return {
+        "rotated_at": iso(now),
+        "next_rotation_at": iso(next_end),
+        "front_count": 12,
+        "waiting_count": 12,
+        "source": source,
+    }
+
+
+def should_rotate(db_path: Path | str = DB_PATH) -> bool:
+    initialize_database(db_path)
+    with connect(db_path) as conn:
+        row = conn.execute("SELECT value FROM bot_config WHERE key = 'last_rotation_at'").fetchone()
+        if row is None:
+            return True
+        last_rotation = datetime.fromisoformat(row["value"])
+        return utc_now() >= last_rotation + timedelta(hours=12)
 
 
 if __name__ == "__main__":

@@ -5,7 +5,14 @@ from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse
 
-from db import create_mens_entry, get_slot, initialize_database, list_slots
+from db import (
+    create_mens_entry,
+    get_slot,
+    initialize_database,
+    list_slots,
+    list_waiting_slots,
+    rotate_waiting_slots_to_front,
+)
 
 
 HOST = "0.0.0.0"
@@ -33,6 +40,10 @@ class CaribbeanSlotsHandler(BaseHTTPRequestHandler):
 
         if path == "/slots":
             self._send_json({"slots": list_slots()})
+            return
+
+        if path == "/waiting-slots":
+            self._send_json({"waiting_slots": list_waiting_slots()})
             return
 
         if path.startswith("/slots/"):
@@ -70,6 +81,16 @@ class CaribbeanSlotsHandler(BaseHTTPRequestHandler):
                 },
                 HTTPStatus.CREATED,
             )
+            return
+
+        if path == "/bot/rotate":
+            try:
+                result = rotate_waiting_slots_to_front(source="api")
+            except ValueError as exc:
+                self._send_error(str(exc), HTTPStatus.CONFLICT)
+                return
+
+            self._send_json({"rotation": result}, HTTPStatus.CREATED)
             return
 
         self._send_error("Route not found", HTTPStatus.NOT_FOUND)
