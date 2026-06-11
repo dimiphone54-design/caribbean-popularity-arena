@@ -32,6 +32,16 @@ type ToastState = {
 
 const formatVotes = (votes: number) => votes.toLocaleString("en-US");
 
+const formatCountdown = (totalSeconds: number) => {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+};
+
 const rankClass = (rank: number) => {
   if (rank === 1) return "bg-gradient-to-br from-[#f5c842] to-[#e8a800] text-[#0a0e1f]";
   if (rank === 2) return "bg-gradient-to-br from-[#c0c0c0] to-[#888] text-[#0a0e1f]";
@@ -50,6 +60,7 @@ export function LiveArenaExperience() {
   const [selectedBoost, setSelectedBoost] = useState<BoostPack>(boostPacks[0]);
   const [toast, setToast] = useState<ToastState | null>(null);
   const [timerSeconds, setTimerSeconds] = useState(22 * 60 + 14);
+  const [slotTimerSeconds, setSlotTimerSeconds] = useState(12 * 60 * 60);
 
   const selectedSlot = useMemo(
     () => slots.find((slot) => slot.id === selectedSlotId) ?? null,
@@ -59,6 +70,7 @@ export function LiveArenaExperience() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setTimerSeconds((seconds) => (seconds <= 0 ? 3600 : seconds - 1));
+      setSlotTimerSeconds((seconds) => (seconds <= 0 ? 12 * 60 * 60 : seconds - 1));
     }, 1000);
 
     return () => window.clearInterval(timer);
@@ -231,6 +243,8 @@ export function LiveArenaExperience() {
   const timerLabel = `${minutes.toString().padStart(2, "0")}:${seconds
     .toString()
     .padStart(2, "0")}`;
+  const slotTimerLabel = formatCountdown(slotTimerSeconds);
+  const countrySlideItems = [...islandTabs, ...islandTabs];
 
   return (
     <section id="home" className="relative isolate min-h-screen overflow-hidden bg-[#0a0e1f] text-[#f0edf8]">
@@ -309,15 +323,18 @@ export function LiveArenaExperience() {
         </div>
       </nav>
 
-      <div className="fixed inset-x-0 top-[58px] z-40 flex overflow-x-auto border-b-2 border-[#e8a800] bg-[#0d1225] [scrollbar-width:none]">
-        <div className="flex min-w-max">
-          {islandTabs.map((island, index) => (
+      <div className="fixed inset-x-0 top-[58px] z-40 flex overflow-hidden border-b-2 border-[#e8a800] bg-[#0d1225]">
+        <div className="flex min-w-max hover:[animation-play-state:paused]" style={{ animation: "tick 60s linear infinite" }}>
+          {countrySlideItems.map((island, index) => {
+            const originalIndex = index % islandTabs.length;
+
+            return (
             <button
-              key={island.label}
+              key={`${island.label}-${index}`}
               type="button"
-              onClick={() => setActiveIsland(index)}
+              onClick={() => setActiveIsland(originalIndex)}
               className={`relative flex h-[46px] items-center gap-2 border-r border-white/[0.07] px-5 text-xs font-black uppercase tracking-wide transition ${
-                activeIsland === index
+                activeIsland === originalIndex
                   ? "bg-[#f5c842]/10 text-[#f5c842]"
                   : "text-[#7a82a8] hover:bg-white/[0.04] hover:text-[#f0edf8]"
               }`}
@@ -325,11 +342,12 @@ export function LiveArenaExperience() {
               <span className="text-lg">{island.flag}</span>
               {island.label}
               <span className="text-[10px] text-[#f5c842]">★</span>
-              {activeIsland === index ? (
+              {activeIsland === originalIndex ? (
                 <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#ff5c2b] to-[#f5c842]" />
               ) : null}
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -414,10 +432,30 @@ export function LiveArenaExperience() {
                 </div>
 
                 <div className="p-2.5 pb-2">
-                  <h3 className="truncate text-sm font-bold text-[#f0edf8]">{slot.name}</h3>
-                  <p className="mt-0.5 text-xs text-[#7a82a8]">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <h3 className="truncate text-sm font-bold text-[#f0edf8]">{slot.name}</h3>
+                      <p className="mt-0.5 truncate text-[11px] text-[#7a82a8]">
+                        Age {slot.age} · {slot.flag} {slot.country}
+                      </p>
+                    </div>
+                    <span className="shrink-0 rounded bg-black/30 px-1.5 py-1 font-['Bebas_Neue',sans-serif] text-[13px] tracking-wide text-[#f5c842]">
+                      {slotTimerLabel}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-[#7a82a8]">
                     {slot.categoryIcon} {slot.category} · {slot.islandCode}
                   </p>
+                  <blockquote className="mt-2 line-clamp-2 min-h-8 rounded-lg border border-[#ff5c2b]/15 bg-black/20 px-2 py-1.5 text-[11px] italic leading-4 text-[#f0edf8]/85">
+                    “{slot.quote}”
+                    <span className="mt-1 block text-[10px] not-italic text-[#f5c842]/80">
+                      {slot.language}
+                    </span>
+                  </blockquote>
+                  <div className="mt-2 flex items-center justify-between text-[11px] font-bold text-[#7a82a8]">
+                    <span>♡ Likes {slot.likes}</span>
+                    <span>💬 Comments {slot.comments}</span>
+                  </div>
                   <div className="mt-2 flex items-center justify-between">
                     <span className="text-xs font-black text-[#f5c842]">{formatVotes(slot.votes)}</span>
                     <span className={`text-xs ${slot.trendTone === "down" ? "text-[#ff8060]" : "text-[#00c9a7]"}`}>
