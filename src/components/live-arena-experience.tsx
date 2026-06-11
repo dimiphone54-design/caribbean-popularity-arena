@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import {
   arenaCreators,
   boostPacks,
@@ -302,6 +302,18 @@ export function LiveArenaExperience() {
             from { opacity: 0; transform: translateY(1rem) scale(.96); }
             to { opacity: 1; transform: translateY(0) scale(1); }
           }
+          @keyframes magicGiftRun {
+            0% { transform: translateX(-18vw) translateY(0) scale(.92); opacity: 0; }
+            10% { opacity: .52; }
+            45% { transform: translateX(44vw) translateY(-.45rem) scale(1); opacity: .58; }
+            90% { opacity: .48; }
+            100% { transform: translateX(118vw) translateY(.2rem) scale(.94); opacity: 0; }
+          }
+          @keyframes diamondTrail {
+            0% { transform: translate3d(0, 0, 0) scale(.45) rotate(0deg); opacity: 0; }
+            20% { opacity: .95; }
+            100% { transform: translate3d(var(--dx), var(--dy), 0) scale(1.2) rotate(180deg); opacity: 0; }
+          }
         `}
       </style>
 
@@ -310,6 +322,41 @@ export function LiveArenaExperience() {
         <div className="absolute -left-10 bottom-20 text-[11rem] text-[#062512]/70 blur-[1px]">🌴</div>
         <div className="absolute -right-8 bottom-28 scale-x-[-1] text-[9rem] text-[#062512]/60 blur-[1px]">🌴</div>
         <div className="absolute left-[8%] top-32 h-20 w-72 bg-white/10 [clip-path:polygon(0_100%,18%_38%,28%_65%,42%_18%,58%_72%,72%_32%,100%_100%)]" />
+        <div
+          className="absolute bottom-[9rem] left-0 h-28 w-48"
+          style={{ animation: "magicGiftRun 18s linear infinite" }}
+        >
+          <div className="relative h-full w-full">
+            <span className="absolute left-10 top-8 text-5xl drop-shadow-[0_0_18px_rgba(245,200,66,.45)]">
+              🏃‍♂️
+            </span>
+            <span className="absolute left-2 top-16 -rotate-12 text-3xl drop-shadow-[0_0_14px_rgba(255,92,43,.5)]">
+              🎁
+            </span>
+            <span className="absolute left-24 top-15 rotate-12 text-3xl drop-shadow-[0_0_14px_rgba(255,92,43,.5)]">
+              🎁
+            </span>
+            {[
+              ["left-4 top-5", "-1.2rem", "-2.2rem", "0s"],
+              ["left-8 top-10", "1.6rem", "-2.8rem", ".35s"],
+              ["left-28 top-7", "2.1rem", "-1.8rem", ".7s"],
+              ["left-32 top-14", "-1rem", "-2.5rem", "1.05s"],
+              ["left-20 top-3", ".6rem", "-3rem", "1.4s"]
+            ].map(([position, dx, dy, delay]) => (
+              <span
+                key={`${position}-${delay}`}
+                className={`absolute ${position} text-xl text-[#f5c842] drop-shadow-[0_0_12px_rgba(245,200,66,.9)]`}
+                style={{
+                  "--dx": dx,
+                  "--dy": dy,
+                  animation: `diamondTrail 1.8s ease-out ${delay} infinite`
+                } as CSSProperties}
+              >
+                💎
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       <nav className="fixed inset-x-0 top-0 z-50 flex h-[58px] items-center justify-between border-b border-[#ff5c2b]/25 bg-[#0a0e1f]/95 px-4 shadow-[0_1px_30px_rgba(255,92,43,.15)] backdrop-blur-2xl sm:px-7">
