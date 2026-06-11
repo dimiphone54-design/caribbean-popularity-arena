@@ -89,8 +89,7 @@ export const islandTabs: IslandTab[] = [
 ];
 
 export const tickerItems = [
-  "🎵 Music category — 2,847 new votes this hour",
-  "💥 Boss Battle ends soon — who is claiming the throne?"
+  "🎵 Music category — 2,847 new votes this hour"
 ];
 
 export const arenaCreators: ArenaCreatorSlot[] = [
