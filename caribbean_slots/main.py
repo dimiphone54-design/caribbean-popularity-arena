@@ -77,7 +77,7 @@ class CaribbeanSlotsHandler(BaseHTTPRequestHandler):
             self._send_json(
                 {
                     "entry": entry,
-                    "message": "Men's $6 USD entry created. Redirect to WiPay when checkout_url is configured.",
+                    "message": "Men's free $0 USD entry created for open website preview.",
                 },
                 HTTPStatus.CREATED,
             )

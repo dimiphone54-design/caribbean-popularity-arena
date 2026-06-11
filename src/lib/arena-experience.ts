@@ -357,10 +357,10 @@ export const arenaCreators: ArenaCreatorSlot[] = [
 ];
 
 export const boostPacks: BoostPack[] = [
-  { votes: 50, price: 3, label: "Quick spark", icon: "🔥" },
-  { votes: 200, price: 9, label: "Fire burst", icon: "🔥🔥" },
-  { votes: 500, price: 18, label: "Inferno blast", icon: "🔥🔥🔥" },
-  { votes: 2000, price: 60, label: "Total domination", icon: "💥 NUKE" }
+  { votes: 50, price: 0, label: "Quick spark", icon: "🔥" },
+  { votes: 200, price: 0, label: "Fire burst", icon: "🔥🔥" },
+  { votes: 500, price: 0, label: "Inferno blast", icon: "🔥🔥🔥" },
+  { votes: 2000, price: 0, label: "Total domination", icon: "💥 NUKE" }
 ];
 
 export const waitingSlots: WaitingSlot[] = [

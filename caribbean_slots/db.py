@@ -10,7 +10,7 @@ from typing import Any, Iterator
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = Path(os.environ.get("CARIBBEAN_SLOTS_DB", BASE_DIR / "slots.db"))
-ENTRY_AMOUNT_USD = int(os.environ.get("WIPAY_MENS_ENTRY_AMOUNT_USD", "6"))
+ENTRY_AMOUNT_USD = int(os.environ.get("WIPAY_MENS_ENTRY_AMOUNT_USD", "0"))
 
 
 SEED_SLOTS = [

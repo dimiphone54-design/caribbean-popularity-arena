@@ -115,9 +115,9 @@ export const votingCategories = [
 export const membershipPlans: MembershipPlan[] = [
   {
     name: "Fan Pass",
-    price: "$5",
-    cadence: "month",
-    description: "For supporters who want more votes and creator access.",
+    price: "$0",
+    cadence: "free",
+    description: "For supporters who want open creator access at no cost.",
     features: [
       "25 monthly arena votes",
       "Member-only creator updates",
@@ -126,9 +126,9 @@ export const membershipPlans: MembershipPlan[] = [
   },
   {
     name: "Arena Plus",
-    price: "$15",
-    cadence: "month",
-    description: "For super fans tracking every race across the Caribbean.",
+    price: "$0",
+    cadence: "free",
+    description: "For super fans tracking every race across the Caribbean at no cost.",
     highlighted: true,
     features: [
       "100 monthly arena votes",
@@ -139,9 +139,9 @@ export const membershipPlans: MembershipPlan[] = [
   },
   {
     name: "Creator Circle",
-    price: "$49",
-    cadence: "month",
-    description: "For creators and teams growing a loyal island audience.",
+    price: "$0",
+    cadence: "free",
+    description: "For creators and teams growing a loyal island audience at no cost.",
     features: [
       "Creator analytics dashboard",
       "Campaign placement requests",

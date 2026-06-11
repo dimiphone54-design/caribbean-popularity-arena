@@ -25,14 +25,7 @@ type SlotState = ArenaCreatorSlot & {
   hasVoted?: boolean;
 };
 
-const mensEntryAmountUsd = "6";
-const wipayCheckoutUrl = process.env.NEXT_PUBLIC_WIPAY_CHECKOUT_URL ?? "";
-const wipayAccountName = process.env.NEXT_PUBLIC_WIPAY_ACCOUNT_NAME ?? "WiPay";
-const isWipayCheckoutReady =
-  Boolean(wipayCheckoutUrl) &&
-  wipayCheckoutUrl !== "placeholder" &&
-  wipayCheckoutUrl !== "replace-me" &&
-  wipayCheckoutUrl !== "your-value-here";
+const freeEntryAmountUsd = "0";
 
 type ToastState = {
   message: string;
@@ -67,6 +60,7 @@ export function LiveArenaExperience() {
   const [slots, setSlots] = useState<SlotState[]>(arenaCreators);
   const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
   const [selectedEntrySlotId, setSelectedEntrySlotId] = useState<number | null>(null);
+  const [openDemoPanel, setOpenDemoPanel] = useState<"apply" | "rooms" | "dashboard" | "bank" | null>(null);
   const [selectedBoost, setSelectedBoost] = useState<BoostPack>(boostPacks[0]);
   const [toast, setToast] = useState<ToastState | null>(null);
   const [slotTimerSeconds, setSlotTimerSeconds] = useState(12 * 60 * 60);
@@ -233,13 +227,8 @@ export function LiveArenaExperience() {
 
   const handleMensEntryCheckout = () => {
     if (!selectedEntrySlot) return;
-
-    if (!isWipayCheckoutReady) {
-      showToast("WiPay checkout placeholder: add NEXT_PUBLIC_WIPAY_CHECKOUT_URL.", "warning");
-      return;
-    }
-
-    window.open(wipayCheckoutUrl, "_blank", "noopener,noreferrer");
+    showToast(`♡ Free entry opened for ${selectedEntrySlot.name} — $0 cost.`);
+    setSelectedEntrySlotId(null);
   };
 
   const confirmFireUp = () => {
@@ -338,16 +327,35 @@ export function LiveArenaExperience() {
           <div className="hidden items-center gap-1.5 rounded-lg border border-[#ff5c2b]/30 bg-[#111830] px-3 py-1.5 text-sm font-bold text-[#f5c842] sm:flex">
             🪙 0
           </div>
-          <button className="hidden rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-semibold text-[#f0edf8] transition hover:border-white/35 md:inline-flex">
-            Sign in
+          <button
+            type="button"
+            onClick={() => setOpenDemoPanel("rooms")}
+            className="hidden rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-semibold text-[#f0edf8] transition hover:border-white/35 lg:inline-flex"
+          >
+            Rooms
           </button>
-          <a
-            href="#plans"
+          <button
+            type="button"
+            onClick={() => setOpenDemoPanel("dashboard")}
+            className="hidden rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-semibold text-[#f0edf8] transition hover:border-white/35 lg:inline-flex"
+          >
+            Dashboard
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpenDemoPanel("bank")}
+            className="hidden rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-semibold text-[#f0edf8] transition hover:border-white/35 md:inline-flex"
+          >
+            Bank Sign In
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpenDemoPanel("apply")}
             className="rounded-lg bg-gradient-to-r from-[#ff5c2b] to-[#e8a800] px-4 py-2 text-xs font-black tracking-wide text-[#0a0e1f] transition hover:opacity-85 sm:px-5 sm:text-sm"
             style={{ animation: "glowPulse 2.5s ease-in-out infinite" }}
           >
             Women → Apply Free
-          </a>
+          </button>
         </div>
       </nav>
 
@@ -495,7 +503,7 @@ export function LiveArenaExperience() {
                       onClick={(event) => openMensEntry(slot.id, event)}
                       className="rounded-md border border-[#f5c842]/25 bg-[#f5c842]/10 px-2 py-1 text-[#f5c842] transition hover:border-[#f5c842]/60 hover:bg-[#f5c842]/20"
                     >
-                      ♡ Like · Men ${mensEntryAmountUsd} Entry
+                      ♡ Like · Free ${freeEntryAmountUsd} Entry
                     </button>
                     <span>💬 Comments {slot.comments}</span>
                   </div>
@@ -576,11 +584,11 @@ export function LiveArenaExperience() {
                 >
                   <span>
                     <span className="block text-sm font-black">
-                      {formatVotes(pack.votes)} votes {pack.icon}
+                      {formatVotes(pack.votes)} free votes {pack.icon}
                     </span>
                     <span className="mt-0.5 block text-xs text-[#7a82a8]">{pack.label}</span>
                   </span>
-                  <span className="text-base font-black text-[#f5c842]">${pack.price}</span>
+                  <span className="text-base font-black text-[#f5c842]">$0</span>
                 </button>
               ))}
             </div>
@@ -591,7 +599,7 @@ export function LiveArenaExperience() {
               className="w-full rounded-xl bg-gradient-to-r from-[#ff5c2b] to-[#e8a800] px-4 py-3.5 text-sm font-black text-[#0a0e1f] transition hover:opacity-90"
               style={{ animation: "glowPulse 1.5s ease-in-out infinite" }}
             >
-              🔥 Fire Up Now — Pay with WiPay
+              🔥 Fire Up Free — $0
             </button>
           </div>
         </div>
@@ -617,15 +625,15 @@ export function LiveArenaExperience() {
               Men&apos;s Entry
             </h2>
             <p className="mt-2 text-sm leading-6 text-[#7a82a8]">
-              This like is the only men&apos;s interaction. Entry is ${mensEntryAmountUsd} USD and routes through WiPay.
+              This like opens a free preview entry. Cost is ${freeEntryAmountUsd} on this website.
             </p>
             <div className="my-5 rounded-xl border border-white/[0.07] bg-[#111830] p-4 text-left">
               <p className="text-sm font-black text-[#f0edf8]">♡ Like {selectedEntrySlot.name}</p>
               <p className="mt-1 text-xs text-[#7a82a8]">
-                {selectedEntrySlot.flag} {selectedEntrySlot.country} · paid entry to {wipayAccountName}
+                {selectedEntrySlot.flag} {selectedEntrySlot.country} · free open access
               </p>
               <p className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-wide text-[#f5c842]">
-                ${mensEntryAmountUsd} USD
+                ${freeEntryAmountUsd} USD
               </p>
             </div>
             <button
@@ -633,13 +641,28 @@ export function LiveArenaExperience() {
               onClick={handleMensEntryCheckout}
               className="w-full rounded-xl bg-gradient-to-r from-[#f5c842] to-[#ff5c2b] px-4 py-3.5 text-sm font-black text-[#0a0e1f] transition hover:opacity-90"
             >
-              Continue to WiPay
+              Open Free Entry
             </button>
-            {!isWipayCheckoutReady ? (
-              <p className="mt-3 text-xs leading-5 text-[#ff8060]">
-                Development placeholder active. Add a real WiPay checkout URL in .env.local for production.
-              </p>
-            ) : null}
+          </div>
+        </div>
+      ) : null}
+
+      {openDemoPanel ? (
+        <div className="fixed inset-0 z-[90] grid place-items-center bg-black/75 p-4 backdrop-blur-lg" onClick={() => setOpenDemoPanel(null)}>
+          <div
+            className="relative w-full max-w-lg rounded-[1.25rem] border border-[#f5c842]/40 bg-[#0d1225] p-8 shadow-[0_0_60px_rgba(245,200,66,.2),0_0_120px_rgba(255,92,43,.1)]"
+            onClick={(event) => event.stopPropagation()}
+            style={{ animation: "modalIn .25s ease-out both" }}
+          >
+            <button
+              type="button"
+              onClick={() => setOpenDemoPanel(null)}
+              className="absolute right-4 top-3 text-xl text-[#7a82a8] hover:text-[#f0edf8]"
+              aria-label="Close free access panel"
+            >
+              ×
+            </button>
+            <FreeDemoPanel panel={openDemoPanel} />
           </div>
         </div>
       ) : null}
@@ -652,5 +675,58 @@ export function LiveArenaExperience() {
         {toast?.message ?? "🔥 Fired up!"}
       </div>
     </section>
+  );
+}
+
+function FreeDemoPanel({ panel }: { panel: "apply" | "rooms" | "dashboard" | "bank" }) {
+  const content = {
+    apply: {
+      icon: "✨",
+      title: "Apply Free",
+      subtitle: "Creator application preview is open at $0 cost.",
+      items: ["Upload profile preview", "Choose island and category", "Join waiting list", "No payment required"]
+    },
+    rooms: {
+      icon: "🏝️",
+      title: "Rooms",
+      subtitle: "Fan rooms are open to browse for free.",
+      items: ["Soca room", "Dancehall room", "Carnival fashion room", "Island lounge"]
+    },
+    dashboard: {
+      icon: "📊",
+      title: "Dashboard",
+      subtitle: "Creator dashboard preview is unlocked at $0 cost.",
+      items: ["Votes overview", "Country rank", "Waiting-list position", "12-hour rotation status"]
+    },
+    bank: {
+      icon: "🏦",
+      title: "Bank Sign In",
+      subtitle: "Open demo bank sign-in panel. No real banking credentials required.",
+      items: ["Demo account access", "WiPay placeholder status", "Entry records preview", "Production keys added later"]
+    }
+  }[panel];
+
+  return (
+    <div>
+      <div className="text-center">
+        <div className="text-5xl">{content.icon}</div>
+        <h2 className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#f5c842] to-[#ff5c2b]">
+          {content.title}
+        </h2>
+        <p className="mt-2 text-sm leading-6 text-[#7a82a8]">{content.subtitle}</p>
+        <p className="mt-3 inline-flex rounded-full border border-[#00c9a7]/30 bg-[#00c9a7]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#00c9a7]">
+          $0 Cost · Open Preview
+        </p>
+      </div>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        {content.items.map((item) => (
+          <div key={item} className="rounded-xl border border-white/[0.07] bg-[#111830] p-4">
+            <p className="text-sm font-black text-[#f0edf8]">{item}</p>
+            <p className="mt-1 text-xs text-[#7a82a8]">Open demo access enabled</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

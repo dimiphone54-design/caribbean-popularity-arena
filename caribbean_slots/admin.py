@@ -27,7 +27,7 @@ def main() -> None:
     subcommands.add_parser("reset-countdowns", help="Reset expired 12-hour countdowns")
     subcommands.add_parser("rotate-now", help="Move 12 waiting slots into the 12 front slots")
 
-    entry_parser = subcommands.add_parser("create-men-entry", help="Create a pending $6 WiPay men entry")
+    entry_parser = subcommands.add_parser("create-men-entry", help="Create a free $0 men entry preview")
     entry_parser.add_argument("slot_id", type=int)
 
     args = parser.parse_args()

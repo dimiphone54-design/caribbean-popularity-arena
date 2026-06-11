@@ -1,4 +1,4 @@
-import { ArrowRightLeft, Bot, Clock, ShieldCheck } from "lucide-react";
+import { ArrowRightLeft, Bot, ShieldCheck } from "lucide-react";
 import { arenaCreators, legalBotConfig, waitingSlots } from "@/lib/arena-experience";
 
 export function SlotAutomationPanel() {
@@ -24,16 +24,11 @@ export function SlotAutomationPanel() {
               main arena and the old front list moves back.
             </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl border border-white/[0.07] bg-[#111830] p-4">
                 <Bot className="size-5 text-[#f5c842]" aria-hidden="true" />
                 <p className="mt-3 text-xs uppercase tracking-[0.2em] text-[#7a82a8]">Mode</p>
                 <p className="mt-1 font-black text-white">{legalBotConfig.mode}</p>
-              </div>
-              <div className="rounded-2xl border border-white/[0.07] bg-[#111830] p-4">
-                <Clock className="size-5 text-[#f5c842]" aria-hidden="true" />
-                <p className="mt-3 text-xs uppercase tracking-[0.2em] text-[#7a82a8]">Rotation</p>
-                <p className="mt-1 font-black text-white">{legalBotConfig.rotationInterval}</p>
               </div>
               <div className="rounded-2xl border border-white/[0.07] bg-[#111830] p-4">
                 <ArrowRightLeft className="size-5 text-[#f5c842]" aria-hidden="true" />
