@@ -88,9 +88,7 @@ export const islandTabs: IslandTab[] = [
   { label: "Sint Eustatius", flag: "🇧🇶" }
 ];
 
-export const tickerItems = [
-  "🎵 Music category — 2,847 new votes this hour"
-];
+export const tickerItems: string[] = [];
 
 export const arenaCreators: ArenaCreatorSlot[] = [
   {

@@ -60,7 +60,7 @@ export function LiveArenaExperience() {
   const [slots, setSlots] = useState<SlotState[]>(arenaCreators);
   const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
   const [selectedEntrySlotId, setSelectedEntrySlotId] = useState<number | null>(null);
-  const [openDemoPanel, setOpenDemoPanel] = useState<"apply" | "rooms" | "dashboard" | "bank" | null>(null);
+  const [openDemoPanel, setOpenDemoPanel] = useState<"apply" | "rooms" | "dashboard" | "signin" | null>(null);
   const [selectedBoost, setSelectedBoost] = useState<BoostPack>(boostPacks[0]);
   const [toast, setToast] = useState<ToastState | null>(null);
   const [slotTimerSeconds, setSlotTimerSeconds] = useState(12 * 60 * 60);
@@ -390,10 +390,10 @@ export function LiveArenaExperience() {
           </button>
           <button
             type="button"
-            onClick={() => setOpenDemoPanel("bank")}
+            onClick={() => setOpenDemoPanel("signin")}
             className="hidden rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-semibold text-[#f0edf8] transition hover:border-white/35 md:inline-flex"
           >
-            Bank Sign In
+            Sign In
           </button>
           <button
             type="button"
@@ -434,16 +434,18 @@ export function LiveArenaExperience() {
       </div>
 
       <div className="relative z-10 pt-[104px]">
-        <div className="overflow-hidden bg-gradient-to-r from-[#ff5c2b] via-[#e8a800] to-[#ff5c2b] py-2 [background-size:200%_auto]">
-          <div className="flex w-max gap-10 whitespace-nowrap">
-            {[...tickerItems, ...tickerItems].map((item, index) => (
-              <span key={`${item}-${index}`} className="flex items-center gap-2 text-xs font-black tracking-wide text-[#0a0e1f]">
-                {item}
-                <span className="text-black/30">✦</span>
-              </span>
-            ))}
+        {tickerItems.length > 0 ? (
+          <div className="overflow-hidden bg-gradient-to-r from-[#ff5c2b] via-[#e8a800] to-[#ff5c2b] py-2 [background-size:200%_auto]">
+            <div className="flex w-max gap-10 whitespace-nowrap">
+              {[...tickerItems, ...tickerItems].map((item, index) => (
+                <span key={`${item}-${index}`} className="flex items-center gap-2 text-xs font-black tracking-wide text-[#0a0e1f]">
+                  {item}
+                  <span className="text-black/30">✦</span>
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
 
         <div className="flex flex-col gap-4 px-4 pt-7 sm:px-7 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -724,7 +726,7 @@ export function LiveArenaExperience() {
   );
 }
 
-function FreeDemoPanel({ panel }: { panel: "apply" | "rooms" | "dashboard" | "bank" }) {
+function FreeDemoPanel({ panel }: { panel: "apply" | "rooms" | "dashboard" | "signin" }) {
   const content = {
     apply: {
       icon: "✨",
@@ -744,11 +746,11 @@ function FreeDemoPanel({ panel }: { panel: "apply" | "rooms" | "dashboard" | "ba
       subtitle: "Creator dashboard preview is unlocked at $0 cost.",
       items: ["Votes overview", "Country rank", "Waiting-list position", "12-hour rotation status"]
     },
-    bank: {
-      icon: "🏦",
-      title: "Bank Sign In",
-      subtitle: "Open demo bank sign-in panel. No real banking credentials required.",
-      items: ["Demo account access", "WiPay placeholder status", "Entry records preview", "Production keys added later"]
+    signin: {
+      icon: "🔐",
+      title: "Sign In",
+      subtitle: "Open demo sign-in panel. No real credentials required.",
+      items: ["Demo account access", "Open preview profile", "Creator room access", "Production login added later"]
     }
   }[panel];
 
