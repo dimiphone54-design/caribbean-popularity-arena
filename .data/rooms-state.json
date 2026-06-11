@@ -1,0 +1,31 @@
+{
+  "members": {
+    "the-pair-room": [
+      "voter_af1a2ab4-411f-408d-ba3c-598dd1a6c039"
+    ],
+    "trinidad-tobago-lounge": [
+      "voter_23f48c21-3594-4110-b861-6ca2e2988072"
+    ],
+    "backstage": [
+      "voter_23f48c21-3594-4110-b861-6ca2e2988072"
+    ],
+    "nadia-baptiste-lounge": [
+      "voter_23f48c21-3594-4110-b861-6ca2e2988072"
+    ],
+    "jamaica-lounge": [
+      "voter_af1a2ab4-411f-408d-ba3c-598dd1a6c039"
+    ],
+    "island-lounge": [
+      "voter_af1a2ab4-411f-408d-ba3c-598dd1a6c039"
+    ]
+  },
+  "messages": {},
+  "joinCounts": {
+    "the-pair-room": 7,
+    "trinidad-tobago-lounge": 1,
+    "backstage": 1,
+    "nadia-baptiste-lounge": 1,
+    "jamaica-lounge": 1,
+    "island-lounge": 2
+  }
+}
