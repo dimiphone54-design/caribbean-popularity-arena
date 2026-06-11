@@ -1,0 +1,526 @@
+"use client";
+
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import {
+  arenaCreators,
+  boostPacks,
+  islandTabs,
+  tickerItems,
+  type ArenaCreatorSlot,
+  type BoostPack
+} from "@/lib/arena-experience";
+
+type Particle = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  life: number;
+  decay: number;
+  size: number;
+  hue: number;
+};
+
+type SlotState = ArenaCreatorSlot & {
+  hasVoted?: boolean;
+};
+
+type ToastState = {
+  message: string;
+  tone?: "gold" | "warning";
+};
+
+const formatVotes = (votes: number) => votes.toLocaleString("en-US");
+
+const rankClass = (rank: number) => {
+  if (rank === 1) return "bg-gradient-to-br from-[#f5c842] to-[#e8a800] text-[#0a0e1f]";
+  if (rank === 2) return "bg-gradient-to-br from-[#c0c0c0] to-[#888] text-[#0a0e1f]";
+  if (rank === 3) return "bg-gradient-to-br from-[#cd7f32] to-[#8b4513] text-white";
+  return "bg-[#161d36] text-[#7a82a8]";
+};
+
+export function LiveArenaExperience() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const particlesRef = useRef<Particle[]>([]);
+  const animationRef = useRef<number | null>(null);
+  const baseXRef = useRef<number[]>([]);
+  const [activeIsland, setActiveIsland] = useState(0);
+  const [slots, setSlots] = useState<SlotState[]>(arenaCreators);
+  const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
+  const [selectedBoost, setSelectedBoost] = useState<BoostPack>(boostPacks[0]);
+  const [toast, setToast] = useState<ToastState | null>(null);
+  const [timerSeconds, setTimerSeconds] = useState(22 * 60 + 14);
+
+  const selectedSlot = useMemo(
+    () => slots.find((slot) => slot.id === selectedSlotId) ?? null,
+    [selectedSlotId, slots]
+  );
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setTimerSeconds((seconds) => (seconds <= 0 ? 3600 : seconds - 1));
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!toast) return;
+
+    const timer = window.setTimeout(() => setToast(null), 2600);
+    return () => window.clearTimeout(timer);
+  }, [toast]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas?.getContext("2d");
+
+    if (!canvas || !context) return;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      baseXRef.current = Array.from({ length: 8 }, () => Math.random() * window.innerWidth);
+    };
+
+    const createParticle = (x?: number, y?: number, burst = false): Particle => ({
+      x: x ?? Math.random() * canvas.width,
+      y: y ?? canvas.height + 10,
+      vx: (Math.random() - 0.5) * (burst ? 6 : 1.5),
+      vy: -(Math.random() * (burst ? 8 : 3) + (burst ? 3 : 1)),
+      life: 1,
+      decay: Math.random() * 0.018 + (burst ? 0.025 : 0.008),
+      size: Math.random() * (burst ? 10 : 5) + 2,
+      hue: Math.random() * 40 + 10
+    });
+
+    const drawParticle = (particle: Particle) => {
+      context.save();
+      context.globalAlpha = Math.max(0, particle.life) * 0.7;
+
+      const gradient = context.createRadialGradient(
+        particle.x,
+        particle.y,
+        0,
+        particle.x,
+        particle.y,
+        particle.size
+      );
+
+      gradient.addColorStop(0, `hsl(${particle.hue + 30}, 100%, 90%)`);
+      gradient.addColorStop(0.4, `hsl(${particle.hue + 10}, 100%, 60%)`);
+      gradient.addColorStop(1, `hsla(${particle.hue}, 100%, 40%, 0)`);
+      context.fillStyle = gradient;
+      context.beginPath();
+      context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      context.fill();
+      context.restore();
+    };
+
+    const animate = () => {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (Math.random() < 0.4 && baseXRef.current.length > 0) {
+        const baseX = baseXRef.current[Math.floor(Math.random() * baseXRef.current.length)];
+        particlesRef.current.push(createParticle(baseX + (Math.random() - 0.5) * 60));
+      }
+
+      particlesRef.current = particlesRef.current.filter((particle) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        particle.vy += 0.04;
+        particle.life -= particle.decay;
+        particle.size *= 0.985;
+
+        if (particle.life <= 0) return false;
+
+        drawParticle(particle);
+        return true;
+      });
+
+      animationRef.current = window.requestAnimationFrame(animate);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+    animationRef.current = window.requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      if (animationRef.current) window.cancelAnimationFrame(animationRef.current);
+    };
+  }, []);
+
+  const burstAt = (x: number, y: number, count: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    for (let index = 0; index < count; index += 1) {
+      particlesRef.current.push({
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 6,
+        vy: -(Math.random() * 8 + 3),
+        life: 1,
+        decay: Math.random() * 0.018 + 0.025,
+        size: Math.random() * 10 + 2,
+        hue: Math.random() * 40 + 10
+      });
+    }
+  };
+
+  const showToast = (message: string, tone?: ToastState["tone"]) => {
+    setToast({ message, tone });
+  };
+
+  const castVote = (slotId: number) => {
+    setSlots((currentSlots) =>
+      currentSlots.map((slot) => {
+        if (slot.id !== slotId) return slot;
+
+        if (slot.hasVoted) {
+          showToast("Already voted for this slot today! 🔥", "warning");
+          return slot;
+        }
+
+        showToast(`⚡ Vote cast for ${slot.name}!`);
+        return {
+          ...slot,
+          hasVoted: true,
+          votes: slot.votes + 1,
+          progress: Math.min(99, slot.progress + 0.2)
+        };
+      })
+    );
+  };
+
+  const openFireUp = (slotId: number, event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    const rect = event.currentTarget.getBoundingClientRect();
+    burstAt(rect.left + rect.width / 2, rect.top, 30);
+    setSelectedSlotId(slotId);
+    setSelectedBoost(boostPacks[0]);
+  };
+
+  const confirmFireUp = () => {
+    if (!selectedSlot) return;
+
+    setSlots((currentSlots) =>
+      currentSlots.map((slot) =>
+        slot.id === selectedSlot.id
+          ? {
+              ...slot,
+              isOnFire: true,
+              votes: slot.votes + selectedBoost.votes,
+              progress: Math.min(99, slot.progress + (selectedBoost.votes / 2000) * 20)
+            }
+          : slot
+      )
+    );
+
+    if (typeof window !== "undefined") {
+      burstAt(window.innerWidth / 2, window.innerHeight / 2, 60);
+    }
+
+    showToast(`🔥 FIRED UP ${selectedSlot.name} with ${selectedBoost.votes} votes!`);
+    setSelectedSlotId(null);
+  };
+
+  const minutes = Math.floor(timerSeconds / 60);
+  const seconds = timerSeconds % 60;
+  const timerLabel = `${minutes.toString().padStart(2, "0")}:${seconds
+    .toString()
+    .padStart(2, "0")}`;
+
+  return (
+    <section id="home" className="relative isolate min-h-screen overflow-hidden bg-[#0a0e1f] text-[#f0edf8]">
+      <style>
+        {`
+          @keyframes fireGlow {
+            0%,100% { box-shadow: 0 4px 20px rgba(255,92,43,.2); }
+            50% { box-shadow: 0 4px 40px rgba(255,92,43,.6), 0 0 60px rgba(245,200,66,.2); }
+          }
+          @keyframes flamePulse {
+            0%,100% { text-shadow: 0 0 8px rgba(255,92,43,.5); }
+            50% { text-shadow: 0 0 24px rgba(255,92,43,1), 0 0 48px rgba(245,200,66,.6); }
+          }
+          @keyframes glowPulse {
+            0%,100% { box-shadow: 0 0 8px rgba(245,200,66,.3); }
+            50% { box-shadow: 0 0 28px rgba(245,200,66,.7), 0 0 60px rgba(255,92,43,.3); }
+          }
+          @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+          }
+          @keyframes tick {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          @keyframes liveRing {
+            0%,100% { box-shadow: inset 0 0 0 2px rgba(255,92,43,.5), 0 0 12px rgba(255,92,43,.2); }
+            50% { box-shadow: inset 0 0 0 2px rgba(255,92,43,1), 0 0 30px rgba(255,92,43,.5); }
+          }
+          @keyframes borderFire {
+            0%,100% { border-color: rgba(255,92,43,.4); }
+            50% { border-color: rgba(255,140,0,.9); }
+          }
+          @keyframes hotSlot {
+            0%,100% { background: #111830; }
+            50% { background: rgba(255,92,43,.07); }
+          }
+          @keyframes blink {
+            0%,100% { opacity: 1; }
+            50% { opacity: .2; }
+          }
+          @keyframes modalIn {
+            from { opacity: 0; transform: translateY(1rem) scale(.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+          }
+        `}
+      </style>
+
+      <canvas ref={canvasRef} className="fixed inset-0 z-0 h-full w-full opacity-35" aria-hidden="true" />
+
+      <nav className="fixed inset-x-0 top-0 z-50 flex h-[58px] items-center justify-between border-b border-[#ff5c2b]/25 bg-[#0a0e1f]/95 px-4 shadow-[0_1px_30px_rgba(255,92,43,.15)] backdrop-blur-2xl sm:px-7">
+        <a href="#home" className="flex items-center font-['Bebas_Neue',sans-serif] text-[24px] tracking-[1px] sm:text-[26px]">
+          <span className="text-[#f5c842]" style={{ animation: "flamePulse 3s ease-in-out infinite" }}>
+            Caribbean
+          </span>
+          <span>Popularity</span>
+          <span className="ml-2 self-center rounded bg-gradient-to-r from-[#ff5c2b] to-[#f5c842] px-2 py-1 font-sans text-[10px] font-black uppercase tracking-[0.08em] text-[#0a0e1f]">
+            🔥 Arena
+          </span>
+        </a>
+
+        <div className="flex items-center gap-2.5">
+          <div className="hidden items-center gap-1.5 rounded-lg border border-[#ff5c2b]/30 bg-[#111830] px-3 py-1.5 text-sm font-bold text-[#f5c842] sm:flex">
+            🪙 0
+          </div>
+          <button className="hidden rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-semibold text-[#f0edf8] transition hover:border-white/35 md:inline-flex">
+            Sign in
+          </button>
+          <a
+            href="#plans"
+            className="rounded-lg bg-gradient-to-r from-[#ff5c2b] to-[#e8a800] px-4 py-2 text-xs font-black tracking-wide text-[#0a0e1f] transition hover:opacity-85 sm:px-5 sm:text-sm"
+            style={{ animation: "glowPulse 2.5s ease-in-out infinite" }}
+          >
+            Women → Apply Free
+          </a>
+        </div>
+      </nav>
+
+      <div className="fixed inset-x-0 top-[58px] z-40 flex overflow-x-auto border-b-2 border-[#e8a800] bg-[#0d1225] [scrollbar-width:none]">
+        <div className="flex min-w-max">
+          {islandTabs.map((island, index) => (
+            <button
+              key={island.label}
+              type="button"
+              onClick={() => setActiveIsland(index)}
+              className={`relative flex h-[46px] items-center gap-2 border-r border-white/[0.07] px-5 text-xs font-black uppercase tracking-wide transition ${
+                activeIsland === index
+                  ? "bg-[#f5c842]/10 text-[#f5c842]"
+                  : "text-[#7a82a8] hover:bg-white/[0.04] hover:text-[#f0edf8]"
+              }`}
+            >
+              <span className="text-lg">{island.flag}</span>
+              {island.label}
+              <span className="text-[10px] text-[#f5c842]">★</span>
+              {activeIsland === index ? (
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#ff5c2b] to-[#f5c842]" />
+              ) : null}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10 pt-[104px]">
+        <div className="relative flex min-h-[58px] items-center gap-4 overflow-hidden bg-gradient-to-r from-[#6b0a0a] via-[#e83030] to-[#6b0a0a] px-4 sm:px-7">
+          <div className="grid size-10 shrink-0 place-items-center rounded-lg border border-white/20 bg-black/30 text-xl">
+            ⚔️
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-[11px] font-black uppercase tracking-[0.12em] text-white/70">
+              🔥 Hourly Boss Battle — Fire Up your pick to claim the throne
+            </p>
+            <p className="truncate text-sm font-bold text-white">
+              No one in the lead this hour — claim the throne first 🔥 Win 1hr FREE VIP Incognito
+            </p>
+          </div>
+          <div
+            className="hidden items-center gap-2 rounded-lg border border-[#f5c842]/40 bg-black/40 px-3 py-1.5 font-['Bebas_Neue',sans-serif] text-2xl tracking-[0.12em] text-[#f5c842] sm:flex"
+            style={{ animation: "glowPulse 1.5s ease-in-out infinite" }}
+          >
+            <span className="size-2 rounded-full bg-[#ff6b6b]" style={{ animation: "blink .8s ease-in-out infinite" }} />
+            {timerLabel}
+            <span className="font-sans text-xs font-bold normal-case tracking-normal text-white/50">left</span>
+          </div>
+        </div>
+
+        <div className="overflow-hidden bg-gradient-to-r from-[#ff5c2b] via-[#e8a800] to-[#ff5c2b] py-2 [background-size:200%_auto]" style={{ animation: "shimmer 3s linear infinite" }}>
+          <div className="flex w-max gap-10 whitespace-nowrap" style={{ animation: "tick 28s linear infinite" }}>
+            {[...tickerItems, ...tickerItems].map((item, index) => (
+              <span key={`${item}-${index}`} className="flex items-center gap-2 text-xs font-black tracking-wide text-[#0a0e1f]">
+                {item}
+                <span className="text-black/30">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 px-4 pt-7 sm:px-7 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="font-['Bebas_Neue',sans-serif] text-4xl tracking-[0.08em] text-transparent sm:text-5xl bg-clip-text bg-gradient-to-r from-[#ff5c2b] via-[#f5c842] to-[#ff8c00] [background-size:200%_auto]" style={{ animation: "shimmer 3s linear infinite" }}>
+              🔥 The Arena · 13 Islands · 13 Live
+            </p>
+            <p className="mt-1 text-sm text-[#7a82a8]">
+              Vote free · Fire Up to supercharge your favourite · Boss Battle every hour
+            </p>
+          </div>
+          <p className="max-w-xs text-left text-xs leading-6 text-[#7a82a8] lg:text-right">
+            Strict 1 creator per island · Rankings updated in real time
+          </p>
+        </div>
+
+        <div className="px-4 py-5 sm:px-7 sm:pb-10">
+          <div className="grid grid-cols-2 gap-2.5 md:grid-cols-3 xl:grid-cols-6">
+            {slots.map((slot) => (
+              <article
+                key={slot.id}
+                onClick={() => castVote(slot.id)}
+                className={`group relative cursor-pointer overflow-hidden rounded-xl border border-white/[0.07] bg-[#111830] transition duration-300 hover:-translate-y-1.5 hover:border-[#ff5c2b]/60 hover:shadow-[0_12px_40px_rgba(255,92,43,.25)] ${
+                  slot.rank <= 3 ? "border-[#f5c842]/30" : ""
+                } ${slot.isOnFire ? "border-[#ff5c2b]/70" : ""}`}
+                style={slot.isOnFire ? { animation: "hotSlot 1.5s ease-in-out infinite,borderFire 1s ease-in-out infinite" } : undefined}
+              >
+                <div className="relative flex h-40 items-end justify-center overflow-hidden">
+                  <div className="absolute inset-0 grid place-items-center text-6xl" style={{ background: slot.avatarGradient }}>
+                    {slot.avatarIcon}
+                  </div>
+                  <span className="absolute left-2 top-2 rounded-md bg-[#0a0e1f]/70 px-1.5 py-1 text-lg">
+                    {slot.flag}
+                  </span>
+                  <span className={`absolute right-2 top-2 grid size-7 place-items-center rounded-full border border-white/20 font-['Bebas_Neue',sans-serif] text-sm ${rankClass(slot.rank)}`}>
+                    {slot.rank}
+                  </span>
+                  {slot.rank <= 3 ? (
+                    <span className="absolute inset-0" style={{ animation: "liveRing 2s ease-in-out infinite" }} />
+                  ) : null}
+                  {slot.isOnFire ? (
+                    <span className="absolute bottom-11 left-1/2 z-10 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#ff5c2b] to-[#e8a800] px-3 py-1 text-[10px] font-black tracking-wider text-[#0a0e1f]">
+                      🔥 ON FIRE
+                    </span>
+                  ) : null}
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0e1f] to-transparent" />
+                </div>
+
+                <div className="p-2.5 pb-2">
+                  <h3 className="truncate text-sm font-bold text-[#f0edf8]">{slot.name}</h3>
+                  <p className="mt-0.5 text-xs text-[#7a82a8]">
+                    {slot.categoryIcon} {slot.category} · {slot.islandCode}
+                  </p>
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-xs font-black text-[#f5c842]">{formatVotes(slot.votes)}</span>
+                    <span className={`text-xs ${slot.trendTone === "down" ? "text-[#ff8060]" : "text-[#00c9a7]"}`}>
+                      {slot.trend}
+                    </span>
+                  </div>
+                  <div className="mt-1.5 h-1 overflow-hidden rounded bg-white/[0.08]">
+                    <div className="h-full rounded bg-gradient-to-r from-[#ff5c2b] to-[#f5c842] transition-all" style={{ width: `${slot.progress}%` }} />
+                  </div>
+                </div>
+
+                <div className="flex gap-1.5 px-2.5 pb-2.5">
+                  <button
+                    type="button"
+                    className={`flex-1 rounded-md px-2 py-2 text-xs font-bold transition ${
+                      slot.hasVoted
+                        ? "bg-[#00c9a7]/20 text-[#00c9a7]"
+                        : "bg-[#f5c842]/15 text-[#f5c842] hover:bg-[#f5c842]/30"
+                    }`}
+                  >
+                    {slot.hasVoted ? "✓ Voted!" : "⚡ Vote"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(event) => openFireUp(slot.id, event)}
+                    className="rounded-md bg-gradient-to-br from-[#ff5c2b]/25 to-[#ff8c00]/20 px-2.5 py-2 text-sm text-[#ff5c2b] transition hover:scale-110 hover:from-[#ff5c2b]/50 hover:to-[#ff8c00]/40"
+                    style={{ animation: "fireGlow 2s ease-in-out infinite" }}
+                  >
+                    🔥
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {selectedSlot ? (
+        <div className="fixed inset-0 z-[90] grid place-items-center bg-black/75 p-4 backdrop-blur-lg" onClick={() => setSelectedSlotId(null)}>
+          <div
+            className="relative w-full max-w-sm rounded-[1.25rem] border border-[#ff5c2b]/40 bg-[#0d1225] p-8 text-center shadow-[0_0_60px_rgba(255,92,43,.3),0_0_120px_rgba(245,200,66,.1)]"
+            onClick={(event) => event.stopPropagation()}
+            style={{ animation: "modalIn .25s ease-out both, glowPulse 2s ease-in-out infinite" }}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedSlotId(null)}
+              className="absolute right-4 top-3 text-xl text-[#7a82a8] hover:text-[#f0edf8]"
+              aria-label="Close Fire Up modal"
+            >
+              ×
+            </button>
+            <div className="mb-2 text-5xl">🔥</div>
+            <h2 className="font-['Bebas_Neue',sans-serif] text-3xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#ff5c2b] to-[#f5c842]">
+              Fire Up
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-[#7a82a8]">
+              Supercharge your creator&apos;s votes and blast them up the leaderboard — instantly.
+            </p>
+            <p className="my-5 text-base font-black">🔥 {selectedSlot.name}</p>
+
+            <div className="mb-5 flex flex-col gap-2.5">
+              {boostPacks.map((pack) => (
+                <button
+                  key={pack.votes}
+                  type="button"
+                  onClick={() => setSelectedBoost(pack)}
+                  className={`flex items-center justify-between rounded-xl border p-3 text-left transition ${
+                    selectedBoost.votes === pack.votes
+                      ? "border-[#ff5c2b]/60 bg-[#ff5c2b]/10"
+                      : "border-white/[0.07] bg-[#111830] hover:border-[#ff5c2b]/40"
+                  }`}
+                >
+                  <span>
+                    <span className="block text-sm font-black">
+                      {formatVotes(pack.votes)} votes {pack.icon}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-[#7a82a8]">{pack.label}</span>
+                  </span>
+                  <span className="text-base font-black text-[#f5c842]">${pack.price}</span>
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={confirmFireUp}
+              className="w-full rounded-xl bg-gradient-to-r from-[#ff5c2b] to-[#e8a800] px-4 py-3.5 text-sm font-black text-[#0a0e1f] transition hover:opacity-90"
+              style={{ animation: "glowPulse 1.5s ease-in-out infinite" }}
+            >
+              🔥 Fire Up Now — Pay with WiPay
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      <div
+        className={`fixed bottom-7 left-1/2 z-[95] -translate-x-1/2 rounded-xl border border-[#ff5c2b]/50 bg-[#0d1225] px-6 py-3 text-sm font-bold shadow-[0_0_30px_rgba(255,92,43,.3)] transition-transform duration-300 ${
+          toast ? "translate-y-0" : "translate-y-24"
+        } ${toast?.tone === "warning" ? "text-[#ff8060]" : "text-[#f5c842]"}`}
+      >
+        {toast?.message ?? "🔥 Fired up!"}
+      </div>
+    </section>
+  );
+}

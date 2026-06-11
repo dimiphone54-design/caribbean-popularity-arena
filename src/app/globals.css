@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -26,7 +27,7 @@ body {
     radial-gradient(circle at 88% 8%, rgba(64, 96, 146, 0.28), transparent 34rem),
     linear-gradient(135deg, var(--luxury-navy) 0%, #08172f 46%, #0d1830 100%);
   color: var(--foreground);
-  font-family: "Avenir Next", "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-family: "Inter", "Avenir Next", "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 a {
