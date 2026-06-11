@@ -39,6 +39,17 @@ export type BoostPack = {
   icon: string;
 };
 
+export type WaitingSlot = {
+  queuePosition: number;
+  name: string;
+  age: number;
+  country: string;
+  flag: string;
+  category: string;
+  quote: string;
+  language: string;
+};
+
 export const islandTabs: IslandTab[] = [
   { label: "All Islands", flag: "🌴" },
   { label: "Trinidad & Tobago", flag: "🇹🇹" },
@@ -351,3 +362,135 @@ export const boostPacks: BoostPack[] = [
   { votes: 500, price: 18, label: "Inferno blast", icon: "🔥🔥🔥" },
   { votes: 2000, price: 60, label: "Total domination", icon: "💥 NUKE" }
 ];
+
+export const waitingSlots: WaitingSlot[] = [
+  {
+    queuePosition: 1,
+    name: "Valentina Cruz",
+    age: 24,
+    country: "Puerto Rico",
+    flag: "🇵🇷",
+    category: "Dance",
+    quote: "Boricua fire, corazón primero.",
+    language: "Puerto Rican Spanish"
+  },
+  {
+    queuePosition: 2,
+    name: "Camila Reyes",
+    age: 23,
+    country: "Dominican Republic",
+    flag: "🇩🇴",
+    category: "Music",
+    quote: "Yo vengo con flow y corazón.",
+    language: "Dominican Spanish"
+  },
+  {
+    queuePosition: 3,
+    name: "Marisol Vega",
+    age: 25,
+    country: "Cuba",
+    flag: "🇨🇺",
+    category: "Lifestyle",
+    quote: "Mi gente, vamos con alegría.",
+    language: "Cuban Spanish"
+  },
+  {
+    queuePosition: 4,
+    name: "Anaya Pierre",
+    age: 22,
+    country: "Haiti",
+    flag: "🇭🇹",
+    category: "Fashion",
+    quote: "Mwen la pou klere ak fòs.",
+    language: "Haitian Creole"
+  },
+  {
+    queuePosition: 5,
+    name: "Kaya Rolle",
+    age: 21,
+    country: "Bahamas",
+    flag: "🇧🇸",
+    category: "Beauty",
+    quote: "Big island glow, straight from Nassau.",
+    language: "Bahamian Creole"
+  },
+  {
+    queuePosition: 6,
+    name: "Isabella Maduro",
+    age: 24,
+    country: "Aruba",
+    flag: "🇦🇼",
+    category: "Travel",
+    quote: "Mi ta bria cu amor di isla.",
+    language: "Papiamento"
+  },
+  {
+    queuePosition: 7,
+    name: "Sofia Martina",
+    age: 26,
+    country: "Curacao",
+    flag: "🇨🇼",
+    category: "Art",
+    quote: "Nos kultura ta subi den lus.",
+    language: "Papiamentu"
+  },
+  {
+    queuePosition: 8,
+    name: "Brielle Bean",
+    age: 23,
+    country: "Bermuda",
+    flag: "🇧🇲",
+    category: "Content",
+    quote: "Bermy style, calm waves, big dreams.",
+    language: "Bermudian English"
+  },
+  {
+    queuePosition: 9,
+    name: "Alana Ebanks",
+    age: 22,
+    country: "Cayman Islands",
+    flag: "🇰🇾",
+    category: "Food",
+    quote: "Cayman flavor with a champion heart.",
+    language: "Caymanian English"
+  },
+  {
+    queuePosition: 10,
+    name: "Sienna Missick",
+    age: 25,
+    country: "Turks & Caicos",
+    flag: "🇹🇨",
+    category: "Photo",
+    quote: "Blue water, bold spirit, full grace.",
+    language: "TCI English"
+  },
+  {
+    queuePosition: 11,
+    name: "Jasmine Hodge",
+    age: 24,
+    country: "British Virgin Islands",
+    flag: "🇻🇬",
+    category: "Sailing",
+    quote: "BVI breeze, but I moving strong.",
+    language: "BVI English"
+  },
+  {
+    queuePosition: 12,
+    name: "Leah Francis",
+    age: 23,
+    country: "U.S. Virgin Islands",
+    flag: "🇻🇮",
+    category: "Culture",
+    quote: "VI pride, all heart, all shine.",
+    language: "Virgin Islands English"
+  }
+];
+
+export const legalBotConfig = {
+  mode: "Legal placeholder",
+  fakeApiKey: "fake_caribbean_slots_bot_key",
+  fakeWebhookSecret: "fake_caribbean_slots_webhook_secret",
+  rotationInterval: "12 hours",
+  frontSlots: 12,
+  waitingSlots: 12
+} as const;
