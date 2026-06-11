@@ -89,10 +89,6 @@ export const islandTabs: IslandTab[] = [
 ];
 
 export const tickerItems = [
-  "🔥 Soca Monarch 2026 — voting open now",
-  "⚡ Nadia Baptiste just got fired up — +500 votes",
-  "🇯🇲 Jamaica Top 10 — updated hourly",
-  "🔥 Shanelle Thomas rising fast — up 34% today",
   "🎵 Music category — 2,847 new votes this hour",
   "💥 Boss Battle ends soon — who is claiming the throne?"
 ];

@@ -377,7 +377,6 @@ export function LiveArenaExperience() {
             >
               <span className="text-lg">{island.flag}</span>
               {island.label}
-              <span className="text-[10px] text-[#f5c842]">★</span>
               {activeIsland === originalIndex ? (
                 <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#ff5c2b] to-[#f5c842]" />
               ) : null}
