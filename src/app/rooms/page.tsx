@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function RoomsPage() {
-  redirect("/rooms/island-hub");
+  redirect("/#home");
 }

@@ -14,6 +14,7 @@ import {
   type ArenaCreatorSlot,
   type BoostPack
 } from "@/lib/arena-experience";
+import { isCommandCenterEnabled } from "@/lib/command-center-access";
 
 type Particle = {
   x: number;
@@ -31,6 +32,37 @@ type SlotState = ArenaCreatorSlot & {
 };
 
 const freeEntryAmountUsd = "0";
+
+const snowFlakes = [
+  { left: "4%", size: "3px", opacity: 0.9, duration: "3.2s", delay: "0s", drift: "6px" },
+  { left: "12%", size: "2px", opacity: 0.7, duration: "4.1s", delay: "0.8s", drift: "-5px" },
+  { left: "21%", size: "4px", opacity: 0.85, duration: "3.6s", delay: "1.6s", drift: "8px" },
+  { left: "30%", size: "2px", opacity: 0.6, duration: "4.6s", delay: "0.3s", drift: "-7px" },
+  { left: "39%", size: "3px", opacity: 0.95, duration: "3.0s", delay: "2.1s", drift: "5px" },
+  { left: "48%", size: "2px", opacity: 0.7, duration: "4.3s", delay: "1.1s", drift: "-6px" },
+  { left: "57%", size: "4px", opacity: 0.8, duration: "3.4s", delay: "0.6s", drift: "7px" },
+  { left: "66%", size: "2px", opacity: 0.65, duration: "4.8s", delay: "1.9s", drift: "-4px" },
+  { left: "74%", size: "3px", opacity: 0.9, duration: "3.1s", delay: "0.2s", drift: "6px" },
+  { left: "82%", size: "2px", opacity: 0.7, duration: "4.4s", delay: "1.3s", drift: "-8px" },
+  { left: "90%", size: "4px", opacity: 0.85, duration: "3.7s", delay: "2.4s", drift: "5px" },
+  { left: "96%", size: "2px", opacity: 0.6, duration: "4.0s", delay: "0.9s", drift: "-5px" }
+];
+
+const coconutsBack = [
+  { left: "41%", top: "33%", size: "9px", duration: "1.7s", delay: "0.2s", fall: "56px" },
+  { left: "54%", top: "32%", size: "8px", duration: "2.0s", delay: "0.6s", fall: "60px" },
+  { left: "47%", top: "34%", size: "10px", duration: "1.8s", delay: "1.0s", fall: "58px" },
+  { left: "44%", top: "35%", size: "3px", duration: "1.3s", delay: "0.4s", fall: "64px" },
+  { left: "56%", top: "36%", size: "4px", duration: "1.2s", delay: "1.3s", fall: "66px" }
+];
+
+const coconutsFront = [
+  { left: "49%", top: "35%", size: "9px", duration: "1.6s", delay: "0s", fall: "54px" },
+  { left: "43%", top: "36%", size: "8px", duration: "1.9s", delay: "0.9s", fall: "58px" },
+  { left: "52%", top: "34%", size: "10px", duration: "1.7s", delay: "1.5s", fall: "56px" },
+  { left: "50%", top: "37%", size: "3px", duration: "1.1s", delay: "0.7s", fall: "62px" },
+  { left: "46%", top: "33%", size: "4px", duration: "1.4s", delay: "1.8s", fall: "60px" }
+];
 
 type ToastState = {
   message: string;
@@ -296,6 +328,19 @@ export function LiveArenaExperience() {
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
           }
+          .arena-title-glow {
+            position: relative;
+            display: inline-block;
+          }
+          .arena-title-glow::before {
+            content: "";
+            position: absolute;
+            inset: -6px -14px;
+            border-radius: 12px;
+            background: radial-gradient(ellipse 85% 70% at 50% 50%, rgba(255,255,255,0.11) 0%, rgba(255,255,255,0.04) 42%, rgba(255,255,255,0) 72%);
+            pointer-events: none;
+            z-index: 0;
+          }
           @keyframes tick {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
@@ -334,6 +379,113 @@ export function LiveArenaExperience() {
               border-color: rgba(255,140,0,.95);
             }
           }
+          @keyframes snowFall {
+            0% { transform: translateY(-120%) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(120%) translateX(var(--snow-drift, 4px)); opacity: 0; }
+          }
+          @keyframes globeTurn {
+            from { background-position: 0 0; }
+            to { background-position: -200% 0; }
+          }
+          .globe-3d {
+            position: relative;
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            overflow: hidden;
+            vertical-align: middle;
+            box-shadow:
+              inset -4px -4px 9px rgba(2,12,28,0.75),
+              inset 3px 3px 8px rgba(173,216,255,0.35),
+              0 0 6px rgba(120,190,255,0.65),
+              0 0 12px rgba(90,160,255,0.4);
+          }
+          .globe-3d::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background-color: #0a3d7a;
+            background-image:
+              radial-gradient(ellipse 60% 90% at 50% 0%, #e8f4ff 0 7%, rgba(232,244,255,0) 11%),
+              radial-gradient(ellipse 60% 90% at 50% 100%, #e8f4ff 0 7%, rgba(232,244,255,0) 11%),
+              radial-gradient(ellipse 9% 16% at 10% 38%, #6b8e3a 0 60%, rgba(107,142,58,0) 75%),
+              radial-gradient(ellipse 7% 22% at 14% 62%, #4f7a2e 0 60%, rgba(79,122,46,0) 78%),
+              radial-gradient(ellipse 6% 9% at 22% 30%, #8a7a45 0 55%, rgba(138,122,69,0) 75%),
+              radial-gradient(ellipse 11% 14% at 38% 52%, #5f8a35 0 60%, rgba(95,138,53,0) 76%),
+              radial-gradient(ellipse 5% 8% at 46% 34%, #7d8e3f 0 55%, rgba(125,142,63,0) 75%),
+              radial-gradient(ellipse 10% 16% at 64% 44%, #4f7a2e 0 60%, rgba(79,122,46,0) 77%),
+              radial-gradient(ellipse 6% 12% at 72% 64%, #6b8e3a 0 58%, rgba(107,142,58,0) 76%),
+              radial-gradient(ellipse 7% 10% at 86% 36%, #5f8a35 0 58%, rgba(95,138,53,0) 76%),
+              radial-gradient(ellipse 5% 9% at 92% 58%, #7d8e3f 0 55%, rgba(125,142,63,0) 75%),
+              linear-gradient(180deg, #1559a0 0%, #0a3d7a 45%, #07346b 100%);
+            background-size: 200% 100%, 200% 100%, 200% 100%, 200% 100%, 200% 100%, 200% 100%, 200% 100%, 200% 100%, 200% 100%, 200% 100%, 200% 100%, 100% 100%;
+            background-repeat: repeat-x;
+            animation: globeTurn 7s linear infinite;
+          }
+          .globe-3d::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background:
+              radial-gradient(circle at 30% 26%, rgba(255,255,255,0.5), rgba(255,255,255,0) 42%),
+              radial-gradient(circle at 70% 78%, rgba(2,12,28,0.45), rgba(2,12,28,0) 55%);
+            pointer-events: none;
+          }
+          @keyframes coconutDrop {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            12% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(var(--coconut-fall, 46px)) scale(.8); opacity: 0; }
+          }
+          .coconut-drop {
+            position: absolute;
+            border-radius: 9999px;
+            background: radial-gradient(circle at 32% 28%, #b5803f 0%, #7a4a1d 55%, #4f2d10 100%);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.45);
+            animation: coconutDrop ease-in infinite;
+          }
+          @keyframes giftFly {
+            0% { transform: translateX(0) translateY(0) scale(.55) rotate(-8deg); opacity: 0; }
+            18% { opacity: 1; }
+            82% { opacity: 1; transform: translateX(calc(var(--gift-dist, 30px) * .85)) translateY(-3px) scale(1) rotate(14deg); }
+            100% { transform: translateX(var(--gift-dist, 30px)) translateY(0) scale(.4) rotate(22deg); opacity: 0; }
+          }
+          .gift-fly {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -7px;
+            animation: giftFly ease-in-out infinite;
+          }
+          @keyframes wizardCast {
+            0%, 100% { transform: rotate(-4deg) translateY(0); }
+            50% { transform: rotate(4deg) translateY(-1px); }
+          }
+          @keyframes cakeReceive {
+            0%, 60%, 100% { transform: scale(1); }
+            72% { transform: scale(1.28) translateY(-1px); }
+          }
+          @keyframes eliteSweep {
+            0% { transform: translateX(-160%) skewX(-18deg); }
+            100% { transform: translateX(160%) skewX(-18deg); }
+          }
+          @keyframes eliteGlow {
+            0%, 100% { box-shadow: 0 0 8px rgba(245,200,66,.25), inset 0 0 8px rgba(245,200,66,.08); border-color: rgba(245,200,66,.45); }
+            50% { box-shadow: 0 0 20px rgba(245,200,66,.6), 0 0 34px rgba(255,140,0,.25); border-color: rgba(255,200,90,.95); }
+          }
+          .snow-flake {
+            position: absolute;
+            top: 0;
+            border-radius: 9999px;
+            background: #ffffff;
+            box-shadow: 0 0 4px rgba(255,255,255,0.85);
+            animation: snowFall linear infinite;
+          }
         `}
       </style>
 
@@ -359,13 +511,56 @@ export function LiveArenaExperience() {
           <div className="hidden items-center gap-1.5 rounded-lg border border-[#ff5c2b]/30 bg-[#111830] px-3 py-1.5 text-sm font-bold text-[#f5c842] sm:flex">
             🪙 0
           </div>
-          <button
-            type="button"
-            onClick={() => setOpenDemoPanel("rooms")}
-            className="hidden rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-semibold text-[#f0edf8] transition hover:border-white/35 lg:inline-flex"
+          <Link
+            href="/rooms/retro-sugar"
+            className="relative hidden overflow-hidden rounded-lg border border-[#f5c842]/45 bg-gradient-to-b from-[#1a1330] to-[#0a0e1f] px-4 py-2 text-sm font-semibold text-[#f7e7aa] transition hover:text-[#fff4c2] lg:inline-flex"
+            style={{ animation: "eliteGlow 2.4s ease-in-out infinite" }}
           >
-            Rooms
-          </button>
+            <span
+              className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-[#fff4c2]/70 to-transparent"
+              style={{ animation: "eliteSweep 2.6s ease-in-out infinite" }}
+              aria-hidden="true"
+            />
+            <span className="relative z-10">Retro Sugar</span>
+          </Link>
+          <Link
+            href="/rooms/the-pair-room"
+            className="relative hidden overflow-hidden rounded-lg border border-[#f5c842]/45 bg-gradient-to-b from-[#1a1330] to-[#0a0e1f] px-4 py-2 text-sm font-semibold text-[#f7e7aa] transition hover:text-[#fff4c2] lg:inline-flex"
+            style={{ animation: "eliteGlow 2.4s ease-in-out infinite" }}
+          >
+            <span
+              className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-[#fff4c2]/70 to-transparent"
+              style={{ animation: "eliteSweep 2.6s ease-in-out infinite" }}
+              aria-hidden="true"
+            />
+            <span className="relative z-10">Pair League</span>
+          </Link>
+          <Link
+            href="/rooms/comedy-fest"
+            className="relative hidden overflow-hidden rounded-lg border border-[#f5c842]/45 bg-gradient-to-b from-[#1a1330] to-[#0a0e1f] px-4 py-2 text-sm font-semibold text-[#f7e7aa] transition hover:text-[#fff4c2] lg:inline-flex"
+            style={{ animation: "eliteGlow 2.4s ease-in-out infinite" }}
+          >
+            <span
+              className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-[#fff4c2]/70 to-transparent"
+              style={{ animation: "eliteSweep 2.6s ease-in-out infinite" }}
+              aria-hidden="true"
+            />
+            <span className="relative z-10">Comedy Fest</span>
+          </Link>
+          {isCommandCenterEnabled ? (
+            <Link
+              href="/command-center"
+              className="relative hidden overflow-hidden rounded-lg border border-[#f5c842]/45 bg-gradient-to-b from-[#1a1330] to-[#0a0e1f] px-4 py-2 text-sm font-semibold text-[#f7e7aa] transition hover:text-[#fff4c2] lg:inline-flex"
+              style={{ animation: "eliteGlow 2.4s ease-in-out infinite" }}
+            >
+              <span
+                className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-[#fff4c2]/70 to-transparent"
+                style={{ animation: "eliteSweep 2.6s ease-in-out infinite" }}
+                aria-hidden="true"
+              />
+              <span className="relative z-10">Command Center</span>
+            </Link>
+          ) : null}
           <button
             type="button"
             onClick={() => setOpenDemoPanel("dashboard")}
@@ -435,22 +630,103 @@ export function LiveArenaExperience() {
 
         <div className="flex flex-col gap-4 px-4 pt-7 sm:px-7 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="font-['Bebas_Neue',sans-serif] text-4xl tracking-[0.08em] text-transparent sm:text-5xl bg-clip-text bg-gradient-to-r from-[#ff5c2b] via-[#f5c842] to-[#ff8c00] [background-size:200%_auto]" style={{ animation: "shimmer 3s linear infinite" }}>
-              🔥 The Arena · 12 Islands · 12 Live
+            <p className="flex items-center gap-2 font-['Bebas_Neue',sans-serif] text-4xl leading-none tracking-[0.08em] sm:text-5xl">
+              <span className="relative inline-flex shrink-0 items-end">
+                <span className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+                  {coconutsBack.map((coconut, index) => (
+                    <span
+                      key={`back-${index}`}
+                      className="coconut-drop"
+                      style={{
+                        left: coconut.left,
+                        top: coconut.top,
+                        width: coconut.size,
+                        height: coconut.size,
+                        animationDuration: coconut.duration,
+                        animationDelay: coconut.delay,
+                        ["--coconut-fall" as string]: coconut.fall
+                      }}
+                    />
+                  ))}
+                </span>
+                <img
+                  src="/palm-tree.png?v=3"
+                  alt="Palm tree"
+                  className="relative z-10 h-16 w-auto drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)] sm:h-20"
+                />
+                <span className="pointer-events-none absolute inset-0 z-20" aria-hidden="true">
+                  {coconutsFront.map((coconut, index) => (
+                    <span
+                      key={`front-${index}`}
+                      className="coconut-drop"
+                      style={{
+                        left: coconut.left,
+                        top: coconut.top,
+                        width: coconut.size,
+                        height: coconut.size,
+                        animationDuration: coconut.duration,
+                        animationDelay: coconut.delay,
+                        ["--coconut-fall" as string]: coconut.fall
+                      }}
+                    />
+                  ))}
+                </span>
+              </span>
+              <span className="arena-title-glow">
+                <span className="relative z-10 bg-gradient-to-r from-[#ff5c2b] via-[#f5c842] to-[#ff8c00] bg-clip-text text-transparent [background-size:200%_auto]" style={{ animation: "shimmer 3s linear infinite" }}>
+                  The Arena · 12 Islands · 12 Live
+                </span>
+              </span>
+            </p>
+            <p className="mt-2 text-xs leading-6 text-[#7a82a8]">
+              <span className="relative inline-flex items-center gap-1.5 overflow-hidden whitespace-nowrap rounded-md px-2 py-1">
+                <span className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+                  {snowFlakes.map((flake, index) => (
+                    <span
+                      key={index}
+                      className="snow-flake"
+                      style={{
+                        left: flake.left,
+                        width: flake.size,
+                        height: flake.size,
+                        opacity: flake.opacity,
+                        animationDuration: flake.duration,
+                        animationDelay: flake.delay,
+                        ["--snow-drift" as string]: flake.drift
+                      }}
+                    />
+                  ))}
+                </span>
+                <span className="globe-3d relative z-10" role="img" aria-label="Spinning globe" />
+                <span className="relative z-10 font-black uppercase tracking-[0.12em] text-[#fffafa] drop-shadow-[0_1px_10px_rgba(255,255,255,0.45)]">
+                  International Friends Are Welcome
+                </span>
+                <span className="globe-3d relative z-10" role="img" aria-label="Spinning globe" />
+              </span>
             </p>
             <div className="mt-3 inline-flex max-w-full flex-wrap items-center gap-2 rounded-xl border-2 border-[#f5c842]/45 bg-gradient-to-r from-[#ff5c2b]/15 via-[#111830] to-[#f5c842]/10 px-3 py-2.5 shadow-[0_0_24px_rgba(245,200,66,.18)] sm:gap-2.5 sm:px-4 sm:py-3">
               <p className="text-xs font-bold uppercase tracking-[0.06em] text-[#fff4c2] sm:text-sm">
                 BIRTHDAY GIRL GETS 5 HOURS EXTRA OF BLESSTIME
               </p>
               <span
-                className="inline-flex items-end gap-px rounded-md border border-[#f5c842]/30 bg-[#0a0e1f]/60 px-1.5 py-1 text-[10px] leading-none sm:text-[11px]"
+                className="inline-flex items-center gap-1 rounded-md border border-[#f5c842]/30 bg-[#0a0e1f]/60 px-1.5 py-1 text-[13px] leading-none sm:text-[15px]"
                 aria-label="Magic man blowing gifts onto birthday cake"
                 title="Magic man blowing gifts onto birthday cake"
               >
-                <span>🧙‍♂️</span>
-                <span className="pb-px">💨</span>
-                <span>🎁</span>
-                <span className="text-[12px] sm:text-[13px]">🎂</span>
+                <span className="inline-block origin-bottom" style={{ animation: "wizardCast 1.6s ease-in-out infinite" }}>
+                  🧙‍♂️
+                </span>
+                <span
+                  className="relative inline-block h-4 w-9 overflow-visible"
+                  aria-hidden="true"
+                >
+                  <span className="gift-fly" style={{ ["--gift-dist" as string]: "34px", animationDuration: "1.8s", animationDelay: "0s" }}>🎁</span>
+                  <span className="gift-fly" style={{ ["--gift-dist" as string]: "34px", animationDuration: "1.8s", animationDelay: "0.6s" }}>🎁</span>
+                  <span className="gift-fly" style={{ ["--gift-dist" as string]: "34px", animationDuration: "1.8s", animationDelay: "1.2s" }}>✨</span>
+                </span>
+                <span className="inline-block origin-bottom" style={{ animation: "cakeReceive 1.8s ease-in-out infinite" }}>
+                  🎂
+                </span>
               </span>
               <Link
                 href="/legal/birthday-promotion"
@@ -460,9 +736,6 @@ export function LiveArenaExperience() {
               </Link>
             </div>
           </div>
-          <p className="max-w-xs text-left text-xs leading-6 text-[#7a82a8] lg:text-right">
-            Strict 1 creator per island · Rankings updated in real time
-          </p>
         </div>
 
         <div className="px-4 py-5 sm:px-7 sm:pb-10 [perspective:1400px]">
@@ -606,6 +879,9 @@ export function LiveArenaExperience() {
               </article>
             ))}
           </div>
+          <p className="mt-4 text-center text-xs font-medium leading-6 text-[#7a82a8]">
+            Strict 1 creator per island · Rankings updated in real time
+          </p>
         </div>
       </div>
 

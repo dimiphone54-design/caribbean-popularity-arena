@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CountryEntryRow } from "@/components/country-entry-row";
+import { RoomBackToArena } from "@/components/room-back-to-arena";
 import { SiteFooter } from "@/components/site-footer";
 import { islandHubAutoPath, islandHubQuote } from "@/lib/hub-copy";
 import { grantIslandHubAccess, hasIslandHubAccess, islandHubEntryUsd } from "@/lib/room-access";
@@ -27,9 +27,7 @@ export function IslandHubPage() {
     <>
       <main className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <Link href="/#home" className="text-sm font-semibold text-[#f7e7aa] underline underline-offset-2">
-            ← Back to Arena
-          </Link>
+          <RoomBackToArena />
 
           <p className="mt-6 text-xs font-black uppercase tracking-[0.28em] text-[#00c9a7]">Caribbean Popularity Arena · Room #1</p>
           <h1 className="mt-2 font-['Bebas_Neue',sans-serif] text-5xl tracking-[0.06em] text-[#f7efe0] sm:text-6xl">Island HUB</h1>
