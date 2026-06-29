@@ -1,0 +1,33 @@
+---
+description: Open Google Chrome preview after every completed UI/task change
+alwaysApply: true
+---
+
+# Google preview after every task
+
+After completing any task that touches the website (UI, routes, components, CSS, copy, signup flows):
+
+1. **Ensure dev server** — `npm run dev:arena` on port **3004** (kill busy port first if needed).
+2. **Open Google Chrome** to the relevant preview URL (default: http://localhost:3004/#home).
+3. **Tell the user** the URL and remind **Cmd+Shift+R** hard refresh.
+
+## Default URLs
+
+| Area | URL |
+|------|-----|
+| Home · Front 12 slots | http://localhost:3004/#home |
+| Intl SUITE | http://localhost:3004/rooms/international-suite |
+| Japan room | http://localhost:3004/rooms/japan-room |
+| Signup / JOIN (slot click) | http://localhost:3004/#home → click available slot |
+
+## Commands
+
+```bash
+# Dev (repo or Desktop copy)
+npm run dev:arena
+
+# Open Chrome (macOS)
+open -a "Google Chrome" "http://localhost:3004/#home"
+```
+
+Do this **at the end of the response** — do not skip unless the task was docs-only or unrelated to the site.

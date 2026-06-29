@@ -1,0 +1,425 @@
+/* Football Prediction Arena · aligned with UK room panels */
+
+.football-prediction-arena {
+  display: grid;
+  width: 100%;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.football-prediction-head {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: start;
+}
+
+@media (min-width: 640px) {
+  .football-prediction-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.football-prediction-kicker {
+  margin: 0;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #00f5ff;
+}
+
+.football-prediction-title {
+  margin: 0.25rem 0 0;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 900;
+  line-height: 1.25;
+  color: #f7e7aa;
+}
+
+.football-prediction-sub {
+  margin: 0.35rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #9fb4d4;
+}
+
+.football-prediction-head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.football-prediction-live-rank {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(184, 255, 60, 0.28);
+  background: rgba(4, 10, 18, 0.55);
+}
+
+.football-prediction-live-label {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7a82a8;
+}
+
+.football-prediction-live-value {
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #eef6ff;
+}
+
+.football-prediction-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #eef6ff;
+  cursor: pointer;
+}
+
+.football-prediction-notice {
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(0, 245, 255, 0.28);
+  background: rgba(0, 245, 255, 0.08);
+  font-size: 0.68rem;
+  color: #b8ff3c;
+}
+
+.football-prediction-tabs,
+.football-prediction-leader-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.football-prediction-tab {
+  flex: 0 1 auto;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.28);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9fb4d4;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.football-prediction-tab--sm {
+  font-size: 0.58rem;
+  padding: 0.28rem 0.55rem;
+}
+
+.football-prediction-tab--active {
+  border-color: rgba(184, 255, 60, 0.45);
+  background: rgba(184, 255, 60, 0.12);
+  color: #b8ff3c;
+}
+
+.football-prediction-panel {
+  display: grid;
+  width: 100%;
+  gap: 0.65rem;
+}
+
+.football-prediction-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.football-prediction-filter-label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a82a8;
+}
+
+.football-prediction-select,
+.football-prediction-input {
+  min-width: 0;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.35rem 0.55rem;
+  font-size: 0.72rem;
+  color: #eef6ff;
+}
+
+.football-prediction-input {
+  width: 3rem;
+}
+
+.football-prediction-input--wide {
+  width: min(100%, 10rem);
+}
+
+.football-prediction-open-count {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #b8ff3c;
+}
+
+.football-prediction-match-list,
+.football-prediction-active-list,
+.football-prediction-rank-list {
+  display: grid;
+  gap: 0.55rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.football-prediction-match {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(184, 255, 60, 0.22);
+  background: linear-gradient(135deg, rgba(8, 16, 28, 0.92), rgba(4, 10, 18, 0.82));
+}
+
+.football-prediction-match-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem 1rem;
+}
+
+.football-prediction-match-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+
+.football-prediction-comp {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00f5ff;
+}
+
+.football-prediction-lock {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #b8ff3c;
+}
+
+.football-prediction-lock--locked {
+  color: #fca5a5;
+}
+
+.football-prediction-teams {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.football-prediction-team {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #eef6ff;
+}
+
+.football-prediction-team--away {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.football-prediction-team-crest {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+}
+
+.football-prediction-vs {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a82a8;
+}
+
+.football-prediction-form {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.football-prediction-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.football-prediction-score-inputs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.football-prediction-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  color: #9fb4d4;
+}
+
+.football-prediction-submit {
+  justify-self: start;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 255, 60, 0.4);
+  background: rgba(184, 255, 60, 0.12);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b8ff3c;
+  cursor: pointer;
+}
+
+.football-prediction-active-row,
+.football-prediction-rank-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 0.72rem;
+  color: #eef6ff;
+}
+
+.football-prediction-rank-row {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.football-prediction-rank-num {
+  font-weight: 900;
+  color: #00f5ff;
+}
+
+.football-prediction-rank-name {
+  display: block;
+  font-weight: 800;
+}
+
+.football-prediction-rank-meta {
+  display: block;
+  font-size: 0.62rem;
+  color: #7a82a8;
+}
+
+.football-prediction-points,
+.football-prediction-rank-pts {
+  font-weight: 800;
+  color: #f7e7aa;
+}
+
+.football-prediction-empty {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #9fb4d4;
+}
+
+.football-prediction-stats-grid {
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+}
+
+.football-prediction-stat-card {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.football-prediction-stat-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a82a8;
+}
+
+.football-prediction-stat-value {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #eef6ff;
+}
+
+.football-prediction-tournaments {
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+}
+
+.football-prediction-tournament-card {
+  padding: 0.75rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.28);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #9fb4d4;
+}
+
+.football-prediction-tournament-card--highlight {
+  border-color: rgba(0, 245, 255, 0.35);
+  color: #eef6ff;
+}
+
+.football-prediction-scoring {
+  margin: 0;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.62rem;
+  line-height: 1.45;
+  color: #7a82a8;
+}
+
+.football-prediction-result,
+.football-prediction-saved {
+  margin: 0;
+  font-size: 0.68rem;
+  color: #9fb4d4;
+}

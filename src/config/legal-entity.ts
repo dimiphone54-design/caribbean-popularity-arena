@@ -45,8 +45,8 @@ export const legalEntity = {
   disputeResolution:
     "[ARBITRATION OR COURTS — TO BE CONFIRMED BY COUNSEL]",
 
-  /** Primary payment processor for Trinidad launch */
-  paymentProcessor: "WiPay Financial (Trinidad & Tobago)",
+  /** Primary payment processor for Trinidad launch — settles to linked Scotiabank account */
+  paymentProcessor: "Fygaro (Trinidad & Tobago) — Scotiabank settlement",
 
   jurisdiction: "Republic of Trinidad and Tobago",
 

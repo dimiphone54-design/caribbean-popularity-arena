@@ -1,86 +1,83 @@
-import { Cloud, Database, KeyRound, LockKeyhole, Workflow } from "lucide-react";
-import { firebaseCollections } from "@/lib/firebase/schema";
+import { LockKeyhole, ShieldCheck, Vote } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-const integrationSteps = [
+const memberTrustPoints = [
   {
-    icon: KeyRound,
-    title: "Auth-ready",
-    description: "Client helpers expose Firebase Auth only after public config values are present."
-  },
-  {
-    icon: Database,
-    title: "Firestore collections",
-    description: "Creators, votes, matchups, memberships, and users have named collection contracts."
-  },
-  {
-    icon: Workflow,
-    title: "Ranking pipeline",
-    description: "Vote writes can feed scheduled score calculations and creator leaderboard updates."
+    icon: Vote,
+    title: "Secure voting",
+    description: "Member ballots are recorded with care — built for fair arena rankings and verified activity."
   },
   {
     icon: LockKeyhole,
-    title: "Rules-first shape",
-    description: "Typed documents keep security rules, cloud functions, and UI code aligned."
+    title: "Member-grade security",
+    description: "Accounts, votes, and room access are designed for protected participation on the Platform."
+  },
+  {
+    icon: ShieldCheck,
+    title: "Fair arena scores",
+    description:
+      "Weekly rankings blend fan votes, streaks, verified activity, and category momentum into one arena score."
   }
 ];
 
+/** Public home · member trust only — operator Firebase wiring lives in Command Center */
 export function FirebaseIntegration() {
   return (
-    <section id="firebase" className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
-          <p className="text-sm font-black uppercase tracking-[0.35em] text-cyan-200">
-            Firebase structure
-          </p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight text-white sm:text-5xl">
-            Ready for real-time votes and member data.
+    <section id="firebase" className="w-full py-20">
+      <div className="firebase-infrastructure-panel w-full overflow-hidden rounded-[2rem] p-6 sm:p-8 lg:p-10">
+        <Image
+          src="/firebase-infrastructure-panel-bg.png"
+          alt=""
+          fill
+          className="firebase-infrastructure-panel-bg"
+          sizes="(max-width: 1280px) 100vw, 1280px"
+        />
+        <div className="firebase-infrastructure-panel-scrim" aria-hidden="true" />
+
+        <div className="firebase-infrastructure-copy relative z-[1] mx-auto max-w-3xl text-center">
+          <p className="luxury-section-eyebrow">Member security</p>
+          <h2 className="luxury-section-title mt-3 text-4xl sm:text-5xl">
+            Real-time votes. Member-grade security.
           </h2>
-          <p className="mt-5 text-base leading-7 text-slate-300">
-            The project includes Firebase client initialization, environment
-            placeholders, and shared document types so the UI can connect to
-            Auth, Firestore, and Storage when credentials are added.
+          <p className="mt-5 text-base leading-7 text-[var(--luxury-mist)]">
+            Your votes and membership activity run on secured infrastructure designed for fair arena rankings and
+            protected participation — not purchases of personal access or time with any individual.
           </p>
 
-          <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.07] p-5">
-            <div className="flex items-center gap-3">
-              <span className="grid size-11 place-items-center rounded-2xl bg-cyan-300 text-slate-950">
-                <Cloud className="size-5" aria-hidden="true" />
-              </span>
-              <div>
-                <p className="font-black text-white">Environment file</p>
-                <p className="text-sm text-slate-300">Copy .env.example to .env.local</p>
-              </div>
-            </div>
-            <div className="mt-5 grid gap-2 text-sm text-slate-300 sm:grid-cols-2">
-              {Object.values(firebaseCollections).map((collection) => (
-                <code
-                  key={collection}
-                  className="rounded-xl bg-slate-950/75 px-3 py-2 text-cyan-100"
+          <div className="mt-10 grid gap-4 text-left sm:grid-cols-3">
+            {memberTrustPoints.map((point) => {
+              const Icon = point.icon;
+
+              return (
+                <article
+                  key={point.title}
+                  className="luxury-glass-card firebase-infrastructure-step-card p-5"
                 >
-                  {collection}
-                </code>
-              ))}
-            </div>
+                  <span className="relative z-[1] grid size-11 place-items-center rounded-2xl border border-[var(--glass-border)] bg-[var(--luxury-gold)]/10 text-[var(--luxury-gold-bright)]">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="relative z-[1] mt-4 font-luxury-serif text-lg text-[var(--luxury-champagne)]">
+                    {point.title}
+                  </h3>
+                  <p className="relative z-[1] mt-2 text-sm leading-6 text-[var(--luxury-mist)]">
+                    {point.description}
+                  </p>
+                </article>
+              );
+            })}
           </div>
-        </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {integrationSteps.map((step) => {
-            const Icon = step.icon;
-
-            return (
-              <article
-                key={step.title}
-                className="rounded-[2rem] border border-white/10 bg-white/[0.07] p-6 backdrop-blur"
-              >
-                <span className="grid size-12 place-items-center rounded-2xl bg-white/10 text-amber-200">
-                  <Icon className="size-6" aria-hidden="true" />
-                </span>
-                <h3 className="mt-5 text-xl font-black text-white">{step.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{step.description}</p>
-              </article>
-            );
-          })}
+          <p className="mt-8 text-xs leading-5 text-[var(--luxury-mist)]">
+            Gifts are voluntary contributions for digital platform access and community features.{" "}
+            <Link href="/legal/terms" className="text-[var(--luxury-champagne)] underline underline-offset-2">
+              Terms
+            </Link>
+            {" · "}
+            <Link href="/legal/refunds" className="text-[var(--luxury-champagne)] underline underline-offset-2">
+              Refund Policy
+            </Link>
+          </p>
         </div>
       </div>
     </section>

@@ -1,67 +1,91 @@
-# Caribbean Popularity Arena
+# CaribbeanFreedomArena
 
-A complete Next.js 15 concept site for a Caribbean creator ranking, voting,
-membership, and discovery platform.
+Next.js 15 fan arena — creator lounges, live rooms, legal compliance, and membership previews. Product name **CaribbeanFreedomArena** (legal docs may reference Caribbean Popularity Arena).
 
 **Repository:** [github.com/dimiphone54-design/caribbean-popularity-arena](https://github.com/dimiphone54-design/caribbean-popularity-arena)
 
-## Features
-
-- Next.js 15 App Router with TypeScript
-- Tailwind CSS responsive interface
-- Homepage hero with live platform stats
-- Creator leaderboard cards with ranking, vote, and trend data
-- Interactive voting system UI with category selection and ballot preview
-- Membership plan cards for fans, super fans, and creators
-- Firebase integration structure for Auth, Firestore, and Storage
-- Typed Firestore document contracts for creators, votes, and memberships
-
-## Getting started
-
-Install dependencies:
+## Quick start
 
 ```bash
 npm install
-```
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the arena.
-
-## Placeholder-first environment setup
-
-Copy the example environment file for local development:
-
-```bash
 cp .env.example .env.local
+npm run dev:arena
 ```
 
-All secrets and third-party credentials are placeholders during development.
-The application is designed to run without real production keys. Replace values
-only when connecting production services.
+Open [http://localhost:3004/#home](http://localhost:3004/#home).
 
-Environment groups included in `.env.example`:
+If the page looks white / unstyled, use `npm run dev:arena` (clears `.next` first). Do not run `npm run build` while dev is running.
 
-- Application metadata and URLs
-- Feature flags for voting writes, checkout, and analytics
-- Firebase web app credentials
-- Stripe payment credentials and price IDs
-- Cloudflare account, API, and R2 placeholders
-- Google Analytics, Meta Pixel, and PostHog placeholders
+Production:
 
-The shared environment helper lives in `src/lib/env.ts`. Firebase helpers live
-in `src/lib/firebase/client.ts`, and typed collection contracts live in
-`src/lib/firebase/schema.ts`.
+```bash
+npm run build:arena
+npm run start:arena
+```
+
+## Arena lounges
+
+Fans enter from the **arena nav** (horizontal lounge scroll on the homepage). Each room is independent — only **Back to Arena** inside rooms (gold `2026 ← Back to Arena` pill).
+
+| Lounge | Route |
+|--------|-------|
+| The Elders Table | `/rooms/the-elders-table` |
+| Comedy Fest | `/rooms/comedy-fest` |
+| Pair League | `/rooms/the-pair-room` |
+| Fashion Month | `/rooms/fashion-month` |
+| Squid Game Night | `/rooms/squid-games-night` |
+| Island Hub | `/rooms/island-hub` |
+| International SUITE | `/rooms/international-suite` |
+
+### International SUITE (country rooms)
+
+| Country | Room | Route |
+|---------|------|-------|
+| 🇬🇧 UK | United Kingdom (Cotswolds) | `/rooms/uk-flag-cotswolds` |
+| 🇬🇧 UK | Football Lads | `/rooms/football-lads` |
+| 🇨🇴 Colombia | Colombia Room (live) | `/rooms/colombia-room` |
+| 🇪🇨 Ecuador | Ecuador Room | `/rooms/ecuador-room` |
+| 🇯🇵 Japan | Japan Room | `/rooms/japan-room` |
+| 🇨🇳 China | China Room · Wushu Duilian | `/rooms/china-room` |
+
+Country rooms show only **Back to The Arena** (fixed top-left pill).
+
+## Other routes
+
+| Route | Purpose |
+|-------|---------|
+| `/legal` | Legal document index |
+| `/legal/[slug]` | Terms, privacy, community, etc. |
+| `/command-center` | Owner panel (env flag only) |
+| `/rooms` | Redirects to Island Hub |
+
+## Environment
+
+Copy `.env.example` → `.env.local`. The app runs with placeholders — no real Firebase, WiPay, or analytics keys required for local preview.
+
+| Variable | Purpose |
+|----------|---------|
+| `NEXT_PUBLIC_COMMAND_CENTER_ENABLED` | Set `true` in your `.env.local` only for Command Center |
+| `NEXT_PUBLIC_AGORA_APP_ID` / `AGORA_APP_CERTIFICATE` | China room live video (Agora) |
+| `ARENA_MASTER_KEY` | Owner bypass · Command Center · Agora host token |
+| `NEXT_PUBLIC_ARENA_KEEP_ACTIVE_SLOTS_OPEN` | Dev · Front 12 slots stay open |
+| `WIPAY_*` | Trinidad WiPay — Elders Room $100 unlock when live |
+| `NEXT_PUBLIC_FIREBASE_*` | Firebase when connecting auth/data |
+
+Legal entity placeholders: update `src/config/legal-entity.ts` after Trinidad sole trader registration.
 
 ## Scripts
 
 ```bash
-npm run dev
-npm run build
-npm run lint
-npm run typecheck
+npm run dev:arena   # development · port 3004 (clears .next)
+npm run build:arena # production build
+npm run start:arena # serve production · port 3004
+npm run lint        # ESLint
+npm run typecheck   # TypeScript
 ```
+
+## Stack
+
+- Next.js 15 App Router · React 19 · TypeScript · Tailwind CSS 4
+- Legal markdown in `/legal` · compliance shell (age gate, cookies, report abuse)
+- Mock live UI state in lounge rooms — connect Firebase / WiPay for production writes

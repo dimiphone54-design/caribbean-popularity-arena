@@ -77,3 +77,19 @@ export const legalDocuments: LegalDocument[] = [
 export function getLegalDocumentBySlug(slug: string) {
   return legalDocuments.find((document) => document.slug === slug);
 }
+
+/** Footer micro panel · exact labels + verified slugs */
+export const footerLegalMicroLinks = [
+  { label: "Legal Center", href: "/legal" },
+  { label: "Terms", href: "/legal/terms", slug: "terms" },
+  { label: "Privacy", href: "/legal/privacy", slug: "privacy" },
+  { label: "Community", href: "/legal/community", slug: "community" },
+  { label: "Safety", href: "/legal/safety", slug: "safety" }
+] as const;
+
+for (const link of footerLegalMicroLinks) {
+  if (!("slug" in link)) continue;
+  if (!getLegalDocumentBySlug(link.slug)) {
+    throw new Error(`Footer legal link missing document: ${link.slug}`);
+  }
+}

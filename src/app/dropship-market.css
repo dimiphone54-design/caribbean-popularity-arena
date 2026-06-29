@@ -1,0 +1,2703 @@
+/* Dropship market · arena glass · product grid · FX panel · intl compact strip */
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-panel {
+  position: relative;
+  isolation: isolate;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-panel--room {
+  background:
+    linear-gradient(165deg, rgba(8, 14, 28, 0.92), rgba(4, 8, 18, 0.88)) padding-box,
+    linear-gradient(135deg, rgba(215, 180, 106, 0.45), rgba(0, 245, 255, 0.12), rgba(215, 180, 106, 0.28))
+      border-box;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-panel--room-aligned {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-intro-panel {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  background:
+    linear-gradient(165deg, rgba(8, 14, 28, 0.92), rgba(4, 8, 18, 0.88)) padding-box,
+    linear-gradient(135deg, rgba(215, 180, 106, 0.45), rgba(0, 245, 255, 0.12), rgba(215, 180, 106, 0.28))
+      border-box;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-intro-panel--stack {
+  margin-top: 0.65rem;
+}
+
+.arena-2030-japan-room .japan-room-dropship-head-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.arena-2030-japan-room .japan-room-dropship-head-stack .dropship-live-ai-gen {
+  margin-top: 0;
+}
+
+/* Japan room · Freedom Gateway · exact width under dropship market */
+.arena-2030-japan-room .country-room-live-gate-underneath,
+.arena-2030-japan-room .country-room-live-gate-underneath-gate,
+.arena-2030-japan-room .country-room-live-gate-underneath-gate .c-live-gift-glass {
+  width: 100%;
+}
+
+.arena-2030-japan-room .country-room-live-gate-underneath-gate .c-live-gift-glass-shell {
+  width: 100%;
+  border-radius: 1.5rem;
+}
+
+.arena-2030-japan-room .country-room-live-gate-underneath-preview {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.arena-2030-japan-room .country-room-live-gate-underneath-preview {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.arena-2030-japan-room .country-room-live-gate-underneath-slot {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* Japan room · 1 live slot · women creators · dropship showcase */
+.arena-2030-japan-room .japan-dropship-creator-slot {
+  margin-top: 0;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(244, 114, 182, 0.32);
+  background:
+    linear-gradient(165deg, rgba(26, 8, 24, 0.42), rgba(4, 6, 14, 0.52)) padding-box,
+    linear-gradient(135deg, rgba(251, 191, 36, 0.28), rgba(244, 114, 182, 0.18), rgba(215, 180, 106, 0.22))
+      border-box;
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+  padding: 1.1rem 1rem 1.15rem;
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-head {
+  text-align: center;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-kicker {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(251, 191, 36, 0.9);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-title {
+  margin-top: 0.45rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-sub {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: rgba(228, 228, 231, 0.82);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-badge {
+  display: inline-flex;
+  margin-top: 0.55rem;
+  padding: 0.28rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 114, 182, 0.42);
+  background: rgba(244, 114, 182, 0.12);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(251, 207, 232, 0.96);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-live {
+  margin-top: 0.95rem;
+  display: grid;
+  gap: 0.95rem;
+}
+
+@media (min-width: 640px) {
+  .arena-2030-japan-room .japan-dropship-creator-slot-live {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  min-height: 12.5rem;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 42%;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-stage-glass {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4, 6, 14, 0.08), rgba(4, 6, 14, 0.55));
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-live-pill,
+.arena-2030-japan-room .japan-dropship-creator-slot-open-pill {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.65rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-live-pill {
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  background: rgba(127, 29, 29, 0.72);
+  color: rgba(254, 226, 226, 0.98);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-live-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.9);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-open-pill {
+  border: 1px solid rgba(251, 191, 36, 0.42);
+  background: rgba(4, 6, 14, 0.72);
+  color: rgba(254, 243, 199, 0.96);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-host-name {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-host-meta {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(251, 191, 36, 0.88);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-lane {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(212, 212, 216, 0.88);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-countdown {
+  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(52, 211, 153, 0.92);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-products {
+  margin-top: 0.75rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-product {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(4, 6, 14, 0.34);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-product-thumb {
+  aspect-ratio: 1;
+  border-radius: 0.65rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-product-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-product-price {
+  margin-top: 0.12rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(251, 191, 36, 0.92);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-shop-link,
+.arena-2030-japan-room .japan-dropship-creator-slot-apply-link {
+  display: block;
+  width: 100%;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.1);
+  padding: 0.62rem 0.75rem;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(254, 243, 199, 0.96);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-apply-link {
+  border-color: rgba(244, 114, 182, 0.42);
+  background: rgba(244, 114, 182, 0.12);
+  color: rgba(251, 207, 232, 0.98);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-shop-link:hover,
+.arena-2030-japan-room .japan-dropship-creator-slot-apply-link:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-frozen {
+  font-size: 0.68rem;
+  text-align: center;
+  color: rgba(161, 161, 170, 0.88);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-foot {
+  margin-top: 0.65rem;
+  font-size: 0.62rem;
+  line-height: 1.45;
+  text-align: center;
+  color: rgba(161, 161, 170, 0.82);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-slot-entered {
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(52, 211, 153, 0.92);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup {
+  margin-top: 0.95rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid rgba(244, 114, 182, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-rules {
+  border-radius: 0.95rem;
+  border: 1px solid rgba(251, 191, 36, 0.28);
+  background: rgba(4, 6, 14, 0.38);
+  padding: 0.75rem 0.85rem;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-rules-title {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(251, 191, 36, 0.92);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-rules-list {
+  margin-top: 0.45rem;
+  display: grid;
+  gap: 0.35rem;
+  padding-left: 1rem;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  color: rgba(212, 212, 216, 0.88);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-field > span {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(251, 191, 36, 0.88);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-field input,
+.arena-2030-japan-room .japan-dropship-creator-signup-field textarea {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(4, 6, 14, 0.55);
+  padding: 0.62rem 0.75rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(4, 6, 14, 0.32);
+  padding: 0.62rem 0.7rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: rgba(228, 228, 231, 0.9);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-check a {
+  color: rgba(251, 191, 36, 0.96);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-error {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.1);
+  padding: 0.55rem 0.65rem;
+  font-size: 0.72rem;
+  color: rgba(253, 230, 138, 0.96);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-submit {
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(244, 114, 182, 0.48);
+  background: linear-gradient(180deg, rgba(244, 114, 182, 0.28), rgba(251, 191, 36, 0.16));
+  padding: 0.85rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 251, 235, 0.98);
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-submit:not(:disabled):hover {
+  border-color: rgba(251, 191, 36, 0.62);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-legal {
+  font-size: 0.62rem;
+  text-align: center;
+  color: rgba(161, 161, 170, 0.88);
+}
+
+.arena-2030-japan-room .japan-dropship-creator-signup-legal a {
+  color: rgba(251, 191, 36, 0.92);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.arena-2030-china-room .china-room-dropship-head-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.arena-2030-china-room .china-room-dropship-head-stack .dropship-live-ai-gen {
+  margin-top: 0;
+}
+
+/* China room · Freedom Gateway · exact width under dropship market */
+.arena-2030-china-room .country-room-live-gate-underneath,
+.arena-2030-china-room .country-room-live-gate-underneath-gate,
+.arena-2030-china-room .country-room-live-gate-underneath-gate .c-live-gift-glass {
+  width: 100%;
+}
+
+.arena-2030-china-room .country-room-live-gate-underneath-gate .c-live-gift-glass-shell {
+  width: 100%;
+  border-radius: 1.5rem;
+}
+
+.arena-2030-china-room .country-room-live-gate-underneath-preview {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* China room · see-through panels · Shanghai photo bleeds through slightly */
+.arena-2030-china-room .dropship-market-panel--room,
+.arena-2030-china-room .dropship-market-room-intro-panel {
+  background:
+    linear-gradient(165deg, rgba(4, 10, 22, 0.2), rgba(2, 6, 14, 0.14)) padding-box,
+    linear-gradient(135deg, rgba(34, 211, 238, 0.32), rgba(234, 179, 8, 0.18), rgba(220, 38, 38, 0.22))
+      border-box !important;
+}
+
+.ecuador-room .dropship-market-panel--room,
+.ecuador-room .dropship-market-room-intro-panel {
+  background:
+    linear-gradient(165deg, rgba(4, 10, 8, 0.72), rgba(2, 8, 6, 0.62)) padding-box,
+    linear-gradient(135deg, rgba(252, 209, 22, 0.32), rgba(255, 255, 255, 0.12), rgba(206, 17, 38, 0.28))
+      border-box !important;
+}
+
+.ecuador-room .ecuador-iron-fang-side-panel {
+  background:
+    linear-gradient(165deg, rgba(4, 10, 8, 0.78), rgba(2, 8, 6, 0.68)),
+    rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Ecuador · dropship room panel */
+.ecuador-room .dropship-market-panel--no-mercy-wing,
+.ecuador-room .dropship-market-room-intro-panel--no-mercy-wing {
+  border-color: rgba(206, 17, 38, 0.55) !important;
+  background:
+    linear-gradient(165deg, rgba(12, 2, 4, 0.92), rgba(4, 10, 8, 0.88)) padding-box,
+    linear-gradient(135deg, rgba(206, 17, 38, 0.55), rgba(252, 209, 22, 0.22), rgba(127, 29, 29, 0.45))
+      border-box !important;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(206, 17, 38, 0.18);
+}
+
+.ecuador-room .dropship-market-panel--no-mercy-wing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-market-room-intro {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(206, 17, 38, 0.22);
+}
+
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-ecuador-hero,
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-category-lanes,
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-options-grid,
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-product-grid,
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-live-ai-gen,
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-country-legal-short,
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-order-tracker,
+.ecuador-room .dropship-market-panel--no-mercy-wing .dropship-market-legal {
+  margin-top: 0 !important;
+}
+
+.ecuador-room .dropship-no-mercy-wing-head {
+  align-items: center;
+  padding: 0.35rem 0 0.15rem;
+}
+
+/* A · Glossy lotto ball — Mercado Dropship title line */
+.a2030-glossy-lotto-ball-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.48rem 1.15rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.88);
+  background: radial-gradient(circle at 32% 28%, #fffef5 0%, #fff9c4 18%, #ffd54f 48%, #ffb300 78%, #ff8f00 100%);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.38),
+    inset 0 2px 4px rgba(255, 255, 255, 0.55),
+    inset 0 -3px 6px rgba(180, 83, 9, 0.28);
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(0.78rem, 3vw, 0.95rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: #b71c1c;
+  text-transform: none;
+}
+
+.a2030-glossy-lotto-ball-line strong {
+  font-weight: 900;
+}
+
+.ecuador-room .dropship-market-room-kicker.a2030-glossy-lotto-ball-line,
+.arena-2030 .dropship-market-room-kicker.a2030-glossy-lotto-ball-line {
+  color: #b71c1c;
+  font-size: clamp(0.78rem, 3vw, 0.95rem);
+  font-weight: 900;
+  animation: none;
+}
+
+.ecuador-room .dropship-no-mercy-wing-sub {
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(254, 240, 138, 0.92);
+}
+
+.ecuador-room .dropship-no-mercy-wing-badge {
+  border-color: rgba(239, 68, 68, 0.55);
+  background: linear-gradient(180deg, rgba(127, 29, 29, 0.72), rgba(12, 2, 4, 0.88));
+  color: #fecaca;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.ecuador-room .dropship-market-room-intro--no-mercy-wing .dropship-market-room-step {
+  border-color: rgba(206, 17, 38, 0.22);
+  background: rgba(8, 2, 4, 0.42);
+}
+
+.ecuador-room .dropship-market-room-intro--no-mercy-wing .dropship-market-room-step-title {
+  color: #fca5a5;
+}
+
+.ecuador-dropship-rates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+  margin-top: 0.15rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(252, 209, 22, 0.28);
+  background:
+    linear-gradient(165deg, rgba(4, 10, 8, 0.82), rgba(8, 2, 4, 0.72)),
+    rgba(0, 0, 0, 0.22);
+}
+
+.ecuador-dropship-rates-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ecuador-dropship-rates-kicker {
+  margin: 0;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fcd116;
+}
+
+.ecuador-dropship-rates-fx-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  background: rgba(0, 245, 255, 0.08);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #67e8f9;
+}
+
+.ecuador-dropship-rates-grid {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .ecuador-dropship-rates-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .ecuador-dropship-rates-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ecuador-dropship-rates-cell {
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(206, 17, 38, 0.2);
+  background: rgba(4, 10, 8, 0.55);
+}
+
+.ecuador-dropship-rates-label {
+  margin: 0;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(252, 209, 22, 0.82);
+}
+
+.ecuador-dropship-rates-value {
+  margin: 0.2rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.35;
+  color: #fef9c3;
+}
+
+.ecuador-dropship-rates-note {
+  margin: 0.25rem 0 0;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  color: rgba(196, 181, 160, 0.88);
+}
+
+.ecuador-dropship-rates-foot {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: rgba(184, 255, 60, 0.88);
+}
+
+/* Ecuador · dropship panel shell */
+.ecuador-room .ecuador-obsidian-row {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem 1rem 1.1rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(215, 180, 106, 0.38);
+  background:
+    linear-gradient(165deg, rgba(3, 2, 8, 0.96), rgba(10, 10, 15, 0.9)) padding-box,
+    linear-gradient(135deg, rgba(215, 180, 106, 0.42), rgba(247, 231, 170, 0.14), rgba(30, 27, 24, 0.55))
+      border-box;
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(247, 231, 170, 0.08),
+    0 0 32px rgba(215, 180, 106, 0.1);
+}
+
+.ecuador-room .ecuador-obsidian-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(247, 231, 170, 0.06) 42%,
+    transparent 58%
+  );
+  pointer-events: none;
+}
+
+.ecuador-room .dropship-market-room-intro--obsidian-row {
+  position: relative;
+  z-index: 1;
+}
+
+.ecuador-room .dropship-market-room-intro--obsidian-row .a2030-glossy-lotto-ball-line {
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.48),
+    0 0 18px rgba(255, 213, 79, 0.22),
+    inset 0 2px 4px rgba(255, 255, 255, 0.55),
+    inset 0 -3px 6px rgba(180, 83, 9, 0.28);
+}
+
+.ecuador-room .dropship-market-room-intro--obsidian-row .dropship-no-mercy-wing-sub {
+  color: rgba(215, 180, 106, 0.9);
+}
+
+.ecuador-room .dropship-market-room-intro--obsidian-row .dropship-no-mercy-wing-badge {
+  border-color: rgba(215, 180, 106, 0.45);
+  background: linear-gradient(180deg, rgba(24, 20, 16, 0.88), rgba(3, 2, 8, 0.92));
+  color: #f7e7aa;
+}
+
+.ecuador-room .dropship-market-room-intro--obsidian-row .dropship-market-room-step {
+  border-color: rgba(215, 180, 106, 0.22);
+  background: rgba(3, 2, 8, 0.55);
+}
+
+.ecuador-room .dropship-market-room-intro--obsidian-row .dropship-market-room-step-title {
+  color: #f7e7aa;
+}
+
+.ecuador-room .dropship-market-room-intro--obsidian-row .dropship-market-room-step-body {
+  color: rgba(196, 181, 160, 0.88);
+}
+
+.ecuador-room .ecuador-the-pit-body {
+  width: 100%;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  width: 100%;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-head-copy {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-kicker {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: rgba(0, 245, 255, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-sub {
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: rgba(159, 180, 212, 0.92);
+}
+
+.arena-2030-china-room .dropship-market-room-head--china {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.arena-2030-china-room .dropship-market-room-header-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  font-size: clamp(1rem, 4.2vw, 1.25rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fde68a;
+  text-shadow: 0 0 18px rgba(234, 179, 8, 0.28);
+}
+
+.arena-2030-china-room .dropship-market-room-header-word {
+  line-height: 1;
+}
+
+.arena-2030-china-room .dropship-market-room-header-icon {
+  width: 1.45rem;
+  height: 1.45rem;
+  flex-shrink: 0;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(234, 179, 8, 0.35));
+}
+
+.arena-2030-china-room .dropship-market-room-head--china .dropship-market-room-head-copy {
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+.arena-2030-china-room .dropship-market-room-head--china .dropship-market-badge--room {
+  align-self: center;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-badge--room {
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 255, 60, 0.35);
+  background: rgba(184, 255, 60, 0.08);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: rgba(184, 255, 60, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-market-room-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-market-room-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-step {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(215, 180, 106, 0.18);
+  background: rgba(0, 0, 0, 0.28);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-step-title {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(215, 180, 106, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-room-step-body {
+  margin-top: 0.25rem;
+  font-size: 0.62rem;
+  line-height: 1.45;
+  color: rgba(159, 180, 212, 0.92);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-category-lanes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-category-lanes--compact {
+  margin-top: 0.5rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-category-lane {
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(159, 180, 212, 0.22);
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(238, 246, 255, 0.92);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-category-lane:hover {
+  border-color: rgba(215, 180, 106, 0.4);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-category-lane--active {
+  border-color: rgba(184, 255, 60, 0.45);
+  background: rgba(184, 255, 60, 0.1);
+  box-shadow: 0 0 16px rgba(184, 255, 60, 0.12);
+  color: #eef6ff;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-options-grid,
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-grid {
+  display: grid;
+  gap: 0.85rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-options-grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-options-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(215, 180, 106, 0.22);
+  background: rgba(6, 10, 22, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-card--option {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+@media (max-width: 479px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-product-card--option {
+    flex-direction: column;
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-thumb {
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-card:not(.dropship-product-card--option) .dropship-product-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-card--option .dropship-product-thumb {
+  width: 7.5rem;
+  min-height: 7.5rem;
+}
+
+@media (max-width: 479px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-product-card--option .dropship-product-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: auto;
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem;
+  min-width: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-category {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #eef6ff;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-desc {
+  font-size: 0.68rem;
+  line-height: 1.45;
+  color: rgba(159, 180, 212, 0.9);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-ship {
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  color: rgba(184, 255, 60, 0.78);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-product-price {
+  margin-top: auto;
+  padding-top: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: rgba(215, 180, 106, 0.98);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-buy-wrap {
+  margin-top: 0.35rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-buy-btn {
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(215, 180, 106, 0.45);
+  background: linear-gradient(135deg, rgba(215, 180, 106, 0.22), rgba(201, 162, 39, 0.12));
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff8e6;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-buy-btn:hover {
+  border-color: rgba(247, 231, 170, 0.65);
+  box-shadow: 0 0 18px rgba(215, 180, 106, 0.2);
+  transform: translateY(-1px);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-buy-btn--compact {
+  width: auto;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.58rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-buy-notice {
+  margin-top: 0.35rem;
+  font-size: 0.58rem;
+  color: rgba(184, 255, 60, 0.9);
+}
+
+/* How it works · standalone market */
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works {
+  position: relative;
+  margin-top: 0.85rem;
+  padding: 0.85rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 245, 255, 0.15);
+  background: rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-glow {
+  position: absolute;
+  inset: -20% auto auto -10%;
+  width: 40%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(0, 245, 255, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-head {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-lead {
+  margin-top: 0.25rem;
+  max-width: 36rem;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: rgba(159, 180, 212, 0.92);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-badge {
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 255, 0.25);
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: rgba(0, 245, 255, 0.9);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-steps {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-step {
+  padding: 0.65rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-step-title {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(215, 180, 106, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-how-it-works-step-body {
+  margin-top: 0.3rem;
+  font-size: 0.65rem;
+  line-height: 1.45;
+  color: rgba(159, 180, 212, 0.9);
+}
+
+/* LIVE AI GENERATOR */
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen {
+  position: relative;
+  margin-top: 0.85rem;
+  padding: 0.85rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  background: rgba(2, 8, 18, 0.82);
+  overflow: hidden;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen--compact {
+  padding: 0.65rem;
+  margin-top: 0.65rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.35) 1px, transparent 1px);
+  background-size: 18px 18px;
+  pointer-events: none;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-beam {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, rgba(0, 245, 255, 0.55), transparent);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@keyframes dropshipAiGenGridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0 18px, 18px 0;
+  }
+}
+
+@keyframes dropshipAiGenScanSweep {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.95;
+  }
+
+  92% {
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translateY(220%);
+    opacity: 0;
+  }
+}
+
+@keyframes dropshipAiGenBeamPulse {
+  0%,
+  100% {
+    opacity: 0.28;
+    box-shadow: none;
+  }
+
+  50% {
+    opacity: 0.92;
+    box-shadow: 0 0 16px rgba(0, 245, 255, 0.55);
+  }
+}
+
+@keyframes dropshipAiGenDotPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.65);
+  }
+
+  50% {
+    transform: scale(1.18);
+    box-shadow: 0 0 18px rgba(0, 245, 255, 0.95);
+  }
+}
+
+@keyframes dropshipAiGenChassisTrace {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes dropshipAiGenLiveBlink {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 rgba(184, 255, 60, 0);
+  }
+
+  50% {
+    opacity: 0.82;
+    box-shadow: 0 0 12px rgba(184, 255, 60, 0.45);
+  }
+}
+
+@keyframes dropshipAiGenExactGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 0 rgba(184, 255, 60, 0);
+    filter: brightness(1);
+  }
+
+  50% {
+    text-shadow: 0 0 10px rgba(184, 255, 60, 0.55);
+    filter: brightness(1.08);
+  }
+}
+
+@keyframes dropshipAiGenTicker {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes dropshipAiGenFlowDrift {
+  0% {
+    transform: translateX(-120%) scaleX(0.6);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translateX(420%) scaleX(1);
+    opacity: 0;
+  }
+}
+
+@keyframes dropshipAiGenPanelBreath {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 rgba(0, 245, 255, 0),
+      inset 0 0 0 rgba(0, 245, 255, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 0 22px rgba(0, 245, 255, 0.12),
+      inset 0 0 18px rgba(0, 245, 255, 0.04);
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen--motion {
+  animation: dropshipAiGenPanelBreath 4.2s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen--motion.dropship-live-ai-gen--live {
+  border-color: rgba(0, 245, 255, 0.38);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-chassis {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 245, 255, 0.05),
+    rgba(0, 245, 255, 0.55),
+    rgba(215, 180, 106, 0.45),
+    rgba(0, 245, 255, 0.55),
+    rgba(0, 245, 255, 0.05)
+  );
+  background-size: 200% 100%;
+  animation: dropshipAiGenChassisTrace 5.5s linear infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0.55;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-grid {
+  animation: dropshipAiGenGridDrift 10s linear infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-beam {
+  animation: dropshipAiGenBeamPulse 2.6s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-scan {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-scan::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  height: 34%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 245, 255, 0.06) 28%,
+    rgba(0, 245, 255, 0.22) 50%,
+    rgba(0, 245, 255, 0.06) 72%,
+    transparent 100%
+  );
+  animation: dropshipAiGenScanSweep 3.4s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen--compact .dropship-live-ai-gen-scan::after {
+  height: 42%;
+  animation-duration: 2.8s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-flow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-flow-bit {
+  position: absolute;
+  top: 38%;
+  width: 28%;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.85), transparent);
+  opacity: 0;
+  animation: dropshipAiGenFlowDrift 4.8s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-flow-bit--a {
+  top: 22%;
+  animation-delay: 0s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-flow-bit--b {
+  top: 52%;
+  animation-delay: 1.6s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-flow-bit--c {
+  top: 78%;
+  animation-delay: 3.1s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-dot {
+  animation: dropshipAiGenDotPulse 1.35s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen--live .dropship-live-ai-gen-badge--live {
+  animation: dropshipAiGenLiveBlink 1.05s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--live {
+  animation: dropshipAiGenExactGlow 2.2s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-base--live,
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-split-line--live {
+  animation: dropshipAiGenExactGlow 2.6s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-ticker {
+  position: relative;
+  z-index: 2;
+  margin-top: 0.45rem;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 255, 0.14);
+  background: rgba(0, 0, 0, 0.28);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-ticker-track {
+  display: flex;
+  width: max-content;
+  gap: 2.5rem;
+  padding: 0.28rem 0.65rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(0, 245, 255, 0.82);
+  white-space: nowrap;
+  animation: dropshipAiGenTicker 22s linear infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-head,
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-controls,
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-stack,
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-lead {
+  z-index: 2;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-panel-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0, 245, 255, 0.82);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-panel-label--gold {
+  color: rgba(215, 180, 106, 0.9);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-panel-label-dot {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: #00f5ff;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.65);
+  animation: dropshipAiGenDotPulse 1.35s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0.28rem 0;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: rgba(0, 245, 255, 0.72);
+  animation: dropshipAiGenExactGlow 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen--motion,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-grid,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-beam,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-scan::after,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-chassis,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-dot,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-flow-bit,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-ticker-track,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--live,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-base--live,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-split-line--live,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-mid,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-panel-label-dot,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen--live .dropship-live-ai-gen-badge--live,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-lane,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-shimmer,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-bridge-arrow,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-bridge-dot,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-usd,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-usd-beam,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--from,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--to,
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--usd {
+    animation: none !important;
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-head {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-title-block {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-core {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  background: rgba(0, 245, 255, 0.08);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #00f5ff;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.65);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-title {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: rgba(0, 245, 255, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-sub {
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  color: rgba(159, 180, 212, 0.75);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-badges {
+  display: flex;
+  gap: 0.35rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-badge {
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-badge--live {
+  border-color: rgba(184, 255, 60, 0.35);
+  color: rgba(184, 255, 60, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-badge--exact {
+  border-color: rgba(215, 180, 106, 0.35);
+  color: rgba(215, 180, 106, 0.95);
+  cursor: default;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-badge--exact:hover {
+  border-color: rgba(215, 180, 106, 0.55);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-badge--exact.a2030-intl-neon-flash {
+  animation: a2030IntlNeonFlash 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  border-color: rgba(215, 180, 106, 0.85);
+  color: #fff6dc;
+  text-shadow:
+    0 0 10px rgba(215, 180, 106, 0.95),
+    0 0 22px rgba(0, 245, 255, 0.55);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-lead {
+  position: relative;
+  margin-top: 0.5rem;
+  font-size: 0.62rem;
+  color: rgba(159, 180, 212, 0.88);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-controls {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-controls--compact {
+  grid-template-columns: 1fr 1fr 0.75fr;
+  gap: 0.35rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(159, 180, 212, 0.85);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-input {
+  width: 100%;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 0.68rem;
+  color: #eef6ff;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-input--mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-stack {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+@media (min-width: 640px) {
+  :is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-stack {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-output,
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-split {
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-output--live {
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes dropshipAiGenFxLanePulse {
+  0%,
+  100% {
+    border-color: rgba(0, 245, 255, 0.16);
+    box-shadow: inset 0 0 0 rgba(0, 245, 255, 0);
+    transform: translateX(0);
+  }
+
+  50% {
+    border-color: rgba(0, 245, 255, 0.42);
+    box-shadow: inset 0 0 14px rgba(0, 245, 255, 0.08);
+    transform: translateX(1px);
+  }
+}
+
+@keyframes dropshipAiGenFxBridgePulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes dropshipAiGenFxBridgeDot {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes dropshipAiGenFxShimmer {
+  0% {
+    transform: translateX(-130%);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translateX(130%);
+    opacity: 0;
+  }
+}
+
+@keyframes dropshipAiGenFxUsdPulse {
+  0%,
+  100% {
+    border-color: rgba(184, 255, 60, 0.22);
+    box-shadow: 0 0 0 rgba(184, 255, 60, 0);
+  }
+
+  50% {
+    border-color: rgba(184, 255, 60, 0.52);
+    box-shadow: 0 0 16px rgba(184, 255, 60, 0.18);
+  }
+}
+
+@keyframes dropshipAiGenFxExactTick {
+  0%,
+  88%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  92% {
+    transform: translateY(-1px) scale(1.03);
+  }
+
+  96% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-lane {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem;
+  overflow: hidden;
+  padding: 0.38rem 0.48rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 245, 255, 0.16);
+  background: rgba(0, 0, 0, 0.28);
+  animation: dropshipAiGenFxLanePulse 2.4s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-lane--from {
+  animation-delay: 0s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-lane--to {
+  animation-delay: 0.55s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-tag {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: rgba(159, 180, 212, 0.95);
+  white-space: nowrap;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--from,
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--to {
+  font-size: 0.72rem;
+  animation:
+    dropshipAiGenExactGlow 2.2s ease-in-out infinite,
+    dropshipAiGenFxExactTick 2.8s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--to {
+  animation-delay: 0.55s, 0.55s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-shimmer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(0, 245, 255, 0.16) 48%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(0, 245, 255, 0.16) 52%,
+    transparent 65%
+  );
+  animation: dropshipAiGenFxShimmer 2.6s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-shimmer--delay {
+  animation-delay: 1.1s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-bridge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 1rem;
+  overflow: hidden;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-bridge-arrow {
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: rgba(0, 245, 255, 0.88);
+  animation: dropshipAiGenFxBridgePulse 1.35s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-bridge-dot {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 0.42rem;
+  margin-left: -1px;
+  border-radius: 999px;
+  background: rgba(0, 245, 255, 0.85);
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.65);
+  animation: dropshipAiGenFxBridgeDot 1.8s linear infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-bridge-dot--b {
+  animation-delay: 0.9s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-usd {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 0.12rem;
+  padding: 0.34rem 0.48rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(184, 255, 60, 0.22);
+  background: rgba(0, 0, 0, 0.32);
+  animation: dropshipAiGenFxUsdPulse 2.1s ease-in-out infinite;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact--usd {
+  margin-top: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: rgba(184, 255, 60, 0.98);
+  animation:
+    dropshipAiGenExactGlow 2s ease-in-out infinite,
+    dropshipAiGenFxExactTick 2.4s ease-in-out infinite;
+  animation-delay: 1.1s, 1.1s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-fx-usd-beam {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(184, 255, 60, 0.12),
+    rgba(184, 255, 60, 0.28),
+    rgba(184, 255, 60, 0.12),
+    transparent
+  );
+  animation: dropshipAiGenFxShimmer 2.2s ease-in-out infinite;
+  animation-delay: 0.7s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  color: rgba(159, 180, 212, 0.9);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-exact {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: rgba(184, 255, 60, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-split-line {
+  font-size: 0.62rem;
+  line-height: 1.5;
+  color: rgba(159, 180, 212, 0.9);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-split-line--tight {
+  font-size: 0.58rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-split-formula,
+:is(.arena-2030, .colombia-room-romantic) .dropship-live-ai-gen-base {
+  margin-top: 0.35rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  color: rgba(159, 180, 212, 0.72);
+}
+
+/* Enter button */
+:is(.arena-2030, .colombia-room-romantic) .dropship-enter-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(215, 180, 106, 0.35);
+  background: linear-gradient(135deg, rgba(215, 180, 106, 0.14), rgba(0, 245, 255, 0.06));
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-enter-btn:hover {
+  border-color: rgba(184, 255, 60, 0.4);
+  box-shadow: 0 0 18px rgba(215, 180, 106, 0.15);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-enter-btn--compact {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.75rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-enter-btn-text {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #eef6ff;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-enter-btn-hint {
+  font-size: 0.58rem;
+  color: rgba(159, 180, 212, 0.85);
+}
+
+/* Intl SUITE compact strip */
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-country-dropship {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-dropship-legal-line {
+  font-size: 0.58rem;
+  line-height: 1.45;
+  color: rgba(159, 180, 212, 0.82);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-country-dropship-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-country-dropship-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-country-dropship-title {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(215, 180, 106, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-country-dropship-sub {
+  margin-top: 0.15rem;
+  font-size: 0.6rem;
+  line-height: 1.4;
+  color: rgba(159, 180, 212, 0.88);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-dropship-mini-list {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-dropship-mini-card {
+  display: flex;
+  gap: 0.55rem;
+  padding: 0.55rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(215, 180, 106, 0.18);
+  background: rgba(0, 0, 0, 0.28);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-dropship-mini-thumb {
+  flex-shrink: 0;
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 0.55rem;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-dropship-mini-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-dropship-mini-name {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #eef6ff;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-dropship-mini-ship {
+  font-size: 0.55rem;
+  color: rgba(159, 180, 212, 0.82);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .a2030-intl-dropship-mini-price {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: rgba(215, 180, 106, 0.95);
+}
+
+/* Orders */
+:is(.arena-2030, .colombia-room-romantic) .dropship-orders,
+:is(.arena-2030, .colombia-room-romantic) .dropship-orders-empty {
+  padding: 0.75rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-orders-list {
+  display: grid;
+  gap: 0.45rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-order-row {
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-order-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-order-name {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #eef6ff;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-order-price {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: rgba(215, 180, 106, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-order-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-order-status {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(0, 245, 255, 0.88);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-order-date {
+  font-size: 0.58rem;
+  color: rgba(159, 180, 212, 0.75);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-country-legal-short {
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(184, 255, 60, 0.15);
+  background: rgba(184, 255, 60, 0.04);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-market-legal {
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Country chips · standalone market page */
+:is(.arena-2030, .colombia-room-romantic) .dropship-country-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(215, 180, 106, 0.25);
+  background: rgba(0, 0, 0, 0.28);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: rgba(238, 246, 255, 0.92);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-country-chip:hover,
+:is(.arena-2030, .colombia-room-romantic) .dropship-country-chip--active {
+  border-color: rgba(184, 255, 60, 0.4);
+  background: rgba(184, 255, 60, 0.08);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-country-chip--suite {
+  border-style: dashed;
+  color: rgba(215, 180, 106, 0.95);
+}
+
+/* Checkout modal */
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(1, 2, 8, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-modal {
+  position: relative;
+  width: min(100%, 28rem);
+  max-height: min(90vh, 42rem);
+  overflow-y: auto;
+  padding: 1rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(215, 180, 106, 0.35);
+  background: linear-gradient(165deg, rgba(10, 16, 32, 0.98), rgba(4, 8, 18, 0.98));
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(159, 180, 212, 0.85);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-field input {
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 0.75rem;
+  color: #eef6ff;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-field--full {
+  grid-column: 1 / -1;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-pay {
+  flex: 1;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(184, 255, 60, 0.4);
+  background: rgba(184, 255, 60, 0.12);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(184, 255, 60, 0.98);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-cancel {
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(159, 180, 212, 0.9);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #eef6ff;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-kicker {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(215, 180, 106, 0.95);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-note,
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-meta {
+  font-size: 0.65rem;
+  line-height: 1.45;
+  color: rgba(159, 180, 212, 0.88);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-error {
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  color: #fca5a5;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-checkout-close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  border: 0;
+  background: transparent;
+  color: rgba(159, 180, 212, 0.85);
+  cursor: pointer;
+}
+
+/* Colombia · Medellín hero slideshow · dropship lane */
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero {
+  position: relative;
+  margin: 0.85rem 0;
+  min-height: 11rem;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  border: 1px solid rgba(251, 113, 133, 0.42);
+  background: linear-gradient(160deg, rgba(59, 10, 22, 0.95), rgba(13, 1, 4, 0.92));
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(251, 113, 133, 0.14);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero--compact {
+  min-height: 9rem;
+  margin: 0.65rem 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero-photos {
+  position: absolute;
+  inset: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero-photo--active {
+  opacity: 1;
+  z-index: 1;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero-photo--leaving {
+  opacity: 0;
+  z-index: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero-beam {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, rgba(251, 113, 133, 0.75), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero-beam-notch {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: #fb7185;
+  box-shadow: 0 0 12px rgba(251, 113, 133, 0.8);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero-label {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.55rem;
+  z-index: 4;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fecdd3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-colombia-hero-live {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.55rem;
+  z-index: 4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(254, 205, 211, 0.45);
+  background: rgba(190, 24, 93, 0.75);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff1f2;
+}
+
+/* China · Shanghai dropship people · exact photo slideshow */
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero {
+  position: relative;
+  margin: 0.85rem 0;
+  min-height: 11rem;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  border: 1px solid rgba(34, 211, 238, 0.38);
+  background: linear-gradient(160deg, rgba(4, 16, 28, 0.55), rgba(2, 8, 18, 0.45));
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(34, 211, 238, 0.12);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero--compact {
+  min-height: 9rem;
+  margin: 0.65rem 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-photos {
+  position: absolute;
+  inset: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-photo--fill {
+  background-size: cover;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-photo--active {
+  opacity: 1;
+  z-index: 1;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-photo--leaving {
+  opacity: 0;
+  z-index: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-beam {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, rgba(34, 211, 238, 0.75), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-beam-notch {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.8);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-label {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.55rem;
+  z-index: 4;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: #a5f3fc;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-china-hero-live {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.55rem;
+  z-index: 4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(165, 243, 252, 0.45);
+  background: rgba(8, 47, 73, 0.72);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ecfeff;
+}
+
+.arena-2030-china-room .dropship-china-hero {
+  border-color: rgba(34, 211, 238, 0.42);
+  background: rgba(2, 10, 20, 0.22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Ecuador · dropship people · exact photo slideshow */
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero {
+  position: relative;
+  margin: 0.85rem 0;
+  min-height: 11rem;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  border: 1px solid rgba(252, 209, 22, 0.38);
+  background: linear-gradient(160deg, rgba(4, 10, 8, 0.55), rgba(2, 8, 6, 0.45));
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(252, 209, 22, 0.12);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero--compact {
+  min-height: 9rem;
+  margin: 0.65rem 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-photos {
+  position: absolute;
+  inset: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-photo--fill {
+  background-size: cover;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-photo--active {
+  opacity: 1;
+  z-index: 1;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-photo--leaving {
+  opacity: 0;
+  z-index: 0;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-beam {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, rgba(252, 209, 22, 0.75), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-beam-notch {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: #fcd116;
+  box-shadow: 0 0 12px rgba(252, 209, 22, 0.8);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-label {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.55rem;
+  z-index: 4;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: #fef08a;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+}
+
+:is(.arena-2030, .colombia-room-romantic) .dropship-ecuador-hero-live {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.55rem;
+  z-index: 4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(252, 209, 22, 0.45);
+  background: rgba(30, 20, 4, 0.72);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fef9c3;
+}
+
+.ecuador-room .dropship-ecuador-hero {
+  border-color: rgba(252, 209, 22, 0.42);
+  background: rgba(4, 10, 8, 0.22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Colombia room · romantic pink shell on dropship glass panel */
+.colombia-room-romantic .dropship-market-panel--room {
+  border-color: rgba(251, 113, 133, 0.38) !important;
+  background:
+    linear-gradient(165deg, rgba(26, 2, 8, 0.94), rgba(13, 1, 4, 0.9)) padding-box,
+    linear-gradient(135deg, rgba(251, 113, 133, 0.42), rgba(251, 191, 36, 0.14), rgba(251, 113, 133, 0.28))
+      border-box;
+}
+
+.colombia-room-romantic .dropship-market-room-kicker {
+  color: rgba(254, 205, 211, 0.95) !important;
+}
+
+.colombia-room-romantic .dropship-category-lane--active {
+  border-color: rgba(251, 113, 133, 0.5) !important;
+  background: rgba(190, 24, 93, 0.18) !important;
+  box-shadow: 0 0 16px rgba(251, 113, 133, 0.18) !important;
+}

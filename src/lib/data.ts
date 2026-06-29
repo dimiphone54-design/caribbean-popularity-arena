@@ -1,3 +1,9 @@
+import { arenaGiftLegalCopy } from "@/lib/arena-gifts";
+import {
+  eldersTableGiftAmountLabel,
+  eldersTableGiftLegal
+} from "@/lib/elders-table-gift-legal";
+
 export type Creator = {
   rank: number;
   name: string;
@@ -26,6 +32,9 @@ export type MembershipPlan = {
   description: string;
   features: string[];
   highlighted?: boolean;
+  comingSoon?: boolean;
+  href?: string;
+  legalNote?: string;
 };
 
 export const creators: Creator[] = [
@@ -99,8 +108,32 @@ export const creators: Creator[] = [
 export const featuredMatchup: VoteMatchup = {
   round: "Round 3 of 7",
   question: "Who brought the most island energy this week?",
-  left: creators[0],
-  right: creators[1]
+  left: {
+    rank: 2,
+    name: "Amara Kensington",
+    island: "London, UK",
+    category: "Fashion",
+    score: 92104,
+    votes: "92.1K",
+    trend: "↑9%",
+    initials: "AK",
+    accent: "from-red-500 via-rose-400 to-orange-400",
+    bio: "London energy, global stage — we live for the lights.",
+    badges: ["Platinum · Elite Creative"]
+  },
+  right: {
+    rank: 4,
+    name: "Camila Mendoza",
+    island: "Ecuador",
+    category: "Dance",
+    score: 65820,
+    votes: "65.8K",
+    trend: "↑11%",
+    initials: "CM",
+    accent: "from-yellow-400 via-amber-300 to-orange-400",
+    bio: "Desde Quito con amor — vamos con todo.",
+    badges: ["Elite · Elite Creative"]
+  }
 };
 
 export const votingCategories = [
@@ -114,22 +147,22 @@ export const votingCategories = [
 
 export const membershipPlans: MembershipPlan[] = [
   {
-    name: "Fan Pass",
-    price: "$0",
-    cadence: "free",
-    description: "For supporters who want open creator access at no cost.",
-    features: [
-      "25 monthly arena votes",
-      "Member-only creator updates",
-      "Early access to weekly rankings"
-    ]
+    name: "The Elders Table",
+    price: eldersTableGiftAmountLabel,
+    cadence: "digital room access",
+    highlighted: true,
+    href: "/rooms/the-elders-table",
+    description: eldersTableGiftLegal.membershipDescription,
+    features: [...eldersTableGiftLegal.membershipFeatures],
+    legalNote: arenaGiftLegalCopy.noIndividualAccess
   },
   {
     name: "Arena Plus",
-    price: "$0",
-    cadence: "free",
-    description: "For super fans tracking every race across the Caribbean at no cost.",
-    highlighted: true,
+    price: "$0 Gift",
+    cadence: "Complimentary · coming soon",
+    comingSoon: true,
+    description:
+      "Premium digital arena membership with priority voting, exclusive livestream rooms, and profile placement — coming soon.",
     features: [
       "100 monthly arena votes",
       "Priority vote boosts",
@@ -140,8 +173,8 @@ export const membershipPlans: MembershipPlan[] = [
   {
     name: "Creator Circle",
     price: "$0",
-    cadence: "free",
-    description: "For creators and teams growing a loyal island audience at no cost.",
+    cadence: "Complimentary Gift",
+    description: "For creators and teams growing a loyal island audience.",
     features: [
       "Creator analytics dashboard",
       "Campaign placement requests",

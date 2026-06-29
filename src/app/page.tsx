@@ -11,11 +11,15 @@ export default function Home() {
     <>
       <main>
         <LiveArenaExperience />
-        <SlotAutomationPanel />
-        <CreatorLeaderboard />
-        <VotingArena />
-        <MembershipPlans />
-        <FirebaseIntegration />
+        <div className="luxury-club-sections">
+          <div className="a2030-content-column">
+            <SlotAutomationPanel />
+            <CreatorLeaderboard />
+            <VotingArena />
+            <MembershipPlans />
+            <FirebaseIntegration />
+          </div>
+        </div>
       </main>
       <SiteFooter />
     </>

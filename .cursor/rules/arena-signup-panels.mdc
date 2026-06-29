@@ -1,0 +1,83 @@
+---
+description: Inventory of all signup/checkout panels, locations, and one-click live-gift policy
+alwaysApply: true
+---
+
+# Arena signup panels · locations & policy
+
+**Primary dev copy:** `~/Desktop/CaribbeanFreedomArena` · preview `npm run dev:arena` → http://localhost:3004
+
+## Boss rule · country live gift ($6 · 3h)
+
+**All country live-gift panels = one-click touch.** No name, email, terms block, or checkbox on the panel.
+
+- Button: `Send Gift · $6.00 · games & talk-show`
+- Kicker: per-country viral games · talk-show · funny banter (from `country-live-gift-activity-copy.ts`)
+- Legal: link only → `/legal` (“Gift terms · revenue disclosure →”)
+- Checkout fallback: `readMemberUsername()` or `Arena Guest` + `guest+{countryId}@caribbeanfreedomarena.app`
+- Shared component: `src/components/country-live-gift-checkout-panel.tsx`
+  - `variant="intl"` — button row only (International SUITE cards)
+  - `variant="gate"` — header + one-click (room overlays)
+  - `variant="romantic"` — Colombia pink styling + one-click
+- Gate wrapper: `src/components/country-room-live-access-gate.tsx`
+- API: `POST /api/payments/country-live-gift/checkout`
+
+## Country live gift · where it appears
+
+| Location | File | Countries / room slug | Variant |
+|----------|------|----------------------|---------|
+| International SUITE scroll + nav | `international-suite-country-panels.tsx` → `CountryLiveGiftSignupPanel` | All 12: colombia, uk, lithuania, ecuador, trinidad, jamaica, venezuela, poland, tunisia, guyana, china, japan | `intl` |
+| Colombia room live slots | `colombia-room-page.tsx` → `CountryRoomLiveAccessGate` | `colombia` · `colombia-room` | `romantic` |
+| Ecuador room activities | `ecuador-room-page.tsx` → `CountryRoomLiveAccessGate` | `ecuador` · `ecuador-room` | `gate` |
+| UK Cotswolds activities | `cotswolds-page.tsx` → `CountryRoomLiveAccessGate` | `uk` · `uk-flag-cotswolds` | `gate` |
+| Japan room | `japan-room-page.tsx` → `CountryRoomLiveAccessGate` | `japan` · `japan-room` | `gate` |
+| China room | `china-room-page.tsx` → `CountryRoomLiveAccessGate` | `china` · `china-room` | `gate` |
+| Football Lads | `football-lads-page.tsx` → `CountryRoomLiveAccessGate` | `uk` · `football-lads` | `gate` |
+| Payment return | `app/payments/fygaro/return/page.tsx` | unlock after Fygaro/Wipay | — |
+
+## International SUITE · country panel order
+
+Shared: `international-suite-country-panels.tsx` (used by nav dropdown + full suite scroll)
+
+1. Room cards (built rooms open · Front 12 slots frozen)
+2. **Live gift** row · all 12 countries
+3. **Dropship** enter + mini products · all 12 countries
+4. **East Asia stage** link · Japan + China only
+
+**Pinned at top of country list:** Colombia · UK · Japan · China (`getInternationalSuiteNavCountries()`)
+
+**Built rooms stay open** in International SUITE even when Front 12 sign-in is frozen (`countryHasBuiltSuiteRooms`).
+
+## Built room alignment (live → dropship → games/extras)
+
+| Room | Clock (top-right) | Panel order |
+|------|-------------------|-------------|
+| `colombia-room` | `RoomCountryClock` | live gate → dropship → games |
+| `ecuador-room` | `RoomCountryClock` | live gate → dropship → culture → food |
+| `uk-flag-cotswolds` | `RoomCountryClock` + slideshow hero | museum → football → live gate → dropship → archive |
+| `football-lads` | `RoomCountryClock` | live gate (squad + football) → dropship |
+| `japan-room` | `RoomCountryClock` | live gate (stage games) → dropship |
+| `china-room` | `RoomCountryClock` | live gate (Wushu Duilian · Agora) → dropship |
+| `dropship-market?country=*` | `RoomCountryClock` per country param | dropship panel only |
+
+Shared shell: `RoomCountryPageShell` · spacing: `.country-room-section` (mt-6) · `DropshipMarketPanel layout="room"`.
+
+## Other signup / checkout panels (not country live gift)
+
+| Panel | File | Route / trigger | UX | API |
+|-------|------|-----------------|-----|-----|
+| Member sign-up page | `app/signup/page.tsx` | `/signup` | Full form (username, name, email, country, age, password) | local preview |
+| Arena member gift ($6) | `compliance-registration-forms.tsx` → `MemberRegistrationForm` | Home modal **bank** panel in `live-arena-experience.tsx` | Full form + checkout | `POST /api/payments/member-sign-in/checkout` |
+| Creator apply | `compliance-registration-forms.tsx` → `CreatorApplyForm` | Home modal **apply** panel | Full form (local preview) | — |
+| Front 12 women slot | `arena-slot-woman-signup-modal.tsx` | Pending slot click in `arena-front12-elite-slots.tsx` · `#front12-slots` | Full women-only application form | localStorage |
+| Arena Plus host payouts | `country-revenue-split-modal.tsx` | Intl card split panel · `international-suite-country-split-panel.tsx` | Host registration form | `POST /api/country-host/register` |
+| Elders Room unlock | `the-elders-room-live-widget.tsx` | Elders Table page footer widget | One-click gift button | `POST /api/payments/elders-room/checkout` |
+| Dropship product buy | `dropship-checkout-modal.tsx` via `dropship-buy-button.tsx` | Dropship market + room panels | Full shipping/checkout form | `POST /api/dropshipping/orders` |
+| Dropship enter (navigation) | `dropship-enter-button.tsx` | Intl cards via `international-suite-country-panels.tsx` | One-click link to market | — |
+
+## When editing live-gift UX
+
+1. Change **one** shared panel (`country-live-gift-checkout-panel.tsx`) — do not reintroduce per-room forms.
+2. Update **all** gate mounts if adding a new gated room.
+3. Intl card row flows through `international-suite-country-panels.tsx` · all 12 via `getInternationalSuiteNavCountries()`.
+4. Terms copy lives in `lib/country-live-gift-checkout.ts` · legal page — not on the one-click panel.

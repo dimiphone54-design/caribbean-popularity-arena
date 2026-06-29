@@ -9,19 +9,30 @@
   "author": "dimiphone54-design",
   "scripts": {
     "dev": "next dev",
+    "dev:arena": "npm run clean && next dev --port 3004",
     "build": "next build",
+    "build:arena": "npm run clean && next build",
     "start": "next start",
+    "start:arena": "next start --port 3004",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf .next out .turbo .vercel tsconfig.tsbuildinfo .eslintcache node_modules/.cache",
+    "clean:hard": "npm run clean && find . -type d -name '__pycache__' -not -path './node_modules/*' -prune -exec rm -rf {} + 2>/dev/null; true"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@supabase/supabase-js": "^2.108.2",
+    "agora-rtc-sdk-ng": "^4.24.5",
+    "agora-token": "^2.0.5",
     "firebase": "^12.14.0",
     "lucide-react": "^1.17.0",
     "next": "^15.5.19",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "three": "^0.185.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
@@ -29,6 +40,8 @@
     "@types/node": "^25.9.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.185.0",
+    "d3-geo": "^3.1.1",
     "eslint": "^9.39.4",
     "eslint-config-next": "^15.5.19",
     "postcss": "^8.5.15",

@@ -1,0 +1,55 @@
+---
+description: Launch or preview CaribbeanFreedomArena from Desktop save or this repo
+alwaysApply: true
+---
+
+# Launch CaribbeanFreedomArena
+
+When the user says **Preview**, **launch**, **open arena**, or **run from Desktop**, start the site from their saved copy.
+
+## Desktop save (primary)
+
+User database folder:
+
+`~/Desktop/CARIBBEANLOVEAPP (DATA BASE)/caribbean-freedom-arena-website-*.zip`
+
+After unzip (any of these):
+
+```bash
+cd ~/Desktop/CaribbeanFreedomArena
+# or
+cd ~/Desktop/CARIBBEANLOVEAPP\ \(DATA\ BASE\)/caribbean-freedom-arena-website
+npm install          # first time only, or after unzip
+npm run dev:arena
+```
+
+Or run: `./scripts/launch-caribbean-freedom-arena.sh` (auto-picks Desktop or repo)
+
+**Preview URL:** http://localhost:3004/#home  
+**Footer panel:** scroll to bottom  
+**Hard refresh after updates:** `Cmd+Shift+R`
+
+## This repo (development)
+
+If working in `CARIBBEANLOVEAPP` instead of Desktop:
+
+```bash
+cd /Users/dimiphone/CARIBBEANLOVEAPP
+npm run dev:arena
+```
+
+Same URL: http://localhost:3004/
+
+## Rules
+
+- Always use **`npm run dev:arena`** (clears `.next` first). Do not use plain `next dev` after a production build.
+- If port 3004 is busy: `lsof -ti:3004 | xargs kill -9` then rerun `npm run dev:arena`.
+- Production from Desktop: `npm run build:arena && npm run start:arena`
+- Deliverable zip rebuild: `./scripts/build-website-deliverable.sh` → copies to **`~/Desktop/CARIBBEANLOVEAPP (DATA BASE)/`** and opens that folder in Finder (also saved in repo `deliverables/`)
+
+## Unzip path
+
+If the user unzipped `caribbean-freedom-arena-website-*.zip`, extract to:
+
+- `~/Desktop/CaribbeanFreedomArena`, or
+- `~/Desktop/CARIBBEANLOVEAPP (DATA BASE)/caribbean-freedom-arena-website`

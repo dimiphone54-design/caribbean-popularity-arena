@@ -36,5 +36,8 @@ export const firebaseCollections = {
   votes: "votes",
   memberships: "memberships",
   matchups: "matchups",
-  users: "users"
+  users: "users",
+  arenaEngineState: "arena_engine_state",
+  arenaLiveSessions: "arena_live_sessions",
+  arenaRotationEvents: "arena_rotation_events"
 } as const;

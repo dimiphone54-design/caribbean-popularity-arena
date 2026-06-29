@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { isLegalEntityConfigured } from "@/config/legal-entity";
+import { RoomBackToArena } from "@/components/room-back-to-arena";
 import { SiteFooter } from "@/components/site-footer";
 import { legalDocuments } from "@/lib/legal-documents";
 
@@ -11,29 +11,10 @@ export default function LegalIndexPage() {
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#d7b46a]">Legal Framework</p>
             <h1 className="mt-1 font-luxury-serif text-3xl text-[#f7efe0] sm:text-4xl">Caribbean Popularity Arena</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#b8c9e1]">
-              Production-ready legal documents for global users, creators, payment processors, and attorney review.
-              After your Trinidad sole trader registration, update one file:{" "}
-              <code className="rounded bg-black/30 px-1.5 py-0.5 text-[#f7efe0]">src/config/legal-entity.ts</code>.
-            </p>
           </div>
-          <Link
-            href="/"
-            className="inline-flex w-fit rounded-full border border-[#d7b46a]/30 px-5 py-2.5 text-sm font-semibold text-[#f7e7aa] transition hover:border-[#d7b46a]/60 hover:bg-[#d7b46a]/10"
-          >
-            Back to Arena
-          </Link>
+          <RoomBackToArena showHint={false} />
         </div>
       </header>
-
-      {!isLegalEntityConfigured() ? (
-        <div className="border-b border-[#f5c842]/20 bg-[#f5c842]/10 px-4 py-4 sm:px-6 lg:px-8">
-          <p className="mx-auto max-w-7xl text-sm leading-6 text-[#fff4c2]">
-            Pending Trinidad sole trader details — placeholders will auto-fill across all legal pages once you update{" "}
-            <code className="rounded bg-black/30 px-1.5 py-0.5">src/config/legal-entity.ts</code>.
-          </p>
-        </div>
-      ) : null}
 
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid gap-4 md:grid-cols-2">

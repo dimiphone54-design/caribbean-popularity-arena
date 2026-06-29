@@ -1,5 +1,5 @@
 export const brand = {
-  name: "Caribbean Popularity Arena",
+  name: "CaribbeanFreedomArena",
   signature: "Swiss Luxury Romantic 2028",
   tagline: "An exclusive creator arena with cinematic island prestige.",
   navItems: [

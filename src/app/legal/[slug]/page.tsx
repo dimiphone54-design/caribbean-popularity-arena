@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { LegalDocumentView } from "@/components/legal-document-view";
+import { RoomBackToArena } from "@/components/room-back-to-arena";
 import { SiteFooter } from "@/components/site-footer";
 import { getAllLegalSlugs, getLegalDocumentContent } from "@/lib/legal-content";
 
@@ -50,12 +51,7 @@ export default async function LegalDocumentPage({ params }: LegalPageProps) {
             >
               Legal Center
             </Link>
-            <Link
-              href="/"
-              className="inline-flex rounded-full border border-white/10 px-5 py-2.5 text-sm font-semibold text-[#b8c9e1] transition hover:border-white/25 hover:text-[#f7efe0]"
-            >
-              Back to Arena
-            </Link>
+            <RoomBackToArena showHint={false} />
           </div>
         </div>
       </header>
