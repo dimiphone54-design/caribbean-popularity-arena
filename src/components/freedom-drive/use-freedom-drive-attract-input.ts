@@ -16,7 +16,7 @@ export function useFreedomDriveAttractInput(enabled: boolean): FreedomDriveInput
     }
 
     let frame = 0;
-    let start = performance.now();
+    const start = performance.now();
 
     const tick = (now: number) => {
       const t = (now - start) / 1000;
