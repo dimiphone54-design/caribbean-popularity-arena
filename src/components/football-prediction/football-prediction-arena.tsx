@@ -16,6 +16,7 @@ import {
 } from "@/lib/football-prediction-arena";
 import { getDemoFootballFixtures } from "@/lib/football-prediction-fixtures";
 import {
+  cacheFootballFixtures,
   computeUserFootballStats,
   filterFootballLeaderboard,
   readLocalFootballRankings,
@@ -82,32 +83,58 @@ export function FootballPredictionArena({
   const [competitionFilter, setCompetitionFilter] = useState<string>(initialCompetitionFilter);
   const [drafts, setDrafts] = useState<Record<string, FootballPredictionInput>>({});
   const [notice, setNotice] = useState<string | null>(null);
+  const [fixtureSource, setFixtureSource] = useState<"api-sports" | "demo">("demo");
+  const [liveCount, setLiveCount] = useState(0);
 
   const userId = readTargetShooterUserId();
   const username = readTargetShooterUsername();
 
-  const refresh = useCallback(() => {
-    const scored = scoreLocalPredictions();
-    setPredictions(scored);
-    const ranks = buildLocalFootballRankings(scored);
-    writeLocalFootballRankings(ranks);
-    setRankings(ranks);
-  }, []);
+  const refresh = useCallback(
+    (fixtureRows?: FootballMatch[]) => {
+      const scored = scoreLocalPredictions(fixtureRows ?? matches);
+      setPredictions(scored);
+      const ranks = buildLocalFootballRankings(scored);
+      writeLocalFootballRankings(ranks);
+      setRankings(ranks);
+    },
+    [matches]
+  );
+
+  const loadFixtures = useCallback(async () => {
+    try {
+      const res = await fetch("/api/games/football-prediction/fixtures", { cache: "no-store" });
+      const json = (await res.json()) as {
+        matches?: FootballMatch[];
+        source?: "api-sports" | "demo";
+        liveCount?: number;
+      };
+      const rows = json.matches?.length ? json.matches : getDemoFootballFixtures();
+      setMatches(rows);
+      cacheFootballFixtures(rows);
+      setFixtureSource(json.source === "api-sports" ? "api-sports" : "demo");
+      setLiveCount(json.liveCount ?? rows.filter((match) => match.status === "live").length);
+      refresh(rows);
+    } catch {
+      const rows = getDemoFootballFixtures();
+      setMatches(rows);
+      cacheFootballFixtures(rows);
+      setFixtureSource("demo");
+      setLiveCount(0);
+      refresh(rows);
+    }
+  }, [refresh]);
 
   useEffect(() => {
     setCompetitionFilter(initialCompetitionFilter);
   }, [initialCompetitionFilter]);
 
   useEffect(() => {
-    void fetch("/api/games/football-prediction/fixtures")
-      .then((r) => r.json())
-      .then((json: { matches?: FootballMatch[] }) => {
-        if (json.matches?.length) setMatches(json.matches);
-      })
-      .catch(() => setMatches(getDemoFootballFixtures()));
-
-    refresh();
-  }, [refresh]);
+    void loadFixtures();
+    const timer = window.setInterval(() => {
+      void loadFixtures();
+    }, 5 * 60_000);
+    return () => window.clearInterval(timer);
+  }, [loadFixtures]);
 
   const stats = useMemo(
     () => computeUserFootballStats(userId, predictions, rankings),
@@ -225,7 +252,11 @@ export function FootballPredictionArena({
                 ))}
               </select>
             </label>
-            <p className="football-prediction-open-count">{upcoming.length} open fixtures</p>
+            <p className="football-prediction-open-count">
+              {liveCount > 0 ? `${liveCount} live · ` : ""}
+              {upcoming.length} open fixtures
+              {fixtureSource === "api-sports" ? " · API-Sports" : ""}
+            </p>
           </div>
 
           <div className="football-prediction-match-list">
@@ -260,9 +291,18 @@ export function FootballPredictionArena({
 
                   <div className="football-prediction-match-body">
                   <header className="football-prediction-match-head">
-                    <span className="football-prediction-comp">{match.competitionLabel}</span>
+                    <span className="football-prediction-comp">
+                      {match.competitionLabel}
+                      {match.status === "live" ? (
+                        <span className="football-prediction-live-badge"> LIVE</span>
+                      ) : null}
+                    </span>
                     <span className={`football-prediction-lock${locked ? " football-prediction-lock--locked" : ""}`}>
-                      {locked ? "🔒 Locked" : formatKickoffCountdown(match.kickoff)}
+                      {match.status === "live"
+                        ? `🔴 ${match.homeScore ?? 0}-${match.awayScore ?? 0}`
+                        : locked
+                          ? "🔒 Locked"
+                          : formatKickoffCountdown(match.kickoff)}
                     </span>
                   </header>
                   <div className="football-prediction-teams">
@@ -561,7 +601,9 @@ export function FootballPredictionArena({
                 {flag} Football Prediction Arena
               </h2>
               <p className="football-prediction-sub">
-                {countryName} · predict real fixtures · climb global & country boards
+                {fixtureSource === "api-sports"
+                  ? `${countryName} · API-Sports live · ${liveCount} match${liveCount === 1 ? "" : "es"} on now`
+                  : `${countryName} · predict fixtures · climb global & country boards`}
               </p>
             </div>
             <div className="football-prediction-head-actions">

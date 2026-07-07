@@ -1,7 +1,10 @@
+"use client";
+
 import { CfaHeaderCountryAiStrobe } from "@/components/cfa-header-country-ai-strobe";
+import { useArenaMasterKeyActive } from "@/components/use-arena-master-key-active";
 import { getCfaHeaderSlotFlagFill } from "@/lib/cfa-header-slot-flag-fills";
 import type { CfaHeaderSlotCountryMap } from "@/lib/cfa-header-slot-country-maps";
-import { arenaSlotSignInFrozenShortCopy, isArenaSlotFrozen } from "@/lib/arena-slot-sign-in-access";
+import { arenaSlotSignInFrozenShortCopy, isArenaSlotFrozenForUi } from "@/lib/arena-slot-sign-in-access";
 
 type CfaHeaderSlotCountryMapSlideProps = {
   country: CfaHeaderSlotCountryMap;
@@ -16,11 +19,12 @@ export function CfaHeaderSlotCountryMapSlide({
   withJoinAnchor = false,
   backdrop = false,
 }: CfaHeaderSlotCountryMapSlideProps) {
+  const masterKeyActive = useArenaMasterKeyActive();
   const gradientId = `cfa-slot-flag-fill-${country.islandCode}`;
   const clipId = `cfa-slot-flag-clip-${country.islandCode}`;
   const flagFill = getCfaHeaderSlotFlagFill(country.islandCode);
   const diagonal = flagFill.direction === "diagonal";
-  const frozen = isArenaSlotFrozen(country.islandCode);
+  const frozen = isArenaSlotFrozenForUi(country.islandCode, masterKeyActive);
   const showFrozenSlotUx = frozen && !backdrop;
 
   return (

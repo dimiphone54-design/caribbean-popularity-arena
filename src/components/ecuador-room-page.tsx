@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
 import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
 import { EcuadorRoomLiveSlot } from "@/components/ecuador-room-live-slot";
-import { EcuadorRoomGamesPanel } from "@/components/ecuador-room-games-panel";
+import { RoomSportsStack } from "@/components/room-sports-stack";
 import { EcuadorThePit } from "@/components/ecuador-the-pit";
 import { FreedomDriveSimulatorLazy } from "@/components/freedom-drive/freedom-drive-simulator-lazy";
 import { EcuadorIronFangStatPanelCard } from "@/components/ecuador-iron-fang-stat-panel";
@@ -127,6 +127,12 @@ export function EcuadorRoomPage() {
                       panel={panel}
                       onPlayGame={launchLiveGame}
                       onLaunchFreedomDrive={() => launchLiveGame("Ecuador Drive")}
+                      onLaunchFootball={() => {
+                        document.getElementById("ecuador-room-football")?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "center"
+                        });
+                      }}
                     />
                   ))}
                 </div>
@@ -134,8 +140,9 @@ export function EcuadorRoomPage() {
 
               <section className="country-room-section w-full">
                 <EcuadorThePit>
-                  <EcuadorRoomGamesPanel
-                    requestedGame={requestedGame}
+                  <RoomSportsStack
+                    roomSlug="ecuador-room"
+                    requestedGameId={requestedGame}
                     onRequestedGameHandled={() => setRequestedGame(null)}
                   />
                 </EcuadorThePit>

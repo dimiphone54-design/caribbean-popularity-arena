@@ -1,3 +1,4 @@
+import { normalizeArenaSlotOccupancyDisplayName } from "@/lib/arena-slot-live-display";
 import { ARENA_SLOT_COUNTDOWN_SECONDS } from "@/lib/arena-slot-countdown";
 import { shouldKeepArenaActiveSlotsOpen } from "@/lib/arena-slot-keep-open";
 
@@ -52,7 +53,9 @@ export function readArenaSlotOccupancies(nowMs = Date.now()): Record<number, Are
   for (const entry of Object.values(raw)) {
     if (!entry?.slotId) continue;
     if (isArenaSlotOccupancyActive(entry, nowMs)) {
-      active[entry.slotId] = entry;
+      const normalized = normalizeArenaSlotOccupancyDisplayName(entry);
+      if (normalized.displayName !== entry.displayName) changed = true;
+      active[entry.slotId] = normalized;
     } else {
       changed = true;
     }

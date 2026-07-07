@@ -222,6 +222,13 @@
   gap: 0.35rem;
 }
 
+.football-prediction-live-badge {
+  margin-left: 0.35rem;
+  color: #ff4d6d;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
 .football-prediction-comp {
   font-size: 0.62rem;
   font-weight: 800;

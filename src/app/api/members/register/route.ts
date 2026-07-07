@@ -7,6 +7,10 @@ type RegisterBody = {
   email?: string;
   country?: string;
   islandCode?: string;
+  liveFocus?: string;
+  dropshippingItemName?: string;
+  dropshippingStoreUrl?: string;
+  dropshippingNotes?: string;
   bankName?: string;
   accountHolderName?: string;
   accountNumber?: string;
@@ -30,6 +34,10 @@ export async function POST(request: Request) {
     email: body.email?.trim() || existing?.email || "",
     country: body.country?.trim() || existing?.country || "",
     islandCode: body.islandCode?.trim() || existing?.islandCode || "",
+    liveFocus: body.liveFocus?.trim() || existing?.liveFocus || "",
+    dropshippingItemName: body.dropshippingItemName?.trim() || existing?.dropshippingItemName || "",
+    dropshippingStoreUrl: body.dropshippingStoreUrl?.trim() || existing?.dropshippingStoreUrl || "",
+    dropshippingNotes: body.dropshippingNotes?.trim() || existing?.dropshippingNotes || "",
     bankName: body.bankName?.trim() || existing?.bankName || "",
     accountHolderName: body.accountHolderName?.trim() || existing?.accountHolderName || "",
     accountNumber: body.accountNumber?.trim() || existing?.accountNumber || "",

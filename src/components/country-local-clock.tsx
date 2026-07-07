@@ -67,7 +67,9 @@ export function CountryLocalClock({ capital, timeZone, tzAbbrev, className = "" 
         {timeLine}
       </time>
       <span className="country-local-clock-tz">{tzAbbrev}</span>
-      <span className="country-local-clock-date">{dateLine}</span>
+      <span className="country-local-clock-date" suppressHydrationWarning>
+        {dateLine}
+      </span>
     </div>
   );
 }

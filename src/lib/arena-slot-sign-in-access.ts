@@ -5,6 +5,16 @@ import {
   isInternationalSuiteCountryActiveByIslandCode
 } from "@/lib/international-suite";
 
+/** UI-safe · pass masterKeyActive from useArenaMasterKeyActive (false during SSR). */
+export function isArenaSlotSignInOpenForUi(islandCode: string, masterKeyActive = false) {
+  if (masterKeyActive) return true;
+  return isInternationalSuiteCountryActiveByIslandCode(islandCode);
+}
+
+export function isArenaSlotFrozenForUi(islandCode: string, masterKeyActive = false) {
+  return !isArenaSlotSignInOpenForUi(islandCode, masterKeyActive);
+}
+
 /** Front 12 · girl sign-in open · mirrors International SUITE active countries only */
 export const arenaSlotSignInOpenIslandCodes = getInternationalSuiteActiveIslandCodes();
 

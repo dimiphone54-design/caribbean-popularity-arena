@@ -178,6 +178,114 @@ const GAME_CONFIG: Record<string, GameConfig> = {
     opponent: "Rival martial artist",
     field: "Shanghai stage · 武术对练"
   },
+  "Wushu Sanda": {
+    kind: "aim",
+    emoji: "🥋",
+    goal: "Time the strike — land the hit as the sanda window opens in the octagon cage.",
+    action: "HIT!",
+    targetWord: "sanda window",
+    opponent: "Rival sanda fighter",
+    field: "Shanghai octagon · 散打"
+  },
+  Football: {
+    kind: "aim",
+    emoji: "⚽",
+    goal: "Time the shot — strike as the ball crosses the goal window.",
+    action: "SHOOT!",
+    targetWord: "goal window",
+    opponent: "Keeper",
+    field: "Match-day lane · live"
+  },
+  Fútbol: {
+    kind: "aim",
+    emoji: "⚽",
+    goal: "Para el tiro — detén el marcador cuando el balón cruza la zona de gol.",
+    action: "¡GOL!",
+    targetWord: "zona de gol",
+    opponent: "Arquero",
+    field: "Liga · noche de partido"
+  },
+  "Five-a-side": {
+    kind: "aim",
+    emoji: "⚽",
+    goal: "Time the finish — hit the five-a-side target before the pub crew clears.",
+    action: "FINISH!",
+    targetWord: "five-a-side net",
+    opponent: "Pub keeper",
+    field: "Sunday league · 5-a-side"
+  },
+  "Park football": {
+    kind: "aim",
+    emoji: "⚽",
+    goal: "Time the pass — land the ball in the park football zone.",
+    action: "PASS!",
+    targetWord: "park zone",
+    opponent: "Rival squad",
+    field: "Hyde Park · kickabout"
+  },
+  Volleyball: {
+    kind: "aim",
+    emoji: "🏐",
+    goal: "Time the spike — hit as the ball crosses the net sweet spot.",
+    action: "SPIKE!",
+    targetWord: "net zone",
+    opponent: "Blocker",
+    field: "Open park net"
+  },
+  Salsa: {
+    kind: "tap",
+    emoji: "💃",
+    goal: "Tap fast — hit the beat markers before the rival dancer on the Cali floor.",
+    action: "STEP!",
+    targetWord: "beat marker",
+    opponent: "Rival dancer",
+    field: "Cali · live pista"
+  },
+  Surf: {
+    kind: "aim",
+    emoji: "🌊",
+    goal: "Time the pop-up — catch the wave window at Palomino.",
+    action: "RIDE!",
+    targetWord: "wave window",
+    opponent: "The swell",
+    field: "Palomino · Caribbean coast"
+  },
+  Cycling: {
+    kind: "tap",
+    emoji: "🚴",
+    goal: "Tap fast — power the sprint down the ciclovía lane.",
+    action: "PEDAL!",
+    targetWord: "sprint line",
+    opponent: "Peloton rival",
+    field: "Bogotá ciclovía"
+  },
+  Snooker: {
+    kind: "aim",
+    emoji: "🎱",
+    goal: "Stop the cue marker in the potting zone — open break or safety.",
+    action: "POT!",
+    targetWord: "potting zone",
+    opponent: "Frame rival",
+    field: "UK snooker hall"
+  },
+  "Indoor bowls": {
+    kind: "aim",
+    emoji: "🟢",
+    goal: "Stop the weight gauge on the indoor rink jack line.",
+    action: "DRAW!",
+    targetWord: "jack line",
+    opponent: "Rink rival",
+    field: "UK indoor green"
+  },
+  "Indoor Curling": {
+    kind: "aim",
+    emoji: "🥌",
+    goal: "Release the stone into the house scoring zone.",
+    action: "SLIDE!",
+    targetWord: "house zone",
+    opponent: "Skip rival",
+    field: "Elite snow indoor lane"
+  }
 };
 
 const DEFAULT_CONFIG: GameConfig = {

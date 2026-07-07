@@ -1,7 +1,7 @@
 const SLOT_TITLE = "12 SLOTS";
 const SLOT_BIRTHDAY = "🎂 Birthday Queen · 5 Extra Live Hours · Own The Night · All Eyes On Her";
 const SLOT_SUB =
-  "FROZEN NATIONS LOCKED · GIRL SIGN-IN OPEN · UK · ECUADOR · TRINIDAD · 3-HOUR LIVE RUN";
+  "GIRL SIGN-IN OPEN · UK · ECUADOR · TRINIDAD · 3-HOUR LIVE RUN";
 
 const JACKPOT_REEL_NUMBERS = Array.from({ length: 12 }, (_, index) => String(index + 1).padStart(2, "0"));
 

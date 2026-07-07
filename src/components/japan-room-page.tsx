@@ -7,7 +7,7 @@ import {
   DropshipMarketPanel,
   DropshipMarketRoomIntroPanel
 } from "@/components/dropshipping/dropship-market-panel";
-import { EastAsiaRoomGamesPanel } from "@/components/east-asia-room-games-panel";
+import { RoomSportsStack } from "@/components/room-sports-stack";
 import { JapanRoomDropshipCreatorSlot } from "@/components/japan-room-dropship-creator-slot";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
@@ -74,7 +74,11 @@ export function JapanRoomPage() {
                   hideUnlockedStatus
                   belowGate={<JapanRoomDropshipCreatorSlot />}
                 >
-                  <EastAsiaRoomGamesPanel lane={lane} />
+                  <RoomSportsStack
+                    roomSlug={lane.roomSlug}
+                    showStagePreview
+                    stageCaption={`${lane.hostLabel} · 剣 · 炎`}
+                  />
                 </CountryRoomLiveAccessGate>
               </div>
             </section>

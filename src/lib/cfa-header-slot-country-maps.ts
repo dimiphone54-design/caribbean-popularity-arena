@@ -1,5 +1,6 @@
 import generatedPaths from "@/lib/cfa-header-slot-country-paths.generated.json";
 import { arenaCreators } from "@/lib/arena-experience";
+import { sortArenaFront12Slots } from "@/lib/arena-front12-slot-order";
 import { getCfaHeaderTrinidadStrobePaths } from "@/lib/cfa-header-trinidad-ai-strobe-paths";
 
 export type CfaHeaderSlotCountryMap = {
@@ -54,7 +55,7 @@ function resolveSlotMap(islandCode: string): GeneratedSlotMap & { exactTrinidad?
 }
 
 export function buildCfaHeaderSlotCountryMaps(): CfaHeaderSlotCountryMap[] {
-  return arenaCreators.slice(0, 12).map((slot) => {
+  return sortArenaFront12Slots(arenaCreators.slice(0, 12)).map((slot) => {
     const map = resolveSlotMap(slot.islandCode);
 
     return {

@@ -32,7 +32,7 @@ export function UkSlideshowDropshipCreatorsSlot() {
             />
           ))}
         </div>
-        <Link href="#uk-women-dropship-shop" className="uk-slideshow-dropship-slot-link">
+        <Link href="#uk-dropshipping" className="uk-slideshow-dropship-slot-link">
           UK shop →
         </Link>
       </div>

@@ -8,6 +8,7 @@ import { CotswoldsHeroPlayersFilm } from "@/components/cotswolds-hero-players-fi
 import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
 import { FreedomDriveSimulatorLazy } from "@/components/freedom-drive/freedom-drive-simulator-lazy";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
+import { RoomSportsStack } from "@/components/room-sports-stack";
 import { UkFootballHubStack } from "@/components/uk-football-hub-stack";
 import { UkRoomCornerScroll } from "@/components/uk-room-corner-scroll";
 import { useRoomLocale } from "@/components/room-locale-provider";
@@ -134,6 +135,10 @@ export function CotswoldsPage() {
             </figure>
 
             <UkFootballHubStack countryId="uk" countryName="United Kingdom" flag="🇬🇧" />
+
+            <section className="country-room-section w-full">
+              <RoomSportsStack roomSlug="uk-flag-cotswolds" gamesOnly />
+            </section>
 
             <div className="w-full">
               <CountryRoomLiveAccessGate

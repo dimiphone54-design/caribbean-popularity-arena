@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Arena2030Backdrop, Arena2030Header } from "@/components/arena-2030-backdrop";
 import { FootballPredictionArena } from "@/components/football-prediction/football-prediction-arena";
+import { RoomSportsStack } from "@/components/room-sports-stack";
 import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
 import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
@@ -83,6 +84,10 @@ export function FootballLadsPage() {
               flag="🇬🇧"
               layout="room"
             />
+
+            <section className="country-room-section w-full">
+              <RoomSportsStack roomSlug="football-lads" gamesOnly />
+            </section>
 
             {activePrompt ? (
               <section className="country-room-section a2030-transmission rounded-[1.5rem] p-5 backdrop-blur-md">

@@ -14,6 +14,7 @@ export function ArenaAiRailMovingLetters({ text }: { text: string }) {
               key={`${wordIndex}-${index}-${char}`}
               className="arena-ai-rail-letter"
               style={{ animationDelay: `${(wordIndex * 4 + index) * 0.042}s` }}
+              suppressHydrationWarning
             >
               {char === " " ? "\u00a0" : char}
             </span>

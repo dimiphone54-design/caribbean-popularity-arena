@@ -6,16 +6,17 @@ import {
   readArenaSlotOccupancies,
   type ArenaSlotOccupancy
 } from "@/lib/arena-slot-occupancy";
+import { normalizeArenaSlotOccupancyDisplayName } from "@/lib/arena-slot-live-display";
 import { ARENA_ENGINE_STATE_EVENT } from "@/components/use-arena-engine";
 import type { ArenaEngineLiveSession } from "@/lib/arena-engine/types";
 
 function engineSessionToOccupancy(session: ArenaEngineLiveSession): ArenaSlotOccupancy {
-  return {
+  return normalizeArenaSlotOccupancyDisplayName({
     slotId: session.slotId,
     islandCode: session.islandCode,
     displayName: session.displayName,
     signedInAt: Date.parse(session.signedInAt)
-  };
+  });
 }
 
 async function fetchEngineOccupancies(): Promise<Record<number, ArenaSlotOccupancy>> {

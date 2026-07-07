@@ -88,7 +88,7 @@ export const FOOTBALL_COMPETITIONS: Array<{ id: FootballCompetitionId; label: st
 ];
 
 export function isMatchLocked(match: FootballMatch, nowMs = Date.now()) {
-  if (match.status !== "scheduled") return true;
+  if (match.status === "live" || match.status === "finished") return true;
   return new Date(match.kickoff).getTime() <= nowMs;
 }
 

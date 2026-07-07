@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FootballPredictionArena } from "@/components/football-prediction/football-prediction-arena";
+import { ArenaSlotDropshipTab } from "@/components/arena-slot-dropship-tab";
 import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
 import { UkFootballLeagueStrip } from "@/components/uk-football-league-strip";
 import type { FootballCompetitionId } from "@/lib/football-prediction-arena";
@@ -43,25 +44,18 @@ export function UkFootballHubStack({
         />
       </section>
 
-      <section
-        id="uk-women-dropship-shop"
-        className={`uk-football-dropship-wrap ${UK_ROOM_PANEL}`}
-        aria-label="UK dropship market · UK women only"
-      >
-        <header className="uk-football-hub-stack-head uk-football-dropship-head">
-          <p className="uk-football-hub-kicker">{flag} Dropship market</p>
-          <h2 className="uk-football-hub-title">{countryName} shop</h2>
-          <p className="uk-football-hub-sub">UK lane · arena checkout · aligned under football</p>
-        </header>
-        <DropshipMarketPanel
-          countryId={countryId}
-          countryName={countryName}
-          flag={flag}
-          layout="room"
-          hideRoomIntro
-          embeddedInUkStack
-        />
-      </section>
+      <div className={`uk-football-dropship-wrap ${UK_ROOM_PANEL}`}>
+        <ArenaSlotDropshipTab mode="room" countryName={countryName}>
+          <DropshipMarketPanel
+            countryId={countryId}
+            countryName={countryName}
+            flag={flag}
+            layout="room"
+            hideRoomIntro
+            embeddedInUkStack
+          />
+        </ArenaSlotDropshipTab>
+      </div>
     </div>
   );
 }

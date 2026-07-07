@@ -14,16 +14,18 @@ type EcuadorIronFangStatPanelCardProps = {
   panel: EcuadorIronFangStatPanel;
   onPlayGame?: (gameId: EcuadorRoomPlayableGame) => void;
   onLaunchFreedomDrive?: () => void;
+  onLaunchFootball?: () => void;
 };
 
 /** Ecuador · trending game stat card · small live game video preview */
 export function EcuadorIronFangStatPanelCard({
   panel,
   onPlayGame,
-  onLaunchFreedomDrive
+  onLaunchFreedomDrive,
+  onLaunchFootball
 }: EcuadorIronFangStatPanelCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const interactive = Boolean(panel.gameId || panel.freedomDrive);
+  const interactive = Boolean(panel.gameId || panel.freedomDrive || panel.footballLane);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -43,6 +45,10 @@ export function EcuadorIronFangStatPanelCard({
   function handleClick() {
     if (panel.freedomDrive) {
       onLaunchFreedomDrive?.();
+      return;
+    }
+    if (panel.footballLane) {
+      onLaunchFootball?.();
       return;
     }
     if (panel.gameId) {

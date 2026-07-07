@@ -9,7 +9,8 @@ import { ColombiaRoomSlotTopicsScroll } from "@/components/colombia-room-slot-to
 import { ColombiaRoomRomanticAtmosphere } from "@/components/colombia-room-romantic-atmosphere";
 import { ColombiaRoomSlideshow } from "@/components/colombia-room-slideshow";
 import { ColombiaRoomSpotlightPhotos } from "@/components/colombia-room-spotlight-photos";
-import { ColombiaRoomGamesPanel } from "@/components/colombia-room-games-panel";
+import { RoomSportsStack } from "@/components/room-sports-stack";
+import { ArenaSlotDropshipTab, COLOMBIA_DROPSHIP_TAB_HASH } from "@/components/arena-slot-dropship-tab";
 import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
 import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
 import { useRoomLocale } from "@/components/room-locale-provider";
@@ -126,14 +127,20 @@ export function ColombiaRoomPage() {
                 </div>
               </section>
 
-              <DropshipMarketPanel
-                countryId="colombia"
+              <ArenaSlotDropshipTab
+                mode="room"
+                sectionId={COLOMBIA_DROPSHIP_TAB_HASH}
                 countryName="Colombia"
-                flag="🇨🇴"
-                layout="room"
-              />
+              >
+                <DropshipMarketPanel
+                  countryId="colombia"
+                  countryName="Colombia"
+                  flag="🇨🇴"
+                  layout="room"
+                />
+              </ArenaSlotDropshipTab>
               <div className="country-room-section w-full">
-                <ColombiaRoomGamesPanel />
+                <RoomSportsStack roomSlug="colombia-room" />
               </div>
             </div>
           </div>

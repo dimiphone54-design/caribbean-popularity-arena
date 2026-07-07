@@ -12,18 +12,11 @@ export { formatArenaWelcomeLine };
 /** Welcome panel · auto name for every arena enter (member or session guest). */
 export function useArenaWelcomeMember() {
   const pathname = usePathname();
-  const [welcomeLine, setWelcomeLine] = useState<string | null>(() => {
-    if (typeof window === "undefined") return null;
-    return formatArenaWelcomeLine(readArenaWelcomeDisplayName());
-  });
-  const [ready, setReady] = useState(() => typeof window !== "undefined");
+  const [welcomeLine, setWelcomeLine] = useState<string | null>(null);
+  const [ready, setReady] = useState(false);
   const [enterPulse, setEnterPulse] = useState(0);
-  const [isMemberWelcome, setIsMemberWelcome] = useState(() =>
-    typeof window !== "undefined" ? readMemberUsername().length >= 2 : false
-  );
-  const [isMaster, setIsMaster] = useState(() =>
-    typeof window !== "undefined" ? isArenaPrimaryMasterRecognized() : false
-  );
+  const [isMemberWelcome, setIsMemberWelcome] = useState(false);
+  const [isMaster, setIsMaster] = useState(false);
 
   const sync = useCallback(() => {
     const name = readArenaWelcomeDisplayName();

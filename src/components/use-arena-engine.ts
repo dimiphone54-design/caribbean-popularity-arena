@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import {
   countLiveSessionsNow,
   formatRotationCountdownForEngine,
@@ -56,7 +56,11 @@ export function useArenaEngineState(pollMs = 30_000) {
 /** Legal bot + arena panels · 1s tick · live session count + rotation countdown */
 export function useArenaEngineLiveStats(pollMs = 1_000) {
   const { state: engine, loading, refresh } = useArenaEngineState(pollMs);
-  const [nowMs, setNowMs] = useState(() => Date.now());
+  const [nowMs, setNowMs] = useState(0);
+
+  useLayoutEffect(() => {
+    setNowMs(Date.now());
+  }, []);
 
   useEffect(() => {
     const interval = window.setInterval(() => {

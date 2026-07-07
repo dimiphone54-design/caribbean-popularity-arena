@@ -1,6 +1,6 @@
 import { getArenaCountrySlotMeta } from "@/lib/arena-country-slot-meta";
 
-/** Front 12 slot order · matches arenaCreators rank 1–12 */
+/** Front 12 slot ids · photos keyed by slot id (display order is arena-front12-slot-order) */
 export const slotIdToCountryCode: Record<number, string> = {
   1: "CO",
   2: "UK",

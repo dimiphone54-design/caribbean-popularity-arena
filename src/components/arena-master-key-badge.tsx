@@ -1,26 +1,32 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { ARENA_MASTER_KEY_EVENT, isArenaMasterKeyActive } from "@/lib/arena-master-key";
 import { isArenaPrimaryMasterRecognized } from "@/lib/arena-master-identity";
 
 /** Small owner badge when master key bypass is active */
 export function ArenaMasterKeyBadge() {
   const [active, setActive] = useState(false);
+  const [masterLabel, setMasterLabel] = useState("Master key on");
 
   const sync = useCallback(() => {
-    setActive(isArenaMasterKeyActive());
+    const isActive = isArenaMasterKeyActive();
+    setActive(isActive);
+    if (isActive) {
+      setMasterLabel(isArenaPrimaryMasterRecognized() ? "THE MASTER" : "Master key on");
+    }
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     sync();
+  }, [sync]);
+
+  useEffect(() => {
     window.addEventListener(ARENA_MASTER_KEY_EVENT, sync);
     return () => window.removeEventListener(ARENA_MASTER_KEY_EVENT, sync);
   }, [sync]);
 
   if (!active) return null;
-
-  const masterLabel = isArenaPrimaryMasterRecognized() ? "THE MASTER" : "Master key on";
 
   return (
     <div

@@ -53,7 +53,6 @@ export function CountryTrendActivitiesPanel() {
   const pathname = usePathname();
   const { locale } = useRoomLocale();
   const contentLocale = resolveContentLocale(locale);
-  const [open, setOpen] = useState(true);
   const [voiceReady, setVoiceReady] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -92,12 +91,15 @@ export function CountryTrendActivitiesPanel() {
     });
   };
 
+  const isUkRoom =
+    roomSlug.includes("uk-flag") || roomSlug.includes("football-lads") || roomSlug.includes("cotswolds");
+
   return (
     <aside
-      className={`country-trend-panel-rail arena-micro-rail-wall-run${roomSlug.includes("colombia") ? " country-trend-panel-rail--colombia" : ""}${roomSlug.includes("ecuador") ? " country-trend-panel-rail--ecuador" : ""}${roomSlug.includes("japan") ? " country-trend-panel-rail--japan" : ""}${roomSlug.includes("china") ? " country-trend-panel-rail--china" : ""}`}
+      className={`country-trend-panel-rail arena-micro-rail-wall-run${roomSlug.includes("colombia") ? " country-trend-panel-rail--colombia" : ""}${roomSlug.includes("ecuador") ? " country-trend-panel-rail--ecuador" : ""}${roomSlug.includes("japan") ? " country-trend-panel-rail--japan" : ""}${roomSlug.includes("china") ? " country-trend-panel-rail--china" : ""}${isUkRoom ? " country-trend-panel-rail--uk" : ""}`}
       aria-label={panelTitle}
     >
-      <div className="country-trend-panel-rail-stack">
+      <div className="country-trend-panel-rail-stack country-trend-panel-rail--hover">
         <div className="country-trend-panel-cascade arena-micro-rail-wall-run-track">
           <div className="arena-micro-rail-mini-box country-trend-poll-box">
             <span className="arena-micro-rail-mini-notch" aria-hidden="true" />
@@ -125,44 +127,34 @@ export function CountryTrendActivitiesPanel() {
                 >
                   ▼
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setOpen((value) => !value)}
-                  className="country-trend-poll-toggle"
-                  aria-expanded={open}
-                >
-                  {open ? "−" : "+"}
-                </button>
               </div>
             </header>
 
-            {open ? (
-              <div ref={trackRef} className="country-trend-poll-track" role="list" aria-label={panelTitle}>
-                {pollItems.map((item) => (
-                  <div
-                    key={item.id}
-                    role="listitem"
-                    className={`country-trend-poll-option${
-                      item.dualLane ? " country-trend-poll-option--ecuador-dual-lane" : ""
-                    }`}
-                  >
-                    <span className="country-trend-poll-rank" aria-hidden="true">
-                      {item.rank}
-                    </span>
-                    <span className="country-trend-poll-flag" aria-hidden="true">
-                      {item.flag}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      {item.kicker ? (
-                        <p className="country-trend-poll-kicker">{item.kicker}</p>
-                      ) : null}
-                      <p className="country-trend-poll-label">{item.label}</p>
-                      <p className="country-trend-poll-vibe">{item.vibe}</p>
-                    </div>
+            <div ref={trackRef} className="country-trend-poll-track" role="list" aria-label={panelTitle}>
+              {pollItems.map((item) => (
+                <div
+                  key={item.id}
+                  role="listitem"
+                  className={`country-trend-poll-option${
+                    item.dualLane ? " country-trend-poll-option--ecuador-dual-lane" : ""
+                  }`}
+                >
+                  <span className="country-trend-poll-rank" aria-hidden="true">
+                    {item.rank}
+                  </span>
+                  <span className="country-trend-poll-flag" aria-hidden="true">
+                    {item.flag}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    {item.kicker ? (
+                      <p className="country-trend-poll-kicker">{item.kicker}</p>
+                    ) : null}
+                    <p className="country-trend-poll-label">{item.label}</p>
+                    <p className="country-trend-poll-vibe">{item.vibe}</p>
                   </div>
-                ))}
-              </div>
-            ) : null}
+                </div>
+              ))}
+            </div>
           </div>
 
           {voiceReady ? (

@@ -1,4 +1,5 @@
 import type { ArenaCreatorSlot } from "@/lib/arena-experience";
+import { getArenaSlotCreatorName } from "@/lib/arena-slot-live-display";
 import { isCommandCenterEnabled } from "@/lib/command-center-access";
 import { claimArenaSlot } from "@/lib/arena-slot-occupancy";
 import { unlockAllCountryRoomsForMasterKey } from "@/lib/arena-master-key-unlock";
@@ -68,7 +69,7 @@ export function getCountryRoomPathForIslandCode(islandCode: string) {
 export async function masterKeyEnterSlotRoom(
   slot: Pick<ArenaCreatorSlot, "id" | "islandCode" | "country" | "rank">
 ) {
-  const displayName = readMemberUsername().trim() || "Arena Owner";
+  const displayName = getArenaSlotCreatorName(slot.id) || readMemberUsername().trim() || "Arena Owner";
   // Owner preview only · local session — never writes shared arena-engine state
   claimArenaSlot({
     slotId: slot.id,

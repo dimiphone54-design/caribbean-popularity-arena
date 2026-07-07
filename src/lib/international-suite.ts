@@ -1,4 +1,5 @@
 import { arenaCreators } from "@/lib/arena-experience";
+import { getArenaFront12DisplayOrderIndex } from "@/lib/arena-front12-slot-order";
 import { getArenaCountrySlotMeta } from "@/lib/arena-country-slot-meta";
 import { ecuadorCountryHighlights, ecuadorFront12SlotDescription } from "@/lib/ecuador-country";
 
@@ -32,7 +33,7 @@ export const internationalSuiteMeta = {
   slug: "international-suite",
   name: "International SUITE",
   description:
-    "Slide through countries — Colombia · UK · Ecuador · Japan · China rooms open inside. Pick your room and enter."
+    "Slide through countries — UK · China · Japan · Colombia · Ecuador rooms open inside. Pick your room and enter."
 } as const;
 
 type CountryProfile = {
@@ -291,13 +292,13 @@ export function getOpenInternationalCountries() {
   );
 }
 
-/** Built-room lanes pinned at top of International SUITE nav · matches Front 12 active ranks */
+/** Built-room lanes pinned at top of International SUITE nav · matches Front 12 lineup */
 export const internationalSuiteBuiltRoomCountryIds = [
-  "colombia",
   "uk",
-  "ecuador",
   "china",
-  "japan"
+  "japan",
+  "colombia",
+  "ecuador"
 ] as const;
 
 export function getInternationalSuiteBuiltRoomCountries() {
@@ -306,14 +307,19 @@ export function getInternationalSuiteBuiltRoomCountries() {
     .filter((country): country is InternationalSuiteCountry => Boolean(country));
 }
 
-/** Homepage nav + suite scroll · Colombia · UK · Ecuador · China · Japan first, then frost lanes */
+/** Homepage nav + suite scroll · UK · China · Japan · Colombia · Ecuador first, then rest */
 export function getInternationalSuiteNavCountries() {
   const pinned = new Set<string>(internationalSuiteBuiltRoomCountryIds);
   const featured = getInternationalSuiteBuiltRoomCountries();
-  const rest = internationalSuiteCountries.filter(
-    (country) =>
-      country.rooms.some((room) => room.status === "open") && !pinned.has(country.id)
-  );
+  const rest = internationalSuiteCountries
+    .filter(
+      (country) =>
+        country.rooms.some((room) => room.status === "open") && !pinned.has(country.id)
+    )
+    .sort(
+      (a, b) =>
+        getArenaFront12DisplayOrderIndex(a.islandCode) - getArenaFront12DisplayOrderIndex(b.islandCode)
+    );
   return [...featured, ...rest];
 }
 

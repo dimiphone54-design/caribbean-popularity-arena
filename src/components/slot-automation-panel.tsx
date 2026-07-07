@@ -1,34 +1,50 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useMemo, useRef, type ReactNode } from "react";
 import { ArrowRightLeft, Bot, Cpu, ShieldCheck } from "lucide-react";
 import { ArenaSlotIceFrostOverlay } from "@/components/arena-slot-ice-frost-overlay";
 import { useArenaEngineLiveStats } from "@/components/use-arena-engine";
+import { useArenaMasterKeyActive } from "@/components/use-arena-master-key-active";
 import { arenaCreators, legalBotConfig } from "@/lib/arena-experience";
+import { compareArenaFront12SlotOrder } from "@/lib/arena-front12-slot-order";
 import {
   arenaSlotSignInOpenLabel,
   getArenaActiveNationSlotCount,
-  getLegalBotFrozenFrontQueueCount,
-  isArenaSlotFrozen,
-  legalBotFrozenFrontQueueSlots,
-  mapArenaCreatorsToActiveSlotRows
+  isArenaSlotFrozenForUi,
+  isArenaSlotSignInOpenForUi,
+  legalBotFrozenFrontQueueSlots
 } from "@/lib/arena-slot-sign-in-access";
 import { WaitingGirlMicroScene } from "@/components/waiting-girl-micro-scene";
 
-function isLegalBotFrozenFrontRow(item: { islandCode?: string }) {
-  if (!item.islandCode) return false;
-  return isArenaSlotFrozen(item.islandCode);
-}
-
 export function SlotAutomationPanel() {
+  const masterKeyActive = useArenaMasterKeyActive();
   const { engine, loading, liveNow, rotationCountdown, engineStatus, tickKey } =
     useArenaEngineLiveStats();
 
   const activeSlotCount = getArenaActiveNationSlotCount();
-  const frozenFrontCount = getLegalBotFrozenFrontQueueCount();
-
-  const frontItems = legalBotFrozenFrontQueueSlots;
-  const waitingItems = mapArenaCreatorsToActiveSlotRows(arenaCreators);
+  const frontItems = useMemo(
+    () =>
+      legalBotFrozenFrontQueueSlots.filter(
+        (item) => !item.islandCode || !isArenaSlotFrozenForUi(item.islandCode, masterKeyActive)
+      ),
+    [masterKeyActive]
+  );
+  const frontOpenCount = frontItems.length;
+  const waitingItems = useMemo(
+    () =>
+      arenaCreators
+        .filter((slot) => isArenaSlotSignInOpenForUi(slot.islandCode, masterKeyActive))
+        .sort(compareArenaFront12SlotOrder)
+        .map((slot, index) => ({
+          position: index + 1,
+          name: slot.name,
+          country: slot.country,
+          flag: slot.flag,
+          islandCode: slot.islandCode,
+          meta: `Age ${slot.age} · ${slot.category}`
+        })),
+    [masterKeyActive]
+  );
 
   return (
     <section className="relative w-full overflow-hidden py-16">
@@ -55,14 +71,14 @@ export function SlotAutomationPanel() {
             </div>
 
             <h2 className="mt-5 font-['Bebas_Neue',sans-serif] text-5xl tracking-[0.08em] text-transparent bg-clip-text bg-gradient-to-r from-[#ff5c2b] via-[#f5c842] to-[#ff8c00]">
-              {frozenFrontCount} Front Slots · {activeSlotCount} Waiting Back Slots
+              {frontOpenCount} Front Slots · {activeSlotCount} Waiting Back Slots
             </h2>
             <p className="mt-3 text-sm font-black uppercase tracking-[0.16em] text-[#00c9a7]">
-              {liveNow} live now · {activeSlotCount} open nations · {frozenFrontCount} frozen front
+              {liveNow} live now · {activeSlotCount} open nations
             </p>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-[#b8c9e1]">
-              Front {frozenFrontCount} Caribbean queue is frozen · live sessions run on{" "}
-              {arenaSlotSignInOpenLabel} · waiting {activeSlotCount} rotate into front every 12 hours.
+              Front queue is open · live sessions run on {arenaSlotSignInOpenLabel} · waiting{" "}
+              {activeSlotCount} rotate into front every 12 hours.
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -95,10 +111,9 @@ export function SlotAutomationPanel() {
 
           <div className="grid gap-4 xl:grid-cols-2">
             <SlotList
-              title={`Front ${frozenFrontCount} · ${liveNow} live`}
+              title={`Front ${frontOpenCount} · ${liveNow} live`}
               accent="from-[#ff5c2b] to-[#f5c842]"
               items={frontItems}
-              frozenOnly
             />
             <SlotList
               title={`Waiting ${activeSlotCount} rotating next`}
@@ -148,7 +163,8 @@ function SlotList({
   items,
   front12 = false,
   activeOnly = false,
-  frozenOnly = false
+  frozenOnly = false,
+  masterKeyActive = false
 }: {
   title: string;
   accent: string;
@@ -156,6 +172,7 @@ function SlotList({
   front12?: boolean;
   activeOnly?: boolean;
   frozenOnly?: boolean;
+  masterKeyActive?: boolean;
   items: Array<{
     position: number;
     name: string;
@@ -171,13 +188,18 @@ function SlotList({
       ? items
       : front12
         ? items
-            .filter((item) => !item.islandCode || !isLegalBotFrozenFrontRow(item))
+            .filter(
+              (item) =>
+                !item.islandCode || !isArenaSlotFrozenForUi(item.islandCode, masterKeyActive)
+            )
             .sort((a, b) => a.position - b.position)
         : items;
   const frozenItems =
     front12 && !activeOnly && !frozenOnly
       ? items
-          .filter((item) => Boolean(item.islandCode && isLegalBotFrozenFrontRow(item)))
+          .filter((item) =>
+            Boolean(item.islandCode && isArenaSlotFrozenForUi(item.islandCode, masterKeyActive))
+          )
           .sort((a, b) => a.position - b.position)
       : [];
 

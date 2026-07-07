@@ -131,33 +131,12 @@ export function getDemoFootballFixtures(): FootballMatch[] {
 }
 
 export async function fetchFootballFixtures(): Promise<FootballMatch[]> {
-  const apiKey = process.env.FOOTBALL_DATA_API_KEY ?? process.env.NEXT_PUBLIC_FOOTBALL_DATA_API_KEY;
-  if (!apiKey || apiKey.length < 8) {
-    return getDemoFootballFixtures();
-  }
+  const { fetchApiSportsFootballFixtures, isApiSportsConfigured } = await import("@/lib/api-sports-football");
+  if (!isApiSportsConfigured()) return getDemoFootballFixtures();
 
   try {
-    const res = await fetch("https://api.football-data.org/v4/matches?status=SCHEDULED,FINISHED&limit=12", {
-      headers: { "X-Auth-Token": apiKey },
-      next: { revalidate: 300 }
-    });
-    if (!res.ok) return getDemoFootballFixtures();
-    const json = (await res.json()) as { matches?: Array<Record<string, unknown>> };
-    if (!json.matches?.length) return getDemoFootballFixtures();
-    return json.matches.slice(0, 12).map((m, i) => ({
-      id: String(m.id ?? `api-${i}`),
-      competition: "premier-league" as const,
-      competitionLabel: String((m.competition as { name?: string })?.name ?? "League"),
-      league: "premier-league",
-      homeTeam: String((m.homeTeam as { name?: string })?.name ?? "Home"),
-      awayTeam: String((m.awayTeam as { name?: string })?.name ?? "Away"),
-      homeFlag: "⚽",
-      awayFlag: "⚽",
-      kickoff: String(m.utcDate ?? new Date().toISOString()),
-      status: m.status === "FINISHED" ? "finished" : "scheduled",
-      homeScore: (m.score as { fullTime?: { home?: number } })?.fullTime?.home,
-      awayScore: (m.score as { fullTime?: { away?: number } })?.fullTime?.away
-    }));
+    const matches = await fetchApiSportsFootballFixtures();
+    return matches.length ? matches : getDemoFootballFixtures();
   } catch {
     return getDemoFootballFixtures();
   }

@@ -34,7 +34,11 @@ export const ecuadorDualLanePanel = {
 export const ecuadorTrendActivities: CountryTrendActivity[] = [
   {
     id: "ec-dual-lane",
-    kicker: { en: ecuadorDualLanePanel.kicker },
+    kicker: {
+      en: ecuadorDualLanePanel.kicker,
+      es: ecuadorDualLanePanel.kicker,
+      esEC: ecuadorDualLanePanel.kicker
+    },
     label: {
       en: ecuadorDualLanePanel.title,
       es: ecuadorDualLanePanel.title,
@@ -51,13 +55,13 @@ export const ecuadorTrendActivities: CountryTrendActivity[] = [
     label: {
       en: "Encebollado morning",
       es: "Encebollado mañanero",
-      esEC: "Encebollado mañanero costeño",
+      esEC: "Encebollado mañanero",
       zh: "恩塞博利亚多清晨"
     },
     vibe: {
       en: "Fish stew · yuca · coastal buzz",
       es: "Caldo de pescado · yuca · costa viva",
-      esEC: "Caldo de pescado · yuca · malecón activo",
+      esEC: "Caldo de pescado · yuca · costa viva",
       zh: "鱼汤 · 木薯 · 海岸热闹"
     }
   },
@@ -66,13 +70,13 @@ export const ecuadorTrendActivities: CountryTrendActivity[] = [
     label: {
       en: "Otavalo market day",
       es: "Mercado de Otavalo",
-      esEC: "Día de mercado en Otavalo",
+      esEC: "Mercado de Otavalo",
       zh: "奥塔瓦洛集市日"
     },
     vibe: {
       en: "Textiles · Andes crafts · barter chat",
       es: "Textiles · artesanía · charla andina",
-      esEC: "Textiles · artesanía andina · regateo en plaza",
+      esEC: "Textiles · artesanía · charla andina",
       zh: "纺织品 · 安第斯手工艺 · 议价闲聊"
     }
   },
@@ -87,7 +91,7 @@ export const ecuadorTrendActivities: CountryTrendActivity[] = [
     vibe: {
       en: "Live band · couples dance · Quito plaza",
       es: "Banda en vivo · baile · plaza Quito",
-      esEC: "Banda en vivo · parejas bailando · plaza de Quito",
+      esEC: "Banda en vivo · baile · plaza Quito",
       zh: "现场乐队 · 双人舞 · 基多广场"
     }
   },
@@ -96,13 +100,13 @@ export const ecuadorTrendActivities: CountryTrendActivity[] = [
     label: {
       en: "Ecuavoley Sunday",
       es: "Ecuavoley domingo",
-      esEC: "Ecuavoley dominical",
+      esEC: "Ecuavoley domingo",
       zh: "周日厄瓜多尔排球"
     },
     vibe: {
       en: "Three-player volleyball · family court",
       es: "Vóley a tres · cancha familiar",
-      esEC: "Vóley a tres · cancha de barrio · familia reunida",
+      esEC: "Vóley a tres · cancha familiar",
       zh: "三人排球 · 家庭球场"
     }
   },
@@ -111,13 +115,13 @@ export const ecuadorTrendActivities: CountryTrendActivity[] = [
     label: {
       en: "Galápagos & coast stories",
       es: "Historias Galápagos y costa",
-      esEC: "Historias de Galápagos y la costa",
+      esEC: "Historias Galápagos y costa",
       zh: "加拉帕戈斯与海岸故事"
     },
     vibe: {
       en: "Sea lions · islands · Guayaquil malecón",
       es: "Lobos marinos · islas · malecón",
-      esEC: "Lobos marinos · islas · malecón de Guayaquil",
+      esEC: "Lobos marinos · islas · malecón",
       zh: "海狮 · 群岛 · 瓜亚基尔海滨"
     }
   }
@@ -230,11 +234,20 @@ export type EcuadorIronFangStatPanel = {
   detail: string;
   gameId?: EcuadorRoomPlayableGame;
   freedomDrive?: boolean;
+  footballLane?: boolean;
   videoSrc?: string;
   posterSrc?: string;
 };
 
 export const ecuadorIronFangStatPanels: ReadonlyArray<EcuadorIronFangStatPanel> = [
+  {
+    kicker: "Tendencia en vivo",
+    title: "LigaPro · fútbol",
+    detail: "Predicciones · banter · football en todas las salas",
+    footballLane: true,
+    videoSrc: "/ecuador-arena-flash-live-clip.mp4",
+    posterSrc: "/ecuador-room-indurama-team.png"
+  },
   {
     kicker: "Tendencia en vivo",
     title: "Ecuavoley dominical",

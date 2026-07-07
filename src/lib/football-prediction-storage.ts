@@ -1,6 +1,7 @@
 import {
   calculateFootballPredictionPoints,
   type FootballLeaderboardKind,
+  type FootballMatch,
   type FootballPredictionRow,
   type FootballRankingRow
 } from "@/lib/football-prediction-arena";
@@ -8,6 +9,24 @@ import { getDemoFootballFixtures } from "@/lib/football-prediction-fixtures";
 
 const predictionsKey = "cpa_football_predictions";
 const rankingsKey = "cpa_football_rankings";
+const fixturesCacheKey = "cpa_football_fixtures_cache";
+
+export function cacheFootballFixtures(matches: FootballMatch[]) {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem(fixturesCacheKey, JSON.stringify(matches.slice(0, 80)));
+}
+
+export function readCachedFootballFixtures(): FootballMatch[] {
+  if (typeof window === "undefined") return getDemoFootballFixtures();
+  try {
+    const raw = sessionStorage.getItem(fixturesCacheKey);
+    if (!raw) return getDemoFootballFixtures();
+    const parsed = JSON.parse(raw) as FootballMatch[];
+    return Array.isArray(parsed) && parsed.length ? parsed : getDemoFootballFixtures();
+  } catch {
+    return getDemoFootballFixtures();
+  }
+}
 
 export function readLocalFootballPredictions(): FootballPredictionRow[] {
   if (typeof window === "undefined") return [];
@@ -32,8 +51,7 @@ export function upsertLocalFootballPrediction(row: FootballPredictionRow) {
   writeLocalFootballPredictions([row, ...without]);
 }
 
-export function scoreLocalPredictions(): FootballPredictionRow[] {
-  const fixtures = getDemoFootballFixtures();
+export function scoreLocalPredictions(fixtures = readCachedFootballFixtures()): FootballPredictionRow[] {
   const predictions = readLocalFootballPredictions();
 
   const scored = predictions.map((prediction) => {

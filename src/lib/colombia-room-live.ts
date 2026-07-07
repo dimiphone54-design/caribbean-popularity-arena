@@ -434,12 +434,12 @@ export const colombiaLiveCreators: ColombiaLiveCreator[] = [
   },
   {
     id: "isabella",
-    name: "Isabella M.",
-    username: "@isa.cali",
+    name: "Isabella Morales",
+    username: "@isa.bogota",
     profileImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
     previewImage: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&h=675&fit=crop",
     viewers: 1204,
-    lane: "Vallenato · Cali"
+    lane: "Reggaeton · Bogotá"
   },
   {
     id: "mariana",
@@ -503,16 +503,17 @@ export function findColombiaLiveCreator(id: string) {
   return colombiaLiveCreators.find((creator) => creator.id === id) ?? null;
 }
 
-export const colombiaLiveFeaturedCreator = colombiaLiveCreators[0]!;
+export const colombiaLiveFeaturedCreator =
+  colombiaLiveCreators.find((creator) => creator.id === "isabella") ?? colombiaLiveCreators[0]!;
 
 const colombiaTopicSlotCreators: Record<string, string> = {
-  "co-talk-country": "valentina",
+  "co-talk-country": "isabella",
   "co-talk-football": "sofia",
   "co-talk-menu": "camila",
   "co-talk-university": "isabella",
   "co-talk-music": "mariana",
   "co-talk-city": "lucia",
-  "co-talk-qa": "valentina"
+  "co-talk-qa": "isabella"
 };
 
 const colombiaTopicPreviewImages: Record<string, string> = {
@@ -531,17 +532,17 @@ const colombiaVenueSlotCreators: Record<string, string> = {
   "co-day-beach": "mariana",
   "co-day-salsa": "isabella",
   "co-day-food": "camila",
-  "co-day-cerro": "valentina",
+  "co-day-cerro": "isabella",
   "co-day-cartagena": "mariana",
   "co-day-flowers": "camila",
-  "co-day-guatape": "valentina",
+  "co-day-guatape": "isabella",
   "co-day-rosario": "mariana",
   "co-day-horse": "lucia",
   "co-day-museum": "isabella"
 };
 
 export function getColombiaTopicLiveSlot(topicId: string): ColombiaLiveCreator {
-  const creatorId = colombiaTopicSlotCreators[topicId] ?? "valentina";
+  const creatorId = colombiaTopicSlotCreators[topicId] ?? "isabella";
   const preview = colombiaTopicPreviewImages[topicId] ?? colombiaTopicPreviewImages["co-medellin"]!;
   const creator = colombiaLiveCreators.find((entry) => entry.id === creatorId) ?? colombiaLiveCreators[0]!;
 

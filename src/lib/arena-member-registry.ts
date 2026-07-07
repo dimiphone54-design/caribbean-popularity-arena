@@ -7,6 +7,10 @@ export type ArenaMemberRecord = {
   email: string;
   country: string;
   islandCode: string;
+  liveFocus: string;
+  dropshippingItemName: string;
+  dropshippingStoreUrl: string;
+  dropshippingNotes: string;
   bankName: string;
   accountHolderName: string;
   accountNumber: string;
@@ -25,6 +29,10 @@ export type ArenaMemberDraft = {
   email: string;
   country: string;
   islandCode: string;
+  liveFocus?: string;
+  dropshippingItemName?: string;
+  dropshippingStoreUrl?: string;
+  dropshippingNotes?: string;
   bankName: string;
   accountHolderName: string;
   accountNumber: string;
@@ -82,6 +90,10 @@ export async function upsertArenaMember(draft: ArenaMemberDraft, memberId?: stri
     email: draft.email.trim().toLowerCase(),
     country: draft.country.trim(),
     islandCode: draft.islandCode.trim(),
+    liveFocus: draft.liveFocus?.trim() ?? existing?.liveFocus ?? "",
+    dropshippingItemName: draft.dropshippingItemName?.trim() ?? existing?.dropshippingItemName ?? "",
+    dropshippingStoreUrl: draft.dropshippingStoreUrl?.trim() ?? existing?.dropshippingStoreUrl ?? "",
+    dropshippingNotes: draft.dropshippingNotes?.trim() ?? existing?.dropshippingNotes ?? "",
     bankName: draft.bankName.trim(),
     accountHolderName: draft.accountHolderName.trim(),
     accountNumber: draft.accountNumber.trim(),

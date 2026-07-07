@@ -10,14 +10,34 @@ export type CountryTrendActivity = {
 
 export type TrendPanelLocale = ContentLocaleId | "ja" | "zh" | "es-EC";
 
-export const ecuadorTrendPanelUi = {
+export const colombiaTrendPanelUi = {
   pollBadge: "Encuesta",
   panelTitle: "Actividades tendencia",
-  panelHint: "Ecuador · 5 cada uno",
+  panelHint: "Colombia · 5 cada uno",
   voiceTitle: "Voz AI",
   voiceHint: "Voz de bienvenida",
   scrollPollUp: "Desplazar encuesta arriba",
   scrollPollDown: "Desplazar encuesta abajo"
+} as const;
+
+export const ecuadorTrendPanelUi = {
+  pollBadge: "Encuesta",
+  panelTitle: "Actividades tendencia",
+  panelHint: "Ecuador · 6 cada uno",
+  voiceTitle: "Voz AI",
+  voiceHint: "Voz de bienvenida",
+  scrollPollUp: "Desplazar encuesta arriba",
+  scrollPollDown: "Desplazar encuesta abajo"
+} as const;
+
+export const ukTrendPanelUi = {
+  pollBadge: "Poll",
+  panelTitle: "Trend activities",
+  panelHint: "UK · 5 each",
+  voiceTitle: "AI Voice",
+  voiceHint: "Welcome voice",
+  scrollPollUp: "Scroll poll up",
+  scrollPollDown: "Scroll poll down"
 } as const;
 
 export const japanTrendPanelUi = {
@@ -234,22 +254,48 @@ export const japanTrendActivities: CountryTrendActivity[] = [
   }
 ];
 
+/** Built country rooms · one nation per room · exact activities for that country only */
+export const COUNTRY_TREND_ROOM_SLUGS = new Set([
+  "colombia-room",
+  "ecuador-room",
+  "japan-room",
+  "china-room",
+  "uk-flag-cotswolds",
+  "football-lads"
+]);
+
+export const COUNTRY_TREND_BY_ROOM_SLUG: Record<
+  string,
+  { country: CountryTrendId; trendLocale: TrendPanelLocale }
+> = {
+  "colombia-room": { country: "colombia", trendLocale: "es-CO" },
+  "ecuador-room": { country: "ecuador", trendLocale: "es-EC" },
+  "japan-room": { country: "japan", trendLocale: "ja" },
+  "china-room": { country: "china", trendLocale: "zh" },
+  "uk-flag-cotswolds": { country: "uk", trendLocale: "en" },
+  "football-lads": { country: "uk", trendLocale: "en" }
+};
+
 export function getCountryTrendPanelOrder(roomSlug: string): CountryTrendId[] {
+  const mapped = COUNTRY_TREND_BY_ROOM_SLUG[roomSlug];
+  if (mapped) return [mapped.country];
   if (roomSlug.includes("japan")) return ["japan"];
   if (roomSlug.includes("china")) return ["china"];
-  if (roomSlug.includes("colombia")) return ["colombia", "ecuador", "uk"];
-  if (roomSlug.includes("ecuador")) return ["ecuador", "colombia", "uk"];
+  if (roomSlug.includes("colombia")) return ["colombia"];
+  if (roomSlug.includes("ecuador")) return ["ecuador"];
   if (
     roomSlug.includes("uk-flag") ||
     roomSlug.includes("football-lads") ||
     roomSlug.includes("cotswolds")
   ) {
-    return ["uk", "ecuador", "colombia"];
+    return ["uk"];
   }
-  return ["uk", "colombia", "ecuador"];
+  return [];
 }
 
 export function resolveTrendPanelLocale(roomSlug: string, locale: ContentLocaleId): TrendPanelLocale {
+  const mapped = COUNTRY_TREND_BY_ROOM_SLUG[roomSlug];
+  if (mapped) return mapped.trendLocale;
   if (roomSlug.includes("china")) return "zh";
   if (roomSlug.includes("japan")) return "ja";
   if (roomSlug.includes("colombia")) return "es-CO";
@@ -303,42 +349,52 @@ export function pickTrendCopy(
   };
 }
 
+function trendLiveKicker(country: CountryTrendId, locale: TrendPanelLocale) {
+  const count = getCountryTrendActivityCount(country);
+  if (locale === "zh") return `${count}项直播`;
+  if (locale === "ja") return `${count}件ライブ`;
+  if (isSpanishTrendLocale(locale)) return `${count} en vivo`;
+  return `${count} live now`;
+}
+
 export function getCountryTrendMeta(country: CountryTrendId, locale: TrendPanelLocale) {
+  const kicker = trendLiveKicker(country, locale);
+
   if (locale === "zh") {
-    if (country === "uk") return { flag: "🇬🇧", title: "英国 · 趋势", kicker: "5项直播" };
-    if (country === "ecuador") return { flag: "🇪🇨", title: "厄瓜多尔 · 趋势", kicker: "5项直播" };
-    if (country === "japan") return { flag: "🇯🇵", title: "日本 · 趋势", kicker: "5项直播" };
-    if (country === "china") return { flag: "🇨🇳", title: "中国 · 趋势", kicker: "5项直播" };
-    return { flag: "🇨🇴", title: "哥伦比亚 · 趋势", kicker: "5项直播" };
+    if (country === "uk") return { flag: "🇬🇧", title: "英国 · 趋势", kicker };
+    if (country === "ecuador") return { flag: "🇪🇨", title: "厄瓜多尔 · 趋势", kicker };
+    if (country === "japan") return { flag: "🇯🇵", title: "日本 · 趋势", kicker };
+    if (country === "china") return { flag: "🇨🇳", title: "中国 · 趋势", kicker };
+    return { flag: "🇨🇴", title: "哥伦比亚 · 趋势", kicker };
   }
 
   if (country === "uk") {
     return isSpanishTrendLocale(locale)
-      ? { flag: "🇬🇧", title: "UK · tendencias", kicker: "5 en vivo" }
-      : { flag: "🇬🇧", title: "UK · trending", kicker: "5 live now" };
+      ? { flag: "🇬🇧", title: "UK · tendencias", kicker }
+      : { flag: "🇬🇧", title: "UK · trending", kicker };
   }
 
   if (country === "ecuador") {
     return isSpanishTrendLocale(locale)
-      ? { flag: "🇪🇨", title: "Ecuador · tendencias", kicker: "5 en vivo" }
-      : { flag: "🇪🇨", title: "Ecuador · trending", kicker: "5 live now" };
+      ? { flag: "🇪🇨", title: "Ecuador · tendencias", kicker }
+      : { flag: "🇪🇨", title: "Ecuador · trending", kicker };
   }
 
   if (country === "japan") {
     return isSpanishTrendLocale(locale)
-      ? { flag: "🇯🇵", title: "Japan · tendencias", kicker: "5 en vivo" }
-      : { flag: "🇯🇵", title: "Japan · trending", kicker: "5 live now" };
+      ? { flag: "🇯🇵", title: "Japan · tendencias", kicker }
+      : { flag: "🇯🇵", title: "Japan · trending", kicker };
   }
 
   if (country === "china") {
     return isSpanishTrendLocale(locale)
-      ? { flag: "🇨🇳", title: "China · tendencias", kicker: "5 en vivo" }
-      : { flag: "🇨🇳", title: "China · trending", kicker: "5 live now" };
+      ? { flag: "🇨🇳", title: "China · tendencias", kicker }
+      : { flag: "🇨🇳", title: "China · trending", kicker };
   }
 
   return isSpanishTrendLocale(locale)
-    ? { flag: "🇨🇴", title: "Colombia · tendencias", kicker: "5 en vivo" }
-    : { flag: "🇨🇴", title: "Colombia · trending", kicker: "5 live now" };
+    ? { flag: "🇨🇴", title: "Colombia · tendencias", kicker }
+    : { flag: "🇨🇴", title: "Colombia · trending", kicker };
 }
 
 export function getActivitiesForCountry(country: CountryTrendId) {
@@ -347,6 +403,10 @@ export function getActivitiesForCountry(country: CountryTrendId) {
   if (country === "japan") return japanTrendActivities;
   if (country === "china") return chinaTrendActivities;
   return colombiaTrendActivities;
+}
+
+export function getCountryTrendActivityCount(country: CountryTrendId) {
+  return getActivitiesForCountry(country).length;
 }
 
 function countryTrendLabel(country: CountryTrendId, locale?: TrendPanelLocale) {
@@ -364,21 +424,49 @@ function countryTrendLabel(country: CountryTrendId, locale?: TrendPanelLocale) {
   return "Japan";
 }
 
+function formatTrendCountHint(count: number, locale: TrendPanelLocale) {
+  if (locale === "ja") return `${count}つずつ`;
+  if (locale === "zh") return `${count}项`;
+  if (locale === "es" || locale === "es-CO" || locale === "es-EC") return `${count} cada uno`;
+  return `${count} each`;
+}
+
 export function getCountryTrendPanelHint(order: CountryTrendId[], locale: TrendPanelLocale) {
-  if (locale === "ja") return japanTrendPanelUi.panelHint;
-  if (locale === "zh") return chinaTrendPanelUi.panelHint;
+  if (order.length === 1) {
+    const country = order[0];
+    const count = getCountryTrendActivityCount(country);
+    const name = countryTrendLabel(country, locale);
+    return `${name} · ${formatTrendCountHint(count, locale)}`;
+  }
   const names = order.map((country) => countryTrendLabel(country, locale)).join(" · ");
-  return locale === "es" || locale === "es-CO" || locale === "es-EC" ? `${names} · 5 cada uno` : `${names} · 5 each`;
+  const count = order.length > 0 ? getCountryTrendActivityCount(order[0]) : 5;
+  return `${names} · ${formatTrendCountHint(count, locale)}`;
 }
 
 export function getCountryTrendPanelUi(roomSlug: string, locale: ContentLocaleId) {
   const trendLocale = resolveTrendPanelLocale(roomSlug, locale);
+  const order = getCountryTrendPanelOrder(roomSlug);
+  const panelHint = getCountryTrendPanelHint(order, trendLocale);
+
+  if (trendLocale === "es-CO") {
+    return {
+      trendLocale,
+      pollBadge: colombiaTrendPanelUi.pollBadge,
+      panelTitle: colombiaTrendPanelUi.panelTitle,
+      panelHint,
+      voiceTitle: colombiaTrendPanelUi.voiceTitle,
+      voiceHint: colombiaTrendPanelUi.voiceHint,
+      scrollPollUp: colombiaTrendPanelUi.scrollPollUp,
+      scrollPollDown: colombiaTrendPanelUi.scrollPollDown
+    };
+  }
+
   if (trendLocale === "es-EC") {
     return {
       trendLocale,
       pollBadge: ecuadorTrendPanelUi.pollBadge,
       panelTitle: ecuadorTrendPanelUi.panelTitle,
-      panelHint: "",
+      panelHint,
       voiceTitle: ecuadorTrendPanelUi.voiceTitle,
       voiceHint: ecuadorTrendPanelUi.voiceHint,
       scrollPollUp: ecuadorTrendPanelUi.scrollPollUp,
@@ -391,7 +479,7 @@ export function getCountryTrendPanelUi(roomSlug: string, locale: ContentLocaleId
       trendLocale,
       pollBadge: japanTrendPanelUi.pollBadge,
       panelTitle: japanTrendPanelUi.panelTitle,
-      panelHint: japanTrendPanelUi.panelHint,
+      panelHint,
       voiceTitle: japanTrendPanelUi.voiceTitle,
       voiceHint: japanTrendPanelUi.voiceHint,
       scrollPollUp: japanTrendPanelUi.scrollPollUp,
@@ -404,7 +492,7 @@ export function getCountryTrendPanelUi(roomSlug: string, locale: ContentLocaleId
       trendLocale,
       pollBadge: chinaTrendPanelUi.pollBadge,
       panelTitle: chinaTrendPanelUi.panelTitle,
-      panelHint: chinaTrendPanelUi.panelHint,
+      panelHint,
       voiceTitle: chinaTrendPanelUi.voiceTitle,
       voiceHint: chinaTrendPanelUi.voiceHint,
       scrollPollUp: chinaTrendPanelUi.scrollPollUp,
@@ -413,6 +501,22 @@ export function getCountryTrendPanelUi(roomSlug: string, locale: ContentLocaleId
   }
 
   const useSpanish = isSpanishTrendLocale(trendLocale);
+  const isUkRoom =
+    roomSlug.includes("uk-flag") || roomSlug.includes("football-lads") || roomSlug.includes("cotswolds");
+
+  if (isUkRoom && !useSpanish) {
+    return {
+      trendLocale,
+      pollBadge: ukTrendPanelUi.pollBadge,
+      panelTitle: ukTrendPanelUi.panelTitle,
+      panelHint,
+      voiceTitle: ukTrendPanelUi.voiceTitle,
+      voiceHint: ukTrendPanelUi.voiceHint,
+      scrollPollUp: ukTrendPanelUi.scrollPollUp,
+      scrollPollDown: ukTrendPanelUi.scrollPollDown
+    };
+  }
+
   return {
     trendLocale,
     pollBadge: useSpanish ? "Encuesta" : "Poll",
@@ -428,7 +532,8 @@ export function getCountryTrendPanelUi(roomSlug: string, locale: ContentLocaleId
 export function shouldShowCountryTrendPanel(pathname: string | null) {
   if (!pathname?.startsWith("/rooms/")) return false;
   if (pathname.includes("/rooms/international-suite")) return false;
-  return true;
+  const slug = roomSlugFromPathname(pathname);
+  return COUNTRY_TREND_ROOM_SLUGS.has(slug);
 }
 
 export function roomSlugFromPathname(pathname: string | null) {
