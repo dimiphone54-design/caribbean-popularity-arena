@@ -296,7 +296,7 @@ function CountryGirlSlotCard({
                 ) : null}
               </p>
             </div>
-            {slot.islandCode !== "CO" ? (
+            {slot.islandCode !== "CO" && slot.islandCode !== "UK" ? (
               <ArenaSlotTrendingTopics islandCode={slot.islandCode} country={slot.country} compact />
             ) : null}
             <blockquote className="ai-real-slot-quote">“{slot.quote}”</blockquote>
@@ -391,6 +391,13 @@ function CountryGirlSlotCard({
             <ArenaSlotDropshipTab mode="link" roomHref={dropshipRoomHref} />
             {slot.islandCode === "CO" ? (
               <ArenaSlotTrendingTopics islandCode={slot.islandCode} country={slot.country} compact />
+            ) : slot.islandCode === "UK" ? (
+              <ArenaSlotTrendingTopics
+                islandCode={slot.islandCode}
+                country={slot.country}
+                compact
+                gamesOnly
+              />
             ) : null}
           </div>
         ) : (

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { QuarterLocationLabel } from "@/components/quarter-location-label";
-import { UkSlideshowDropshipCreatorsSlot } from "@/components/uk-slideshow-dropship-creators-slot";
 import { cotswoldsQuarterSlideSets } from "@/lib/cotswolds";
 
 const HOLD_MS = 5200;
@@ -82,9 +81,6 @@ export function CotswoldsParkVideoBackdrop() {
         <div className="cotswolds-quarters-crosshair-v" />
         <div className="cotswolds-park-unified-scrim" />
         <div className="cotswolds-slideshow-film-grain" />
-      </div>
-      <div className="cotswolds-uk-women-slot-mount">
-        <UkSlideshowDropshipCreatorsSlot />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ type ArenaSlotTrendingTopicsProps = {
   islandCode: string;
   country: string;
   compact?: boolean;
+  gamesOnly?: boolean;
 };
 
 function TopicTrack({
@@ -35,7 +36,12 @@ function TopicTrack({
 }
 
 /** Front 12 slot · native-language culture topics + viral online games */
-export function ArenaSlotTrendingTopics({ islandCode, country, compact = false }: ArenaSlotTrendingTopicsProps) {
+export function ArenaSlotTrendingTopics({
+  islandCode,
+  country,
+  compact = false,
+  gamesOnly = false
+}: ArenaSlotTrendingTopicsProps) {
   const topics = getArenaSlotTrendingTopics(islandCode);
   const games = getArenaSlotViralGames(islandCode);
 
@@ -43,13 +49,15 @@ export function ArenaSlotTrendingTopics({ islandCode, country, compact = false }
     return (
       <div
         className="ai-real-slot-topics ai-real-slot-topics-compact"
-        aria-label={`Trending topics and games · ${country}`}
+        aria-label={gamesOnly ? `Games · ${country}` : `Trending topics and games · ${country}`}
       >
-        <TopicTrack
-          kicker="Trending"
-          items={topics}
-          ariaLabel={`Culture exchange · ${country}`}
-        />
+        {gamesOnly ? null : (
+          <TopicTrack
+            kicker="Trending"
+            items={topics}
+            ariaLabel={`Culture exchange · ${country}`}
+          />
+        )}
         <TopicTrack
           kicker="Games"
           kickerClass="ai-real-slot-topics-kicker-games"
