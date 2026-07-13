@@ -89,7 +89,7 @@ export function TheEldersRoomLiveWidget() {
         </span>
         <p className="elders-room-live-widget-title">{eldersRoomMeta.name}</p>
         <p className="elders-room-live-widget-tier">
-          Level {eldersRoomMeta.level} · {eldersRoomMeta.currencyLabel}
+          Level {eldersRoomMeta.level} · Gift
         </p>
       </div>
 
@@ -116,7 +116,7 @@ export function TheEldersRoomLiveWidget() {
         <div className="arena-gift-card-cta-head">
           <p className="a2030-intl-country-gift-btn-row a2030-intl-country-gift-btn-row--primary">
             <span className="a2030-intl-country-gift-btn-text">
-              🎁 {eldersTableGiftLegal.giftButtonLabel(eldersRoomMeta.currencyLabel)}
+              🎁 {eldersTableGiftLegal.giftButtonLabel()}
             </span>
           </p>
         </div>
@@ -130,9 +130,7 @@ export function TheEldersRoomLiveWidget() {
         />
 
         <button type="submit" className="elders-room-live-unlock" disabled={checkingOut}>
-          {checkingOut
-            ? arenaGiftCopy.openingGift
-            : `Pay gift · ${eldersRoomMeta.currencyLabel}`}
+          {checkingOut ? arenaGiftCopy.openingGift : "Pay gift"}
         </button>
       </form>
 

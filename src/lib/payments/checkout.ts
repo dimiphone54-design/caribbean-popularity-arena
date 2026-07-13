@@ -80,7 +80,7 @@ export function buildPaymentCheckout(options: BuildCheckoutOptions): PaymentChec
       label: options.label,
       customReference,
       checkoutUrl,
-      message: arenaGiftCopy.redirectingGift(options.amount, "Fygaro")
+      message: arenaGiftCopy.redirectingGift(options.amount)
     };
   }
 
@@ -101,7 +101,7 @@ export function buildPaymentCheckout(options: BuildCheckoutOptions): PaymentChec
       label: options.label,
       customReference,
       checkoutUrl,
-      message: arenaGiftCopy.redirectingGift(options.amount, "WiPay")
+      message: arenaGiftCopy.redirectingGift(options.amount)
     };
   }
 
@@ -113,7 +113,7 @@ export function buildPaymentCheckout(options: BuildCheckoutOptions): PaymentChec
     currency,
     label: options.label,
     customReference,
-    message: arenaGiftCopy.demoGiftReady(options.amount, "Fygaro")
+    message: arenaGiftCopy.demoGiftReady(options.amount)
   };
 }
 

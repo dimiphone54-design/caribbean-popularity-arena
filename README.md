@@ -69,7 +69,7 @@ Copy `.env.example` → `.env.local`. The app runs with placeholders — no real
 | `NEXT_PUBLIC_AGORA_APP_ID` / `AGORA_APP_CERTIFICATE` | China room live video (Agora) |
 | `ARENA_MASTER_KEY` | Owner bypass · Command Center · Agora host token |
 | `NEXT_PUBLIC_ARENA_KEEP_ACTIVE_SLOTS_OPEN` | Dev · Front 12 slots stay open |
-| `WIPAY_*` | Trinidad WiPay — Elders Room $100 unlock when live |
+| `WIPAY_*` | Trinidad WiPay — Elders Room gift unlock when live |
 | `NEXT_PUBLIC_FIREBASE_*` | Firebase when connecting auth/data |
 
 Legal entity placeholders: update `src/config/legal-entity.ts` after Trinidad sole trader registration.

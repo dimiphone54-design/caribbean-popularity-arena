@@ -3,21 +3,21 @@
 import Link from "next/link";
 import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 
-export const UK_DROPSHIP_TAB_HASH = "uk-dropshipping";
-export const CHINA_DROPSHIP_TAB_HASH = "china-dropshipping";
-export const JAPAN_DROPSHIP_TAB_HASH = "japan-dropshipping";
-export const COLOMBIA_DROPSHIP_TAB_HASH = "colombia-dropshipping";
-export const ECUADOR_DROPSHIP_TAB_HASH = "ecuador-dropshipping";
+export const UK_GAMES_TAB_HASH = "uk-games";
+export const CHINA_GAMES_TAB_HASH = "china-games";
+export const JAPAN_GAMES_TAB_HASH = "japan-games";
+export const COLOMBIA_GAMES_TAB_HASH = "colombia-games";
+export const ECUADOR_GAMES_TAB_HASH = "ecuador-games";
 
-export const DROPSHIP_TAB_HASH_BY_ISLAND_CODE: Record<string, string> = {
-  UK: UK_DROPSHIP_TAB_HASH,
-  CN: CHINA_DROPSHIP_TAB_HASH,
-  JP: JAPAN_DROPSHIP_TAB_HASH,
-  CO: COLOMBIA_DROPSHIP_TAB_HASH,
-  EC: ECUADOR_DROPSHIP_TAB_HASH
+export const GAMES_TAB_HASH_BY_ISLAND_CODE: Record<string, string> = {
+  UK: UK_GAMES_TAB_HASH,
+  CN: CHINA_GAMES_TAB_HASH,
+  JP: JAPAN_GAMES_TAB_HASH,
+  CO: COLOMBIA_GAMES_TAB_HASH,
+  EC: ECUADOR_GAMES_TAB_HASH
 };
 
-export const DROPSHIP_ROOM_FALLBACK_BY_ISLAND_CODE: Record<string, string> = {
+export const GAMES_ROOM_FALLBACK_BY_ISLAND_CODE: Record<string, string> = {
   UK: "/rooms/uk-flag-cotswolds",
   CN: "/rooms/china-room",
   JP: "/rooms/japan-room",
@@ -25,18 +25,18 @@ export const DROPSHIP_ROOM_FALLBACK_BY_ISLAND_CODE: Record<string, string> = {
   EC: "/rooms/ecuador-room"
 };
 
-const DEFAULT_DROPSHIP_TAB_HASH = UK_DROPSHIP_TAB_HASH;
+const DEFAULT_GAMES_TAB_HASH = UK_GAMES_TAB_HASH;
 
-type ArenaSlotDropshipTabProps = {
-  /** slot card · 1 click into country room dropship tab */
+type ArenaSlotGamesTabProps = {
+  /** slot card · 1 click into country room games tab */
   mode: "link";
   roomHref: string;
   label?: string;
   onNavigate?: () => void;
 };
 
-type ArenaSlotDropshipRoomTabProps = {
-  /** country room · tab opens full dropship panel inside */
+type ArenaSlotGamesRoomTabProps = {
+  /** country room · tab opens full games panel inside */
   mode: "room";
   sectionId?: string;
   countryName?: string;
@@ -45,13 +45,11 @@ type ArenaSlotDropshipRoomTabProps = {
   children: ReactNode;
 };
 
-export function ArenaSlotDropshipTab(
-  props: ArenaSlotDropshipTabProps | ArenaSlotDropshipRoomTabProps
-) {
-  const label = props.label ?? "Dropshipping";
+export function ArenaSlotGamesTab(props: ArenaSlotGamesTabProps | ArenaSlotGamesRoomTabProps) {
+  const label = props.label ?? "Games";
   const isLinkMode = props.mode === "link";
   const sectionId =
-    props.mode === "room" ? (props.sectionId ?? DEFAULT_DROPSHIP_TAB_HASH) : DEFAULT_DROPSHIP_TAB_HASH;
+    props.mode === "room" ? (props.sectionId ?? DEFAULT_GAMES_TAB_HASH) : DEFAULT_GAMES_TAB_HASH;
   const countryName = props.mode === "room" ? (props.countryName ?? "room") : "room";
   const [open, setOpen] = useState(props.mode === "room" ? (props.defaultOpen ?? false) : false);
 

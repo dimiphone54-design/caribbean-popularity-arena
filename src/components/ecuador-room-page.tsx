@@ -4,14 +4,20 @@ import { useEffect, useState } from "react";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
 import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
+import { ArenaSlotDropshipTab, ECUADOR_DROPSHIP_TAB_HASH } from "@/components/arena-slot-dropship-tab";
+import { ArenaSlotFashionTab, ECUADOR_FASHION_TAB_HASH } from "@/components/arena-slot-fashion-tab";
+import { ArenaSlotFoodTab, ECUADOR_FOOD_TAB_HASH } from "@/components/arena-slot-food-tab";
+import { ArenaSlotStudyHubTab, ECUADOR_STUDY_HUB_TAB_HASH } from "@/components/arena-slot-study-hub-tab";
+import { CountryRoomStudyHubTabPanel } from "@/components/country-room-study-hub-tab-panel";
+import { ArenaSlotGamesTab, ECUADOR_GAMES_TAB_HASH } from "@/components/arena-slot-games-tab";
 import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
+import { EcuadorRoomFashionTabPanel } from "@/components/ecuador-room-fashion-tab-panel";
+import { EcuadorRoomFoodTabPanel } from "@/components/ecuador-room-food-tab-panel";
+import { EcuadorRoomGamesTabPanel } from "@/components/ecuador-room-games-tab-panel";
 import { EcuadorRoomLiveSlot } from "@/components/ecuador-room-live-slot";
-import { RoomSportsStack } from "@/components/room-sports-stack";
-import { EcuadorThePit } from "@/components/ecuador-the-pit";
 import { FreedomDriveSimulatorLazy } from "@/components/freedom-drive/freedom-drive-simulator-lazy";
 import { EcuadorIronFangStatPanelCard } from "@/components/ecuador-iron-fang-stat-panel";
-import { EcuadorCulture2028Panel } from "@/components/ecuador-culture-2028-panel";
-import { EcuadorFoodPanel } from "@/components/ecuador-food-panel";
+import { getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
 import { ecuadorIronFangStatPanels, ecuadorRoomBrand, type EcuadorRoomGameSelection } from "@/lib/ecuador-country";
 
 const ECUADOR_ROOM_SLUG = "ecuador-room";
@@ -27,6 +33,7 @@ const ecuadorBackdrops = [
 ];
 
 export function EcuadorRoomPage() {
+  const tabLabels = getArenaSlotTabLabels("EC");
   const [slide, setSlide] = useState(0);
   const [requestedGame, setRequestedGame] = useState<EcuadorRoomGameSelection | null>(null);
   const [driveExpanded, setDriveExpanded] = useState(false);
@@ -112,12 +119,19 @@ export function EcuadorRoomPage() {
                 </div>
               </section>
 
-              <DropshipMarketPanel
-                countryId="ecuador"
+              <ArenaSlotDropshipTab
+                mode="room"
+                sectionId={ECUADOR_DROPSHIP_TAB_HASH}
                 countryName="Ecuador"
-                flag="🇪🇨"
-                layout="room"
-              />
+                label={tabLabels.dropshipping}
+              >
+                <DropshipMarketPanel
+                  countryId="ecuador"
+                  countryName="Ecuador"
+                  flag="🇪🇨"
+                  layout="room"
+                />
+              </ArenaSlotDropshipTab>
 
               <section className="country-room-section ecuador-stat-panels-section w-full">
                 <div className="ecuador-stat-panels-grid">
@@ -139,13 +153,43 @@ export function EcuadorRoomPage() {
               </section>
 
               <section className="country-room-section w-full">
-                <EcuadorThePit>
-                  <RoomSportsStack
-                    roomSlug="ecuador-room"
-                    requestedGameId={requestedGame}
-                    onRequestedGameHandled={() => setRequestedGame(null)}
-                  />
-                </EcuadorThePit>
+                <div className="ai-real-slot-slot-tabs uk-room-country-tabs">
+                  <ArenaSlotGamesTab
+                    mode="room"
+                    sectionId={ECUADOR_GAMES_TAB_HASH}
+                    countryName="Ecuador"
+                    label={tabLabels.games}
+                  >
+                    <EcuadorRoomGamesTabPanel
+                      requestedGameId={requestedGame}
+                      onRequestedGameHandled={() => setRequestedGame(null)}
+                    />
+                  </ArenaSlotGamesTab>
+                  <ArenaSlotFashionTab
+                    mode="room"
+                    sectionId={ECUADOR_FASHION_TAB_HASH}
+                    countryName="Ecuador"
+                    label={tabLabels.fashion}
+                  >
+                    <EcuadorRoomFashionTabPanel />
+                  </ArenaSlotFashionTab>
+                  <ArenaSlotFoodTab
+                    mode="room"
+                    sectionId={ECUADOR_FOOD_TAB_HASH}
+                    countryName="Ecuador"
+                    label={tabLabels.food}
+                  >
+                    <EcuadorRoomFoodTabPanel />
+                  </ArenaSlotFoodTab>
+                  <ArenaSlotStudyHubTab
+                    mode="room"
+                    sectionId={ECUADOR_STUDY_HUB_TAB_HASH}
+                    countryName="Ecuador"
+                    label={tabLabels.studyHub}
+                  >
+                    <CountryRoomStudyHubTabPanel countryId="ecuador" />
+                  </ArenaSlotStudyHubTab>
+                </div>
               </section>
 
               <section
@@ -161,9 +205,6 @@ export function EcuadorRoomPage() {
                 />
               </section>
 
-              <EcuadorCulture2028Panel />
-
-              <EcuadorFoodPanel />
             </div>
           </RoomCountryPageShell>
         </div>

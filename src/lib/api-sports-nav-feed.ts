@@ -1,6 +1,11 @@
 import { getApiSportsFootballKey } from "@/lib/api-sports-football";
 import { isFootballApiOnCooldown, markFootballApiCooldown } from "@/lib/api-sports-rate-limit";
 import { API_SPORTS_NAV_SPORT_META, type ApiSportsNavSportId } from "@/lib/api-sports-sport-meta";
+import {
+  formatNavSportsFinalsSentence,
+  getNavSportsFinalsFallback,
+  getNavSportsFinalsFallbackEvents
+} from "@/lib/nav-sports-finals-fallback";
 import { NAV_SPORTS_RECAP_LANES } from "@/lib/nav-sports-recap-lanes";
 
 export type NavLiveSportStatus = "live" | "scheduled" | "finished";
@@ -44,7 +49,7 @@ export type NavLiveSportsFeed = {
 };
 
 const CACHE_MS = 30 * 60 * 1000;
-const F1_NAV_SEASON = 2024;
+const F1_NAV_SEASON = new Date().getFullYear();
 const MAX_PER_SPORT = 4;
 const RECENT_DAY_OFFSETS = [-1, 0] as const;
 const UPCOMING_DAY_OFFSETS = [1, 2, 3, 4, 5, 6, 7] as const;
@@ -281,10 +286,21 @@ function mapF1Race(race: F1Race): NavLiveSportEvent {
   };
 }
 
-export function buildUpcomingSportLines(upcoming: NavLiveSportEvent[]): NavUpcomingSportLine[] {
-  const sorted = [...upcoming].sort(
+function mergeUpcomingWithFinalsFallback(upcoming: NavLiveSportEvent[]) {
+  const bySport = new Map<ApiSportsNavSportId, NavLiveSportEvent>();
+  for (const event of upcoming) {
+    if (!bySport.has(event.sport)) bySport.set(event.sport, event);
+  }
+  for (const fallback of getNavSportsFinalsFallbackEvents()) {
+    if (!bySport.has(fallback.sport)) bySport.set(fallback.sport, fallback);
+  }
+  return [...bySport.values()].sort(
     (a, b) => new Date(a.kickoff ?? 0).getTime() - new Date(b.kickoff ?? 0).getTime()
   );
+}
+
+export function buildUpcomingSportLines(upcoming: NavLiveSportEvent[]): NavUpcomingSportLine[] {
+  const sorted = mergeUpcomingWithFinalsFallback(upcoming);
   const usedIds = new Set<string>();
 
   return NAV_SPORTS_RECAP_LANES.map((lane) => {
@@ -292,14 +308,19 @@ export function buildUpcomingSportLines(upcoming: NavLiveSportEvent[]): NavUpcom
     const match = sorted.find((event) => event.sport === lane.sport && !usedIds.has(event.id));
     if (match) usedIds.add(match.id);
 
-    const sentence = match ? `${match.title} · ${match.meta}` : "No upcoming fixture";
+    const finalsFallback = getNavSportsFinalsFallback(lane.sport);
+    const sentence = match
+      ? `${match.title} · ${match.meta}`
+      : finalsFallback
+        ? formatNavSportsFinalsSentence(finalsFallback)
+        : "Finals schedule loading…";
 
     return {
       sport: lane.sport,
       label: meta.label,
       emoji: meta.emoji,
       sentence,
-      kickoff: match?.kickoff
+      kickoff: match?.kickoff ?? finalsFallback?.kickoff
     };
   });
 }
@@ -399,11 +420,14 @@ async function fetchF1Events(apiKey: string, requestsUsed: { n: number }) {
   requestsUsed.n += 1;
   if (!races?.length) return [];
 
-  return races
-    .filter((race) => race.type?.toLowerCase() === "race")
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, MAX_PER_SPORT * 2)
-    .map(mapF1Race);
+  const now = Date.now() - 3 * 60 * 60 * 1000;
+  const raceRows = races.filter((race) => race.type?.toLowerCase() === "race");
+  const upcoming = raceRows
+    .filter((race) => new Date(`${race.date}T${race.time || "00:00:00"}`).getTime() >= now)
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const selected = (upcoming.length ? upcoming : raceRows).slice(0, MAX_PER_SPORT * 2);
+
+  return selected.map(mapF1Race);
 }
 
 export function clearNavLiveSportsCache() {

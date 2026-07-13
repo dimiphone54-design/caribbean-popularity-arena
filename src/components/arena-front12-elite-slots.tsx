@@ -40,7 +40,36 @@ import {
   DROPSHIP_ROOM_FALLBACK_BY_ISLAND_CODE,
   DROPSHIP_TAB_HASH_BY_ISLAND_CODE
 } from "@/components/arena-slot-dropship-tab";
-import { withArenaFront12DisplayRanks } from "@/lib/arena-front12-slot-order";
+import {
+  ArenaSlotFashionTab,
+  FASHION_ROOM_FALLBACK_BY_ISLAND_CODE,
+  FASHION_TAB_HASH_BY_ISLAND_CODE
+} from "@/components/arena-slot-fashion-tab";
+import {
+  ArenaSlotFoodTab,
+  FOOD_ROOM_FALLBACK_BY_ISLAND_CODE,
+  FOOD_TAB_HASH_BY_ISLAND_CODE
+} from "@/components/arena-slot-food-tab";
+import {
+  ArenaSlotGamesTab,
+  GAMES_ROOM_FALLBACK_BY_ISLAND_CODE,
+  GAMES_TAB_HASH_BY_ISLAND_CODE
+} from "@/components/arena-slot-games-tab";
+import {
+  ArenaSlotStudyHubTab,
+  STUDY_HUB_ROOM_FALLBACK_BY_ISLAND_CODE,
+  STUDY_HUB_TAB_HASH_BY_ISLAND_CODE
+} from "@/components/arena-slot-study-hub-tab";
+import {
+  filterArenaFront12Slots,
+  isArenaFront12VisibleSlot,
+  withArenaFront12DisplayRanks
+} from "@/lib/arena-front12-slot-order";
+import {
+  ARENA_FRONT_SLOT_TAB_CODES,
+  getArenaSlotTabWelcome
+} from "@/lib/arena-slot-country-welcome";
+import { getArenaSlotDisplayLabels, getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
 import { resolveArenaSlotLiveDisplayName } from "@/lib/arena-slot-live-display";
 
 export const formatPendingSlotLabel = (rank: number) => `SLOT ${rank} - available`;
@@ -125,6 +154,41 @@ function CountryGirlSlotCard({
     null;
   const dropshipRoomHref =
     dropshipTabHash && primaryRoomHref ? `${primaryRoomHref}#${dropshipTabHash}` : null;
+  const gamesTabHash = GAMES_TAB_HASH_BY_ISLAND_CODE[slot.islandCode] ?? null;
+  const gamesPrimaryRoomHref =
+    (suiteCountry && getInternationalSuitePrimaryRoomHref(suiteCountry)) ||
+    GAMES_ROOM_FALLBACK_BY_ISLAND_CODE[slot.islandCode] ||
+    null;
+  const gamesRoomHref =
+    gamesTabHash && gamesPrimaryRoomHref ? `${gamesPrimaryRoomHref}#${gamesTabHash}` : null;
+  const fashionTabHash = FASHION_TAB_HASH_BY_ISLAND_CODE[slot.islandCode] ?? null;
+  const fashionPrimaryRoomHref =
+    (suiteCountry && getInternationalSuitePrimaryRoomHref(suiteCountry)) ||
+    FASHION_ROOM_FALLBACK_BY_ISLAND_CODE[slot.islandCode] ||
+    null;
+  const fashionRoomHref =
+    fashionTabHash && fashionPrimaryRoomHref ? `${fashionPrimaryRoomHref}#${fashionTabHash}` : null;
+  const foodTabHash = FOOD_TAB_HASH_BY_ISLAND_CODE[slot.islandCode] ?? null;
+  const foodPrimaryRoomHref =
+    (suiteCountry && getInternationalSuitePrimaryRoomHref(suiteCountry)) ||
+    FOOD_ROOM_FALLBACK_BY_ISLAND_CODE[slot.islandCode] ||
+    null;
+  const foodRoomHref =
+    foodTabHash && foodPrimaryRoomHref ? `${foodPrimaryRoomHref}#${foodTabHash}` : null;
+  const studyHubTabHash = STUDY_HUB_TAB_HASH_BY_ISLAND_CODE[slot.islandCode] ?? null;
+  const studyHubPrimaryRoomHref =
+    (suiteCountry && getInternationalSuitePrimaryRoomHref(suiteCountry)) ||
+    STUDY_HUB_ROOM_FALLBACK_BY_ISLAND_CODE[slot.islandCode] ||
+    null;
+  const studyHubRoomHref =
+    studyHubTabHash && studyHubPrimaryRoomHref ? `${studyHubPrimaryRoomHref}#${studyHubTabHash}` : null;
+  const tabWelcome = getArenaSlotTabWelcome(slot.islandCode);
+  const displayLabels = getArenaSlotDisplayLabels(slot.islandCode, {
+    country: slot.country,
+    capital: countryMeta.capital,
+    languageLabel: countryMeta.languageLabel
+  });
+  const tabLabels = getArenaSlotTabLabels(slot.islandCode);
 
   const openGirlSignIn = () => {
     if (isActive) return;
@@ -168,7 +232,7 @@ function CountryGirlSlotCard({
       tabIndex={isSignInOpen ? 0 : undefined}
       role={isSignInOpen ? "button" : undefined}
 
-      className={`ai-real-slot ai-real-slot-dense${slot.islandCode === "UK" ? " ai-real-slot-uk" : ""} ${isFrozen ? "ai-real-slot-pending ai-real-slot-frozen cfa-slot-frozen-surface" : !isActive ? "ai-real-slot-pending ai-real-slot-pending-clickable" : ""} ${slotRank <= 3 && isActive ? "ai-real-slot-top" : ""} ${slot.isOnFire && isActive ? "ai-real-slot-fire" : ""}`}
+      className={`ai-real-slot ai-real-slot-dense${slot.islandCode === "UK" ? " ai-real-slot-uk" : ""} ${isFrozen ? "ai-real-slot-pending ai-real-slot-frozen cfa-slot-frozen-surface" : !isActive ? "ai-real-slot-pending ai-real-slot-pending-clickable" : ""} ${slotRank <= 3 && isActive ? "ai-real-slot-top" : ""} ${slot.isOnFire && isActive && slot.islandCode !== "CO" ? "ai-real-slot-fire" : ""}`}
       aria-label={
         isActive
           ? `${slot.country} · ${displayName}${countryMeta.languageLabel ? ` · ${countryMeta.languageLabel}` : ""} · live`
@@ -183,26 +247,27 @@ function CountryGirlSlotCard({
           <span className="ai-real-slot-flag" aria-hidden="true">
             {slot.flag}
           </span>
-          <span className="ai-real-slot-country">{slot.country}</span>
+          <span className="ai-real-slot-country">{displayLabels.country}</span>
           <span className="ai-real-slot-code">{slot.islandCode}</span>
           {isActive ? (
             <span className="ai-real-slot-live">
               <span className="ai-real-slot-live-dot" aria-hidden="true" />
-              LIVE
+              {displayLabels.liveBadge}
             </span>
           ) : !isFrozen ? (
-            <span className="ai-real-slot-pending-badge">Pending</span>
+            <span className="ai-real-slot-pending-badge">{displayLabels.pendingBadge}</span>
           ) : null}
         </div>
         <div className="ai-real-slot-nation-row ai-real-slot-nation-row-local">
           <CountryLocalClock
-            capital={countryMeta.capital}
+            capital={displayLabels.capital}
             timeZone={countryMeta.timeZone}
             tzAbbrev={countryMeta.tzAbbrev}
+            locale={displayLabels.clockLocale}
             className="ai-real-slot-local-clock"
           />
-          {countryMeta.languageLabel ? (
-            <span className="ai-real-slot-language-pill">{countryMeta.languageLabel}</span>
+          {displayLabels.languageLabel ? (
+            <span className="ai-real-slot-language-pill">{displayLabels.languageLabel}</span>
           ) : null}
         </div>
       </header>
@@ -255,9 +320,11 @@ function CountryGirlSlotCard({
           <span className={`ai-real-slot-rank${slotRank <= 3 ? ` ai-real-slot-rank-${slotRank}` : ""}`}>
             #{slotRank}
           </span>
-          <span className={`ai-real-slot-tier${isFrozen ? " ai-real-slot-tier-frozen" : ""}`}>
-            {isActive ? `${theme.tier} · Elite Creative` : isFrozen ? "Frozen · sign-in closed" : "Awaiting sign-in"}
-          </span>
+          {!isActive ? (
+            <span className={`ai-real-slot-tier${isFrozen ? " ai-real-slot-tier-frozen" : ""}`}>
+              {isFrozen ? "Frozen · sign-in closed" : "Awaiting sign-in"}
+            </span>
+          ) : null}
           <time
             className={`ai-real-slot-timer ${isActive ? "" : isFrozen ? "ai-real-slot-timer-frozen" : "ai-real-slot-timer-pending"}`}
             dateTime={isActive ? `PT${remainingSeconds}S` : "PT3H"}
@@ -268,11 +335,13 @@ function CountryGirlSlotCard({
 
         {isActive ? (
           <span className="ai-real-slot-on-cam">
-            {slot.flag} {countryMeta.capital}
+            {slot.flag} {displayLabels.capital}
           </span>
         ) : null}
 
-        {slot.isOnFire && isActive ? <span className="ai-real-slot-fire-badge">🔥 ON FIRE</span> : null}
+        {slot.isOnFire && isActive && slot.islandCode !== "CO" ? (
+          <span className="ai-real-slot-fire-badge">🔥 ON FIRE</span>
+        ) : null}
 
         {isActive ? (
           <p className="ai-real-slot-scene">{theme.scene}</p>
@@ -287,7 +356,7 @@ function CountryGirlSlotCard({
             <div className="ai-real-slot-info-head">
               <h3 className="ai-real-slot-name">{displayName}</h3>
               <p className="ai-real-slot-meta ai-real-slot-meta-inline">
-                {slot.categoryIcon} {slot.category} · {slot.country} · Live · 3h slot
+                {slot.categoryIcon} {slot.category} · {displayLabels.country} · {displayLabels.metaLiveLabel} · 3h slot
                 {slot.language ? (
                   <>
                     {" "}
@@ -296,7 +365,7 @@ function CountryGirlSlotCard({
                 ) : null}
               </p>
             </div>
-            {slot.islandCode !== "CO" && slot.islandCode !== "UK" ? (
+            {!ARENA_FRONT_SLOT_TAB_CODES.has(slot.islandCode) ? (
               <ArenaSlotTrendingTopics islandCode={slot.islandCode} country={slot.country} compact />
             ) : null}
             <blockquote className="ai-real-slot-quote">“{slot.quote}”</blockquote>
@@ -304,7 +373,7 @@ function CountryGirlSlotCard({
             <div className="ai-real-slot-stats-band">
               <div className="ai-real-slot-metrics">
                 <span className="ai-real-slot-votes">
-                  <span className="ai-real-slot-votes-label">LIVE</span>
+                  <span className="ai-real-slot-votes-label">{displayLabels.votesLiveLabel}</span>
                   {formatVotes(slot.votes)} votes
                 </span>
                 <span className={slot.trendTone === "down" ? "ai-real-slot-trend-down" : "ai-real-slot-trend-up"}>
@@ -388,22 +457,34 @@ function CountryGirlSlotCard({
 
         {dropshipRoomHref ? (
           <div className="ai-real-slot-dropship-foot">
-            <ArenaSlotDropshipTab mode="link" roomHref={dropshipRoomHref} />
-            {slot.islandCode === "CO" ? (
-              <ArenaSlotTrendingTopics islandCode={slot.islandCode} country={slot.country} compact />
-            ) : slot.islandCode === "UK" ? (
-              <ArenaSlotTrendingTopics
-                islandCode={slot.islandCode}
-                country={slot.country}
-                compact
-                gamesOnly
-              />
+            <div className="ai-real-slot-slot-tabs">
+              <ArenaSlotDropshipTab mode="link" roomHref={dropshipRoomHref} label={tabLabels.dropshipping} />
+              {gamesRoomHref ? (
+                <ArenaSlotGamesTab mode="link" roomHref={gamesRoomHref} label={tabLabels.games} />
+              ) : null}
+              {fashionRoomHref ? (
+                <ArenaSlotFashionTab mode="link" roomHref={fashionRoomHref} label={tabLabels.fashion} />
+              ) : null}
+              {foodRoomHref ? (
+                <ArenaSlotFoodTab mode="link" roomHref={foodRoomHref} label={tabLabels.food} />
+              ) : null}
+              {studyHubRoomHref ? (
+                <ArenaSlotStudyHubTab mode="link" roomHref={studyHubRoomHref} label={tabLabels.studyHub} />
+              ) : null}
+            </div>
+            {tabWelcome ? (
+              <p className="ai-real-slot-tab-welcome">
+                <span className="ai-real-slot-tab-welcome-mark" aria-hidden="true">
+                  {slot.flag}
+                </span>
+                {tabWelcome}
+              </p>
             ) : null}
           </div>
         ) : (
-          <section className="ai-real-slot-country-panel" aria-label={`${slot.country} dropshipping`}>
+          <section className="ai-real-slot-country-panel" aria-label={`${slot.country} · ${tabLabels.dropshipping}`}>
             <div className="ai-real-slot-country-panel-tab" aria-hidden="true">
-              Dropshipping
+              {tabLabels.dropshipping}
             </div>
             <div className="ai-real-slot-country-panel-body">
               <div className="ai-real-slot-country-panel-grid">
@@ -450,6 +531,14 @@ function CountryGirlSlotCard({
                 <p className="ai-real-slot-country-panel-line">Suite profile not found for this country yet.</p>
               )}
             </div>
+            {tabWelcome ? (
+              <p className="ai-real-slot-tab-welcome">
+                <span className="ai-real-slot-tab-welcome-mark" aria-hidden="true">
+                  {slot.flag}
+                </span>
+                {tabWelcome}
+              </p>
+            ) : null}
           </section>
         )}
       </div>
@@ -473,11 +562,14 @@ export function ArenaFront12EliteSlots({
   const [joinSlot, setJoinSlot] = useState<ArenaFront12SlotState | null>(null);
   const [girlSignInSlot, setGirlSignInSlot] = useState<ArenaFront12SlotState | null>(null);
   const visibleSlots = withArenaFront12DisplayRanks(
-    slots.filter((slot) => {
-      const isActive = Boolean(occupancies[slot.id]);
-      if (isActive) return true;
-      return !isArenaSlotFrozenForUi(slot.islandCode, masterKeyActive);
-    })
+    filterArenaFront12Slots(
+      slots.filter((slot) => {
+        const isActive = Boolean(occupancies[slot.id]);
+        if (isActive) return true;
+        if (isArenaFront12VisibleSlot(slot.islandCode)) return true;
+        return !isArenaSlotFrozenForUi(slot.islandCode, masterKeyActive);
+      })
+    )
   );
 
   return (

@@ -2,7 +2,7 @@ import { formatArenaGiftAmount } from "@/lib/arena-gifts";
 import { arenaLoungeRooms } from "@/lib/arena-lounge-rooms";
 import { caribbeanFreedomArenaApp } from "@/lib/caribbean-freedom-arena-app";
 import { countryRoomLiveAccessUsd, countryRoomLiveSessionHours } from "@/lib/country-room-access";
-import { eldersTableGiftAmountUsd } from "@/lib/elders-table-gift-legal";
+import { eldersTableGiftPublicPriceLabel } from "@/lib/elders-table-gift-legal";
 import { internationalSuiteCountries, internationalSuiteMeta } from "@/lib/international-suite";
 import { legalDocuments } from "@/lib/legal-documents";
 
@@ -21,7 +21,7 @@ type GuideEntry = {
 const SITE = caribbeanFreedomArenaApp.name;
 const SITE_URL = "http://localhost:3004/#home";
 const countryLiveGift = formatArenaGiftAmount(countryRoomLiveAccessUsd);
-const eldersGift = formatArenaGiftAmount(eldersTableGiftAmountUsd);
+const eldersGift = eldersTableGiftPublicPriceLabel;
 
 const loungeList = arenaLoungeRooms.map((room) => `${room.label} (${room.href})`).join(" · ");
 const countryNames = internationalSuiteCountries.map((c) => c.name).join(", ");
@@ -164,7 +164,7 @@ const guideEntries: GuideEntry[] = [
   },
   {
     topic: "elders",
-    keywords: ["elder", "elders table", "elders room", "jamaica", "chess", "100 gift", "$100"],
+    keywords: ["elder", "elders table", "elders room", "jamaica", "chess", "gift"],
     answer: `The Elders Table (/rooms/the-elders-table) — Jamaica ×3 Caribbean Freedom Arena vibe. The Elders Room unlock: ${eldersGift} digital room access gift. Live win clips, chess, games panels. Plan card on #plans section.`
   },
   {
@@ -254,7 +254,7 @@ const guideEntries: GuideEntry[] = [
   {
     topic: "payment",
     keywords: ["pay", "payment", "fygaro", "wipay", "scotiabank", "card", "checkout", "billing", "money"],
-    answer: `Payments run through Fygaro (Trinidad & Tobago) → Scotiabank settlement when live keys are set. Gifts — not purchases of individuals. Disclosures: /legal/refunds · /legal/terms. Demo mode works locally without real keys.`
+    answer: `Gifts process through the platform checkout when live keys are set. Gifts — not purchases of individuals. Disclosures: /legal/refunds · /legal/terms. Demo mode works locally without real keys.`
   },
   {
     topic: "language",

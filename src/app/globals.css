@@ -3518,6 +3518,19 @@ a {
   gap: 0;
 }
 
+.arena-2030-cotswolds .cotswolds-room-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.arena-2030-cotswolds .cotswolds-room-header-band {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .arena-2030-cotswolds .cotswolds-quote-row {
   display: flex;
   flex-wrap: wrap;
@@ -3533,10 +3546,16 @@ a {
   color: #eef6ff;
 }
 
+.arena-2030-cotswolds .cotswolds-slideshow-shell {
+  position: relative;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
 .arena-2030-cotswolds .cotswolds-slideshow-stage--below-quote {
   width: 100%;
   max-width: none;
-  margin-top: 0.75rem;
+  margin-top: 0;
   margin-inline: 0;
   border-radius: 1.75rem;
   border: 1px solid rgba(0, 245, 255, 0.22);
@@ -3550,6 +3569,63 @@ a {
   margin: 1.25rem 0 0;
   justify-content: center;
   text-align: center;
+}
+
+.arena-2030-cotswolds .cotswolds-room-header-overlay {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0.4rem 0.55rem;
+  pointer-events: none;
+  font-size: clamp(1.35rem, 2.8vw, 2.85rem);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 0.65rem;
+  background: linear-gradient(180deg, rgba(1, 33, 105, 0.72), rgba(0, 0, 0, 0.55));
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 0 24px rgba(1, 33, 105, 0.45),
+    0 0 8px rgba(200, 16, 46, 0.25);
+}
+
+.arena-2030-cotswolds .cotswolds-room-header-overlay .a2030-title-vertical {
+  text-shadow: none;
+}
+
+.arena-2030-cotswolds .cotswolds-room-header-letters {
+  gap: 0.04em;
+  line-height: 1;
+}
+
+.arena-2030-cotswolds .cotswolds-room-header-letter.a2030-title {
+  background: none;
+  background-clip: unset;
+  -webkit-background-clip: unset;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.55));
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.85),
+    0 1px 0 #012169,
+    0 -1px 0 #c8102e;
+  animation:
+    a2030TitleLetterWave 6.5s ease-in-out infinite,
+    cotswoldsRoomHeaderLetterGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes cotswoldsRoomHeaderLetterGlow {
+  0%,
+  100% {
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+  }
+  50% {
+    color: #b8ff3c;
+    -webkit-text-fill-color: #b8ff3c;
+  }
 }
 
 /* UK slideshow · bottom-right quarter cell · UK women dropship slot only */
@@ -5141,8 +5217,10 @@ a {
   --cfa-nav-height: 58px;
   --cfa-sports-panel-height: 7.75rem;
   --cfa-island-bar-height: 46px;
+  --cfa-crypto-bar-height: 40px;
   --cfa-hero-top-offset: calc(
-    var(--cfa-nav-height) + var(--cfa-sports-panel-height) + var(--cfa-island-bar-height)
+    var(--cfa-nav-height) + var(--cfa-sports-panel-height) + var(--cfa-island-bar-height) +
+      var(--cfa-crypto-bar-height)
   );
 }
 
@@ -5152,6 +5230,28 @@ a {
 
 .arena-2030 .a2030-island-bar {
   top: calc(var(--cfa-nav-height) + var(--cfa-sports-panel-height));
+}
+
+.arena-2030 .a2030-crypto-bar {
+  top: calc(var(--cfa-nav-height) + var(--cfa-sports-panel-height) + var(--cfa-island-bar-height));
+  border-bottom: 1px solid rgba(0, 245, 255, 0.18);
+  background: linear-gradient(90deg, rgba(2, 8, 18, 0.96), rgba(4, 10, 24, 0.94), rgba(2, 8, 18, 0.96));
+  backdrop-filter: blur(var(--glass-blur)) saturate(170%);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.35);
+}
+
+.arena-2030 .a2030-crypto-bar-item::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.35), transparent);
+  opacity: 0.45;
+}
+
+.arena-2030 .a2030-crypto-bar-icon {
+  color: #00f5ff;
+  text-shadow: 0 0 12px rgba(0, 245, 255, 0.35);
 }
 
 .arena-2030 .a2030-nav {
@@ -23754,14 +23854,78 @@ a {
   margin-bottom: 0.35rem;
 }
 
+.ai-real-slot-country-panel-body--room .uk-room-games-tab-panel .cotswolds-extra-games-panel {
+  margin: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.ai-real-slot-country-panel-body--room .uk-room-games-tab-panel .room-sports-stack {
+  margin: 0;
+}
+
 .ai-real-slot-dropship-foot {
   display: flex;
   flex-direction: column;
   gap: 0.14rem;
 }
 
+.ai-real-slot-slot-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.18rem;
+}
+
+.ai-real-slot-slot-tabs .ai-real-slot-country-panel {
+  margin-top: 0;
+}
+
+.uk-room-country-tabs {
+  width: 100%;
+  align-items: flex-start;
+}
+
+.uk-room-country-tabs .ai-real-slot-country-panel--room {
+  flex: 1 1 min(100%, 22rem);
+  min-width: 0;
+}
+
+.ai-real-slot-country-panel-body--room .uk-room-fashion-tab-panel .uk-room-fashion-panel {
+  margin: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ai-real-slot-country-panel-body--room .uk-room-food-tab-panel .uk-room-food-panel {
+  margin: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
 .ai-real-slot-dropship-foot .ai-real-slot-topics {
   margin-top: 0.12rem;
+}
+
+.ai-real-slot-tab-welcome {
+  margin: 0.12rem 0 0;
+  padding: 0 0.05rem;
+  font-size: 0.4rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.45;
+  color: #ffffff;
+}
+
+.ai-real-slot-tab-welcome-mark {
+  margin-right: 0.22em;
+  font-size: 0.52rem;
+  line-height: 1;
+  vertical-align: 0.02em;
 }
 
 .ai-real-slot-country-panel-body {

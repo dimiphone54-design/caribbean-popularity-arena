@@ -75,7 +75,7 @@ export function getCountryGateButtonSuffix(countryId: string, fallback: string) 
 /** Footnote under gift panel */
 export function getCountryGateFootnote(countryId: string, fallback: string) {
   if (countryId === "ecuador") {
-    return "Abajo ves preview gratis. Juegos, talk-show y actividades se abren después del regalo (demo aquí · WiPay pronto).";
+    return "Abajo ves preview gratis. Juegos, talk-show y actividades se abren después del regalo (demo aquí).";
   }
   return fallback;
 }

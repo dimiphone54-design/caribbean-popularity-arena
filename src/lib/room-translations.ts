@@ -340,7 +340,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
       "Regalo worldwide · 3 horas · juegos · talk-show · una lane por país",
     gateButtonSuffix: "juegos y talk-show",
     gateDefaultFootnote:
-      "Abajo ves preview gratis. Juegos, talk-show y actividades se abren después del regalo (demo aquí · WiPay pronto).",
+      "Abajo ves preview gratis. Juegos, talk-show y actividades se abren después del regalo (demo aquí).",
     gateTimeLeft: "restante",
     colombia: {
       eyebrow: "Pasión colombiana · amor en vivo",
@@ -368,7 +368,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
       gatePrice: "Regalo worldwide · 3 horas · un live por país en nuestra plataforma.",
       gateButton: "entrar con amor",
       gateFootnote:
-        "Abajo puedes ver las slides con amor — el live se abre después del regalo (demo aquí · WiPay pronto).",
+        "Abajo puedes ver las slides con amor — el live se abre después del regalo (demo aquí).",
       topics: colombiaTopicsEsCO,
       venues: colombiaVenuesEsCO
     },
@@ -414,7 +414,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
       "Regalo worldwide · 3 horas · juegos · talk-show · una lane por país",
     gateButtonSuffix: "juegos y talk-show",
     gateDefaultFootnote:
-      "Abajo ves preview gratis. Juegos, talk-show y actividades se abren después del regalo (demo aquí · WiPay pronto).",
+      "Abajo ves preview gratis. Juegos, talk-show y actividades se abren después del regalo (demo aquí).",
     gateTimeLeft: "restante",
     colombia: {
       eyebrow: "Pasión colombiana · amor en vivo",
@@ -442,7 +442,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
       gatePrice: "Regalo worldwide · 3 horas · un live por país en nuestra plataforma.",
       gateButton: "entrar con amor",
       gateFootnote:
-        "Abajo puedes ver las slides — el live se abre después del regalo (demo · WiPay pronto).",
+        "Abajo puedes ver las slides — el live se abre después del regalo (demo).",
       topics: colombiaTopicsEsCO,
       venues: colombiaVenuesEsCO
     },
@@ -488,7 +488,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
       "Gift worldwide · 3 hours · games · talk-show · one lane per country",
     gateButtonSuffix: "games & talk-show",
     gateDefaultFootnote:
-      "Browse preview lanes below free. Games, talk-show & activities open after your gift (demo here — WiPay when keys are live).",
+      "Browse preview lanes below free. Games, talk-show & activities open after your gift (demo here).",
     gateTimeLeft: "left",
     colombia: {
       eyebrow: "Colombian passion · love live",
@@ -516,7 +516,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
       gatePrice: "Gift worldwide · 3 hours · one live per country on our platform.",
       gateButton: "enter with love",
       gateFootnote:
-        "Browse the slides below free — live opens after your gift (demo here · WiPay soon).",
+        "Browse the slides below free — live opens after your gift (demo here).",
       topics: colombiaTopicsEn,
       venues: colombiaVenuesEn
     },
@@ -562,7 +562,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
       "Gift worldwide · 3 hours · games · talk-show · one lane per country",
     gateButtonSuffix: "games & talk-show",
     gateDefaultFootnote:
-      "Browse preview lanes below free. Games, talk-show & activities open after your gift (demo here — WiPay when keys are live).",
+      "Browse preview lanes below free. Games, talk-show & activities open after your gift (demo here).",
     gateTimeLeft: "left",
     colombia: {
       eyebrow: "Colombian passion · love live",
@@ -590,7 +590,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
       gatePrice: "Gift worldwide · 3 hours · one live per country on our platform.",
       gateButton: "enter with love",
       gateFootnote:
-        "Browse the slides below free — live opens after your gift (demo here · WiPay soon).",
+        "Browse the slides below free — live opens after your gift (demo here).",
       topics: colombiaTopicsEn,
       venues: colombiaVenuesEn
     },

@@ -46,7 +46,7 @@ export const legalEntity = {
     "[ARBITRATION OR COURTS — TO BE CONFIRMED BY COUNSEL]",
 
   /** Primary payment processor for Trinidad launch — settles to linked Scotiabank account */
-  paymentProcessor: "Fygaro (Trinidad & Tobago) — Scotiabank settlement",
+  paymentProcessor: "Payment processor — bank settlement",
 
   jurisdiction: "Republic of Trinidad and Tobago",
 

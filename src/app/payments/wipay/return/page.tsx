@@ -45,7 +45,7 @@ function WipayReturnContent() {
         })
       }).catch(() => undefined);
       markArenaMemberAccess();
-      setMessage("Member gift confirmed · WiPay sandbox · welcome panel unlocked.");
+      setMessage("Member gift confirmed · welcome panel unlocked.");
       return;
     }
 
@@ -57,7 +57,7 @@ function WipayReturnContent() {
         unlockCountryRoomAccess(slug);
         clearCountryLiveGiftPending();
         setMessage(
-          `${formatArenaGiftAmount(countryRoomLiveAccessUsd)} gift confirmed · WiPay · ${countryRoomLiveSessionHours}h games & talk-show unlocked.`
+          `${formatArenaGiftAmount(countryRoomLiveAccessUsd)} gift confirmed · ${countryRoomLiveSessionHours}h games & talk-show unlocked.`
         );
       }
       return;
@@ -98,13 +98,13 @@ function WipayReturnContent() {
               currency: payload.order.currency,
               buyerEmail: payload.order.buyerEmail,
               status: "ordered",
-              trackingNote: "WiPay confirmed · supplier packing"
+              trackingNote: "Payment confirmed · supplier packing"
             });
             setMessage(`Dropship order confirmed · ${payload.order.productName} · supplier notified.`);
           }
         })
         .catch(() => {
-          setMessage("WiPay payment received · refresh your order tracker in the dropship market.");
+          setMessage("Payment received · refresh your order tracker in the dropship market.");
         });
     }
   }, [customReference, product, reference, status]);
@@ -113,7 +113,7 @@ function WipayReturnContent() {
 
   return (
     <main className="mx-auto flex min-h-[70vh] max-w-xl flex-col justify-center px-6 py-16 text-center">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#7dd3fc]">WiPay Gift Pipeline</p>
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#7dd3fc]">Gift confirmation</p>
       <h1 className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-wider text-[#eef6ff]">
         {hasReturnParams && status === "success" ? "Gift received" : "Return to arena"}
       </h1>
@@ -123,7 +123,7 @@ function WipayReturnContent() {
           <p>{message ?? arenaGiftCopy.giftReturnPending}</p>
           {reference ? (
             <p>
-              WiPay reference: <span className="font-mono text-[#eef6ff]">{reference}</span>
+              Reference: <span className="font-mono text-[#eef6ff]">{reference}</span>
             </p>
           ) : null}
           {customReference ? (
@@ -135,7 +135,7 @@ function WipayReturnContent() {
       ) : (
         <p className="mt-6 text-sm leading-6 text-[#9aa8c6]">
           {status !== "success"
-            ? "WiPay did not confirm success. Return to the arena and try your gift again."
+            ? "Payment was not confirmed. Return to the arena and try your gift again."
             : "No payment reference was found. If you just completed a gift, wait a moment and refresh — or return to the arena and try again."}
         </p>
       )}
@@ -173,7 +173,7 @@ export default function WipayReturnPage() {
     <Suspense
       fallback={
         <main className="mx-auto flex min-h-[70vh] max-w-xl items-center justify-center px-6 py-16 text-center text-sm text-[#9aa8c6]">
-          Loading WiPay gift confirmation…
+          Loading gift confirmation…
         </main>
       }
     >

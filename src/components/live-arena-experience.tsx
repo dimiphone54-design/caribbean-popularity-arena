@@ -13,6 +13,7 @@ import { ArenaLoungeScrollPanel } from "@/components/arena-lounge-scroll-panel";
 import { CfaNavPopularityArenaPill } from "@/components/cfa-nav-popularity-arena-pill";
 import { CfaNavFreedomElite2050Pill } from "@/components/cfa-nav-freedom-elite-2050-pill";
 import { CfaNavMemberSignInPill } from "@/components/cfa-nav-member-sign-in-pill";
+import { CfaNavCryptoScrollBar } from "@/components/cfa-nav-crypto-scroll-bar";
 import { CfaNavSportsVideoPanel } from "@/components/cfa-nav-sports-video-panel";
 const CfaPopularityArenaWorldMapModal = dynamic(
   () =>
@@ -26,7 +27,6 @@ import {
   type PopularityRecordsTab
 } from "@/components/popularity-arena-records-modal";
 import { ReportAbuseButton } from "@/components/report-abuse-flow";
-import { fygaro, fygaroSetupChecklist } from "@/config/fygaro";
 import {
   arenaCreators,
   boostPacks,
@@ -321,7 +321,7 @@ export function LiveArenaExperience() {
         slot.id === selectedSlot.id
           ? {
               ...slot,
-              isOnFire: true,
+              ...(slot.islandCode !== "CO" ? { isOnFire: true } : {}),
               votes: slot.votes + selectedBoost.votes,
               progress: Math.min(99, slot.progress + (selectedBoost.votes / 2000) * 20)
             }
@@ -562,6 +562,8 @@ export function LiveArenaExperience() {
           })}
         </div>
       </div>
+
+      <CfaNavCryptoScrollBar />
 
       <div className="relative z-10 a2030-hero-offset">
         {tickerItems.length > 0 ? (
@@ -822,8 +824,8 @@ function FreeDemoPanel({
     bank: {
       icon: "🏦",
       title: "Member Sign In",
-      subtitle: `Arena Member Gift · ${formatArenaGiftAmount(6)}. Sign in with your arena name — it auto-appears on the welcome panel (e.g. WELCOME DIMITRI). Fygaro → Scotiabank when keys connect.`,
-      items: [`${formatArenaGiftAmount(6)} member sign-in gift`, "Personalized welcome screen", "AI language detect", "Fygaro Links + Scotiabank payout"]
+      subtitle: `Arena Member Gift · ${formatArenaGiftAmount(6)}. Sign in with your arena name — it auto-appears on the welcome panel (e.g. WELCOME DIMITRI).`,
+      items: [`${formatArenaGiftAmount(6)} member sign-in gift`, "Personalized welcome screen", "AI language detect", "Secure gift checkout"]
     }
   }[panel];
 
@@ -848,27 +850,6 @@ function FreeDemoPanel({
             title="Member"
             onSubmitted={() => onNotice("Member registration preview submitted with Terms and Privacy acceptance.")}
           />
-          <div className="mt-6 rounded-xl border border-[#f5c842]/20 bg-[#111830] p-4 text-left">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#f5c842]">Operator — direct gift pipeline</p>
-            <p className="mt-2 text-sm leading-6 text-[#b8c9e1]">
-              Fygaro → your bank is the money pipe. No sole-trader block on checkout — add{" "}
-              <code className="text-[#f7efe0]">FYGARO_*</code> keys and gifts go live. Business registration and{" "}
-              <code className="text-[#f7efe0]">legal-entity.ts</code> are optional by country, not required for the pipe.
-            </p>
-            <ul className="mt-3 space-y-1.5 text-xs leading-5 text-[#9aa8c6]">
-              {fygaroSetupChecklist.slice(0, 4).map((step) => (
-                <li key={step}>• {step}</li>
-              ))}
-            </ul>
-            <a
-              href={fygaro.portalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex text-sm font-semibold text-[#f7e7aa] underline underline-offset-2"
-            >
-              Open Fygaro dashboard
-            </a>
-          </div>
         </>
       ) : (
         <div className="mt-6 grid gap-3 sm:grid-cols-2">

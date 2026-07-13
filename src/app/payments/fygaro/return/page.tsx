@@ -114,7 +114,7 @@ function FygaroReturnContent() {
 
   return (
     <main className="mx-auto flex min-h-[70vh] max-w-xl flex-col justify-center px-6 py-16 text-center">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#7dd3fc]">Fygaro Gift Pipeline</p>
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#7dd3fc]">Gift confirmation</p>
       <h1 className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-wider text-[#eef6ff]">
         {hasReturnParams ? "Gift received" : "Return to arena"}
       </h1>
@@ -124,7 +124,7 @@ function FygaroReturnContent() {
           <p>{message ?? arenaGiftCopy.giftReturnPending}</p>
           {reference ? (
             <p>
-              Fygaro reference: <span className="font-mono text-[#eef6ff]">{reference}</span>
+              Reference: <span className="font-mono text-[#eef6ff]">{reference}</span>
             </p>
           ) : null}
           {customReference ? (
@@ -152,7 +152,7 @@ function FygaroReturnContent() {
             href="/rooms/the-elders-table"
             className="rounded-xl border border-white/15 px-5 py-3 text-sm font-bold text-[#eef6ff]"
           >
-            Elders Room · {formatArenaGiftAmount(100)}
+            Elders Room · Gift
           </Link>
         ) : null}
         {product === "country-live-gift" ? (

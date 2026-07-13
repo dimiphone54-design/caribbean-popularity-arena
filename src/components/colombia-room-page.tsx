@@ -9,8 +9,15 @@ import { ColombiaRoomSlotTopicsScroll } from "@/components/colombia-room-slot-to
 import { ColombiaRoomRomanticAtmosphere } from "@/components/colombia-room-romantic-atmosphere";
 import { ColombiaRoomSlideshow } from "@/components/colombia-room-slideshow";
 import { ColombiaRoomSpotlightPhotos } from "@/components/colombia-room-spotlight-photos";
-import { RoomSportsStack } from "@/components/room-sports-stack";
 import { ArenaSlotDropshipTab, COLOMBIA_DROPSHIP_TAB_HASH } from "@/components/arena-slot-dropship-tab";
+import { ArenaSlotFashionTab, COLOMBIA_FASHION_TAB_HASH } from "@/components/arena-slot-fashion-tab";
+import { ArenaSlotFoodTab, COLOMBIA_FOOD_TAB_HASH } from "@/components/arena-slot-food-tab";
+import { ArenaSlotStudyHubTab, COLOMBIA_STUDY_HUB_TAB_HASH } from "@/components/arena-slot-study-hub-tab";
+import { CountryRoomStudyHubTabPanel } from "@/components/country-room-study-hub-tab-panel";
+import { ArenaSlotGamesTab, COLOMBIA_GAMES_TAB_HASH } from "@/components/arena-slot-games-tab";
+import { ColombiaRoomFashionTabPanel } from "@/components/colombia-room-fashion-tab-panel";
+import { ColombiaRoomFoodTabPanel } from "@/components/colombia-room-food-tab-panel";
+import { ColombiaRoomGamesTabPanel } from "@/components/colombia-room-games-tab-panel";
 import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
 import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
 import { useRoomLocale } from "@/components/room-locale-provider";
@@ -18,6 +25,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { defaultColombiaTrendingTopicId, findColombiaTrendingTopic } from "@/lib/live-creator-session";
 import { defaultColombiaLiveVenueId, findColombiaLiveVenue } from "@/lib/colombia-live-venues";
 import { getColombiaTopicLiveSlot, getColombiaVenueLiveSlot } from "@/lib/colombia-room-live";
+import { getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
 import { translateColombiaTopic, translateColombiaVenue } from "@/lib/room-translations";
 
 const COLOMBIA_ROOM_SLUG = "colombia-room";
@@ -26,6 +34,7 @@ const COLOMBIA_ROOM_BG = "#0d0104";
 export function ColombiaRoomPage() {
   const { locale, t } = useRoomLocale();
   const copy = t.colombia;
+  const tabLabels = getArenaSlotTabLabels("CO");
   const [topicId, setTopicId] = useState(defaultColombiaTrendingTopicId);
   const [venueId, setVenueId] = useState(defaultColombiaLiveVenueId);
   const activeTopic = findColombiaTrendingTopic(topicId);
@@ -131,6 +140,7 @@ export function ColombiaRoomPage() {
                 mode="room"
                 sectionId={COLOMBIA_DROPSHIP_TAB_HASH}
                 countryName="Colombia"
+                label={tabLabels.dropshipping}
               >
                 <DropshipMarketPanel
                   countryId="colombia"
@@ -139,9 +149,43 @@ export function ColombiaRoomPage() {
                   layout="room"
                 />
               </ArenaSlotDropshipTab>
-              <div className="country-room-section w-full">
-                <RoomSportsStack roomSlug="colombia-room" />
-              </div>
+
+              <section className="country-room-section w-full">
+                <div className="ai-real-slot-slot-tabs uk-room-country-tabs">
+                  <ArenaSlotGamesTab
+                    mode="room"
+                    sectionId={COLOMBIA_GAMES_TAB_HASH}
+                    countryName="Colombia"
+                    label={tabLabels.games}
+                  >
+                    <ColombiaRoomGamesTabPanel />
+                  </ArenaSlotGamesTab>
+                  <ArenaSlotFashionTab
+                    mode="room"
+                    sectionId={COLOMBIA_FASHION_TAB_HASH}
+                    countryName="Colombia"
+                    label={tabLabels.fashion}
+                  >
+                    <ColombiaRoomFashionTabPanel />
+                  </ArenaSlotFashionTab>
+                  <ArenaSlotFoodTab
+                    mode="room"
+                    sectionId={COLOMBIA_FOOD_TAB_HASH}
+                    countryName="Colombia"
+                    label={tabLabels.food}
+                  >
+                    <ColombiaRoomFoodTabPanel />
+                  </ArenaSlotFoodTab>
+                  <ArenaSlotStudyHubTab
+                    mode="room"
+                    sectionId={COLOMBIA_STUDY_HUB_TAB_HASH}
+                    countryName="Colombia"
+                    label={tabLabels.studyHub}
+                  >
+                    <CountryRoomStudyHubTabPanel countryId="colombia" />
+                  </ArenaSlotStudyHubTab>
+                </div>
+              </section>
             </div>
           </div>
 

@@ -6,8 +6,8 @@ function pad2(value: string) {
   return value.padStart(2, "0");
 }
 
-function getTimeZoneParts(date: Date, timeZone: string) {
-  const formatter = new Intl.DateTimeFormat("en-GB", {
+function getTimeZoneParts(date: Date, timeZone: string, locale = "en-GB") {
+  const formatter = new Intl.DateTimeFormat(locale, {
     timeZone,
     weekday: "short",
     day: "numeric",
@@ -31,13 +31,13 @@ function getTimeZoneParts(date: Date, timeZone: string) {
   };
 }
 
-export function formatCountryLocalTime(date: Date, timeZone: string) {
-  const { hour, minute, second } = getTimeZoneParts(date, timeZone);
+export function formatCountryLocalTime(date: Date, timeZone: string, locale = "en-GB") {
+  const { hour, minute, second } = getTimeZoneParts(date, timeZone, locale);
   return `${hour}:${minute}:${second}`;
 }
 
-export function formatCountryLocalDate(date: Date, timeZone: string) {
-  const { weekday, day, month } = getTimeZoneParts(date, timeZone);
+export function formatCountryLocalDate(date: Date, timeZone: string, locale = "en-GB") {
+  const { weekday, day, month } = getTimeZoneParts(date, timeZone, locale);
   return `${weekday} ${day} ${month}`;
 }
 
@@ -46,9 +46,16 @@ type CountryLocalClockProps = {
   timeZone: string;
   tzAbbrev: string;
   className?: string;
+  locale?: string;
 };
 
-export function CountryLocalClock({ capital, timeZone, tzAbbrev, className = "" }: CountryLocalClockProps) {
+export function CountryLocalClock({
+  capital,
+  timeZone,
+  tzAbbrev,
+  className = "",
+  locale = "en-GB"
+}: CountryLocalClockProps) {
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -57,8 +64,8 @@ export function CountryLocalClock({ capital, timeZone, tzAbbrev, className = "" 
     return () => window.clearInterval(timer);
   }, []);
 
-  const timeLine = now ? formatCountryLocalTime(now, timeZone) : "--:--:--";
-  const dateLine = now ? formatCountryLocalDate(now, timeZone) : "…";
+  const timeLine = now ? formatCountryLocalTime(now, timeZone, locale) : "--:--:--";
+  const dateLine = now ? formatCountryLocalDate(now, timeZone, locale) : "…";
 
   return (
     <div className={`country-local-clock ${className}`.trim()} aria-live="polite">

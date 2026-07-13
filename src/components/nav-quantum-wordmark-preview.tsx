@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 const snowFlakes = [
   { left: "4%", size: "3px", opacity: 0.9, duration: "3.2s", delay: "0s", drift: "6px" },
   { left: "12%", size: "2px", opacity: 0.7, duration: "4.1s", delay: "0.8s", drift: "-5px" },
@@ -175,9 +177,9 @@ export function NavQuantumWordmarkPreview() {
       </div>
 
       <p className="nav-quantum-preview-footer">
-        <a href="/" className="nav-quantum-preview-home-link">
+        <Link href="/" className="nav-quantum-preview-home-link">
           ← Back to live arena
-        </a>
+        </Link>
       </p>
     </div>
   );

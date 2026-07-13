@@ -20,14 +20,14 @@ export const arenaGiftCopy = {
   sendGift: "Send Gift",
   openingGift: "Opening gift…",
   giftUnavailable: "Gift unavailable right now — try again shortly.",
-  giftQueued: "Demo gift queued — Fygaro goes live with your keys.",
+  giftQueued: "Demo gift queued — checkout goes live when keys are connected.",
   giftNetworkError: "Network error — gift will retry when you are back online.",
   noGiftRequired: "No gift required",
   memberGiftPreview: "$6 Gift · Member sign-in preview",
-  redirectingGift: (amountUsd: number, processor = "Fygaro") =>
-    `Redirecting to ${processor} for your ${formatArenaGiftAmount(amountUsd)}.`,
-  demoGiftReady: (amountUsd: number, processor = "Fygaro") =>
-    `Demo gift ready — ${processor} keys will automate your ${formatArenaGiftAmount(amountUsd)} once your Fygaro + Scotiabank pipeline is live.`,
+  redirectingGift: (amountUsd: number, _processor?: string) =>
+    `Redirecting for your ${formatArenaGiftAmount(amountUsd)}.`,
+  demoGiftReady: (amountUsd: number, _processor?: string) =>
+    `Demo gift ready — your ${formatArenaGiftAmount(amountUsd)} will process when checkout is live.`,
   giftConfirmed: (amountUsd: number) =>
     `Gift confirmed — your ${formatArenaGiftAmount(amountUsd)} is on its way to settlement.`,
   giftReturnPending: "Payment received — finishing your arena unlock…"

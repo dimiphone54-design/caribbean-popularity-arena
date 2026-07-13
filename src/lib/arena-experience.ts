@@ -117,8 +117,7 @@ export const arenaCreators: ArenaCreatorSlot[] = [
     portraitImage: arenaSlotRealPeoplePhotos[1],
     votes: 102847,
     trend: "↑14%",
-    progress: 95,
-    isOnFire: true
+    progress: 95
   },
   {
     id: 2,

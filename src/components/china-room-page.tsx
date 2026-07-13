@@ -2,18 +2,26 @@
 
 import { ArenaAgoraLiveStage } from "@/components/arena-agora-live-stage";
 import { Arena2030Backdrop, Arena2030Header } from "@/components/arena-2030-backdrop";
-import { ChinaWushuWarfarePanel } from "@/components/china-wushu-warfare-panel";
 import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
 import { ArenaSlotDropshipTab, CHINA_DROPSHIP_TAB_HASH } from "@/components/arena-slot-dropship-tab";
+import { ArenaSlotFashionTab, CHINA_FASHION_TAB_HASH } from "@/components/arena-slot-fashion-tab";
+import { ArenaSlotFoodTab, CHINA_FOOD_TAB_HASH } from "@/components/arena-slot-food-tab";
+import { ArenaSlotStudyHubTab, CHINA_STUDY_HUB_TAB_HASH } from "@/components/arena-slot-study-hub-tab";
+import { CountryRoomStudyHubTabPanel } from "@/components/country-room-study-hub-tab-panel";
+import { ArenaSlotGamesTab, CHINA_GAMES_TAB_HASH } from "@/components/arena-slot-games-tab";
 import { ChinaDropshipRatesPanel } from "@/components/dropshipping/china-dropship-rates-panel";
 import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
-import { RoomSportsStack } from "@/components/room-sports-stack";
+import { ChinaRoomFashionTabPanel } from "@/components/china-room-fashion-tab-panel";
+import { ChinaRoomFoodTabPanel } from "@/components/china-room-food-tab-panel";
+import { ChinaRoomGamesTabPanel } from "@/components/china-room-games-tab-panel";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
+import { getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
 import { chinaRoomGameLane } from "@/lib/east-asia-room-games";
 
 export function ChinaRoomPage() {
   const lane = chinaRoomGameLane;
+  const tabLabels = getArenaSlotTabLabels("CN");
 
   return (
     <>
@@ -51,12 +59,6 @@ export function ChinaRoomPage() {
                   layout="hero"
                   gameLabel="Wushu Duilian · 武术对练"
                 />
-                <ChinaWushuWarfarePanel />
-                <RoomSportsStack
-                  roomSlug={lane.roomSlug}
-                  showStagePreview
-                  stageCaption={`${lane.hostLabel} · 剑棍 · 对练`}
-                />
               </CountryRoomLiveAccessGate>
             </section>
 
@@ -64,6 +66,7 @@ export function ChinaRoomPage() {
               mode="room"
               sectionId={CHINA_DROPSHIP_TAB_HASH}
               countryName={lane.countryName}
+              label={tabLabels.dropshipping}
             >
               <ChinaDropshipRatesPanel />
               <DropshipMarketPanel
@@ -73,6 +76,43 @@ export function ChinaRoomPage() {
                 layout="room"
               />
             </ArenaSlotDropshipTab>
+
+            <section className="country-room-section w-full">
+              <div className="ai-real-slot-slot-tabs uk-room-country-tabs">
+                <ArenaSlotGamesTab
+                  mode="room"
+                  sectionId={CHINA_GAMES_TAB_HASH}
+                  countryName={lane.countryName}
+                  label={tabLabels.games}
+                >
+                  <ChinaRoomGamesTabPanel />
+                </ArenaSlotGamesTab>
+                <ArenaSlotFashionTab
+                  mode="room"
+                  sectionId={CHINA_FASHION_TAB_HASH}
+                  countryName={lane.countryName}
+                  label={tabLabels.fashion}
+                >
+                  <ChinaRoomFashionTabPanel />
+                </ArenaSlotFashionTab>
+                <ArenaSlotFoodTab
+                  mode="room"
+                  sectionId={CHINA_FOOD_TAB_HASH}
+                  countryName={lane.countryName}
+                  label={tabLabels.food}
+                >
+                  <ChinaRoomFoodTabPanel />
+                </ArenaSlotFoodTab>
+                <ArenaSlotStudyHubTab
+                  mode="room"
+                  sectionId={CHINA_STUDY_HUB_TAB_HASH}
+                  countryName={lane.countryName}
+                  label={tabLabels.studyHub}
+                >
+                  <CountryRoomStudyHubTabPanel countryId="china" />
+                </ArenaSlotStudyHubTab>
+              </div>
+            </section>
           </RoomCountryPageShell>
         </div>
       </main>

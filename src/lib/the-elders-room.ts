@@ -1,4 +1,3 @@
-import { formatArenaGiftAmount } from "@/lib/arena-gifts";
 import { eldersTableGiftAmountUsd } from "@/lib/elders-table-gift-legal";
 
 export type EldersRoomWinClip = {
@@ -26,7 +25,7 @@ export const eldersRoomMeta = {
   name: "THE ELDERS ROOM",
   level: 2,
   priceUsd: eldersTableGiftAmountUsd,
-  currencyLabel: formatArenaGiftAmount(eldersTableGiftAmountUsd),
+  currencyLabel: "Gift",
   tagline: "Live win clips · digital room access · send a Gift to enter"
 } as const;
 

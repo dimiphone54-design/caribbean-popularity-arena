@@ -1,20 +1,27 @@
 import type { ArenaCreatorSlot } from "@/lib/arena-experience";
 
-/** Front 12 grid · exact lineup · UK · China · Japan · Colombia · Ecuador · then rest */
+/** Front slots grid · exact lineup · UK · Japan · China · Ecuador · Colombia · Poland · Lithuania */
 export const ARENA_FRONT12_SLOT_DISPLAY_ORDER = [
   "UK",
-  "CN",
   "JP",
-  "CO",
+  "CN",
   "EC",
-  "LT",
-  "TT",
-  "JM",
-  "VE",
+  "CO",
   "PL",
-  "TN",
-  "GY"
+  "LT"
 ] as const;
+
+export type ArenaFront12VisibleIslandCode = (typeof ARENA_FRONT12_SLOT_DISPLAY_ORDER)[number];
+
+export const ARENA_FRONT12_VISIBLE_ISLAND_CODES = new Set<string>(ARENA_FRONT12_SLOT_DISPLAY_ORDER);
+
+export function isArenaFront12VisibleSlot(islandCode: string) {
+  return ARENA_FRONT12_VISIBLE_ISLAND_CODES.has(islandCode);
+}
+
+export function filterArenaFront12Slots<T extends Pick<ArenaCreatorSlot, "islandCode">>(slots: T[]) {
+  return slots.filter((slot) => isArenaFront12VisibleSlot(slot.islandCode));
+}
 
 const displayOrderIndex = new Map<string, number>(
   ARENA_FRONT12_SLOT_DISPLAY_ORDER.map((code, index) => [code, index])

@@ -1,6 +1,6 @@
 import { arenaGiftLegalCopy } from "@/lib/arena-gifts";
 import {
-  eldersTableGiftAmountLabel,
+  eldersTableGiftPublicPriceLabel,
   eldersTableGiftLegal
 } from "@/lib/elders-table-gift-legal";
 
@@ -148,7 +148,7 @@ export const votingCategories = [
 export const membershipPlans: MembershipPlan[] = [
   {
     name: "The Elders Table",
-    price: eldersTableGiftAmountLabel,
+    price: eldersTableGiftPublicPriceLabel,
     cadence: "digital room access",
     highlighted: true,
     href: "/rooms/the-elders-table",

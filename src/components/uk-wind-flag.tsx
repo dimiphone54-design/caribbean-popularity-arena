@@ -3,6 +3,34 @@ type UkWindFlagProps = {
   label?: string;
 };
 
+type UkVerticalStackTitleProps = {
+  text?: string;
+  variant?: "room" | "default";
+};
+
+/** One letter per line · UK flag colour cycle */
+export function UkVerticalStackTitle({ text = "United Kingdom", variant = "default" }: UkVerticalStackTitleProps) {
+  const letters = text.replace(/\s+/g, "").split("");
+  const letterClass =
+    variant === "room"
+      ? "a2030-title a2030-title-breathe a2030-title-letter a2030-title-vertical-letter cotswolds-room-header-letter inline-block"
+      : "a2030-title a2030-title-breathe a2030-title-letter a2030-title-vertical-letter uk-flag-title-letter inline-block";
+
+  return (
+    <span className="a2030-title-vertical inline-flex flex-col items-center" aria-hidden="true">
+      {letters.map((char, index) => (
+        <span
+          key={`${char}-${index}`}
+          className={letterClass}
+          style={{ animationDelay: `${index * 0.22}s` }}
+        >
+          {char}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export function UkFlagJumpingTitle({ text = "United Kingdom" }: { text?: string }) {
   return (
     <span className="a2030-title-letters inline-flex flex-wrap items-end" aria-label={text}>
@@ -12,6 +40,25 @@ export function UkFlagJumpingTitle({ text = "United Kingdom" }: { text?: string 
             key={`${char}-${index}`}
             className="a2030-title a2030-title-breathe a2030-title-letter uk-flag-title-letter inline-block"
             style={{ animationDelay: `${index * 0.35}s` }}
+          >
+            {char}
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+/** UK room header · horizontal letter row · same room glow styling */
+export function UkRoomHorizontalTitle({ text = "United Kingdom" }: { text?: string }) {
+  return (
+    <span className="cotswolds-room-header-letters a2030-title-letters inline-flex flex-wrap items-end" aria-hidden="true">
+      <span className="a2030-title-word inline-flex items-end">
+        {text.split("").map((char, index) => (
+          <span
+            key={`${char}-${index}`}
+            className="a2030-title a2030-title-breathe a2030-title-letter cotswolds-room-header-letter inline-block"
+            style={{ animationDelay: `${index * 0.22}s` }}
           >
             {char}
           </span>
