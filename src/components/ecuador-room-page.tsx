@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
-import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
 import { ArenaSlotDropshipTab, ECUADOR_DROPSHIP_TAB_HASH } from "@/components/arena-slot-dropship-tab";
 import { ArenaSlotFashionTab, ECUADOR_FASHION_TAB_HASH } from "@/components/arena-slot-fashion-tab";
 import { ArenaSlotFoodTab, ECUADOR_FOOD_TAB_HASH } from "@/components/arena-slot-food-tab";
@@ -19,7 +18,6 @@ import { EcuadorIronFangStatPanelCard } from "@/components/ecuador-iron-fang-sta
 import { getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
 import { ecuadorIronFangStatPanels, ecuadorRoomBrand, type EcuadorRoomGameSelection } from "@/lib/ecuador-country";
 
-const ECUADOR_ROOM_SLUG = "ecuador-room";
 const ECUADOR_LIVE_GAMES_ID = "ecuador-live-games";
 const ECUADOR_ROOM_BG = "#040a08";
 
@@ -101,17 +99,8 @@ export function EcuadorRoomPage() {
 
             <div className="ecuador-room-body mx-auto flex w-full flex-col">
               <section className="country-room-section country-room-live-stack w-full">
-                <div id="ecuador-live-gift-gate" className="w-full">
-                  <CountryRoomLiveAccessGate
-                    roomSlug={ECUADOR_ROOM_SLUG}
-                    countryId="ecuador"
-                    countryName="Ecuador"
-                    flag="🇪🇨"
-                    variant="romantic"
-                    hideUnlockedStatus
-                  >
-                    <EcuadorRoomLiveSlot />
-                  </CountryRoomLiveAccessGate>
+                <div className="w-full">
+                  <EcuadorRoomLiveSlot />
                 </div>
               </section>
 
