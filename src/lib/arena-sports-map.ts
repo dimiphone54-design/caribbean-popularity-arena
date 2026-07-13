@@ -57,8 +57,7 @@ export const ARENA_SPORTS_MAP_ZONES: ArenaSportsMapZone[] = [
       { name: "Sack Race", emoji: "🏁" },
       { name: "Park Relay", emoji: "🏃" },
       { name: "Indoor Curling", emoji: "🥌" },
-      { name: "Park football", emoji: "⚽" },
-      { name: "Freedom Drive", emoji: "🏎️" }
+      { name: "Park football", emoji: "⚽" }
     ]
   },
   {
@@ -82,8 +81,7 @@ export const ARENA_SPORTS_MAP_ZONES: ArenaSportsMapZone[] = [
     subtitle: "/rooms/ecuador-room",
     sports: [
       { name: "Ecuavoley", emoji: "🏐" },
-      { name: "Free Fire EC", emoji: "🔫" },
-      { name: "Ecuador Drive", emoji: "🏎️" }
+      { name: "Free Fire EC", emoji: "🔫" }
     ]
   },
   {
@@ -142,8 +140,7 @@ export const ARENA_SPORTS_UNIQUE_LIST: ArenaSportsMapEntry[] = [
   { name: "Salsa", emoji: "💃" },
   { name: "Surf", emoji: "🌊" },
   { name: "Cycling", emoji: "🚴" },
-  { name: "Indoor Curling", emoji: "🥌" },
-  { name: "Racing · Freedom / Ecuador Drive", emoji: "🏎️" }
+  { name: "Indoor Curling", emoji: "🥌" }
 ];
 
 export const ARENA_ESPORTS_LIST: ArenaSportsMapEntry[] = [
@@ -156,6 +153,6 @@ export const ARENA_SPORTS_MAP_STATS = {
   playableSimulators: 18,
   sportsRecordsTab: 4,
   richestRoom: "UK Cotswolds",
-  richestRoomCount: 17,
+  richestRoomCount: 16,
   topSport: "Football"
 };

@@ -38,7 +38,7 @@ export function CommandCenterUkRoomArchive() {
           <p className="text-xs font-black uppercase tracking-[0.16em] text-[#ff8c42]">🔒 Room locked</p>
           <p className="mt-2 text-sm leading-6 text-[#d8deef]">
             Enter your owner Master Key in the panel above. UK fans keep the live Freedom Gateway, football hub,
-            dropship shop, Freedom Drive, and bottom dock only.
+            dropship shop, and bottom dock only.
           </p>
         </div>
       ) : (

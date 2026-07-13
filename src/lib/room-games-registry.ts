@@ -125,7 +125,7 @@ export const ROOM_GAMES_BY_SLUG: Record<string, RoomGamesConfig> = {
     islandCode: "EC",
     panelKicker: "Juegos virales · talk-show · en vivo",
     panelTitle: "🇪🇨 Ecuador · deportes",
-    panelSubtitle: "Ecuavoley · Free Fire · Ecuador Drive",
+    panelSubtitle: "Ecuavoley · Free Fire",
     host: "Sala EC",
     roomKicker: "Ecuador (EC) · juegos en la sala",
     panelClass: "ecuador-game-room-panel w-full rounded-2xl border border-[#fcd116]/35 bg-[#040a08]/65 p-4 backdrop-blur-md sm:p-5",

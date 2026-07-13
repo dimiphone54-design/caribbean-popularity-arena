@@ -77,15 +77,15 @@ const seedMatchScores: PopularityMatchScore[] = [
     recordedAt: "2026-06-22T18:40:00.000Z"
   },
   {
-    id: "match-ec-drive-1",
+    id: "match-ec-ecuavoley-1",
     roomSlug: "ecuador-room",
     roomLabel: "Ecuador",
     countryId: "ecuador",
     flag: "🇪🇨",
-    player: "AndesDrift",
-    match: "Ecuador Drive · Quito chase",
-    scoreLabel: "Drive pts",
-    score: 31280,
+    player: "AndesVolley",
+    match: "Ecuavoley · cancha dominical",
+    scoreLabel: "Wins",
+    score: 12,
     recordedAt: "2026-07-01T14:02:00.000Z"
   },
   {

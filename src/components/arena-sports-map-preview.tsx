@@ -54,8 +54,8 @@ export function ArenaSportsMapPreview() {
               <div className="arena-sports-map-preview-flow-node">🇬🇧 UK Rooms</div>
               <div className="arena-sports-map-preview-flow-leaves">
                 <span>Football Lads</span>
-                <span>Cotswolds · 17 lanes</span>
-                <span>Freedom Drive</span>
+                <span>Cotswolds · park games</span>
+                <span>Football prediction</span>
               </div>
             </div>
             <div className="arena-sports-map-preview-flow-branch">
@@ -72,7 +72,7 @@ export function ArenaSportsMapPreview() {
               <div className="arena-sports-map-preview-flow-node">🇪🇨 Ecuador</div>
               <div className="arena-sports-map-preview-flow-leaves">
                 <span>Ecuavoley</span>
-                <span>Ecuador Drive</span>
+                <span>Free Fire EC</span>
               </div>
             </div>
             <div className="arena-sports-map-preview-flow-branch">
