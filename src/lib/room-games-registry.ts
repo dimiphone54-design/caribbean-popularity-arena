@@ -2,8 +2,7 @@
 
 export type RoomGameLaunch =
   | { type: "simulator"; gameName: string }
-  | { type: "east-asia-stage"; gameName: string }
-  | { type: "freedom-drive"; anchor: string };
+  | { type: "east-asia-stage"; gameName: string };
 
 export type RoomCountryGameRow = {
   id: string;
@@ -154,17 +153,6 @@ export const ROOM_GAMES_BY_SLUG: Record<string, RoomGamesConfig> = {
         hint: "Shooter móvil viral en la región",
         ready: 94,
         launch: { type: "simulator", gameName: "Free Fire EC" }
-      },
-      {
-        id: "ec-drive",
-        set: "03",
-        tag: "Arena Ecuador Drive · Quito · Guayaquil 2030",
-        emoji: "🏎️",
-        name: "Ecuador Drive",
-        host: "🇪🇨 Mundo abierto · cámara chase",
-        hint: "Simulador 3D · W/A/S/D · derrape",
-        ready: 96,
-        launch: { type: "freedom-drive", anchor: "#ecuador-freedom-drive" }
       }
     ]
   },

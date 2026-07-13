@@ -4,7 +4,6 @@ import { useState } from "react";
 import { CotswoldsAtmosphereOverlay } from "@/components/cotswolds-atmosphere-overlay";
 import { CotswoldsGameSimulator } from "@/components/cotswolds-game-simulator";
 import { CotswoldsParkVideoBackdrop } from "@/components/cotswolds-park-video-backdrop";
-import { FreedomDriveSimulatorLazy } from "@/components/freedom-drive/freedom-drive-simulator-lazy";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { ArenaSlotFashionTab } from "@/components/arena-slot-fashion-tab";
 import { ArenaSlotFoodTab } from "@/components/arena-slot-food-tab";
@@ -21,7 +20,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { UkRoomHorizontalTitle } from "@/components/uk-wind-flag";
 import { getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
 import { cotswoldsMenActivityPanels } from "@/lib/cotswolds";
-import { UK_ROOM_PANEL } from "@/lib/uk-room-panel";
 
 export function CotswoldsPage() {
   const { t } = useRoomLocale();
@@ -30,7 +28,6 @@ export function CotswoldsPage() {
   /** Men's dock · exact 1-click open / 1-click close */
   const [panelOpen, setPanelOpen] = useState(false);
   const [menSim, setMenSim] = useState<{ name: string; host: string } | null>(null);
-  const [driveExpanded, setDriveExpanded] = useState(false);
 
   const toggleMenPanel = () => {
     setPanelOpen((open) => !open);
@@ -39,7 +36,7 @@ export function CotswoldsPage() {
   return (
     <>
       <main className="arena-2030 arena-2030-cotswolds relative flex min-h-screen flex-col overflow-x-hidden pb-56">
-        <UkRoomCornerScroll hidden={driveExpanded} />
+        <UkRoomCornerScroll />
 
         <div className="relative z-10">
           <RoomCountryPageShell topPadding="compact">
@@ -94,14 +91,6 @@ export function CotswoldsPage() {
                   <CountryRoomStudyHubTabPanel countryId="uk" />
                 </ArenaSlotStudyHubTab>
               </div>
-            </section>
-
-            <section className={UK_ROOM_PANEL} aria-label="Freedom Drive Simulator">
-              <FreedomDriveSimulatorLazy
-                embedInRoom
-                expanded={driveExpanded}
-                onToggleExpand={() => setDriveExpanded((open) => !open)}
-              />
             </section>
           </RoomCountryPageShell>
         </div>

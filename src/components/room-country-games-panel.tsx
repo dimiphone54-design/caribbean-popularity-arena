@@ -40,10 +40,6 @@ export function RoomCountryGamesPanel({
       onRequestedGameHandled?.();
       return;
     }
-    if (row.launch.type === "freedom-drive") {
-      onRequestedGameHandled?.();
-      return;
-    }
     setActiveGame(rowLaunchId(row));
     onRequestedGameHandled?.();
   }, [requestedGameId, config.games, onRequestedGameHandled]);
@@ -87,18 +83,6 @@ export function RoomCountryGamesPanel({
         <div className="cotswolds-game-board mt-4 space-y-2.5" role="list">
           {config.games.map((row) => {
             const playing = activeGame === rowLaunchId(row);
-
-            if (row.launch.type === "freedom-drive") {
-              return (
-                <a
-                  key={row.id}
-                  href={row.launch.anchor}
-                  className={`cotswolds-game-row ${config.rowClass} block no-underline`}
-                >
-                  <GameRowContent row={row} playing={false} readyLabel={`${row.ready}% ready · open 3D simulator`} cta="▶ DRIVE" />
-                </a>
-              );
-            }
 
             return (
               <button

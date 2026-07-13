@@ -226,14 +226,13 @@ export const ecuadorFoodPanel = {
 } as const;
 
 export type EcuadorRoomPlayableGame = "Ecuavoley" | "Free Fire EC";
-export type EcuadorRoomGameSelection = EcuadorRoomPlayableGame | "Ecuador Drive";
+export type EcuadorRoomGameSelection = EcuadorRoomPlayableGame;
 
 export type EcuadorIronFangStatPanel = {
   kicker: string;
   title: string;
   detail: string;
   gameId?: EcuadorRoomPlayableGame;
-  freedomDrive?: boolean;
   footballLane?: boolean;
   videoSrc?: string;
   posterSrc?: string;
@@ -262,13 +261,6 @@ export const ecuadorIronFangStatPanels: ReadonlyArray<EcuadorIronFangStatPanel> 
     detail: "El shooter móvil más viral de la región",
     gameId: "Free Fire EC",
     videoSrc: "/ecuador-live-free-fire-trend.mp4",
-    posterSrc: "/ecuador-room-gaming-party.png"
-  },
-  {
-    kicker: "Tendencia en vivo",
-    title: "Ecuador Drive Simulator",
-    detail: "Arena Ecuador Drive · Quito · Guayaquil · mundo abierto",
-    freedomDrive: true,
     posterSrc: "/ecuador-room-gaming-party.png"
   }
 ];

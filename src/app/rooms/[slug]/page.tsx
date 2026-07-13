@@ -60,10 +60,6 @@ export default async function RoomPage({ params }: { params: Promise<{ slug: str
     return <CotswoldsPage />;
   }
 
-  if (slug === "freedom-drive") {
-    redirect("/freedom-drive");
-  }
-
   if (slug === "japan-room") {
     return <JapanRoomPage />;
   }

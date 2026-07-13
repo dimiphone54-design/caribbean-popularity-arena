@@ -27039,66 +27039,6 @@ a {
   outline-offset: 2px;
 }
 
-.ecuador-stat-panel-game-video-live--drive {
-  border-color: rgba(0, 245, 255, 0.45);
-  color: #67e8f9;
-  text-shadow: 0 0 8px rgba(0, 245, 255, 0.45);
-}
-
-.ecuador-stat-panel--freedom-drive {
-  border-color: rgba(0, 245, 255, 0.28) !important;
-}
-
-.ecuador-stat-panel--freedom-drive:hover {
-  border-color: rgba(0, 245, 255, 0.48) !important;
-  box-shadow: 0 0 22px rgba(0, 245, 255, 0.14);
-}
-
-.ecuador-stat-panel-game-video-wrap--drive {
-  width: 100%;
-  max-width: 11.5rem;
-  border-color: rgba(0, 245, 255, 0.32);
-  background: #121c2e;
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.32),
-    0 0 22px rgba(0, 245, 255, 0.16),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-
-.ecuador-stat-panel-game-video-wrap--drive::after {
-  background: linear-gradient(to top, rgba(8, 14, 24, 0.18) 0%, transparent 55%);
-}
-
-.ecuador-stat-panel-freedom-drive-canvas {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #121c2e;
-  filter: brightness(1.14) contrast(1.02) saturate(1.08);
-}
-
-.ecuador-stat-panel-freedom-drive-canvas canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.ecuador-stat-panel-freedom-drive-fallback {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-size: cover;
-  background-position: center;
-}
-
-.ecuador-game-room-row--drive {
-  border-color: rgba(0, 245, 255, 0.22);
-}
-
-.ecuador-game-room-row--drive:hover {
-  border-color: rgba(0, 245, 255, 0.42);
-}
-
 .ecuador-stat-panel-game-video-wrap {
   position: relative;
   width: 100%;

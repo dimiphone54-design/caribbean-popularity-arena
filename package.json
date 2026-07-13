@@ -20,8 +20,6 @@
     "clean:hard": "npm run clean && find . -type d -name '__pycache__' -not -path './node_modules/*' -prune -exec rm -rf {} + 2>/dev/null; true"
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
     "@supabase/supabase-js": "^2.108.2",
     "agora-rtc-sdk-ng": "^4.24.5",
     "agora-token": "^2.0.5",
@@ -34,7 +32,6 @@
     "react-leaflet": "^5.0.0",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "three": "^0.185.0",
     "world-countries": "^5.1.0"
   },
   "devDependencies": {
@@ -44,7 +41,6 @@
     "@types/node": "^25.9.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@types/three": "^0.185.0",
     "d3-geo": "^3.1.1",
     "eslint": "^9.39.4",
     "eslint-config-next": "^15.5.19",

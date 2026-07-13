@@ -1,19 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import type { EcuadorIronFangStatPanel, EcuadorRoomGameSelection, EcuadorRoomPlayableGame } from "@/lib/ecuador-country";
-
-const FreedomDriveStatPreview = dynamic(
-  () =>
-    import("@/components/freedom-drive/freedom-drive-stat-preview").then((mod) => mod.FreedomDriveStatPreview),
-  { ssr: false }
-);
 
 type EcuadorIronFangStatPanelCardProps = {
   panel: EcuadorIronFangStatPanel;
   onPlayGame?: (gameId: EcuadorRoomPlayableGame) => void;
-  onLaunchFreedomDrive?: () => void;
   onLaunchFootball?: () => void;
 };
 
@@ -21,11 +13,10 @@ type EcuadorIronFangStatPanelCardProps = {
 export function EcuadorIronFangStatPanelCard({
   panel,
   onPlayGame,
-  onLaunchFreedomDrive,
   onLaunchFootball
 }: EcuadorIronFangStatPanelCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const interactive = Boolean(panel.gameId || panel.freedomDrive || panel.footballLane);
+  const interactive = Boolean(panel.gameId || panel.footballLane);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -43,10 +34,6 @@ export function EcuadorIronFangStatPanelCard({
   }, [panel.videoSrc]);
 
   function handleClick() {
-    if (panel.freedomDrive) {
-      onLaunchFreedomDrive?.();
-      return;
-    }
     if (panel.footballLane) {
       onLaunchFootball?.();
       return;
@@ -64,7 +51,7 @@ export function EcuadorIronFangStatPanelCard({
       onClick={interactive ? handleClick : undefined}
       className={`ecuador-iron-fang-stat-panel ecuador-stat-panel-card a2030-holo-panel rounded-2xl border p-4 text-center${
         interactive ? " ecuador-stat-panel--playable" : ""
-      }${panel.freedomDrive ? " ecuador-stat-panel--freedom-drive" : ""}`}
+      }`}
     >
       <div className="ecuador-stat-panel-card-head">
         <p className="ecuador-iron-fang-kicker a2030-micro text-[10px] font-bold uppercase">{panel.kicker}</p>
@@ -72,9 +59,7 @@ export function EcuadorIronFangStatPanelCard({
       </div>
 
       <div className="ecuador-stat-panel-card-media">
-        {panel.freedomDrive ? (
-          <FreedomDriveStatPreview />
-        ) : panel.videoSrc ? (
+        {panel.videoSrc ? (
           <div className="ecuador-stat-panel-game-video-wrap">
             <span className="ecuador-stat-panel-game-video-live" aria-hidden="true">
               ● EN VIVO
@@ -101,7 +86,7 @@ export function EcuadorIronFangStatPanelCard({
         </p>
         {interactive ? (
           <p className="ecuador-stat-panel-play-cta mt-2 text-[10px] font-black uppercase tracking-[0.14em] text-[#fcd116]">
-            {panel.freedomDrive ? "▶ 1 tap · lanzar simulador" : "▶ 1 tap · jugar en vivo"}
+            ▶ 1 tap · jugar en vivo
           </p>
         ) : null}
       </div>

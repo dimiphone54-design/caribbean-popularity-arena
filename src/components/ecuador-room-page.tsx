@@ -15,14 +15,12 @@ import { EcuadorRoomFashionTabPanel } from "@/components/ecuador-room-fashion-ta
 import { EcuadorRoomFoodTabPanel } from "@/components/ecuador-room-food-tab-panel";
 import { EcuadorRoomGamesTabPanel } from "@/components/ecuador-room-games-tab-panel";
 import { EcuadorRoomLiveSlot } from "@/components/ecuador-room-live-slot";
-import { FreedomDriveSimulatorLazy } from "@/components/freedom-drive/freedom-drive-simulator-lazy";
 import { EcuadorIronFangStatPanelCard } from "@/components/ecuador-iron-fang-stat-panel";
 import { getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
 import { ecuadorIronFangStatPanels, ecuadorRoomBrand, type EcuadorRoomGameSelection } from "@/lib/ecuador-country";
 
 const ECUADOR_ROOM_SLUG = "ecuador-room";
 const ECUADOR_LIVE_GAMES_ID = "ecuador-live-games";
-const ECUADOR_FREEDOM_DRIVE_ID = "ecuador-freedom-drive";
 const ECUADOR_ROOM_BG = "#040a08";
 
 const ecuadorBackdrops = [
@@ -36,13 +34,11 @@ export function EcuadorRoomPage() {
   const tabLabels = getArenaSlotTabLabels("EC");
   const [slide, setSlide] = useState(0);
   const [requestedGame, setRequestedGame] = useState<EcuadorRoomGameSelection | null>(null);
-  const [driveExpanded, setDriveExpanded] = useState(false);
 
   const launchLiveGame = (gameId: EcuadorRoomGameSelection) => {
     setRequestedGame(gameId);
-    const targetId = gameId === "Ecuador Drive" ? ECUADOR_FREEDOM_DRIVE_ID : ECUADOR_LIVE_GAMES_ID;
     window.setTimeout(() => {
-      document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      document.getElementById(ECUADOR_LIVE_GAMES_ID)?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 0);
   };
 
@@ -140,7 +136,6 @@ export function EcuadorRoomPage() {
                       key={panel.kicker + panel.title}
                       panel={panel}
                       onPlayGame={launchLiveGame}
-                      onLaunchFreedomDrive={() => launchLiveGame("Ecuador Drive")}
                       onLaunchFootball={() => {
                         document.getElementById("ecuador-room-football")?.scrollIntoView({
                           behavior: "smooth",
@@ -190,19 +185,6 @@ export function EcuadorRoomPage() {
                     <CountryRoomStudyHubTabPanel countryId="ecuador" />
                   </ArenaSlotStudyHubTab>
                 </div>
-              </section>
-
-              <section
-                id={ECUADOR_FREEDOM_DRIVE_ID}
-                className="country-room-section ecuador-freedom-drive-section w-full"
-                aria-label="Ecuador Drive Simulator"
-              >
-                <FreedomDriveSimulatorLazy
-                  embedInRoom
-                  locale="ecuador"
-                  expanded={driveExpanded}
-                  onToggleExpand={() => setDriveExpanded((open) => !open)}
-                />
               </section>
 
             </div>
