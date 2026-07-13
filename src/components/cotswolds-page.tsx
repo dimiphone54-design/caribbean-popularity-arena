@@ -27,9 +27,14 @@ export function CotswoldsPage() {
   const { t } = useRoomLocale();
   const uk = t.uk;
   const tabLabels = getArenaSlotTabLabels("UK");
-  const [panelOpen, setPanelOpen] = useState(true);
+  /** Men's dock · exact 1-click open / 1-click close */
+  const [panelOpen, setPanelOpen] = useState(false);
   const [menSim, setMenSim] = useState<{ name: string; host: string } | null>(null);
   const [driveExpanded, setDriveExpanded] = useState(false);
+
+  const toggleMenPanel = () => {
+    setPanelOpen((open) => !open);
+  };
 
   return (
     <>
@@ -114,7 +119,9 @@ export function CotswoldsPage() {
               </div>
               <button
                 type="button"
-                onClick={() => setPanelOpen((open) => !open)}
+                onClick={toggleMenPanel}
+                aria-expanded={panelOpen}
+                aria-controls="uk-room-men-panel"
                 className={`cotswolds-dock-toggle a2030-micro rounded-lg border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] transition sm:text-xs${
                   panelOpen
                     ? " cotswolds-dock-toggle--hide a2030-hide-blink"
@@ -133,7 +140,10 @@ export function CotswoldsPage() {
             </div>
 
             {panelOpen ? (
-              <div className="a2030-men-scroll mt-3 flex max-h-[min(38vh,18rem)] flex-col gap-2 overflow-y-auto overscroll-contain pr-1">
+              <div
+                id="uk-room-men-panel"
+                className="a2030-men-scroll mt-3 flex max-h-[min(38vh,18rem)] flex-col gap-2 overflow-y-auto overscroll-contain pr-1"
+              >
                 {cotswoldsMenActivityPanels.map((panel) => (
                   <button
                     key={panel.id}

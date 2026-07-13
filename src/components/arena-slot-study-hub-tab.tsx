@@ -91,6 +91,19 @@ export function ArenaSlotStudyHubTab(props: ArenaSlotStudyHubTabProps | ArenaSlo
     }
   };
 
+  const closeTab = () => {
+    setOpen(false);
+    if (typeof window === "undefined") return;
+    if (window.location.hash.replace("#", "") === sectionId) {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+    }
+  };
+
+  const toggleTab = () => {
+    if (open) closeTab();
+    else openTab();
+  };
+
   return (
     <section
       id={sectionId}
@@ -102,7 +115,7 @@ export function ArenaSlotStudyHubTab(props: ArenaSlotStudyHubTabProps | ArenaSlo
         className={`ai-real-slot-country-panel-tab ai-real-slot-country-panel-tab--button${open ? " is-open" : ""}`}
         aria-expanded={open}
         aria-controls={`${sectionId}-body`}
-        onClick={() => (open ? setOpen(false) : openTab())}
+        onClick={toggleTab}
       >
         {label}
       </button>

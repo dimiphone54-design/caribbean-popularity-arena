@@ -4071,6 +4071,12 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .cotswolds-dock-toggle--hide {
