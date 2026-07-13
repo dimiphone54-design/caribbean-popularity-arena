@@ -560,28 +560,25 @@ export function FootballPredictionArena({
       aria-label="Football Prediction Arena"
     >
       {embeddedInUkHub ? (
-        <div className="uk-football-hub-split">
-          <div className="uk-football-command-pane" aria-label="Football prediction controls">
-            {leagueStrip}
-            <header className="uk-football-command-head">
-              <div className="uk-football-command-head-top">
-                <p className="uk-football-command-kicker">🇬🇧 UK football lane · Predict &amp; climb</p>
-                <span className="uk-football-command-live" aria-hidden="true" />
-              </div>
-              <div className="uk-football-command-copy">
-                <h2 className="uk-football-command-title">
-                  {flag} Football prediction arena
-                </h2>
-                <p className="uk-football-command-filter">
-                  League filter · <span className="uk-football-hub-filter-pill">{embedLeagueLabel}</span>
-                </p>
-              </div>
+        <div className="uk-football-hub-split uk-football-hub-split--compact-toolbar">
+          <div className="uk-football-command-pane uk-football-command-pane--compact" aria-label="Football prediction controls">
+            {/* A · Compact toolbar — one slim identity row */}
+            <header className="uk-football-command-toolbar">
+              <p className="uk-football-command-kicker">🇬🇧 UK football · Predict &amp; climb</p>
+              <span className="uk-football-command-live" aria-hidden="true" />
+              <h2 className="uk-football-command-title">
+                {flag} Football prediction arena
+              </h2>
+              <span className="uk-football-hub-filter-pill" title="Active league filter">
+                {embedLeagueLabel}
+              </span>
             </header>
+            {leagueStrip}
             {predictionTabs}
             {tab === "matches" ? (
               <div className="uk-football-command-board-intro">
                 <h3 className="uk-football-combined-section-title">Recent FIFA wins</h3>
-                <p className="uk-football-combined-section-sub">Real scores · country flags · arena nights</p>
+                <p className="uk-football-combined-section-sub">Real scores · flags · arena nights</p>
               </div>
             ) : null}
           </div>

@@ -374,10 +374,11 @@
 
 .uk-football-fifa-wins-split {
   display: grid;
-  grid-template-columns: minmax(0, 19.5rem) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.85fr);
   gap: 0.75rem;
   align-items: start;
   width: 100%;
+  min-width: 0;
 }
 
 @media (max-width: 720px) {
@@ -652,7 +653,18 @@
   box-shadow: 0 0 8px rgba(184, 255, 60, 0.55);
 }
 
-.uk-football-fifa-wins-list,
+.uk-football-fifa-wins-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+
 .uk-football-fixture-list {
   display: grid;
   gap: 0.45rem;
@@ -660,6 +672,12 @@
   padding: 0;
   list-style: none;
   justify-items: start;
+}
+
+@media (max-width: 520px) {
+  .uk-football-fifa-wins-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .uk-football-fifa-win-row,
@@ -673,7 +691,10 @@
 }
 
 .uk-football-fifa-win-row--compact {
-  width: min(100%, 19.5rem);
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
   text-align: left;
   justify-items: start;
   gap: 0.3rem;
@@ -1027,6 +1048,11 @@
   min-width: 0;
 }
 
+/* A · Compact toolbar layout */
+.uk-football-hub-split--compact-toolbar {
+  gap: 0;
+}
+
 .uk-football-command-pane {
   position: relative;
   overflow: hidden;
@@ -1038,6 +1064,11 @@
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+}
+
+.uk-football-command-pane--compact {
+  gap: 0.4rem;
+  padding: 0.05rem 0 0.55rem;
 }
 
 .uk-football-command-pane-rwb {
@@ -1058,6 +1089,18 @@
   pointer-events: none;
 }
 
+/* One slim horizontal bar · kicker + live + title + filter */
+.uk-football-command-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.28rem 0.45rem;
+  width: 100%;
+  min-width: 0;
+  padding: 0.22rem 0 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .uk-football-command-head {
   display: grid;
   gap: 0.55rem;
@@ -1074,20 +1117,27 @@
 
 .uk-football-command-kicker {
   margin: 0;
-  font-size: 0.625rem;
+  font-size: 0.55rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #00f5ff;
+  white-space: nowrap;
+}
+
+.uk-football-command-toolbar .uk-football-command-kicker {
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
 }
 
 .uk-football-command-live {
   display: inline-flex;
-  width: 0.55rem;
-  height: 0.55rem;
+  flex-shrink: 0;
+  width: 0.42rem;
+  height: 0.42rem;
   border-radius: 999px;
   background: #b8ff3c;
-  box-shadow: 0 0 10px rgba(184, 255, 60, 0.75);
+  box-shadow: 0 0 8px rgba(184, 255, 60, 0.85);
 }
 
 .uk-football-command-copy {
@@ -1105,6 +1155,20 @@
   color: #f7e7aa;
 }
 
+.uk-football-command-toolbar .uk-football-command-title {
+  font-size: 0.72rem;
+  line-height: 1.15;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.uk-football-command-toolbar .uk-football-hub-filter-pill {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 0.08rem 0.4rem;
+  font-size: 0.55rem;
+}
+
 .uk-football-command-filter {
   margin: 0;
   font-size: 0.68rem;
@@ -1116,8 +1180,28 @@
   margin-bottom: 0;
 }
 
+.uk-football-command-pane--compact .uk-football-league-strip {
+  gap: 0.28rem;
+  padding-bottom: 0;
+}
+
+.uk-football-command-pane--compact .uk-football-league-pill {
+  padding: 0.22rem 0.48rem;
+  font-size: 0.55rem;
+}
+
 .uk-football-command-pane .football-prediction-tabs {
   margin-top: 0.1rem;
+}
+
+.uk-football-command-pane--compact .football-prediction-tabs {
+  margin-top: 0;
+  gap: 0.28rem;
+}
+
+.uk-football-command-pane--compact .football-prediction-tab {
+  padding: 0.28rem 0.55rem;
+  font-size: 0.62rem;
 }
 
 .uk-football-command-board-intro {
@@ -1126,6 +1210,19 @@
   padding: 0.45rem 0 0;
   border: none;
   background: transparent;
+}
+
+.uk-football-command-pane--compact .uk-football-command-board-intro {
+  padding: 0.2rem 0 0;
+  gap: 0.05rem;
+}
+
+.uk-football-command-pane--compact .uk-football-combined-section-title {
+  font-size: 0.68rem;
+}
+
+.uk-football-command-pane--compact .uk-football-combined-section-sub {
+  font-size: 0.58rem;
 }
 
 .uk-football-board-pane {
@@ -1137,6 +1234,10 @@
   background: transparent;
   min-width: 0;
   width: 100%;
+}
+
+.uk-football-hub-split--compact-toolbar .uk-football-board-pane {
+  padding-top: 0.5rem;
 }
 
 /* FIFA wins · 4K board screen only */
