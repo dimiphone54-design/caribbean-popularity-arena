@@ -38,7 +38,7 @@ export const popularityArenaPreviewScenes: PopularityPreviewScene[] = [
     id: "games",
     src: "/nav-popularity-reel/games-live.mp4",
     poster: "/cotswolds-park-drones-play-snow.png",
-    label: "Games · Free Fire EC"
+    label: "Games · Ecuavoley"
   },
   {
     id: "dropship",

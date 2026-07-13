@@ -42,7 +42,7 @@ export const ROOM_GAMES_BY_SLUG: Record<string, RoomGamesConfig> = {
     islandCode: "CO",
     panelKicker: "Deportes · juegos en vivo",
     panelTitle: "Colombia (CO) · deportes",
-    panelSubtitle: "Fútbol · voleibol · salsa · surf · ciclismo · Free Fire",
+    panelSubtitle: "Fútbol · voleibol · salsa · surf · ciclismo",
     host: "Sala CO",
     roomKicker: "Colombia (CO) · deportes en la sala",
     panelClass: "colombia-game-room-panel w-full rounded-2xl border border-[#fb7185]/35 bg-[#1a0208]/55 p-4 backdrop-blur-md sm:p-5",
@@ -103,17 +103,6 @@ export const ROOM_GAMES_BY_SLUG: Record<string, RoomGamesConfig> = {
         hint: "Sprint en el parque · ritmo de equipo",
         ready: 88,
         launch: { type: "simulator", gameName: "Cycling" }
-      },
-      {
-        id: "co-free-fire",
-        set: "06",
-        tag: "Ranked con la sala",
-        emoji: "🔫",
-        name: "Free Fire",
-        host: "Sala CO · ranked BR",
-        hint: "Battle royale móvil · sala en vivo",
-        ready: 92,
-        launch: { type: "simulator", gameName: "Free Fire" }
       }
     ]
   },
@@ -125,7 +114,7 @@ export const ROOM_GAMES_BY_SLUG: Record<string, RoomGamesConfig> = {
     islandCode: "EC",
     panelKicker: "Juegos virales · talk-show · en vivo",
     panelTitle: "🇪🇨 Ecuador · deportes",
-    panelSubtitle: "Ecuavoley · Free Fire",
+    panelSubtitle: "Ecuavoley",
     host: "Sala EC",
     roomKicker: "Ecuador (EC) · juegos en la sala",
     panelClass: "ecuador-game-room-panel w-full rounded-2xl border border-[#fcd116]/35 bg-[#040a08]/65 p-4 backdrop-blur-md sm:p-5",
@@ -142,17 +131,6 @@ export const ROOM_GAMES_BY_SLUG: Record<string, RoomGamesConfig> = {
         hint: "Clásico ecuatoriano · tres jugadores",
         ready: 88,
         launch: { type: "simulator", gameName: "Ecuavoley" }
-      },
-      {
-        id: "ec-free-fire",
-        set: "02",
-        tag: "Sala ecuatoriana · ranked BR",
-        emoji: "🔫",
-        name: "Free Fire EC",
-        host: "Sala EC · ranked · squad live",
-        hint: "Shooter móvil viral en la región",
-        ready: 94,
-        launch: { type: "simulator", gameName: "Free Fire EC" }
       }
     ]
   },

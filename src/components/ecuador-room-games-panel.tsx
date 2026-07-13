@@ -11,7 +11,6 @@ type EcuadorRoomGamesPanelProps = {
 };
 
 const ECUAVOLEY_GAME = "Ecuavoley" as const;
-const FREE_FIRE_GAME = "Free Fire EC" as const;
 const ECUADOR_HOST = "Sala EC";
 
 type PlayableRow = {
@@ -25,7 +24,7 @@ type PlayableRow = {
   ready: number;
 };
 
-/** Ecuador (EC) · Ecuavoley + Free Fire */
+/** Ecuador (EC) · Ecuavoley */
 export function EcuadorRoomGamesPanel({
   requestedGame = null,
   onRequestedGameHandled
@@ -33,7 +32,6 @@ export function EcuadorRoomGamesPanel({
   const [activeGame, setActiveGame] = useState<EcuadorRoomGameSelection | null>(null);
   const games = getArenaSlotViralGames("EC");
   const ecuavoley = games.find((game) => game.label.toLowerCase().includes("ecuavoley"));
-  const freeFire = games.find((game) => game.label.toLowerCase().includes("free fire"));
 
   const playableRows: PlayableRow[] = [
     {
@@ -45,16 +43,6 @@ export function EcuadorRoomGamesPanel({
       host: `${ECUADOR_HOST} · Quito · Guayaquil`,
       hint: ecuavoley?.hint ?? "Ecuador's three-player volleyball classic",
       ready: 88
-    },
-    {
-      id: FREE_FIRE_GAME,
-      set: "02",
-      tag: "Sala ecuatoriana · ranked BR",
-      emoji: "🔫",
-      name: "Free Fire",
-      host: `${ECUADOR_HOST} · ranked · squad live`,
-      hint: freeFire?.hint ?? "Most viral mobile shooter in the region",
-      ready: 94
     }
   ];
 
@@ -69,14 +57,14 @@ export function EcuadorRoomGamesPanel({
       <section
         id="ecuador-live-games"
         className="ecuador-game-room-panel w-full rounded-2xl border border-[#fcd116]/35 bg-[#040a08]/65 p-4 backdrop-blur-md sm:p-5"
-        aria-label="Ecuador (EC): Ecuavoley y Free Fire"
+        aria-label="Ecuador (EC): Ecuavoley"
       >
         <header className="text-center">
           <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#fcd116]">
             Juegos virales · talk-show · en vivo
           </p>
           <h2 className="ecuador-room-title mt-2 text-2xl font-black text-[#fef9c3] sm:text-3xl">
-            🇪🇨 Ecuador · Ecuavoley · Free Fire
+            🇪🇨 Ecuador · Ecuavoley
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#d4d4d8]">
             ¡Dale pues! · elige un juego · toca para jugar en la sala

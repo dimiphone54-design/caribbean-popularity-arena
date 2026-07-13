@@ -133,24 +133,6 @@ const GAME_CONFIG: Record<string, GameConfig> = {
     opponent: "Glam judge",
     field: "Hyde Park · live 3h"
   },
-  "Free Fire": {
-    kind: "aim",
-    emoji: "🔫",
-    goal: "Time your shot — land the crosshair in the headshot zone before the rival squad tags you.",
-    action: "FIRE!",
-    targetWord: "headshot zone",
-    opponent: "Rival squad",
-    field: "Bermuda ranked · Bogotá sala"
-  },
-  "Free Fire EC": {
-    kind: "aim",
-    emoji: "🔫",
-    goal: "Para el tiro — mira la cabeza en la zona headshot antes de que el squad rival te baje.",
-    action: "¡DISPARA!",
-    targetWord: "zona headshot",
-    opponent: "Squad rival",
-    field: "Sala ecuatoriana · Guayaquil · ranked BR"
-  },
   Ecuavoley: {
     kind: "aim",
     emoji: "🏐",

@@ -32,7 +32,7 @@ export const sportsArenaPreviewScenes: SportsPreviewScene[] = [
     id: "games",
     src: "/nav-sports-reel/games-live.mp4",
     poster: "/cotswolds-park-feed-games-night.png",
-    label: "Games · Free Fire EC"
+    label: "Games · Ecuavoley"
   },
   {
     id: "colombia",

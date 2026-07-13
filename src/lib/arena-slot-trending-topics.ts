@@ -99,10 +99,10 @@ export const arenaSlotTrendingTopicsByCode: Record<string, ArenaSlotTrendTopic[]
 /** Favourite online games · viral talk-show & party games · per nation */
 export const arenaSlotViralGamesByCode: Record<string, ArenaSlotTrendTopic[]> = {
   CO: slotPrompts("CO", "game", [
-    { emoji: "🔫", label: "Free Fire · ranked con la sala", hint: "Colombia's most-played mobile battle royale" },
     { emoji: "🧱", label: "Roblox · parkour y roleplay viral", hint: "Top online worlds · TikTok viral games" },
     { emoji: "🍺", label: "Yo Nunca · juego de talk-show en vivo", hint: "Never have I ever · party talk-show classic" },
-    { emoji: "🧠", label: "Preguntados · trivia en español", hint: "Trivia Crack · viral quiz showdown" }
+    { emoji: "🧠", label: "Preguntados · trivia en español", hint: "Trivia Crack · viral quiz showdown" },
+    { emoji: "⚽", label: "Fútbol · banter de liga", hint: "Match-night football talk" }
   ]),
   UK: slotPrompts("UK", "game", [
     { emoji: "🎮", label: "Fortnite · squads tonight", hint: "UK favourite online battle royale" },
@@ -118,9 +118,9 @@ export const arenaSlotViralGamesByCode: Record<string, ArenaSlotTrendTopic[]> = 
   ]),
   EC: slotPrompts("EC", "game", [
     { emoji: "🏐", label: "Ecuavoley · partido en la cancha", hint: "Ecuador's three-player volleyball classic" },
-    { emoji: "🔫", label: "Free Fire · sala ecuatoriana", hint: "Most viral mobile shooter in the region" },
     { emoji: "🍻", label: "Yo Nunca · talk-show de fiesta", hint: "Never have I ever · live party game" },
-    { emoji: "⚽", label: "LigaPro · FIFA · banter online", hint: "Barcelona SC · Liga de Quito · football nights" }
+    { emoji: "⚽", label: "LigaPro · FIFA · banter online", hint: "Barcelona SC · Liga de Quito · football nights" },
+    { emoji: "🃏", label: "Dominó · mesa en vivo", hint: "Caribbean table talk · online" }
   ]),
   TT: slotPrompts("TT", "game", [
     { emoji: "⚽", label: "FIFA · we playing tonight?", hint: "Caribbean football game nights online" },
@@ -135,10 +135,10 @@ export const arenaSlotViralGamesByCode: Record<string, ArenaSlotTrendTopic[]> = 
     { emoji: "🍺", label: "Never Have I Ever · talk-show yard game", hint: "Party talk-show game · live banter" }
   ]),
   VE: slotPrompts("VE", "game", [
-    { emoji: "🔫", label: "Free Fire · ranked con el crew", hint: "Venezuela's viral mobile battle royale" },
     { emoji: "🧱", label: "Roblox · mundos virales", hint: "Online viral worlds · TikTok trends" },
     { emoji: "🧠", label: "Preguntados · trivia talk-show", hint: "Trivia Crack · quiz showdown" },
-    { emoji: "👽", label: "Among Us · sala en vivo", hint: "Online party deduction game" }
+    { emoji: "👽", label: "Among Us · sala en vivo", hint: "Online party deduction game" },
+    { emoji: "⚽", label: "Fútbol · banter en vivo", hint: "Match-night football talk" }
   ]),
   PL: slotPrompts("PL", "game", [
     { emoji: "🎯", label: "Counter-Strike 2 · ranked online", hint: "Poland's favourite competitive shooter" },
@@ -148,9 +148,9 @@ export const arenaSlotViralGamesByCode: Record<string, ArenaSlotTrendTopic[]> = 
   ]),
   TN: slotPrompts("TN", "game", [
     { emoji: "🔫", label: "PUBG Mobile · ranked Tunisie", hint: "Top mobile battle royale online" },
-    { emoji: "🔥", label: "Free Fire · squad Maghreb", hint: "Viral mobile shooter in North Africa" },
     { emoji: "📺", label: "Khamsa w Khamsa · jeu talk-show viral", hint: "Classic Maghreb party talk-show game" },
-    { emoji: "🧠", label: "لعبة المعلومات · trivia en ligne", hint: "Arabic viral quiz · online trivia" }
+    { emoji: "🧠", label: "لعبة المعلومات · trivia en ligne", hint: "Arabic viral quiz · online trivia" },
+    { emoji: "⚽", label: "Football · banter Maghreb", hint: "Match-night football talk" }
   ]),
   GY: slotPrompts("GY", "game", [
     { emoji: "🎲", label: "Ludo King · board game online", hint: "Viral mobile board game" },

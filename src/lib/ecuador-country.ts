@@ -13,9 +13,9 @@ export const ecuadorCountryHighlights = {
     "Chocolate fino de aroma · café Loja · guayusa"
   ],
   games: [
-    "Free Fire · Ecuatorian FIFA nights",
-    "Ecuavoley · dominoes · Yo Nunca talk-show",
-    "Roblox viral challenges · LigaPro banter"
+    "Ecuavoley · cancha de barrio",
+    "Dominoes · Yo Nunca talk-show",
+    "LigaPro banter · FIFA nights"
   ],
   activities: [
     "Galápagos live chat · Amazon river stories",
@@ -225,7 +225,7 @@ export const ecuadorFoodPanel = {
   ] satisfies ReadonlyArray<EcuadorFoodPanelItem>
 } as const;
 
-export type EcuadorRoomPlayableGame = "Ecuavoley" | "Free Fire EC";
+export type EcuadorRoomPlayableGame = "Ecuavoley";
 export type EcuadorRoomGameSelection = EcuadorRoomPlayableGame;
 
 export type EcuadorIronFangStatPanel = {
@@ -254,14 +254,6 @@ export const ecuadorIronFangStatPanels: ReadonlyArray<EcuadorIronFangStatPanel> 
     gameId: "Ecuavoley",
     videoSrc: "/ecuador-arena-flash-live-clip.mp4",
     posterSrc: "/ecuador-room-indurama-team.png"
-  },
-  {
-    kicker: "Tendencia en vivo",
-    title: "Free Fire · sala ecuatoriana",
-    detail: "El shooter móvil más viral de la región",
-    gameId: "Free Fire EC",
-    videoSrc: "/ecuador-live-free-fire-trend.mp4",
-    posterSrc: "/ecuador-room-gaming-party.png"
   }
 ];
 

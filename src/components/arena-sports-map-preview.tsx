@@ -72,7 +72,7 @@ export function ArenaSportsMapPreview() {
               <div className="arena-sports-map-preview-flow-node">🇪🇨 Ecuador</div>
               <div className="arena-sports-map-preview-flow-leaves">
                 <span>Ecuavoley</span>
-                <span>Free Fire EC</span>
+                <span>LigaPro</span>
               </div>
             </div>
             <div className="arena-sports-map-preview-flow-branch">

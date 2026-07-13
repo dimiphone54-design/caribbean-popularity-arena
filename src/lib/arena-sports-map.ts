@@ -20,7 +20,7 @@ export const ARENA_SPORTS_MAP_ZONES: ArenaSportsMapZone[] = [
     sports: [
       { name: "Football", emoji: "⚽" },
       { name: "Man Utd action", emoji: "⚽" },
-      { name: "Free Fire EC", emoji: "🔫" },
+
       { name: "Colombia sports night", emoji: "🇨🇴" },
       { name: "UK park games", emoji: "🌳" }
     ]
@@ -71,7 +71,7 @@ export const ARENA_SPORTS_MAP_ZONES: ArenaSportsMapZone[] = [
       { name: "Salsa", emoji: "💃" },
       { name: "Surf", emoji: "🌊" },
       { name: "Cycling", emoji: "🚴" },
-      { name: "Free Fire", emoji: "🔫" }
+
     ]
   },
   {
@@ -81,7 +81,7 @@ export const ARENA_SPORTS_MAP_ZONES: ArenaSportsMapZone[] = [
     subtitle: "/rooms/ecuador-room",
     sports: [
       { name: "Ecuavoley", emoji: "🏐" },
-      { name: "Free Fire EC", emoji: "🔫" }
+      { name: "LigaPro", emoji: "⚽" }
     ]
   },
   {
@@ -144,8 +144,8 @@ export const ARENA_SPORTS_UNIQUE_LIST: ArenaSportsMapEntry[] = [
 ];
 
 export const ARENA_ESPORTS_LIST: ArenaSportsMapEntry[] = [
-  { name: "Free Fire", emoji: "🔫" },
-  { name: "Free Fire EC", emoji: "🔫" }
+  { name: "Roblox", emoji: "🧱" },
+  { name: "Among Us", emoji: "👽" }
 ];
 
 export const ARENA_SPORTS_MAP_STATS = {

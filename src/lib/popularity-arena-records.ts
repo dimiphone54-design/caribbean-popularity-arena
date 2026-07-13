@@ -53,18 +53,6 @@ export type PopularitySportsRecord = {
 
 const seedMatchScores: PopularityMatchScore[] = [
   {
-    id: "match-ec-ff-1",
-    roomSlug: "ecuador-room",
-    roomLabel: "Ecuador",
-    countryId: "ecuador",
-    flag: "🇪🇨",
-    player: "LaPichuda_EC",
-    match: "Free Fire EC · Squad BR",
-    scoreLabel: "Arena pts",
-    score: 18420,
-    recordedAt: "2026-06-28T21:14:00.000Z"
-  },
-  {
     id: "match-ec-volley-1",
     roomSlug: "ecuador-room",
     roomLabel: "Ecuador",
