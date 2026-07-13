@@ -18,46 +18,19 @@ export type DropshipProduct = {
   flag: string;
   imageUrl: string;
   supplierNote: string;
-  /** Wholesale + fulfilment cost in USD · used in 50/50 margin calculator */
-  supplierCostUsd?: number;
+  /** Optional direct seller contact (mailto / https / wa.me) */
+  sellerContact?: string;
+  storeUrl?: string;
+  sellerEmail?: string;
   lane?: DropshipLaneId;
-};
-
-export type DropshipOrderStatus = "pending_payment" | "ordered" | "shipped" | "delivered";
-
-export type DropshipBuyer = {
-  fullName: string;
-  email: string;
-  phone: string;
-  addressLine1: string;
-  addressLine2?: string;
-  city: string;
-  postalCode: string;
-  countryCode: string;
-};
-
-export type DropshipOrder = {
-  id: string;
-  productId: string;
-  productName: string;
-  countryId: string;
-  countryName: string;
-  flag: string;
-  amount: number;
-  currency: string;
-  status: DropshipOrderStatus;
-  orderedAt: string;
-  trackingNote?: string;
-  customReference: string;
-  buyerEmail?: string;
 };
 
 export const dropshipMarketMeta = {
   title: "Dropship Market",
-  subtitle: "Browse · buy on arena · supplier ships direct to you",
+  subtitle: "Browse · contact seller directly · pay the seller off-site",
   slug: "dropship-market",
   legalNote:
-    "Orders ship from the listed country. Delivery times vary. Returns handled per supplier policy · Terms apply."
+    "Arena lists suppliers only. Contact the seller and arrange payment outside this site. Delivery and returns are between buyer and seller."
 } as const;
 
 export function getDropshipMarketHref(countryId?: string) {

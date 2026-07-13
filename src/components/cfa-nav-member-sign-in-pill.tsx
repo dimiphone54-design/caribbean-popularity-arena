@@ -1,6 +1,6 @@
 "use client";
 
-import { formatArenaGiftAmount } from "@/lib/arena-gifts";
+import { formatFreeLabel } from "@/lib/arena-display-labels";
 
 type CfaNavMemberSignInPillProps = {
   onOpen: () => void;
@@ -40,7 +40,7 @@ export function CfaNavMemberSignInPill({ onOpen }: CfaNavMemberSignInPillProps) 
         </span>
         <span className="cfa-nav-signin-pill-copy">
           <span className="cfa-nav-signin-pill-label">SIGN IN</span>
-          <span className="cfa-nav-signin-pill-gift">{formatArenaGiftAmount(6)}</span>
+          <span className="cfa-nav-signin-pill-gift">{formatFreeLabel(6)}</span>
         </span>
       </span>
     </button>

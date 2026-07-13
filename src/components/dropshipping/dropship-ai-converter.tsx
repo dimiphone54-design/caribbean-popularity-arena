@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  computeDropshipLaneSplit,
   getAllDropshipCountryConfigs
 } from "@/lib/dropship-country-config";
 import {
@@ -107,15 +106,6 @@ export function DropshipAiConverter({
     return convertCountryToCountry(usdAmount, fromCountryId, toCountryId);
   }, [usdAmount, fromCountryId, toCountryId, fxLive, motionPulse]);
 
-  const laneSplitBase = useMemo(
-    () => computeDropshipLaneSplit(fromCountryId, usdAmount, 50),
-    [fromCountryId, usdAmount]
-  );
-
-  const laneSplitL2 = useMemo(
-    () => computeDropshipLaneSplit(fromCountryId, usdAmount, 70),
-    [fromCountryId, usdAmount]
-  );
 
   const tickerLine = useMemo(() => {
     const fromCode = conversion.fromCurrency;
@@ -126,11 +116,9 @@ export function DropshipAiConverter({
       formatUsd(conversion.usdAmount),
       formatDropshipCurrency(conversion.fromLocal, fromCode),
       formatDropshipCurrency(conversion.toLocal, toCode),
-      `50/50 H ${formatUsd(laneSplitBase.hostUsd)}`,
-      `70/30 H ${formatUsd(laneSplitL2.hostUsd)}`,
-      "AI AUTOMATED · EXACT INFO"
+      "FX REFERENCE · NO ON-SITE PAYMENT"
     ].join(" · ");
-  }, [conversion, fxStatus, fromCountry?.flag, laneSplitBase.hostUsd, laneSplitL2.hostUsd, toCountry?.flag]);
+  }, [conversion, fxStatus, fromCountry?.flag, toCountry?.flag]);
 
   return (
     <section
@@ -270,29 +258,7 @@ export function DropshipAiConverter({
         </div>
 
         <div className="dropship-live-ai-gen-split">
-          {!compact ? (
-            <p className="dropship-live-ai-gen-panel-label dropship-live-ai-gen-panel-label--gold">
-              <span className="dropship-live-ai-gen-panel-label-dot" aria-hidden="true" />
-              {copy.aiSplitLabel}
-            </p>
-          ) : null}
-          {compact ? (
-            <p className="dropship-live-ai-gen-split-line dropship-live-ai-gen-split-line--tight dropship-live-ai-gen-split-line--live">
-              {copy.aiSplitCompact(formatUsd(laneSplitBase.hostUsd), formatUsd(laneSplitL2.hostUsd))}
-            </p>
-          ) : (
-            <>
-              <p className="dropship-live-ai-gen-split-line">
-                {copy.aiSplit5050(formatUsd(laneSplitBase.hostUsd), formatUsd(laneSplitBase.platformUsd))}
-              </p>
-              <p className="dropship-live-ai-gen-split-line">
-                {copy.aiSplit7030(formatUsd(laneSplitL2.hostUsd), formatUsd(laneSplitL2.platformUsd))}
-              </p>
-              <p className="dropship-live-ai-gen-split-formula">
-                {copy.aiSplitFormula(formatUsd(laneSplitBase.marginUsd), formatUsd(laneSplitBase.grossUsd))}
-              </p>
-            </>
-          )}
+          <p className="dropship-live-ai-gen-split-line">Contact seller · no platform cut · pay off-site</p>
         </div>
       </div>
     </section>

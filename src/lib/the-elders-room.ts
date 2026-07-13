@@ -1,5 +1,3 @@
-import { eldersTableGiftAmountUsd } from "@/lib/elders-table-gift-legal";
-
 export type EldersRoomWinClip = {
   id: string;
   winnerName: string;
@@ -24,9 +22,8 @@ export type EldersRoomWinClip = {
 export const eldersRoomMeta = {
   name: "THE ELDERS ROOM",
   level: 2,
-  priceUsd: eldersTableGiftAmountUsd,
-  currencyLabel: "Gift",
-  tagline: "Live win clips · digital room access · send a Gift to enter"
+  currencyLabel: "Free",
+  tagline: "Live win clips · open community room · free to browse"
 } as const;
 
 export const eldersRoomWinClips: EldersRoomWinClip[] = [

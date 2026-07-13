@@ -1,8 +1,6 @@
-import { formatArenaGiftAmount } from "@/lib/arena-gifts";
 import { arenaLoungeRooms } from "@/lib/arena-lounge-rooms";
 import { caribbeanFreedomArenaApp } from "@/lib/caribbean-freedom-arena-app";
-import { countryRoomLiveAccessUsd, countryRoomLiveSessionHours } from "@/lib/country-room-access";
-import { eldersTableGiftPublicPriceLabel } from "@/lib/elders-table-gift-legal";
+import { countryRoomLiveSessionHours } from "@/lib/country-room-access";
 import { internationalSuiteCountries, internationalSuiteMeta } from "@/lib/international-suite";
 import { legalDocuments } from "@/lib/legal-documents";
 
@@ -20,8 +18,8 @@ type GuideEntry = {
 
 const SITE = caribbeanFreedomArenaApp.name;
 const SITE_URL = "http://localhost:3004/#home";
-const countryLiveGift = formatArenaGiftAmount(countryRoomLiveAccessUsd);
-const eldersGift = eldersTableGiftPublicPriceLabel;
+const countryLiveGift = "Free";
+const eldersGift = "Free";
 
 const loungeList = arenaLoungeRooms.map((room) => `${room.label} (${room.href})`).join(" · ");
 const countryNames = internationalSuiteCountries.map((c) => c.name).join(", ");
@@ -253,7 +251,7 @@ const guideEntries: GuideEntry[] = [
   },
   {
     topic: "payment",
-    keywords: ["pay", "payment", "fygaro", "wipay", "scotiabank", "card", "checkout", "billing", "money"],
+    keywords: ["pay", "payment", "scotiabank", "card", "billing", "money", "seller"],
     answer: `Gifts process through the platform checkout when live keys are set. Gifts — not purchases of individuals. Disclosures: /legal/refunds · /legal/terms. Demo mode works locally without real keys.`
   },
   {

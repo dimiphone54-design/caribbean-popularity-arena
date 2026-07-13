@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { CountryLiveGiftSignupPanel } from "@/components/country-live-gift-checkout-panel";
 import { InternationalSuiteCountryDropship } from "@/components/dropshipping/international-suite-country-dropship";
 import { DropshipEnterButton } from "@/components/dropshipping/dropship-enter-button";
 import { EastAsiaRoomEnterButton } from "@/components/east-asia-room-enter-button";
@@ -167,15 +166,24 @@ export function InternationalSuiteCountryPanels({
       <div
         className={`a2030-intl-country-live-gift mt-4 border-t border-[#00f5ff]/15 pt-4${variant === "nav" ? ` ${pad}` : ""}`}
       >
-        <CountryLiveGiftSignupPanel
-          countryId={country.id}
-          countryName={country.name}
-          flag={country.flag}
-          roomSlug={getInternationalSuiteCountryLiveRoomSlug(country.id)}
-          tagline={translateIntlCountryTagline(locale, country.id, country.tagline)}
-          region={country.region}
-          onNavigate={onNavigate}
-        />
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#00f5ff]">
+          {country.flag} Live room · free community access
+        </p>
+        <p className="mt-1 text-[11px] leading-5 text-[#8fa3c4]">
+          {translateIntlCountryTagline(locale, country.id, country.tagline)} · {country.region}
+        </p>
+        <Link
+          href={`/rooms/${getInternationalSuiteCountryLiveRoomSlug(country.id)}`}
+          onClick={(event) =>
+            handleSuiteLinkClick(
+              event,
+              `/rooms/${getInternationalSuiteCountryLiveRoomSlug(country.id)}`
+            )
+          }
+          className="a2030-intl-country-live-gift-room-link mt-2 inline-flex"
+        >
+          Enter {country.name} room free →
+        </Link>
       </div>
 
       <div

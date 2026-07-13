@@ -1,9 +1,3 @@
-import { arenaGiftLegalCopy } from "@/lib/arena-gifts";
-import {
-  eldersTableGiftPublicPriceLabel,
-  eldersTableGiftLegal
-} from "@/lib/elders-table-gift-legal";
-
 export type Creator = {
   rank: number;
   name: string;
@@ -148,18 +142,23 @@ export const votingCategories = [
 export const membershipPlans: MembershipPlan[] = [
   {
     name: "The Elders Table",
-    price: eldersTableGiftPublicPriceLabel,
-    cadence: "digital room access",
+    price: "Free",
+    cadence: "community room",
     highlighted: true,
     href: "/rooms/the-elders-table",
-    description: eldersTableGiftLegal.membershipDescription,
-    features: [...eldersTableGiftLegal.membershipFeatures],
-    legalNote: arenaGiftLegalCopy.noIndividualAccess
+    description:
+      "Open community room for culture sessions, creator showcase, and engagement — free to browse on Caribbean Freedom Arena.",
+    features: [
+      "Elders Table room entry · community access",
+      "Creator showcase & culture engagement",
+      "Community games, riddims, and culture topics",
+      "Arena voting and lounge tools · where enabled"
+    ]
   },
   {
     name: "Arena Plus",
-    price: "$0 Gift",
-    cadence: "Complimentary · coming soon",
+    price: "Free",
+    cadence: "coming soon",
     comingSoon: true,
     description:
       "Premium digital arena membership with priority voting, exclusive livestream rooms, and profile placement — coming soon.",
@@ -172,8 +171,8 @@ export const membershipPlans: MembershipPlan[] = [
   },
   {
     name: "Creator Circle",
-    price: "$0",
-    cadence: "Complimentary Gift",
+    price: "Free",
+    cadence: "community",
     description: "For creators and teams growing a loyal island audience.",
     features: [
       "Creator analytics dashboard",

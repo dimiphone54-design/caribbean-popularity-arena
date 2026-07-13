@@ -6,7 +6,7 @@ import { ArenaLoungeFrostBadge, ArenaLoungeFrostPanel } from "@/components/arena
 import { CountryEntryRow } from "@/components/country-entry-row";
 import { SiteFooter } from "@/components/site-footer";
 import { islandHubAutoPath, islandHubQuote } from "@/lib/hub-copy";
-import { formatArenaGiftAmount, arenaGiftCopy } from "@/lib/arena-gifts";
+import { formatFreeLabel, arenaDisplayCopy } from "@/lib/arena-display-labels";
 import { grantIslandHubAccess, hasIslandHubAccess, islandHubEntryUsd } from "@/lib/room-access";
 import { registeredWomen } from "@/lib/registered-women";
 
@@ -54,14 +54,14 @@ export function IslandHubPage() {
             {!unlocked ? (
               <ArenaLoungeFrostPanel className="a2030-holo-panel mt-6 rounded-[1.75rem] p-6 sm:p-8">
                 <p className="text-lg font-black text-white">
-                  Men&apos;s {formatArenaGiftAmount(islandHubEntryUsd)} entry · view all {registeredWomen.length} registered women
+                  Men&apos;s {formatFreeLabel(islandHubEntryUsd)} entry · view all {registeredWomen.length} registered women
                 </p>
                 <button
                   type="button"
                   onClick={handleEntry}
                   className="a2030-cta a2030-micro mt-5 rounded-xl px-6 py-3 text-xs font-black uppercase tracking-[0.12em] transition"
                 >
-                  {arenaGiftCopy.sendGift} · Island HUB
+                  {arenaDisplayCopy.sendGift} · Island HUB
                 </button>
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                   {previewWomen.map((woman) => (

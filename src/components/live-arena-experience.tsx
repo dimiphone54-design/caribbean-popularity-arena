@@ -36,7 +36,7 @@ import {
   type BoostPack
 } from "@/lib/arena-experience";
 import { isCommandCenterEnabled } from "@/lib/command-center-access";
-import { arenaGiftCopy, formatArenaGiftAmount } from "@/lib/arena-gifts";
+import { arenaDisplayCopy, formatFreeLabel } from "@/lib/arena-display-labels";
 
 type Particle = {
   x: number;
@@ -309,7 +309,7 @@ export function LiveArenaExperience() {
 
   const handleMensEntryCheckout = () => {
     if (!selectedEntrySlot) return;
-    showToast(`♡ Free entry opened for ${selectedEntrySlot.name} — ${formatArenaGiftAmount(freeEntryAmountUsd)}.`);
+    showToast(`♡ Free entry opened for ${selectedEntrySlot.name} — ${formatFreeLabel(freeEntryAmountUsd)}.`);
     setSelectedEntrySlotId(null);
   };
 
@@ -679,7 +679,7 @@ export function LiveArenaExperience() {
                     </span>
                     <span className="mt-0.5 block text-xs text-[#7a82a8]">{pack.label}</span>
                   </span>
-                  <span className="text-base font-black text-[#f5c842]">{formatArenaGiftAmount(0)}</span>
+                  <span className="text-base font-black text-[#f5c842]">{formatFreeLabel(0)}</span>
                 </button>
               ))}
             </div>
@@ -690,7 +690,7 @@ export function LiveArenaExperience() {
               className="w-full rounded-xl bg-gradient-to-r from-[#ff5c2b] to-[#e8a800] px-4 py-3.5 text-sm font-black text-[#0a0e1f] transition hover:opacity-90"
               style={{ animation: "glowPulse 1.5s ease-in-out infinite" }}
             >
-              🔥 Fire Up · {formatArenaGiftAmount(0)}
+              🔥 Fire Up · {formatFreeLabel(0)}
             </button>
           </div>
         </div>
@@ -716,7 +716,7 @@ export function LiveArenaExperience() {
               Men&apos;s Entry
             </h2>
             <p className="mt-2 text-sm leading-6 text-[#7a82a8]">
-              This like opens a complimentary preview entry. Gift amount is {formatArenaGiftAmount(freeEntryAmountUsd)} on this website.
+              This like opens a complimentary preview entry. Access is {formatFreeLabel(freeEntryAmountUsd)} on this website.
             </p>
             <div className="my-5 rounded-xl border border-white/[0.07] bg-[#111830] p-4 text-left">
               <p className="text-sm font-black text-[#f0edf8]">♡ Like {selectedEntrySlot.name}</p>
@@ -724,7 +724,7 @@ export function LiveArenaExperience() {
                 {selectedEntrySlot.flag} {selectedEntrySlot.country} · free open access
               </p>
               <p className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-wide text-[#f5c842]">
-                {formatArenaGiftAmount(freeEntryAmountUsd)}
+                {formatFreeLabel(freeEntryAmountUsd)}
               </p>
             </div>
             <button
@@ -807,7 +807,7 @@ function FreeDemoPanel({
       icon: "✨",
       title: "Apply as Creator — Free",
       subtitle: "Open to eligible adult creators aged 18+. Applications are reviewed without regard to gender, subject to verification and capacity.",
-      items: ["Upload profile preview", "Choose island and category", "Join waiting list", arenaGiftCopy.noGiftRequired]
+      items: ["Upload profile preview", "Choose island and category", "Join waiting list", arenaDisplayCopy.noGiftRequired]
     },
     rooms: {
       icon: "🏝️",
@@ -818,14 +818,14 @@ function FreeDemoPanel({
     dashboard: {
       icon: "📊",
       title: "Dashboard",
-      subtitle: `Creator dashboard preview opens with ${formatArenaGiftAmount(0)}.`,
+      subtitle: `Creator dashboard preview opens with ${formatFreeLabel(0)}.`,
       items: ["Votes overview", "Country rank", "Waiting-list position", "12-hour rotation status"]
     },
     bank: {
       icon: "🏦",
       title: "Member Sign In",
-      subtitle: `Arena Member Gift · ${formatArenaGiftAmount(6)}. Sign in with your arena name — it auto-appears on the welcome panel (e.g. WELCOME DIMITRI).`,
-      items: [`${formatArenaGiftAmount(6)} member sign-in gift`, "Personalized welcome screen", "AI language detect", "Secure gift checkout"]
+      subtitle: `Arena member access · ${formatFreeLabel(6)}. Sign in with your arena name — it auto-appears on the welcome panel (e.g. WELCOME DIMITRI).`,
+      items: [`${formatFreeLabel(6)} member sign-in`, "Personalized welcome screen", "AI language detect", "Open community access"]
     }
   }[panel];
 
@@ -838,7 +838,7 @@ function FreeDemoPanel({
         </h2>
         <p className="mt-2 text-sm leading-6 text-[#7a82a8]">{content.subtitle}</p>
         <p className="mt-3 inline-flex rounded-full border border-[#00c9a7]/30 bg-[#00c9a7]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#00c9a7]">
-          {formatArenaGiftAmount(0)} · Open Preview
+          {formatFreeLabel(0)} · Open Preview
         </p>
       </div>
 

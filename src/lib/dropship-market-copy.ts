@@ -1,4 +1,4 @@
-import type { DropshipOrder, DropshipProduct } from "@/lib/dropshipping";
+import type { DropshipProduct } from "@/lib/dropshipping";
 import { internationalSuiteCountries } from "@/lib/international-suite";
 
 export type DropshipCopyLocale = "en" | "es" | "es-CO" | "es-EC" | "ja" | "zh";
@@ -46,6 +46,7 @@ export type DropshipMarketCopy = {
   steps: ReadonlyArray<{ title: string; body: string }>;
   shipsFrom: string;
   buy: string;
+  contactSeller?: string;
   categoryAria: string;
   categoryTech: string;
   categoryAutomotive: string;
@@ -61,7 +62,7 @@ export type DropshipMarketCopy = {
   ordersLoading: string;
   ordersEmpty: string;
   ordersItemFallback: string;
-  orderStatus: Record<DropshipOrder["status"], string>;
+  orderStatus: Record<string, string>;
   aiTitle: string;
   aiSub: string;
   aiExact: string;
@@ -120,7 +121,8 @@ const enCopy: DropshipMarketCopy = {
     { title: "4 · Track", body: "Same email · status updates here." }
   ],
   shipsFrom: "Ships from",
-  buy: "Buy · dropship",
+  buy: "Contact seller",
+  contactSeller: "Contact seller",
   categoryAria: "Dropship category options",
   categoryTech: "📱 Tech & Gadgets",
   categoryAutomotive: "🚗 Automotive & Car Accessories",
@@ -395,7 +397,7 @@ const jaCopy: DropshipMarketCopy = {
     { title: "4 · 追跡", body: "同じメール · ここでステータス更新。" }
   ],
   shipsFrom: "発送元",
-  buy: "購入 · ドロップシップ",
+  buy: "出品者に連絡",
   categoryAria: "ドロップシップカテゴリー",
   categoryTech: "📱 テック＆ガジェット",
   categoryAutomotive: "🚗 自動車＆カーアクセサリー",
@@ -482,7 +484,7 @@ const zhCopy: DropshipMarketCopy = {
     { title: "4 · 追踪", body: "同一邮箱 · 在此查看状态更新。" }
   ],
   shipsFrom: "发货地",
-  buy: "购买 · 代发货",
+  buy: "联系卖家",
   categoryAria: "代发货分类选项",
   categoryTech: "📱 科技与数码",
   categoryAutomotive: "🚗 汽车与配件",

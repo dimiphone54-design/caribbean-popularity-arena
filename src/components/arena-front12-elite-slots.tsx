@@ -9,7 +9,7 @@ import { ArenaSlotWomanSignupModal } from "@/components/arena-slot-woman-signup-
 import { CountryLocalClock } from "@/components/country-local-clock";
 import { useArenaSlotOccupancies } from "@/components/use-arena-slot-occupancies";
 import type { ArenaCreatorSlot } from "@/lib/arena-experience";
-import { formatArenaGiftAmount } from "@/lib/arena-gifts";
+import { formatFreeLabel } from "@/lib/arena-display-labels";
 import { getArenaCountrySlotMeta } from "@/lib/arena-country-slot-meta";
 import { getArenaEliteSlotTheme } from "@/lib/arena-elite-slot-themes";
 import { getArenaSlotPhotosForCountry } from "@/lib/arena-slot-real-people";
@@ -393,7 +393,7 @@ function CountryGirlSlotCard({
                 {slot.hasVoted ? "✓ Voted" : "⚡ Vote"}
               </button>
               <button type="button" onClick={(event) => onMensEntry(slot.id, event)} className="ai-real-slot-btn-like">
-                ♡ {formatArenaGiftAmount(freeEntryAmountUsd)}
+                ♡ {formatFreeLabel(freeEntryAmountUsd)}
               </button>
               <button
                 type="button"

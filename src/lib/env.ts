@@ -1,20 +1,7 @@
-import { wipayTrinidad } from "@/config/wipay";
-
 const placeholderValues = new Set(["", "placeholder", "your-value-here", "replace-me"]);
 
 function readEnv(name: string, fallback = "") {
   return process.env[name] ?? fallback;
-}
-
-function isDevelopment() {
-  return readEnv("NEXT_PUBLIC_APP_ENV", "development") === "development";
-}
-
-function readWipayEnv(name: string, devFallback: string) {
-  const value = readEnv(name);
-  if (hasUsableValue(value)) return value;
-  if (isDevelopment()) return devFallback;
-  return value;
 }
 
 function hasUsableValue(value: string | undefined) {
@@ -25,6 +12,7 @@ function hasUsableConfig(values: Array<string | undefined>) {
   return values.every(hasUsableValue);
 }
 
+/** Platform env — no payment processors (site takes no money). */
 export const env = {
   app: {
     name: readEnv("NEXT_PUBLIC_APP_NAME", "CaribbeanFreedomArena"),
@@ -38,28 +26,6 @@ export const env = {
     storageBucket: readEnv("NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET"),
     messagingSenderId: readEnv("NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID"),
     appId: readEnv("NEXT_PUBLIC_FIREBASE_APP_ID")
-  },
-  payments: {
-    provider: readEnv("NEXT_PUBLIC_PAYMENT_PROVIDER", isDevelopment() ? "wipay" : "fygaro"),
-    stripePublishableKey: readEnv("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"),
-    stripeSecretKey: readEnv("STRIPE_SECRET_KEY"),
-    stripeWebhookSecret: readEnv("STRIPE_WEBHOOK_SECRET"),
-    fanPassPriceId: readEnv("STRIPE_FAN_PASS_PRICE_ID"),
-    arenaPlusPriceId: readEnv("STRIPE_ARENA_PLUS_PRICE_ID"),
-    creatorCirclePriceId: readEnv("STRIPE_CREATOR_CIRCLE_PRICE_ID"),
-    fygaroPaymentButtonUrl: readEnv("FYGARO_PAYMENT_BUTTON_URL"),
-    fygaroApiKey: readEnv("FYGARO_API_KEY"),
-    fygaroApiSecret: readEnv("FYGARO_API_SECRET"),
-    fygaroHookSecret: readEnv("FYGARO_HOOK_SECRET"),
-    fygaroHookKeyId: readEnv("FYGARO_HOOK_KEY_ID"),
-    fygaroDefaultCurrency: readEnv("FYGARO_DEFAULT_CURRENCY", "USD"),
-    fygaroJwtTtlSeconds: Number(readEnv("FYGARO_JWT_TTL_SECONDS", "1800")),
-    wipayCheckoutUrl: readWipayEnv("NEXT_PUBLIC_WIPAY_CHECKOUT_URL", wipayTrinidad.paymentRequestUrl),
-    wipayAccountName: readWipayEnv("NEXT_PUBLIC_WIPAY_ACCOUNT_NAME", "CaribbeanFreedomArena Demo"),
-    wipayAccountId: readWipayEnv("WIPAY_ACCOUNT_ID", wipayTrinidad.sandbox.accountNumber),
-    wipayApiKey: readWipayEnv("WIPAY_API_KEY", wipayTrinidad.sandbox.apiKey),
-    wipayApiSecret: readWipayEnv("WIPAY_API_SECRET", "wipay-demo-secret-arena"),
-    mensEntryAmountUsd: readEnv("WIPAY_MENS_ENTRY_AMOUNT_USD", "6")
   },
   cloudflare: {
     accountId: readEnv("CLOUDFLARE_ACCOUNT_ID"),
@@ -76,8 +42,8 @@ export const env = {
   },
   features: {
     enableVotingWrites: readEnv("NEXT_PUBLIC_ENABLE_VOTING_WRITES", "false") === "true",
-    enableMembershipCheckout:
-      readEnv("NEXT_PUBLIC_ENABLE_MEMBERSHIP_CHECKOUT", "false") === "true",
+    /** Always false — platform does not process payments */
+    enableMembershipCheckout: false,
     enableAnalytics: readEnv("NEXT_PUBLIC_ENABLE_ANALYTICS", "false") === "true",
     enableArenaEngine: readEnv("NEXT_PUBLIC_ENABLE_ARENA_ENGINE", "true") === "true"
   }
@@ -85,22 +51,6 @@ export const env = {
 
 export const serviceReadiness = {
   firebase: hasUsableConfig(Object.values(env.firebase)),
-  stripe: hasUsableConfig([
-    env.payments.stripePublishableKey,
-    env.payments.stripeSecretKey,
-    env.payments.stripeWebhookSecret
-  ]),
-  fygaro: hasUsableConfig([
-    env.payments.fygaroPaymentButtonUrl,
-    env.payments.fygaroApiKey,
-    env.payments.fygaroApiSecret
-  ]),
-  wipay: hasUsableConfig([
-    env.payments.wipayCheckoutUrl,
-    env.payments.wipayAccountId,
-    env.payments.wipayApiKey,
-    env.payments.wipayApiSecret
-  ]),
   cloudflareR2: hasUsableConfig([
     env.cloudflare.accountId,
     env.cloudflare.r2AccessKeyId,

@@ -1,23 +1,20 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { ArenaPlusIceFrostOverlay } from "@/components/arena-plus-ice-frost-overlay";
-import { EldersTableGiftCta } from "@/components/elders-table-gift-cta";
 import { EldersTableLockPanel } from "@/components/elders-table-lock-panel";
-import { arenaGiftCopy, arenaGiftLegalCopy } from "@/lib/arena-gifts";
 import { membershipPlans } from "@/lib/data";
-import { eldersTableGiftLegal } from "@/lib/elders-table-gift-legal";
 
 export function MembershipPlans() {
   return (
     <section id="plans" className="w-full py-20">
       <div className="w-full">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="luxury-section-eyebrow">Digital room access</p>
+          <p className="luxury-section-eyebrow">Community rooms</p>
           <h2 className="luxury-section-title mt-3 text-4xl sm:text-5xl">
-            Exclusive rooms. Platform privilege.
+            Exclusive rooms. Open access.
           </h2>
           <p className="mt-5 text-base leading-7 text-[var(--luxury-mist)]">
-            {eldersTableGiftLegal.sectionIntro}
+            Free community rooms on the platform. Browse, watch, and join — no purchase required on this site.
           </p>
         </div>
 
@@ -45,7 +42,9 @@ export function MembershipPlans() {
               ) : null}
               {plan.highlighted ? <EldersTableLockPanel /> : null}
 
-              <h3 className={`relative z-[1] font-luxury-serif text-2xl text-[var(--luxury-champagne)]${plan.highlighted ? " mt-5" : " mt-6"}`}>
+              <h3
+                className={`relative z-[1] font-luxury-serif text-2xl text-[var(--luxury-champagne)]${plan.highlighted ? " mt-5" : " mt-6"}`}
+              >
                 {plan.name}
               </h3>
               <p
@@ -74,39 +73,24 @@ export function MembershipPlans() {
                 ))}
               </ul>
 
-              {plan.legalNote ? (
-                <p className="relative z-[1] mt-4 text-[11px] leading-5 text-[var(--luxury-mist)]">
-                  {plan.legalNote}{" "}
-                  <Link href="/legal/refunds" className="text-[var(--luxury-champagne)] underline underline-offset-2">
-                    Refund Policy
-                  </Link>
-                  {" · "}
-                  <Link href="/legal/terms" className="text-[var(--luxury-champagne)] underline underline-offset-2">
-                    Terms
-                  </Link>
-                </p>
-              ) : null}
-
               {plan.comingSoon ? (
                 <span className="relative z-[1] mt-8 inline-flex w-full cursor-not-allowed items-center justify-center rounded-full border border-[var(--luxury-mist)]/20 bg-black/25 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--luxury-mist)]">
                   Coming Soon
                 </span>
-              ) : plan.highlighted ? (
-                <EldersTableGiftCta />
               ) : (
-                <a
+                <Link
                   href={plan.href ?? "#vote"}
                   className="relative z-[1] mt-8 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-bold transition luxury-gold-outline"
                 >
-                  {plan.href ? `${arenaGiftCopy.sendGift} · ${plan.name}` : `Join ${plan.name}`}
-                </a>
+                  {plan.href ? `Enter ${plan.name}` : `Join ${plan.name}`}
+                </Link>
               )}
             </article>
           ))}
         </div>
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-xs leading-5 text-[var(--luxury-mist)]">
-          {arenaGiftLegalCopy.digitalServicesOnly} {arenaGiftLegalCopy.refundPolicyRef}
+          Community and entertainment only. This platform does not process payments.
         </p>
       </div>
     </section>

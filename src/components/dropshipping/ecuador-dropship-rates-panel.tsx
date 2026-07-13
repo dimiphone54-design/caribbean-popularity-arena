@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { computeDropshipLaneSplit, getDropshipCountryConfig, getDropshipProcessingUsd } from "@/lib/dropship-country-config";
-import { formatUsd, refreshDropshipFxRates } from "@/lib/dropship-fx";
+import { useEffect, useState } from "react";
+import { getDropshipCountryConfig } from "@/lib/dropship-country-config";
+import { refreshDropshipFxRates } from "@/lib/dropship-fx";
 
-const SAMPLE_USD = 29;
-
-/** Ecuador · real dropship lane rates · supplier · processing · Arena split */
+/** Ecuador lane · display only · no fees, cuts, or on-site payment */
 export function EcuadorDropshipRatesPanel() {
   const config = getDropshipCountryConfig("ecuador");
   const [fxStatus, setFxStatus] = useState<"SYNC" | "LIVE" | "CACHE" | "LOCAL">("SYNC");
@@ -30,28 +28,12 @@ export function EcuadorDropshipRatesPanel() {
     };
   }, []);
 
-  const split5050 = useMemo(
-    () => computeDropshipLaneSplit("ecuador", SAMPLE_USD, 50),
-    []
-  );
-  const split7030 = useMemo(
-    () => computeDropshipLaneSplit("ecuador", SAMPLE_USD, 70),
-    []
-  );
-  const processingUsd = useMemo(
-    () => getDropshipProcessingUsd("ecuador", SAMPLE_USD),
-    []
-  );
-
   if (!config) return null;
 
-  const supplierPct = config.supplierCostPercent;
-  const processingPct = config.processingPercent;
-
   return (
-    <div className="ecuador-dropship-rates" aria-label="Tarifas dropship Ecuador · carril real">
+    <div className="ecuador-dropship-rates" aria-label="Info dropship Ecuador · carril">
       <div className="ecuador-dropship-rates-head">
-        <p className="ecuador-dropship-rates-kicker">Tarifas carril · info exacta</p>
+        <p className="ecuador-dropship-rates-kicker">Carril · contacto directo con vendedor</p>
         <span className="ecuador-dropship-rates-fx-badge">{fxStatus} FX</span>
       </div>
 
@@ -59,29 +41,12 @@ export function EcuadorDropshipRatesPanel() {
         <li className="ecuador-dropship-rates-cell" role="listitem">
           <p className="ecuador-dropship-rates-label">Moneda carril</p>
           <p className="ecuador-dropship-rates-value">{config.currencyCode} · dólar Ecuador</p>
-          <p className="ecuador-dropship-rates-note">Precio lista en USD · sin conversión local</p>
+          <p className="ecuador-dropship-rates-note">Referencia de lista · precio final con el vendedor</p>
         </li>
         <li className="ecuador-dropship-rates-cell" role="listitem">
-          <p className="ecuador-dropship-rates-label">Costo proveedor</p>
-          <p className="ecuador-dropship-rates-value">{supplierPct}% del retail</p>
-          <p className="ecuador-dropship-rates-note">
-            ≈ {formatUsd(getDropshipSupplierSample(supplierPct))} en pedido {formatUsd(SAMPLE_USD)}
-          </p>
-        </li>
-        <li className="ecuador-dropship-rates-cell" role="listitem">
-          <p className="ecuador-dropship-rates-label">Procesamiento</p>
-          <p className="ecuador-dropship-rates-value">{processingPct}% + $0.30</p>
-          <p className="ecuador-dropship-rates-note">
-            ≈ {formatUsd(processingUsd)} en pedido {formatUsd(SAMPLE_USD)} · checkout arena
-          </p>
-        </li>
-        <li className="ecuador-dropship-rates-cell" role="listitem">
-          <p className="ecuador-dropship-rates-label">Reparto Arena Plus</p>
-          <p className="ecuador-dropship-rates-value">50/50 · 70/30 host</p>
-          <p className="ecuador-dropship-rates-note">
-            50/50 H {formatUsd(split5050.hostUsd)} · 70/30 H {formatUsd(split7030.hostUsd)} · m{" "}
-            {formatUsd(split5050.marginUsd)}
-          </p>
+          <p className="ecuador-dropship-rates-label">Cómo comprar</p>
+          <p className="ecuador-dropship-rates-value">Contactar vendedor</p>
+          <p className="ecuador-dropship-rates-note">Sin pago en esta web · pagas al vendedor fuera del sitio</p>
         </li>
         <li className="ecuador-dropship-rates-cell" role="listitem">
           <p className="ecuador-dropship-rates-label">Envío nacional</p>
@@ -93,15 +58,17 @@ export function EcuadorDropshipRatesPanel() {
           <p className="ecuador-dropship-rates-value">7–21 días</p>
           <p className="ecuador-dropship-rates-note">Según destino · aranceles pueden aplicar fuera de Ecuador</p>
         </li>
+        <li className="ecuador-dropship-rates-cell" role="listitem">
+          <p className="ecuador-dropship-rates-label">Nota del carril</p>
+          <p className="ecuador-dropship-rates-value">Ecuador</p>
+          <p className="ecuador-dropship-rates-note">{config.legalShort}</p>
+        </li>
       </ul>
 
       <p className="ecuador-dropship-rates-foot">
-        Sin inventario en la arena · pagas aquí · socio en Ecuador envía a tu puerta · rastrea con el mismo correo abajo.
+        Sin inventario en la arena · sin cobro en el sitio · contacta al vendedor y paga fuera · el socio en Ecuador
+        envía a tu puerta.
       </p>
     </div>
   );
-}
-
-function getDropshipSupplierSample(supplierPct: number) {
-  return SAMPLE_USD * (supplierPct / 100);
 }
