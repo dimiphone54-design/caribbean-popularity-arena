@@ -527,9 +527,7 @@ export function LiveArenaExperience() {
             onClick={() => setOpenDemoPanel("apply")}
             className="a2030-cta a2030-micro shrink-0 rounded-lg px-3 py-2 text-[10px] font-black uppercase tracking-[0.08em] transition sm:px-4 sm:text-[11px] xl:px-5 xl:text-xs xl:tracking-[0.1em]"
           >
-            <span className="sm:hidden">Apply</span>
-            <span className="hidden sm:inline xl:hidden">Apply · Free</span>
-            <span className="hidden xl:inline">Apply as Creator — Free</span>
+            <span>Welcome</span>
           </button>
         </div>
       </nav>
@@ -805,7 +803,7 @@ function FreeDemoPanel({
   const content = {
     apply: {
       icon: "✨",
-      title: "Apply as Creator — Free",
+      title: "Welcome",
       subtitle: "Open to eligible adult creators aged 18+. Applications are reviewed without regard to gender, subject to verification and capacity.",
       items: ["Upload profile preview", "Choose island and category", "Join waiting list", arenaDisplayCopy.noGiftRequired]
     },
