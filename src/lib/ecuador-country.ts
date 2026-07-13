@@ -225,7 +225,7 @@ export const ecuadorFoodPanel = {
   ] satisfies ReadonlyArray<EcuadorFoodPanelItem>
 } as const;
 
-export type EcuadorRoomPlayableGame = "Ecuavoley";
+export type EcuadorRoomPlayableGame = "Ecuavoley" | "Dominó Ecuatoriano";
 export type EcuadorRoomGameSelection = EcuadorRoomPlayableGame;
 
 export type EcuadorIronFangStatPanel = {
@@ -254,6 +254,13 @@ export const ecuadorIronFangStatPanels: ReadonlyArray<EcuadorIronFangStatPanel> 
     gameId: "Ecuavoley",
     videoSrc: "/ecuador-arena-flash-live-clip.mp4",
     posterSrc: "/ecuador-room-indurama-team.png"
+  },
+  {
+    kicker: "Juego original",
+    title: "Dominó Ecuatoriano",
+    detail: "Bloque · doble seis · vs IA · ¡Dale pues, pilas!",
+    gameId: "Dominó Ecuatoriano",
+    posterSrc: "/ecuador-room-gaming-party.png"
   }
 ];
 

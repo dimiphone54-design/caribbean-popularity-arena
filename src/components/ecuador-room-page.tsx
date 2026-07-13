@@ -35,9 +35,17 @@ export function EcuadorRoomPage() {
 
   const launchLiveGame = (gameId: EcuadorRoomGameSelection) => {
     setRequestedGame(gameId);
+    // Open Juegos tab (hash) so Dominó / Ecuavoley panels are visible
+    if (typeof window !== "undefined") {
+      window.location.hash = ECUADOR_GAMES_TAB_HASH;
+    }
     window.setTimeout(() => {
-      document.getElementById(ECUADOR_LIVE_GAMES_ID)?.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 0);
+      const target =
+        gameId === "Dominó Ecuatoriano"
+          ? document.querySelector(".domino-root")
+          : document.getElementById(ECUADOR_LIVE_GAMES_ID);
+      target?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 120);
   };
 
   useEffect(() => {
