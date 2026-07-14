@@ -15,6 +15,8 @@ import { UkRoomFashionTabPanel } from "@/components/uk-room-fashion-tab-panel";
 import { UkFootballHubStack } from "@/components/uk-football-hub-stack";
 import { UkRoomGamesTabPanel } from "@/components/uk-room-games-tab-panel";
 import { UkRoomCornerScroll } from "@/components/uk-room-corner-scroll";
+import { UKStudyHubTeacherLiveSlot } from "@/components/uk-study-hub-teacher-live-slot";
+import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
 import { useRoomLocale } from "@/components/room-locale-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { UkRoomHorizontalTitle } from "@/components/uk-wind-flag";
@@ -75,6 +77,64 @@ export function CotswoldsPage() {
             </figure>
 
             <UkFootballHubStack countryId="uk" countryName="United Kingdom" flag="🇬🇧" />
+
+            {/* ── UK Study Hub · standalone panel ── */}
+            <section
+              className="country-room-section relative overflow-hidden rounded-2xl"
+              aria-label="UK Study Hub"
+              style={{
+                backgroundImage:
+                  "url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&auto=format&fit=crop')",
+                backgroundSize: "cover",
+                backgroundPosition: "center top",
+              }}
+            >
+              <div className="absolute inset-0 bg-[#020c06]/30" aria-hidden="true" />
+              <div className="relative z-10 p-4 sm:p-6">
+                {/* Panel header */}
+                <div className="mb-5 flex items-center gap-3">
+                  <span className="text-2xl" aria-hidden="true">📚</span>
+                  <div>
+                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#fbbf24]">
+                      UK Study Hub · London · campus lane
+                    </p>
+                    <h2 className="font-['Bebas_Neue',sans-serif] text-2xl tracking-widest text-[#eef6ff] sm:text-3xl">
+                      United Kingdom · Study Hub
+                    </h2>
+                  </div>
+                </div>
+                {/* Lane chips */}
+                <div className="mb-6 flex flex-wrap gap-2" role="list">
+                  {[
+                    { emoji: "📚", label: "London campus · library lane" },
+                    { emoji: "🎓", label: "GCSE · A-Level prep hub" },
+                    { emoji: "💻", label: "Remote study · arena desk" },
+                    { emoji: "🗣️", label: "English practice circle" },
+                  ].map((lane) => (
+                    <span
+                      key={lane.label}
+                      role="listitem"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-[#94a3b8]/30 bg-[#0a0a00]/50 px-3 py-1.5 text-[10px] font-semibold text-[#cbd5e1] backdrop-blur-sm"
+                    >
+                      <span aria-hidden="true">{lane.emoji}</span>
+                      {lane.label}
+                    </span>
+                  ))}
+                </div>
+                {/* Teacher live slots */}
+                <UKStudyHubTeacherLiveSlot />
+              </div>
+            </section>
+
+            {/* ── UK Dropshipping · standalone panel ── */}
+            <section className="country-room-section w-full" aria-label="UK Dropshipping market">
+              <DropshipMarketPanel
+                countryId="uk"
+                countryName="United Kingdom"
+                flag="🇬🇧"
+                layout="room"
+              />
+            </section>
 
             <section className="country-room-section w-full">
               <div className="ai-real-slot-slot-tabs uk-room-country-tabs">

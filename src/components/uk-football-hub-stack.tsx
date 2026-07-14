@@ -2,12 +2,9 @@
 
 import { useState } from "react";
 import { FootballPredictionArena } from "@/components/football-prediction/football-prediction-arena";
-import { ArenaSlotDropshipTab } from "@/components/arena-slot-dropship-tab";
-import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
 import { UkFootballLeagueStrip } from "@/components/uk-football-league-strip";
 import type { FootballCompetitionId } from "@/lib/football-prediction-arena";
 import { FOOTBALL_COMPETITIONS } from "@/lib/football-prediction-arena";
-import { getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
 import { UK_ROOM_PANEL } from "@/lib/uk-room-panel";
 import "@/components/uk-football-hub-stack.css";
 
@@ -27,7 +24,6 @@ export function UkFootballHubStack({
   countryName = "United Kingdom",
   flag = "🇬🇧"
 }: UkFootballHubStackProps) {
-  const tabLabels = getArenaSlotTabLabels("UK");
   const [selectedLeague, setSelectedLeague] = useState<FootballCompetitionId | "all">("all");
 
   return (
@@ -45,19 +41,6 @@ export function UkFootballHubStack({
           }
         />
       </section>
-
-      <div className={`uk-football-dropship-wrap ${UK_ROOM_PANEL}`}>
-        <ArenaSlotDropshipTab mode="room" countryName={countryName} label={tabLabels.dropshipping}>
-          <DropshipMarketPanel
-            countryId={countryId}
-            countryName={countryName}
-            flag={flag}
-            layout="room"
-            hideRoomIntro
-            embeddedInUkStack
-          />
-        </ArenaSlotDropshipTab>
-      </div>
     </div>
   );
 }
