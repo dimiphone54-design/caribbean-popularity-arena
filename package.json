@@ -20,6 +20,7 @@
     "clean:hard": "npm run clean && find . -type d -name '__pycache__' -not -path './node_modules/*' -prune -exec rm -rf {} + 2>/dev/null; true"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^10.1.2",
     "@supabase/supabase-js": "^2.108.2",
     "agora-rtc-sdk-ng": "^4.24.5",
     "agora-token": "^2.0.5",

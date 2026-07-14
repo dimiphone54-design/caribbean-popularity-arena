@@ -12,7 +12,7 @@ function hasUsableConfig(values: Array<string | undefined>) {
   return values.every(hasUsableValue);
 }
 
-/** Platform env — no payment processors (site takes no money). */
+/** Platform env — payment via PayPal. */
 export const env = {
   app: {
     name: readEnv("NEXT_PUBLIC_APP_NAME", "CaribbeanFreedomArena"),
@@ -34,6 +34,10 @@ export const env = {
     r2SecretAccessKey: readEnv("CLOUDFLARE_R2_SECRET_ACCESS_KEY"),
     r2BucketName: readEnv("CLOUDFLARE_R2_BUCKET_NAME")
   },
+  paypal: {
+    clientId: readEnv("PAYPAL_CLIENT_ID"),
+    env: readEnv("PAYPAL_ENV", "sandbox")
+  },
   analytics: {
     gaMeasurementId: readEnv("NEXT_PUBLIC_GA_MEASUREMENT_ID"),
     metaPixelId: readEnv("NEXT_PUBLIC_META_PIXEL_ID"),
@@ -42,8 +46,7 @@ export const env = {
   },
   features: {
     enableVotingWrites: readEnv("NEXT_PUBLIC_ENABLE_VOTING_WRITES", "false") === "true",
-    /** Always false — platform does not process payments */
-    enableMembershipCheckout: false,
+    enableMembershipCheckout: hasUsableValue(readEnv("PAYPAL_CLIENT_ID")) && hasUsableValue(readEnv("PAYPAL_CLIENT_SECRET")),
     enableAnalytics: readEnv("NEXT_PUBLIC_ENABLE_ANALYTICS", "false") === "true",
     enableArenaEngine: readEnv("NEXT_PUBLIC_ENABLE_ARENA_ENGINE", "true") === "true"
   }
