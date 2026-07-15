@@ -1327,7 +1327,7 @@ a {
 .site-footer-panel-wrap {
   width: 100%;
   max-width: 100vw;
-  margin-top: auto;
+  margin-top: 0;
   padding: 0;
   background: transparent;
   overflow: hidden;
@@ -28308,4 +28308,156 @@ a {
     0 24px 64px rgba(0, 0, 0, 0.62),
     0 0 56px rgba(37, 99, 235, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Terms footer — clean legal links, visible on every page */
+.site-footer-terms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1rem;
+  text-align: center;
+}
+.site-footer-terms-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.site-footer-terms-links a {
+  color: #1a1a2e;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer-terms-links a:hover {
+  color: #ff2bd6;
+  text-decoration: underline;
+}
+.site-footer-terms-links span {
+  color: #9aa3b2;
+}
+.site-footer-terms-copyright {
+  font-size: 0.72rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Terms footer styled as a matching panel */
+.site-footer-terms {
+  margin: 1rem auto 1.25rem;
+  max-width: 640px;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(215, 180, 106, 0.25);
+  background: rgba(10, 0, 16, 0.55);
+  padding: 1rem 1.25rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+.site-footer-terms-links a {
+  color: #d7b46a;
+}
+.site-footer-terms-links a:hover {
+  color: #ff2bd6;
+}
+.site-footer-terms-links span {
+  color: rgba(215, 180, 106, 0.4);
+}
+.site-footer-terms-copyright {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Lift terms panel higher off the bottom */
+.site-footer-terms {
+  margin-bottom: 4rem;
+}
+
+/* Lift terms panel much higher */
+.site-footer-terms {
+  margin-bottom: 16rem;
+}
+
+/* Lift terms panel higher again */
+.site-footer-terms {
+  margin-bottom: 48rem;
+}
+
+/* Match terms panel to Tournament panel size/style */
+.site-footer-terms {
+  margin: 1rem auto 2rem;
+  max-width: 380px;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 43, 214, 0.2);
+  background: rgba(10, 0, 16, 0.8);
+  padding: 0.75rem 1rem;
+}
+.site-footer-terms-links {
+  font-size: 0.7rem;
+}
+
+/* Final clean terms panel spacing */
+.site-footer-terms {
+  margin: 1.5rem auto 2rem;
+}
+
+/* Lift terms panel higher */
+.site-footer-terms {
+  margin-bottom: 8rem;
+}
+
+/* Lift terms panel much higher */
+.site-footer-terms {
+  margin-bottom: 40rem;
+}
+
+/* Kill the empty white footer shell — let terms sit on dark background */
+.site-footer-panel-white-shell {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+}
+
+/* Reset terms panel to clean spacing */
+.site-footer-terms {
+  margin: 2rem auto 3rem;
+}
+
+/* Pull terms up close to last content */
+.site-footer-terms {
+  margin-top: -1rem;
+}
+
+/* Pull terms up more to meet content */
+.site-footer-terms {
+  margin-top: -6rem;
+}
+
+/* Bring terms back — visible and close */
+.site-footer-terms {
+  margin-top: -3rem;
+}
+
+/* Stop fighting with negative margin */
+.site-footer-terms {
+  margin-top: 1rem;
+}
+
+/* Nudge terms up a touch */
+.site-footer-terms {
+  margin-top: -0.75rem;
+}
+
+/* Lift terms two touches up */
+.site-footer-terms {
+  margin-top: -1.75rem;
+}
+
+/* Back one step */
+.site-footer-terms {
+  margin-top: -0.75rem;
 }

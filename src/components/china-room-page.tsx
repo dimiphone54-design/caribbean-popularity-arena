@@ -25,7 +25,7 @@ export function ChinaRoomPage() {
 
   return (
     <>
-      <main className="arena-2030 arena-2030-china-room relative min-h-screen overflow-hidden pb-56">
+      <main className="arena-2030 arena-2030-china-room relative min-h-screen overflow-hidden">
         <Arena2030Backdrop
           image={lane.backdropImage}
           imageOpacity="opacity-100"

@@ -1,18 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
 import { SiteFooterLowerRightStack, SITE_FOOTER_MICRO_ANCHOR_ID } from "@/components/site-footer-lower-right-stack";
-
-const matchPanelPhotos = {
-  match: {
-    src: "/site-footer-match-panel-bg.png",
-    alt: "Find Your Perfect Match — join our community, meaningful connections, safe and secure, easy to chat, Join Now"
-  },
-  friends: {
-    src: "/site-footer-match-panel-friends.png",
-    alt: "Friends on the arena — four players connected on mobile, gaming and chat together"
-  }
-} as const;
 
 export function SiteFooter() {
   return (
@@ -22,51 +11,21 @@ export function SiteFooter() {
           <span className="site-footer-panel-white-notch" aria-hidden="true" />
           <span className="site-footer-panel-white-strobe" aria-hidden="true" />
 
-          <div className="site-footer-panel-photo relative">
-            <div className="site-footer-panel-photo-grid">
-              <div className="site-footer-panel-photo-friends relative">
-                <Image
-                  src={matchPanelPhotos.friends.src}
-                  alt={matchPanelPhotos.friends.alt}
-                  fill
-                  className="site-footer-panel-bg site-footer-panel-bg--friends"
-                  sizes="(max-width: 640px) 50vw, 50vw"
-                  priority={false}
-                />
-                <div className="site-footer-photo-locations" aria-hidden="true">
-                  <span className="site-footer-photo-location site-footer-photo-location--japan">📍 Japan</span>
-                  <span className="site-footer-photo-location site-footer-photo-location--china">📍 China</span>
-                </div>
-              </div>
+          <div className="site-footer-terms" role="contentinfo">
+            <nav className="site-footer-terms-links" aria-label="Legal">
+              <Link href="/legal/terms">Terms</Link>
+              <span aria-hidden="true">·</span>
+              <Link href="/legal/privacy">Privacy</Link>
+              <span aria-hidden="true">·</span>
+              <Link href="/legal/community">Community Guidelines</Link>
+              <span aria-hidden="true">·</span>
+              <Link href="/legal/creator-agreement">Creator Agreement</Link>
+            </nav>
+            <p className="site-footer-terms-copyright">© 2026 Caribbean Freedom Arena</p>
+          </div>
 
-              <div className="site-footer-panel-photo-match relative">
-                <Image
-                  src={matchPanelPhotos.match.src}
-                  alt={matchPanelPhotos.match.alt}
-                  fill
-                  className="site-footer-panel-bg site-footer-panel-bg--match"
-                  sizes="(max-width: 640px) 50vw, 50vw"
-                  priority={false}
-                />
-
-                <div className="site-footer-photo-locations" aria-hidden="true">
-                  <span className="site-footer-photo-location site-footer-photo-location--uk">📍 UK</span>
-                  <span className="site-footer-photo-location site-footer-photo-location--ecuador">📍 Ecuador</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="site-footer-panel-photo-divide" aria-hidden="true">
-              <span className="site-footer-panel-photo-divide-line" />
-              <span className="site-footer-panel-photo-divide-heart">💕</span>
-              <span className="site-footer-panel-photo-divide-line" />
-            </div>
-
-            <div className="site-footer-panel-fade" aria-hidden="true" />
-
-            <div className="site-footer-legal-anchor" id={SITE_FOOTER_MICRO_ANCHOR_ID}>
-              <SiteFooterLowerRightStack />
-            </div>
+          <div className="site-footer-legal-anchor" id={SITE_FOOTER_MICRO_ANCHOR_ID}>
+            <SiteFooterLowerRightStack />
           </div>
         </div>
       </div>

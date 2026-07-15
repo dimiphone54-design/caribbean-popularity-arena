@@ -25,7 +25,7 @@ export function JapanRoomPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <main className="arena-2030 arena-2030-japan-room relative flex-1 overflow-hidden pb-16">
+      <main className="arena-2030 arena-2030-japan-room relative flex-1 overflow-hidden">
         <Arena2030Backdrop
           image={lane.backdropImage}
           imageOpacity="opacity-[0.82] sm:opacity-[0.95]"

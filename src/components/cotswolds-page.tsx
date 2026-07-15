@@ -30,7 +30,7 @@ export function CotswoldsPage() {
 
   return (
     <>
-      <main className="arena-2030 arena-2030-cotswolds relative flex min-h-screen flex-col overflow-x-hidden pb-16">
+      <main className="arena-2030 arena-2030-cotswolds relative flex min-h-0 flex-col overflow-x-hidden">
         <UkRoomCornerScroll />
 
         <div className="relative z-10">
