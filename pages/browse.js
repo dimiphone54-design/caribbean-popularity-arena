@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { supabase } from '../lib/supabaseClient';
-import FileBrowser from '../components/FileBrowser';
-import CountryPanel from '../components/CountryPanel';
-import styles from '../styles/Upload.module.css'; // Re-using styles from the upload page
+import { supabase } from '../supabaseClient';
+import FileBrowser from '../FileBrowser';
+import CountryPanel from '../CountryPanel';
+import styles from '../Upload.module.css'; // Re-using styles from the upload page
 
 export default function BrowsePage() {
   const [session, setSession] = useState(null);

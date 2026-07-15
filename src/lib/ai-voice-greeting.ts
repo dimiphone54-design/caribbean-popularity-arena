@@ -380,7 +380,7 @@ export function primeAiVoice() {
   }
 }
 
-/** Arena entry — welcome voice matches panel (e.g. WELCOME DIMITRI). */
+/** Arena entry — welcome voice matches panel (e.g. WELCOME CHARLIE). */
 export function buildWelcomeSegments(username: string, language: AiVoiceLanguage = "en"): GreetingSegment[] {
   const text = formatWelcomeVoiceGreeting(username, language);
   if (!text) return [];

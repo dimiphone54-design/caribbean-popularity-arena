@@ -15,7 +15,7 @@ export function RoomCountryPageShell({
 
   return (
     <div
-      className={`country-room-page-shell mx-auto w-full max-w-6xl px-4 pb-56 sm:px-6 ${topClass} ${className}`.trim()}
+      className={`country-room-page-shell mx-auto flex w-full max-w-6xl flex-col px-4 pb-8 sm:px-6 ${topClass} ${className}`.trim()}
     >
       {children}
     </div>

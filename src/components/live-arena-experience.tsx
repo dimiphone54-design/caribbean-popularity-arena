@@ -822,7 +822,7 @@ function FreeDemoPanel({
     bank: {
       icon: "🏦",
       title: "Member Sign In",
-      subtitle: `Arena member access · ${formatFreeLabel(6)}. Sign in with your arena name — it auto-appears on the welcome panel (e.g. WELCOME DIMITRI).`,
+      subtitle: `Arena member access · ${formatFreeLabel(6)}. Sign in with your arena name — it auto-appears on the welcome panel (e.g. WELCOME CHARLIE).`,
       items: [`${formatFreeLabel(6)} member sign-in`, "Personalized welcome screen", "AI language detect", "Open community access"]
     }
   }[panel];

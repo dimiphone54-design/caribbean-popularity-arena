@@ -1,4 +1,4 @@
-import styles from '../styles/CountryPanel.module.css';
+import styles from './CountryPanel.module.css';
 
 export default function CountryPanel({ liveText, country, emoji, description, linkText, linkHref = '#' }) {
   return (

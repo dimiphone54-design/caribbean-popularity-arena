@@ -12,7 +12,7 @@ import { getRoomCountryId } from "@/lib/room-country-from-path";
 export function RoomsLayoutClient({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const dropshipCountry = searchParams.get("country");
+  const dropshipCountry = searchParams?.get("country") ?? null;
   const roomCountryId = getRoomCountryId(pathname, dropshipCountry);
 
   return (

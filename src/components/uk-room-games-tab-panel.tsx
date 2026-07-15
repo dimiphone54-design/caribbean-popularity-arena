@@ -1,189 +1,58 @@
 "use client";
 
 import { useState } from "react";
-import { CotswoldsGameSimulator } from "@/components/cotswolds-game-simulator";
-import { CotswoldsHeroPlayersFilm } from "@/components/cotswolds-hero-players-film";
-import { CountryRoomLiveAccessGate } from "@/components/country-room-live-access-gate";
-import { RoomSportsStack } from "@/components/room-sports-stack";
-import {
-  cotswoldsHeroQuarterSet,
-  cotswoldsHollandParkWomen,
-  cotswoldsHollandParkWomenFeed,
-  cotswoldsLondonParkGirls,
-  cotswoldsLondonParkGirlsFeed,
-  type CotswoldsParkMember
-} from "@/lib/cotswolds";
-import { UK_ROOM_PANEL } from "@/lib/uk-room-panel";
+import { cotswoldsLondonParkGirls } from "@/lib/cotswolds";
 
-function GameGraphBoard({ members }: { members: CotswoldsParkMember[] }) {
+export function UkRoomGamesTabPanel() {
   const [sim, setSim] = useState<{ name: string; host: string } | null>(null);
 
   return (
-    <div className="cotswolds-game-board mt-3 space-y-2.5" role="list">
-      {members.map((member, index) => {
-        const parts = member.game.split("·");
-        const orderTag = parts.length > 1 ? parts[0].trim() : `Game ${index + 1}`;
-        const gameName = (parts.length > 1 ? parts.slice(1).join("·") : member.game).trim();
-        const ready = 46 + ((member.id * 13) % 48);
-        const live = sim?.name === gameName && sim?.host === member.name.split(" ")[0];
-
-        return (
-          <button
-            key={member.id}
-            type="button"
-            onClick={() => setSim({ name: gameName, host: member.name.split(" ")[0] })}
-            aria-pressed={live}
-            className={`cotswolds-game-row${live ? " cotswolds-game-row--live" : ""}${
-              gameName === "Best Makeup Look" ? " cotswolds-game-row--photo" : ""
-            }`}
-          >
-            <span className="cotswolds-hero-rank cotswolds-game-rank" aria-hidden="true">
-              <span className="cotswolds-hero-rank-word">SET</span>
-              <span className="cotswolds-hero-rank-num">{String(index + 1).padStart(2, "0")}</span>
-            </span>
-            <span className="cotswolds-game-main">
-              {gameName === "Best Makeup Look" ? (
-                <span className="cotswolds-game-tournament">💄 Makeup Tournament · Live 3h</span>
-              ) : null}
-              <span className="cotswolds-game-tag">{orderTag}</span>
-              <span className="cotswolds-game-name">
-                <span className="cotswolds-game-flag">{member.flag}</span>
-                {gameName}
+    <div className="a2030-holo-panel scroll-mt-24 rounded-[1.25rem] border border-[#b8ff3c]/20 p-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase text-[#b8ff3c] sm:text-xs">
+          🇬🇧 UK park games
+        </p>
+        <span className="a2030-pulse-ring inline-flex h-2 w-2 rounded-full bg-[#b8ff3c]" />
+      </div>
+      <div className="mt-3 space-y-1.5" role="list">
+        {cotswoldsLondonParkGirls.map((member, index) => {
+          const parts = member.game.split("·");
+          const orderTag = parts.length > 1 ? parts[0].trim() : `Game ${index + 1}`;
+          const gameName = (parts.length > 1 ? parts.slice(1).join("·") : member.game).trim();
+          const ready = 46 + ((member.id * 13) % 48);
+          return (
+            <button
+              key={member.id}
+              type="button"
+              onClick={() => setSim({ name: gameName, host: member.name.split(" ")[0] })}
+              className="flex w-full items-center gap-2 rounded-lg border border-white/5 bg-[#0a0010]/50 px-3 py-2 text-left transition hover:border-[#b8ff3c]/25 hover:bg-[#b8ff3c]/5"
+            >
+              <span className="text-lg" aria-hidden="true">{member.flag}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[12px] font-bold text-[#fef9c3]">{gameName}</span>
+                <span className="block text-[10px] text-[#8fa3c4]">{member.name.split(" ")[0]} · {member.area}</span>
               </span>
-              <span className="cotswolds-game-host">
-                {member.name.split(" ")[0]} · {member.area} · {member.age}
+              <span className="shrink-0 rounded-full bg-[#b8ff3c]/10 px-2 py-0.5 text-[9px] font-bold text-[#b8ff3c]">
+                {ready}% ready
               </span>
-              <span className="cotswolds-game-graph" aria-hidden="true">
-                <span
-                  className="cotswolds-game-graph-fill"
-                  style={{ width: `${live ? 100 : ready}%` }}
-                />
-              </span>
-              <span className="cotswolds-game-meter">
-                {live ? "In the simulator · play live" : `${ready}% ready · tap to play`}
-              </span>
-            </span>
-            <span className={`cotswolds-game-cta${live ? " cotswolds-game-cta--live" : ""}`}>
-              {live ? "● PLAYING" : "▶ PLAY GAME"}
-            </span>
-          </button>
-        );
-      })}
+            </button>
+          );
+        })}
+      </div>
 
       {sim ? (
-        <CotswoldsGameSimulator gameName={sim.name} host={sim.host} onClose={() => setSim(null)} />
+        <div className="mt-2 rounded-xl border border-[#b8ff3c]/20 bg-[#b8ff3c]/5 p-3 text-center">
+          <p className="text-[11px] font-bold text-[#fef9c3]">{sim.name}</p>
+          <p className="mt-0.5 text-[9px] text-[#8fa3c4]">{sim.host}</p>
+          <button
+            type="button"
+            onClick={() => setSim(null)}
+            className="mt-1.5 rounded-full bg-[#b8ff3c]/10 px-3 py-1 text-[9px] font-bold text-[#b8ff3c] hover:bg-[#b8ff3c]/20"
+          >
+            PLAY · {sim.host.split("·")[0].trim()}
+          </button>
+        </div>
       ) : null}
-    </div>
-  );
-}
-
-/** UK room · full games stack inside Games tab (registry + park lanes + live gate) */
-export function UkRoomGamesTabPanel() {
-  const [heroSim, setHeroSim] = useState<{ name: string; host: string } | null>(null);
-
-  return (
-    <div className="uk-room-games-tab-panel space-y-5">
-      <RoomSportsStack roomSlug="uk-flag-cotswolds" gamesOnly />
-
-      <CountryRoomLiveAccessGate
-        roomSlug="uk-flag-cotswolds"
-        countryId="uk"
-        countryName="United Kingdom"
-        flag="🇬🇧"
-      >
-        <section className={UK_ROOM_PANEL}>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase sm:text-xs">
-              ACTIVITYS
-            </p>
-            <span className="a2030-pulse-ring inline-flex h-2 w-2 rounded-full bg-[#b8ff3c]" />
-          </div>
-          <ol className="cotswolds-hero-board mt-3" role="list">
-            {cotswoldsHeroQuarterSet.map((feed, index) => (
-              <li
-                key={feed.id}
-                className={`cotswolds-hero-card${
-                  feed.id === cotswoldsLondonParkGirlsFeed.id ? " cotswolds-hero-card--players" : ""
-                }`}
-                role="listitem"
-              >
-                {feed.id === cotswoldsLondonParkGirlsFeed.id ? <CotswoldsHeroPlayersFilm /> : null}
-                <span className="cotswolds-hero-rank" aria-hidden="true">
-                  <span className="cotswolds-hero-rank-word">SET</span>
-                  <span className="cotswolds-hero-rank-num">{String(index + 1).padStart(2, "0")}</span>
-                </span>
-                <span className="cotswolds-hero-card-main">
-                  <span className="cotswolds-hero-label">{feed.label}</span>
-                  {feed.caption ? <span className="cotswolds-hero-caption">{feed.caption}</span> : null}
-                  {feed.id === cotswoldsLondonParkGirlsFeed.id ? (
-                    <button
-                      type="button"
-                      onClick={() => setHeroSim({ name: "Park Relay", host: "Manchester live · Tessa" })}
-                      className="cotswolds-hero-live-cta mt-2"
-                    >
-                      <span className="cotswolds-hero-live-dot" aria-hidden="true" />
-                      ▶ LIVE
-                    </button>
-                  ) : null}
-                  {feed.id === cotswoldsHollandParkWomenFeed.id ? (
-                    <span className="cotswolds-hero-games mt-2">
-                      {[
-                        { game: "Croquet", emoji: "🏑", host: "Margot · Holland Park" },
-                        { game: "Badminton", emoji: "🏸", host: "Freya · Holland Park" },
-                        { game: "Boules", emoji: "🟢", host: "Imogen · Holland Park" }
-                      ].map((entry) => (
-                        <button
-                          key={entry.game}
-                          type="button"
-                          onClick={() => setHeroSim({ name: entry.game, host: entry.host })}
-                          className="cotswolds-hero-game-pill"
-                        >
-                          <span aria-hidden="true">{entry.emoji}</span>
-                          {entry.game}
-                          <span className="cotswolds-hero-game-play" aria-hidden="true">
-                            ▶ Play
-                          </span>
-                        </button>
-                      ))}
-                    </span>
-                  ) : null}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        {heroSim ? (
-          <CotswoldsGameSimulator
-            gameName={heroSim.name}
-            host={heroSim.host}
-            onClose={() => setHeroSim(null)}
-          />
-        ) : null}
-
-        <section className={UK_ROOM_PANEL}>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase text-[#b8ff3c] sm:text-xs">
-              🇬🇧 UK park games
-            </p>
-            <span className="a2030-pulse-ring inline-flex h-2 w-2 rounded-full bg-[#b8ff3c]" />
-          </div>
-
-          <p className="a2030-electric-flash a2030-micro mt-5 text-[10px] font-bold uppercase text-[#ffb8ef]">
-            {cotswoldsLondonParkGirls.map((member) => member.game.split("·").pop()?.trim()).join(" · ")}
-          </p>
-          <GameGraphBoard members={cotswoldsLondonParkGirls} />
-          {cotswoldsLondonParkGirlsFeed.caption ? (
-            <p className="mt-2 text-xs text-[#9fb4d4]">{cotswoldsLondonParkGirlsFeed.caption}</p>
-          ) : null}
-
-          <p className="a2030-micro mt-5 text-[10px] font-bold uppercase text-[#ffb8ef]">
-            4 Holland Park women // ages 22 & 25 — click to play
-          </p>
-          <GameGraphBoard members={cotswoldsHollandParkWomen} />
-          <p className="mt-2 text-xs text-[#9fb4d4]">{cotswoldsHollandParkWomenFeed.caption}</p>
-        </section>
-      </CountryRoomLiveAccessGate>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabaseClient';
-import styles from '../styles/FileBrowser.module.css';
+import { supabase } from './supabaseClient';
+import styles from './FileBrowser.module.css';
 
 export default function FileBrowser({ bucketName }) {
   const [files, setFiles] = useState([]);

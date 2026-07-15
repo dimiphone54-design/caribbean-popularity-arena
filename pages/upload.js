@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { supabase } from '../lib/supabaseClient';
-import FolderUploader from '../components/FolderUploader';
+import { supabase } from '../supabaseClient';
+import FolderUploader from '../FolderUploader';
 
 export default function UploadPage() {
   const [session, setSession] = useState(null);

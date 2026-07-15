@@ -106,7 +106,6 @@ export function DropshipAiConverter({
     return convertCountryToCountry(usdAmount, fromCountryId, toCountryId);
   }, [usdAmount, fromCountryId, toCountryId, fxLive, motionPulse]);
 
-
   const tickerLine = useMemo(() => {
     const fromCode = conversion.fromCurrency;
     const toCode = conversion.toCurrency;
@@ -115,8 +114,7 @@ export function DropshipAiConverter({
       `${fromCountry?.flag ?? ""} ${fromCode}→${toCountry?.flag ?? ""} ${toCode}`,
       formatUsd(conversion.usdAmount),
       formatDropshipCurrency(conversion.fromLocal, fromCode),
-      formatDropshipCurrency(conversion.toLocal, toCode),
-      "FX REFERENCE · NO ON-SITE PAYMENT"
+      formatDropshipCurrency(conversion.toLocal, toCode)
     ].join(" · ");
   }, [conversion, fxStatus, fromCountry?.flag, toCountry?.flag]);
 
@@ -255,10 +253,6 @@ export function DropshipAiConverter({
               </strong>
             </div>
           </div>
-        </div>
-
-        <div className="dropship-live-ai-gen-split">
-          <p className="dropship-live-ai-gen-split-line">Contact seller · no platform cut · pay off-site</p>
         </div>
       </div>
     </section>

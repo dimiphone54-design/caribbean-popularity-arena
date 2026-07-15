@@ -6,8 +6,8 @@ const primaryMasterTrustKey = "cfa_primary_master_trusted_device";
 
 /** First owner · CaribbeanFreedomArena */
 export const ARENA_PRIMARY_MASTER = {
-  username: "Dimitri",
-  welcomePanelName: "DIMITRI"
+  username: "Charlie",
+  welcomePanelName: "CHARLIE"
 } as const;
 
 /** Localized “The Master” · exact per International SUITE country */

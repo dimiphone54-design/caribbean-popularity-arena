@@ -129,7 +129,7 @@ const enCopy: DropshipMarketCopy = {
   legalShort: "",
   checkoutStreetAddress: "Street address",
   checkoutPayLoading: "Starting…",
-  checkoutPayButton: (price) => `Pay ${price} · dropship`,
+  checkoutPayButton: (price) => `Pay ${price}`,
   checkoutErrorStart: "Could not start checkout",
   checkoutErrorNetwork: "Network error — try again",
   orderPlaced: (category, city) => `Order placed · ${category} ships to ${city}`,
@@ -185,9 +185,9 @@ const enCopy: DropshipMarketCopy = {
     `${countryName} · browse · checkout · supplier ships direct · separate from $6 live gift rooms`,
   switchCountryLane: "Switch country lane",
   laneTechName: (countryName) => `${countryName} Tech & Gadgets Pack`,
-  laneTechDesc: "Phone accessories · cables · gadget bundle · local supplier ships direct",
+  laneTechDesc: "Phone accessories · cables · gadget bundle",
   laneAutoName: (countryName) => `${countryName} Car Accessories Kit`,
-  laneAutoDesc: "Interior accessories · care kit · local supplier ships direct",
+  laneAutoDesc: "Interior accessories · care kit",
   openFullMarket: (countryName) => `Open full ${countryName} market →`
 };
 
@@ -213,7 +213,7 @@ const esCOCopy: DropshipMarketCopy = {
     "Proveedor en Colombia envía · carril COP · aranceles pueden aplicar fuera de Colombia",
   checkoutStreetAddress: "Dirección",
   checkoutPayLoading: "Iniciando…",
-  checkoutPayButton: (price) => `Pagar ${price} · dropship`,
+  checkoutPayButton: (price) => `Pagar ${price}`,
   checkoutErrorStart: "No se pudo iniciar el checkout",
   checkoutErrorNetwork: "Error de red — intenta de nuevo",
   orderPlaced: (category, city) => `Pedido realizado · ${category} envía a ${city}`,
@@ -270,9 +270,9 @@ const esCOCopy: DropshipMarketCopy = {
     `${countryName} · explora · checkout · proveedor envía directo · separado de salas en vivo de regalo $6`,
   switchCountryLane: "Cambiar carril de país",
   laneTechName: (countryName) => `Pack tech y gadgets · ${countryName}`,
-  laneTechDesc: "Accesorios celular · cables · bundle · proveedor local envía directo",
+  laneTechDesc: "Accesorios celular · cables · bundle",
   laneAutoName: (countryName) => `Kit accesorios auto · ${countryName}`,
-  laneAutoDesc: "Accesorios interior · kit de cuidado · proveedor local envía directo",
+  laneAutoDesc: "Accesorios interior · kit de cuidado",
   openFullMarket: (countryName) => `Abrir mercado completo ${countryName} →`
 };
 
@@ -297,7 +297,7 @@ const esCopy: DropshipMarketCopy = {
   legalShort: "Proveedor local envía · conversión de moneda · aranceles pueden aplicar",
   checkoutStreetAddress: "Dirección",
   checkoutPayLoading: "Iniciando…",
-  checkoutPayButton: (price) => `Pagar ${price} · dropship`,
+  checkoutPayButton: (price) => `Pagar ${price}`,
   checkoutErrorStart: "No se pudo iniciar el checkout",
   checkoutErrorNetwork: "Error de red — intenta de nuevo",
   orderPlaced: (category, city) => `Pedido realizado · ${category} envía a ${city}`,
@@ -354,9 +354,9 @@ const esCopy: DropshipMarketCopy = {
     `${countryName} · explora · checkout · proveedor envía directo · separado de salas en vivo de regalo $6`,
   switchCountryLane: "Cambiar carril de país",
   laneTechName: (countryName) => `Pack tech y gadgets · ${countryName}`,
-  laneTechDesc: "Accesorios celular · cables · bundle · proveedor local envía directo",
+  laneTechDesc: "Accesorios celular · cables · bundle",
   laneAutoName: (countryName) => `Kit accesorios auto · ${countryName}`,
-  laneAutoDesc: "Accesorios interior · kit de cuidado · proveedor local envía directo",
+  laneAutoDesc: "Accesorios interior · kit de cuidado",
   openFullMarket: (countryName) => `Abrir mercado completo ${countryName} →`
 };
 
@@ -404,7 +404,7 @@ const jaCopy: DropshipMarketCopy = {
   legalShort: "日本レーン · 円換算 · 国内サプライヤーレーン",
   checkoutStreetAddress: "住所",
   checkoutPayLoading: "開始中…",
-  checkoutPayButton: (price) => `支払う ${price} · ドロップシップ`,
+  checkoutPayButton: (price) => `支払う ${price}`,
   checkoutErrorStart: "チェックアウトを開始できません",
   checkoutErrorNetwork: "ネットワークエラー — 再試行してください",
   orderPlaced: (category, city) => `注文完了 · ${category} → ${city}へ発送`,
@@ -460,9 +460,9 @@ const jaCopy: DropshipMarketCopy = {
     "日本 · 閲覧 · チェックアウト · サプライヤー直送 · $6ライブギフトルームとは別",
   switchCountryLane: "国レーンを切り替え",
   laneTechName: (countryName) => `${countryName}テック＆ガジェットパック`,
-  laneTechDesc: "スマホアクセサリー · ケーブル · ガジェットセット · 現地サプライヤー直送",
+  laneTechDesc: "スマホアクセサリー · ケーブル · ガジェットセット",
   laneAutoName: (countryName) => `${countryName}カーアクセサリーキット`,
-  laneAutoDesc: "インテリアアクセサリー · ケアキット · 現地サプライヤー直送",
+  laneAutoDesc: "インテリアアクセサリー · ケアキット",
   openFullMarket: () => "フル日本マーケットへ →"
 };
 
@@ -491,7 +491,7 @@ const zhCopy: DropshipMarketCopy = {
   legalShort: "中国通道 · 人民币换算 · 出口供应商直发",
   checkoutStreetAddress: "街道地址",
   checkoutPayLoading: "启动中…",
-  checkoutPayButton: (price) => `支付 ${price} · 代发货`,
+  checkoutPayButton: (price) => `支付 ${price}`,
   checkoutErrorStart: "无法启动结账",
   checkoutErrorNetwork: "网络错误 — 请重试",
   orderPlaced: (category, city) => `订单已下 · ${category} 发往 ${city}`,
@@ -546,9 +546,9 @@ const zhCopy: DropshipMarketCopy = {
   marketPageDesc: () => "中国 · 浏览 · 结账 · 供应商直发 · 与$6直播礼物房间分开",
   switchCountryLane: "切换国家通道",
   laneTechName: (countryName) => `${countryName}科技数码套装`,
-  laneTechDesc: "手机配件 · 线缆 · 数码套装 · 本地供应商直发",
+  laneTechDesc: "手机配件 · 线缆 · 数码套装",
   laneAutoName: (countryName) => `${countryName}汽车配件套装`,
-  laneAutoDesc: "内饰配件 · 护理套装 · 本地供应商直发",
+  laneAutoDesc: "内饰配件 · 护理套装",
   openFullMarket: () => "打开完整中国市场 →"
 };
 
@@ -685,7 +685,7 @@ const chinaProductCopy: Record<string, ProductCopyEntry> = {
 const japanProductCopy: Record<string, ProductCopyEntry> = {
   "jp-lifestyle-box": {
     name: "ジャパンライフスタイルボックス",
-    description: "ミニマル雑貨 · ジャパンセレクト",
+    description: "ミニマル雑貨 · 和モダンセレクト",
     category: "ライフスタイル",
     shipsFrom: "🇯🇵 ジャパン · 日本"
   },
@@ -695,10 +695,110 @@ const japanProductCopy: Record<string, ProductCopyEntry> = {
     category: "ファッション",
     shipsFrom: "🇯🇵 ジャパン · 日本"
   },
+  "jp-kimono-wrap": {
+    name: "ジャパンキモノシルクラップ",
+    description: "伝統シルクラップ · モダンスタイル",
+    category: "ファッション · キモノ",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-kendo-tee": {
+    name: "ジャパンケンドスピリットT",
+    description: "武道インスパイア · アリーナレディ",
+    category: "ファッション · 剣道",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
   "jp-matcha-kit": {
     name: "ジャパンマッチャスターターキット",
     description: "抹茶 · 茶筅 · 碗ミニセット",
     category: "食品キット",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  // Anime & Japan-Exclusive
+  "jp-anime-tee": {
+    name: "ジャパン限定アニメT",
+    description: "日本限定 · リミテッドアニメプリント",
+    category: "アニメ · 限定",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-gashapon-figure": {
+    name: "ガシャポンミニフィギュアセット",
+    description: "カプセルトイ · ブラインドボックス",
+    category: "コレクティブル",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-manga-box": {
+    name: "ジャパン限定版マンガボックス",
+    description: "コレクターマンガ · 日本限定プリント",
+    category: "マンガ · 限定",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-char-pouch": {
+    name: "キャラクターグッズポーチ",
+    description: "カワイイポーチ · 日本限定コラボ",
+    category: "アクセサリー",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  // J-Beauty
+  "jp-glass-skin-kit": {
+    name: "グラススキンスターターキット",
+    description: "PDRNセラム · シートマスク · グローセット",
+    category: "スキンケア · グロウ",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-pdrn-masks": {
+    name: "PDRNシートマスク10枚入り",
+    description: "バイラルPDRNマスク · グロウスキン2026",
+    category: "シートマスク · バイラル",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-rice-serum": {
+    name: "コシミライスウォーターセラム",
+    description: "米ぬかエキストラクト · 伝統グロウ",
+    category: "セラム · 伝統",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-beauty-box": {
+    name: "ジャパンビューティーエッセンスボックス",
+    description: "厳選Jビューティー · 5点セット",
+    category: "Jビューティー · カレーション",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  // Stationery
+  "jp-precision-pens": {
+    name: "ジャパン精密ペンセット (0.3mm)",
+    description: "モノづくりゲルペン · 6色セット",
+    category: "ペン · モノづくり",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-travelers-notebook": {
+    name: "トラベラーズノートブックキット",
+    description: "レザーノート · リフィルインサート",
+    category: "ノートブック · アナログ",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-sticker-pack": {
+    name: "ジャパンステッカーコレクターパック",
+    description: "カワイイステッカー · 50枚セット",
+    category: "ステッカー · カワイイ",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  // Snacks
+  "jp-spicy-box": {
+    name: "ジャパンスパイシースナックチャレンジボックス",
+    description: "バイラルスパイシー · チャレンジパック",
+    category: "スナック · バイラル",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-dagashi-pack": {
+    name: "駄菓子バラエティパック",
+    description: "レトロキャンディ · 20種バラエティ",
+    category: "スナック · レトロ",
+    shipsFrom: "🇯🇵 ジャパン · 日本"
+  },
+  "jp-matcha-sweets": {
+    name: "マッチャスイーツボックス",
+    description: "抹茶チョコ · 饅頭 · キットカット",
+    category: "スイーツ · 抹茶",
     shipsFrom: "🇯🇵 ジャパン · 日本"
   }
 };

@@ -3,75 +3,45 @@
 import Image from "next/image";
 import { getAllDropshipProductsForCountry } from "@/lib/dropshipping";
 
-const japanFashionLanes = [
-  { emoji: "👘", label: "JAPAN street fashion · kimono lane", hint: "Japanese culture street print" },
-  { emoji: "🧥", label: "Minimal editorial · arena stage", hint: "JAPAN pick · live wired" },
-  { emoji: "🎌", label: "Kendo stage fits · duel night", hint: "Sword clash · flame burst lane" },
-  { emoji: "🛍️", label: "Lifestyle box · shop the fit", hint: "JAPAN dropship supplier" }
-] as const;
+const lanes = [
+  { emoji: "👘", label: "Street · kimono" },
+  { emoji: "🎌", label: "Kendo fits" },
+  { emoji: "🛍️", label: "Lifestyle box" },
+];
 
-/** Japan room · fashion + dropship inside Fashion tab */
 export function JapanRoomFashionTabPanel() {
-  const fashionProducts = getAllDropshipProductsForCountry("japan").filter((product) =>
-    product.category.toLowerCase().includes("fashion")
+  const products = getAllDropshipProductsForCountry("japan").filter((p) =>
+    p.category.toLowerCase().includes("fashion") || p.category.toLowerCase().includes("lifestyle")
   );
 
   return (
-    <div className="japan-room-fashion-tab-panel space-y-5">
-      <section className="a2030-holo-panel country-room-section" aria-label="Japan fashion">
-        <header className="text-center">
-          <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#fbbf24]">
-            JAPAN fashion · street · kimono lane
-          </p>
-          <h2 className="mt-2 font-['Bebas_Neue',sans-serif] text-2xl tracking-widest text-[#eef6ff] sm:text-3xl">
-            JAPAN · street couture
-          </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#c4d4ef]/90">
-            Japanese culture street prints, minimalist goods, and arena-ready fits wired for the JAPAN room.
-          </p>
-        </header>
-
-        <div className="mt-4 flex flex-wrap justify-center gap-2" role="list">
-          {japanFashionLanes.map((lane) => (
-            <span
-              key={lane.label}
-              className="east-asia-game-chip east-asia-game-chip--japan inline-flex max-w-full items-start gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-semibold"
-              role="listitem"
-              title={lane.hint}
-            >
-              <span aria-hidden="true">{lane.emoji}</span>
-              <span>{lane.label}</span>
-            </span>
+    <div className="a2030-holo-panel rounded-[1.25rem] border border-[#ff4466]/20 p-2.5 sm:p-3">
+      <header className="text-center">
+        <p className="text-[9px] font-black uppercase tracking-[0.16em] text-[#fbbf24]">👘 fashion · street couture</p>
+        <h2 className="mt-1 font-['Bebas_Neue',sans-serif] text-lg tracking-widest text-[#eef6ff] sm:text-xl">JAPAN · street</h2>
+      </header>
+      <div className="mt-2 flex flex-wrap justify-center gap-1.5">
+        {lanes.map((l) => (
+          <span key={l.label} className="east-asia-game-chip east-asia-game-chip--japan inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-semibold">
+            <span aria-hidden="true">{l.emoji}</span><span>{l.label}</span>
+          </span>
+        ))}
+      </div>
+      {products.length > 0 && (
+        <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+          {products.map((p) => (
+            <figure key={p.id} className="overflow-hidden rounded-lg border border-[#ff2bd6]/20 bg-[#0f172a]/70">
+              <div className="relative aspect-[4/3] w-full">
+                <Image src={p.imageUrl} alt={p.name} fill sizes="(max-width:640px) 50vw, 220px" className="object-cover" />
+              </div>
+              <figcaption className="px-2 py-1.5">
+                <p className="text-[10px] font-bold text-[#eef6ff] leading-tight">{p.flag} {p.name}</p>
+                <p className="text-[9px] text-[#9fb4d4] leading-tight">{p.description}</p>
+              </figcaption>
+            </figure>
           ))}
         </div>
-
-        {fashionProducts.length > 0 ? (
-          <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            {fashionProducts.map((product) => (
-              <figure
-                key={product.id}
-                className="overflow-hidden rounded-xl border border-[#ff2bd6]/20 bg-[#0f172a]/70"
-              >
-                <div className="relative aspect-[5/3] w-full">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 280px"
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="px-3 py-2">
-                  <p className="text-[11px] font-bold text-[#eef6ff]">
-                    {product.flag} {product.name}
-                  </p>
-                  <p className="mt-1 text-[10px] leading-5 text-[#9fb4d4]">{product.description}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        ) : null}
-      </section>
+      )}
     </div>
   );
 }

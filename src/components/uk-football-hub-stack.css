@@ -1035,6 +1035,455 @@
   color: #9fb4d4;
 }
 
+/* ═══════════════════════════════════════════════════════
+   FotMob / ESPN style · match cards + FIFA rows
+   ═══════════════════════════════════════════════════════ */
+
+/* ── FIFA recent wins list ── */
+.uk-fifa-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+
+@media (max-width: 520px) {
+  .uk-fifa-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── FIFA card ── */
+.uk-fifa-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.28);
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  justify-items: start;
+}
+
+.uk-fifa-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.35rem;
+}
+
+.uk-fifa-card-league {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00f5ff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.uk-fifa-card-time {
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: #7a82a8;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.uk-fifa-card-match {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.uk-fifa-card-team {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.uk-fifa-card-team--away {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.uk-fifa-card-name {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #eef6ff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 5.5rem;
+}
+
+.uk-fifa-card-score-center {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.uk-fifa-card-score {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #f7e7aa;
+  line-height: 1;
+}
+
+.uk-fifa-card-sep {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #7a82a8;
+}
+
+/* FIFA flag/strip reuse */
+.uk-fifa-flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.45);
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.uk-fifa-flag-strip {
+  display: block;
+  width: 1.85rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.uk-fifa-flag-strip--home { background-position: left center; }
+.uk-fifa-flag-strip--away { background-position: right center; }
+
+/* ── Fixture list ── */
+.uk-fixture-list {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-items: start;
+}
+
+/* ── Fixture card ── */
+.uk-fixture-card {
+  display: grid;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.28);
+  transition: border-color 0.2s ease;
+}
+
+.uk-fixture-card:hover {
+  border-color: rgba(0, 245, 255, 0.25);
+}
+
+/* Top bar */
+.uk-fixture-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.uk-fixture-comp {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a82a8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Status pill */
+.uk-fixture-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.uk-fixture-status--live {
+  border: 1px solid rgba(255, 77, 109, 0.4);
+  background: rgba(255, 77, 109, 0.15);
+  color: #ff4d6d;
+}
+
+.uk-fixture-status-dot--live {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: #ff4d6d;
+  animation: uk-fixture-live-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes uk-fixture-live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.uk-fixture-status--ft {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #9fb4d4;
+}
+
+.uk-fixture-status--upcoming {
+  border: 1px solid rgba(184, 255, 60, 0.25);
+  background: rgba(184, 255, 60, 0.08);
+  color: #b8ff3c;
+}
+
+/* Teams row */
+.uk-fixture-teams {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.uk-fixture-team {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.uk-fixture-team--home { justify-content: flex-start; }
+.uk-fixture-team--away {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.uk-fixture-name {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #eef6ff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.uk-fixture-crest {
+  width: 1.4rem;
+  height: 1.4rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.uk-fixture-flag {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Kickoff time display (center for upcoming) */
+.uk-fixture-kickoff {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  flex-shrink: 0;
+}
+
+.uk-fixture-kickoff-time {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #eef6ff;
+  line-height: 1;
+}
+
+.uk-fixture-kickoff-date {
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: #7a82a8;
+  white-space: nowrap;
+}
+
+/* Score center (for live/finished) */
+.uk-fixture-score-center {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.uk-fixture-score {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #f7e7aa;
+  line-height: 1;
+}
+
+.uk-fixture-sep {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #7a82a8;
+}
+
+/* Saved prediction */
+.uk-fixture-saved {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.45rem;
+  background: rgba(0, 245, 255, 0.06);
+  border: 1px solid rgba(0, 245, 255, 0.15);
+}
+
+.uk-fixture-saved-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a82a8;
+}
+
+.uk-fixture-saved-pick {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #00f5ff;
+  text-transform: capitalize;
+}
+
+.uk-fixture-saved-pts {
+  margin-left: auto;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #b8ff3c;
+  white-space: nowrap;
+}
+
+/* Expand button */
+.uk-fixture-expand-btn {
+  width: 100%;
+  border-radius: 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.3rem 0;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9fb4d4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.uk-fixture-expand-btn:hover {
+  border-color: rgba(184, 255, 60, 0.35);
+  background: rgba(184, 255, 60, 0.08);
+  color: #b8ff3c;
+}
+
+/* Pick form */
+.uk-fixture-pick {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.45rem;
+  align-items: end;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 520px) {
+  .uk-fixture-pick {
+    grid-template-columns: 1fr;
+  }
+}
+
+.uk-fixture-pick-label {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a82a8;
+}
+
+.uk-fixture-select,
+.uk-fixture-input {
+  min-width: 0;
+  border-radius: 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.35rem 0.55rem;
+  font-size: 0.72rem;
+  color: #eef6ff;
+}
+
+.uk-fixture-score-inputs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.uk-fixture-input {
+  width: 2.5rem;
+}
+
+.uk-fixture-submit {
+  border-radius: 999px;
+  border: 1px solid rgba(184, 255, 60, 0.4);
+  background: rgba(184, 255, 60, 0.12);
+  padding: 0.38rem 0.75rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #b8ff3c;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.uk-fixture-submit:hover {
+  background: rgba(184, 255, 60, 0.2);
+}
+
 .uk-football-predict-wrap .football-prediction-arena--uk-embed {
   gap: 0;
   width: 100%;

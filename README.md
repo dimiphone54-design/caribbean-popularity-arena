@@ -56,7 +56,7 @@ Country rooms show only **Back to The Arena** (fixed top-left pill).
 |-------|---------|
 | `/legal` | Legal document index |
 | `/legal/[slug]` | Terms, privacy, community, etc. |
-| `/command-center` | Owner panel (env flag only) |
+| `/command-center` | Owner panel (temporarily disabled in this build) |
 | `/rooms` | Redirects to Island Hub |
 
 ## Environment

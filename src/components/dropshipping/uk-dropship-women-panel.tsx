@@ -60,7 +60,8 @@ export function UkDropshipWomenPanel({ countryName, onOrdered }: UkDropshipWomen
                 <DropshipBuyButton
                   product={product}
                   countryName={countryName}
-                  onOrdered={onOrdered}
+                  flag={product.flag}
+                  onOrderedAction={onOrdered}
                   compact
                 />
               </div>

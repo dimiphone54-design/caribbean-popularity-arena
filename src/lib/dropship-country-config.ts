@@ -13,7 +13,7 @@ export type DropshipCountryConfig = {
 };
 
 const baseLegal =
-  "Arena lists supplier lanes only — we do not hold inventory and take no payment. Buyers contact sellers directly and arrange payment off-site with the seller.";
+  "Arena operates the customer checkout for supplier lanes and manages supplier payout through the platform. We do not hold inventory, and fulfillment still depends on the supplier partner.";
 
 const configs: DropshipCountryConfig[] = [
   {

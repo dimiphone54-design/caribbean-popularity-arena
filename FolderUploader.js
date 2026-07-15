@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { supabase } from '../lib/supabaseClient'; // Use the central Supabase client
-import styles from '../styles/FolderUploader.module.css'; // Import styles
+import { supabase } from './supabaseClient'; // Use the central Supabase client
+import styles from './FolderUploader.module.css'; // Import styles
 
 export default function FolderUploader({ bucketName }) {
   const [uploading, setUploading] = useState(false);

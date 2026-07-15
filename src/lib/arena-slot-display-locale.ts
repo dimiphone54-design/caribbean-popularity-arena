@@ -10,7 +10,7 @@ export type ArenaSlotDisplayLabels = {
 };
 
 const chinaSlotDisplay: ArenaSlotDisplayLabels = {
-  country: "中国",
+  country: "China",
   capital: "上海",
   liveBadge: "直播",
   pendingBadge: "待定",
@@ -43,7 +43,7 @@ const ecuadorSlotDisplay: ArenaSlotDisplayLabels = {
 };
 
 const polandSlotDisplay: ArenaSlotDisplayLabels = {
-  country: "Polska",
+  country: "Poland",
   capital: "Warszawa",
   liveBadge: "NA ŻYWO",
   pendingBadge: "Oczekuje",
@@ -54,7 +54,7 @@ const polandSlotDisplay: ArenaSlotDisplayLabels = {
 };
 
 const lithuaniaSlotDisplay: ArenaSlotDisplayLabels = {
-  country: "Lietuva",
+  country: "Lithuania",
   capital: "Vilnius",
   liveBadge: "TIESIOGIAI",
   pendingBadge: "Laukiama",
@@ -113,7 +113,7 @@ const japanTabLabels: ArenaSlotTabLabels = {
 };
 
 const japanSlotDisplay: ArenaSlotDisplayLabels = {
-  country: "日本",
+  country: "Japan",
   capital: "東京",
   liveBadge: "ライブ",
   pendingBadge: "待機中",

@@ -1,32 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { CotswoldsAtmosphereOverlay } from "@/components/cotswolds-atmosphere-overlay";
 import { CotswoldsGameSimulator } from "@/components/cotswolds-game-simulator";
 import { CotswoldsParkVideoBackdrop } from "@/components/cotswolds-park-video-backdrop";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
-import { ArenaSlotFashionTab } from "@/components/arena-slot-fashion-tab";
-import { ArenaSlotFoodTab } from "@/components/arena-slot-food-tab";
-import { ArenaSlotStudyHubTab } from "@/components/arena-slot-study-hub-tab";
-import { CountryRoomStudyHubTabPanel } from "@/components/country-room-study-hub-tab-panel";
-import { UkRoomFoodTabPanel } from "@/components/uk-room-food-tab-panel";
-import { ArenaSlotGamesTab } from "@/components/arena-slot-games-tab";
-import { UkRoomFashionTabPanel } from "@/components/uk-room-fashion-tab-panel";
+import { ukFoodScenes, ukFoodLanes } from "@/components/uk-room-food-tab-panel";
+import { UkFashionPanel } from "@/components/uk-fashion-panel";
 import { UkFootballHubStack } from "@/components/uk-football-hub-stack";
-import { UkRoomGamesTabPanel } from "@/components/uk-room-games-tab-panel";
 import { UkRoomCornerScroll } from "@/components/uk-room-corner-scroll";
 import { UKStudyHubTeacherLiveSlot } from "@/components/uk-study-hub-teacher-live-slot";
 import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
 import { useRoomLocale } from "@/components/room-locale-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { UkRoomHorizontalTitle } from "@/components/uk-wind-flag";
-import { getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
-import { cotswoldsMenActivityPanels } from "@/lib/cotswolds";
+import { cotswoldsLondonParkGirls, cotswoldsMenActivityPanels } from "@/lib/cotswolds";
 
 export function CotswoldsPage() {
   const { t } = useRoomLocale();
   const uk = t.uk;
-  const tabLabels = getArenaSlotTabLabels("UK");
   /** Men's dock · exact 1-click open / 1-click close */
   const [panelOpen, setPanelOpen] = useState(false);
   const [menSim, setMenSim] = useState<{ name: string; host: string } | null>(null);
@@ -37,7 +30,7 @@ export function CotswoldsPage() {
 
   return (
     <>
-      <main className="arena-2030 arena-2030-cotswolds relative flex min-h-screen flex-col overflow-x-hidden pb-56">
+      <main className="arena-2030 arena-2030-cotswolds relative flex min-h-screen flex-col overflow-x-hidden pb-16">
         <UkRoomCornerScroll />
 
         <div className="relative z-10">
@@ -69,6 +62,29 @@ export function CotswoldsPage() {
               </div>
             </header>
 
+            {/* ── UK Study Hub · standalone panel ── */}
+            <section
+              className="country-room-section relative overflow-hidden rounded-[1.25rem] border border-[#fbbf24]/20"
+              aria-label="UK Study Hub"
+              style={{
+                backgroundImage: "url('/uk-study-hub-bg.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className="absolute inset-0 bg-[#020c06]/40" aria-hidden="true" />
+              <div className="relative z-10 p-3">
+                <div className="flex flex-col items-center gap-1">
+                  <p className="a2030-electric-flash a2030-micro text-center text-2xl font-black uppercase tracking-wider text-[#fbbf24] sm:text-3xl">
+                    📚 UK Study Hub · London · campus lane
+                  </p>
+                </div>
+                <div className="mt-2">
+                  <UKStudyHubTeacherLiveSlot />
+                </div>
+              </div>
+            </section>
+
             <figure className="cotswolds-museum-box country-room-section">
               <div className="cotswolds-museum-box-inner">
                 <figcaption className="cotswolds-museum-box-label">{uk.cotswoldsMuseumLabel}</figcaption>
@@ -77,54 +93,6 @@ export function CotswoldsPage() {
             </figure>
 
             <UkFootballHubStack countryId="uk" countryName="United Kingdom" flag="🇬🇧" />
-
-            {/* ── UK Study Hub · standalone panel ── */}
-            <section
-              className="country-room-section relative overflow-hidden rounded-2xl"
-              aria-label="UK Study Hub"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&auto=format&fit=crop')",
-                backgroundSize: "cover",
-                backgroundPosition: "center top",
-              }}
-            >
-              <div className="absolute inset-0 bg-[#020c06]/30" aria-hidden="true" />
-              <div className="relative z-10 p-4 sm:p-6">
-                {/* Panel header */}
-                <div className="mb-5 flex items-center gap-3">
-                  <span className="text-2xl" aria-hidden="true">📚</span>
-                  <div>
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#fbbf24]">
-                      UK Study Hub · London · campus lane
-                    </p>
-                    <h2 className="font-['Bebas_Neue',sans-serif] text-2xl tracking-widest text-[#eef6ff] sm:text-3xl">
-                      United Kingdom · Study Hub
-                    </h2>
-                  </div>
-                </div>
-                {/* Lane chips */}
-                <div className="mb-6 flex flex-wrap gap-2" role="list">
-                  {[
-                    { emoji: "📚", label: "London campus · library lane" },
-                    { emoji: "🎓", label: "GCSE · A-Level prep hub" },
-                    { emoji: "💻", label: "Remote study · arena desk" },
-                    { emoji: "🗣️", label: "English practice circle" },
-                  ].map((lane) => (
-                    <span
-                      key={lane.label}
-                      role="listitem"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-[#94a3b8]/30 bg-[#0a0a00]/50 px-3 py-1.5 text-[10px] font-semibold text-[#cbd5e1] backdrop-blur-sm"
-                    >
-                      <span aria-hidden="true">{lane.emoji}</span>
-                      {lane.label}
-                    </span>
-                  ))}
-                </div>
-                {/* Teacher live slots */}
-                <UKStudyHubTeacherLiveSlot />
-              </div>
-            </section>
 
             {/* ── UK Dropshipping · standalone panel ── */}
             <section className="country-room-section w-full" aria-label="UK Dropshipping market">
@@ -136,21 +104,101 @@ export function CotswoldsPage() {
               />
             </section>
 
-            <section className="country-room-section w-full">
-              <div className="ai-real-slot-slot-tabs uk-room-country-tabs">
-                <ArenaSlotGamesTab mode="room" countryName="United Kingdom" label={tabLabels.games}>
-                  <UkRoomGamesTabPanel />
-                </ArenaSlotGamesTab>
-                <ArenaSlotFashionTab mode="room" countryName="United Kingdom" label={tabLabels.fashion}>
-                  <UkRoomFashionTabPanel />
-                </ArenaSlotFashionTab>
-                <ArenaSlotFoodTab mode="room" countryName="United Kingdom" label={tabLabels.food}>
-                  <UkRoomFoodTabPanel />
-                </ArenaSlotFoodTab>
-                <ArenaSlotStudyHubTab mode="room" countryName="United Kingdom" label={tabLabels.studyHub}>
-                  <CountryRoomStudyHubTabPanel countryId="uk" />
-                </ArenaSlotStudyHubTab>
+            {/* ── UK Welcome panel #2 ── */}
+            <figure className="cotswolds-museum-box country-room-section">
+              <div className="cotswolds-museum-box-inner">
+                <p className="cotswolds-quote-text a2030-micro text-[10px] font-bold sm:text-xs">
+                  🪵 &quot;NOWT WRONG WI&apos; YA, LOVE? Come in, sit yourself down — don&apos;t be shy! We&apos;ve got the kettle on and a plate of biscuits sorted. Pull up a chair and have a proper chinwag. You&apos;re among friends here, so make yourself at home!&quot;
+                </p>
               </div>
+            </figure>
+
+            {/* ── UK Park Games · standalone panel ── */}
+            <section className="country-room-section w-full" aria-label="UK Park Games">
+              <div className="a2030-holo-panel scroll-mt-24 rounded-[1.25rem] border border-[#b8ff3c]/20 p-3 sm:p-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase text-[#b8ff3c] sm:text-xs">
+                    🇬🇧 UK park games
+                  </p>
+                  <span className="a2030-pulse-ring inline-flex h-2 w-2 rounded-full bg-[#b8ff3c]" />
+                </div>
+                <div className="mt-3 space-y-1.5" role="list">
+                  {cotswoldsLondonParkGirls.map((member, index) => {
+                    const parts = member.game.split("·");
+                    const orderTag = parts.length > 1 ? parts[0].trim() : `Game ${index + 1}`;
+                    const gameName = (parts.length > 1 ? parts.slice(1).join("·") : member.game).trim();
+                    const ready = 46 + ((member.id * 13) % 48);
+                    return (
+                      <button
+                        key={member.id}
+                        type="button"
+                        className="flex w-full items-center gap-2 rounded-lg border border-white/5 bg-[#0a0010]/50 px-3 py-2 text-left transition hover:border-[#b8ff3c]/25 hover:bg-[#b8ff3c]/5"
+                      >
+                        <span className="text-lg" aria-hidden="true">{member.flag}</span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[12px] font-bold text-[#fef9c3]">{gameName}</span>
+                          <span className="block text-[10px] text-[#8fa3c4]">{member.name.split(" ")[0]} · {member.area}</span>
+                        </span>
+                        <span className="shrink-0 rounded-full bg-[#b8ff3c]/10 px-2 py-0.5 text-[9px] font-bold text-[#b8ff3c]">
+                          {ready}% ready
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+
+            {/* ── UK Food · standalone panel ── */}
+            <section className="country-room-section w-full" aria-label="UK Food">
+              <div className="a2030-holo-panel scroll-mt-24 rounded-[1.25rem] border border-[#fbbf24]/20 p-3 sm:p-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase text-[#fbbf24] sm:text-xs">
+                    🇬🇧 UK food
+                  </p>
+                  <span className="a2030-pulse-ring inline-flex h-2 w-2 rounded-full bg-[#fbbf24]" />
+                </div>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {ukFoodScenes.map((scene) => (
+                    <figure
+                      key={scene.id}
+                      className="overflow-hidden rounded-xl border border-[#94a3b8]/25 bg-[#0f172a]/70"
+                    >
+                      <div className="relative aspect-[5/3] w-full">
+                        <Image
+                          src={scene.imageUrl}
+                          alt={scene.label}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 280px"
+                          className="object-cover"
+                        />
+                      </div>
+                      <figcaption className="px-3 py-2">
+                        <p className="text-[11px] font-bold text-[#eef6ff]">{scene.label}</p>
+                        <p className="mt-1 text-[10px] leading-5 text-[#9fb4d4]">{scene.caption}</p>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+                <div className="mt-3 flex flex-wrap justify-center gap-2" role="list">
+                  {ukFoodLanes.map((lane) => (
+                    <span
+                      key={lane.label}
+                      className="inline-flex max-w-full items-start gap-1.5 rounded-full border border-[#fbbf24]/25 px-3 py-1.5 text-[10px] font-semibold text-[#fbbf24]"
+                      role="listitem"
+                      title={lane.hint}
+                    >
+                      <span aria-hidden="true">{lane.emoji}</span>
+                      <span>{lane.label}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* ── UK Fashion · standalone panel ── */}
+            <section className="country-room-section w-full" aria-label="UK Fashion panel">
+              <UkFashionPanel />
             </section>
           </RoomCountryPageShell>
         </div>

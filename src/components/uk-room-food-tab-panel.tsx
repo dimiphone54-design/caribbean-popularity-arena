@@ -4,26 +4,38 @@ import Image from "next/image";
 import { getAllDropshipProductsForCountry } from "@/lib/dropshipping";
 import { UK_ROOM_PANEL } from "@/lib/uk-room-panel";
 
-const ukFoodScenes = [
+export const ukFoodScenes = [
   {
     id: "fish-chips-park",
-    label: "Fish & chips · Hyde Park bench",
-    caption: "Charlotte & Rosie — classic UK park lunch on the bench.",
+    label: "Fish & Chips · Hyde Park Takeover",
+    caption: "Charlotte & Rosie owning the bench — nobody eats harder.",
     imageUrl: "/cotswolds-park-feed-uk-dish.png"
   },
   {
-    id: "national-dish-crowd",
-    label: "UK national dish · fish & chips",
-    caption: "Everybody eating fish & chips — crowd lane in the park.",
-    imageUrl: "/cotswolds-uk-national-dish-crowd.png"
+    id: "sunday-roast-crowd",
+    label: "UK National Dish · Sunday Roast Domination",
+    caption: "Whole park locked in on roast dinner — UK food royalty.",
+    imageUrl: "/uk-sunday-roast-dish.png"
+  },
+  {
+    id: "afternoon-tea-picnic",
+    label: "Afternoon Tea · Park Picnic",
+    caption: "Holland Park lanes going full tea service — cupcakes, scones, zero chill.",
+    imageUrl: "/uk-afternoon-tea-picnic.png"
+  },
+  {
+    id: "bench-lunch-games",
+    label: "Bench Lunch · Games Night Fuel",
+    caption: "Cotswolds park crew loading up before game night — bench energy only.",
+    imageUrl: "/uk-bench-lunch-games.png"
   }
 ] as const;
 
-const ukFoodLanes = [
-  { emoji: "🐟", label: "Fish & chips · national favourite", hint: "Classic UK park lunch" },
-  { emoji: "🫖", label: "Afternoon tea · park picnic", hint: "Holland Park · Hyde Park lanes" },
-  { emoji: "🥧", label: "Sunday roast vibes · pub lane", hint: "Manchester · London wired" },
-  { emoji: "🍟", label: "Bench lunch · games night fuel", hint: "Cotswolds park · live eat-along" }
+export const ukFoodLanes = [
+  { emoji: "🍳", label: "Full English · National Favourite", hint: "Classic UK park breakfast" },
+  { emoji: "🫖", label: "Afternoon Tea · Park Picnic", hint: "Holland Park · Hyde Park lanes" },
+  { emoji: "🥧", label: "Sunday Roast Vibes · Pub Lane", hint: "Manchester · London wired" },
+  { emoji: "🍟", label: "Bench Lunch · Games Night Fuel", hint: "Cotswolds park · live eat-along" }
 ] as const;
 
 /** UK room · dishes + dropship food inside Food tab */

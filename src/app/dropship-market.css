@@ -2701,3 +2701,204 @@
   background: rgba(190, 24, 93, 0.18) !important;
   box-shadow: 0 0 16px rgba(251, 113, 133, 0.18) !important;
 }
+
+/* ═══════════════════════════════════════════════════════
+   UK room · Dropship Market alignment + organization
+   ═══════════════════════════════════════════════════════ */
+
+.arena-2030-cotswolds .dropship-market-panel--room {
+  padding: 0.75rem;
+  border-color: rgba(215, 180, 106, 0.25);
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-market-room-intro {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-market-room-kicker {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #d7b46a;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-market-room-sub {
+  font-size: 0.62rem;
+  color: #9fb4d4;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-market-room-steps {
+  gap: 0.35rem;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-market-room-step {
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.45rem;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-market-room-step-title {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #eef6ff;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-market-room-step-body {
+  font-size: 0.58rem;
+  color: #9fb4d4;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-category-lanes {
+  margin-bottom: 0.5rem;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-category-lane {
+  padding: 0.3rem 0.55rem;
+  font-size: 0.58rem;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-options-grid {
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 480px) {
+  .arena-2030-cotswolds .dropship-market-panel--room .dropship-options-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: grid;
+  }
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-grid {
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 480px) {
+  .arena-2030-cotswolds .dropship-market-panel--room .dropship-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: grid;
+  }
+}
+
+@media (min-width: 768px) {
+  .arena-2030-cotswolds .dropship-market-panel--room .dropship-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-card {
+  border-color: rgba(215, 180, 106, 0.18);
+  background: rgba(6, 10, 22, 0.65);
+  border-radius: 0.75rem;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-card--option {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+@media (max-width: 479px) {
+  .arena-2030-cotswolds .dropship-market-panel--room .dropship-product-card--option {
+    flex-direction: column;
+  }
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-thumb {
+  width: 6.5rem;
+  min-height: 6.5rem;
+  border-radius: 0.75rem 0 0 0.75rem;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 479px) {
+  .arena-2030-cotswolds .dropship-market-panel--room .dropship-product-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: auto;
+    border-radius: 0.75rem 0.75rem 0 0;
+  }
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-card:not(.dropship-product-card--option) .dropship-product-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-body {
+  padding: 0.6rem 0.7rem;
+  gap: 0.25rem;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-category {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #eef6ff;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-desc {
+  font-size: 0.62rem;
+  color: #9fb4d4;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-ship {
+  font-size: 0.55rem;
+  color: #b8ff3c;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-price {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #d7b46a;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-buy-btn {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.58rem;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-market-badge {
+  font-size: 0.55rem;
+  padding: 0.2rem 0.45rem;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-section-label {
+  padding-left: 0.25rem;
+  border-left: 2px solid rgba(215, 180, 106, 0.45);
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-grid {
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+@media (min-width: 480px) {
+  .arena-2030-cotswolds .dropship-market-panel--room .dropship-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-grid .dropship-product-card {
+  flex-direction: column;
+  border-color: rgba(215, 180, 106, 0.18);
+  background: rgba(6, 10, 22, 0.65);
+  border-radius: 0.75rem;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-grid .dropship-product-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--room .dropship-product-grid .dropship-product-body {
+  padding: 0.6rem 0.7rem;
+  gap: 0.25rem;
+}

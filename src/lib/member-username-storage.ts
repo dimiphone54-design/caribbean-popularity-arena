@@ -36,7 +36,7 @@ export function formatArenaWelcomeLine(name: string) {
   return `WELCOME ${name.trim().toUpperCase()}`;
 }
 
-/** Spoken welcome · matches welcome panel (WELCOME DIMITRI → Welcome Dimitri). */
+/** Spoken welcome · matches welcome panel (WELCOME CHARLIE → Welcome Charlie). */
 export function formatWelcomeVoiceGreeting(name: string, locale: RoomLocaleId = "en") {
   const cleaned = name.trim().replace(/^@+/, "");
   if (cleaned.length < 2) return "";

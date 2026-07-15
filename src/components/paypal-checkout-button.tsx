@@ -2,6 +2,7 @@
 
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
+import { PLATFORM_COMMERCE_COPY } from "@/lib/platform-commerce";
 
 type PayPalCheckoutButtonProps = {
   plan: string;
@@ -25,17 +26,21 @@ export function PayPalCheckoutButton({
 
   if (!clientId) {
     return (
-      <button
-        disabled
-        className="inline-flex w-full items-center justify-center rounded-full border border-[var(--luxury-mist)]/20 bg-black/25 px-5 py-3 text-sm font-bold text-[var(--luxury-mist)]"
-      >
-        PayPal not configured
-      </button>
+      <div>
+        <button
+          disabled
+          className="inline-flex w-full items-center justify-center rounded-full border border-[var(--luxury-mist)]/20 bg-black/25 px-5 py-3 text-sm font-bold text-[var(--luxury-mist)]"
+        >
+          PayPal not configured
+        </button>
+        <p className="mt-2 text-center text-xs text-[var(--luxury-mist)]/80">{PLATFORM_COMMERCE_COPY.checkoutNotice}</p>
+      </div>
     );
   }
 
   return (
     <div className="paypal-checkout-button">
+      <p className="mb-2 text-center text-xs text-[var(--luxury-mist)]/80">{PLATFORM_COMMERCE_COPY.platformMerchantLabel}</p>
       <PayPalScriptProvider
         options={{
           clientId,
@@ -114,6 +119,7 @@ export function PayPalCheckoutButton({
           {error}
         </p>
       )}
+      <p className="mt-2 text-center text-[11px] text-[var(--luxury-mist)]/70">{PLATFORM_COMMERCE_COPY.payoutNotice}</p>
     </div>
   );
 }

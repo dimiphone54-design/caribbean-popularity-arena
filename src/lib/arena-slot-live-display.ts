@@ -2,7 +2,7 @@ import { arenaCreators } from "@/lib/arena-experience";
 import type { ArenaSlotOccupancy } from "@/lib/arena-slot-occupancy";
 
 /** Keep in sync with ARENA_PRIMARY_MASTER · avoid importing arena-master-identity (circular via arena-master-key) */
-const ownerPreviewNames = new Set(["dimitri", "arena owner"]);
+const ownerPreviewNames = new Set(["charlie", "arena owner"]);
 
 export function isArenaOwnerPreviewDisplayName(displayName: string) {
   const normalized = displayName.trim().toLowerCase();

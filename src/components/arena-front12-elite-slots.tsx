@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, type CSSProperties, type MouseEvent } from "react";
-import { ArenaJoinSignupModal } from "@/components/arena-join-signup-modal";
+
 import { ArenaSlotTrendingTopics } from "@/components/arena-slot-trending-topics";
 import { ArenaSlotIceFrostOverlay } from "@/components/arena-slot-ice-frost-overlay";
 import { ArenaSlotWomanSignupModal } from "@/components/arena-slot-woman-signup-modal";
@@ -12,7 +12,6 @@ import type { ArenaCreatorSlot } from "@/lib/arena-experience";
 import { formatFreeLabel } from "@/lib/arena-display-labels";
 import { getArenaCountrySlotMeta } from "@/lib/arena-country-slot-meta";
 import { getArenaEliteSlotTheme } from "@/lib/arena-elite-slot-themes";
-import { getArenaSlotPhotosForCountry } from "@/lib/arena-slot-real-people";
 import {
   getOccupiedArenaSlotCountdownLabel,
   formatArenaSlotCountdown
@@ -124,8 +123,6 @@ function CountryGirlSlotCard({
   const masterKeyActive = useArenaMasterKeyActive();
   const theme = getArenaEliteSlotTheme(slot);
   const countryMeta = getArenaCountrySlotMeta(slot);
-  const photos = getArenaSlotPhotosForCountry(slot.islandCode);
-  const [photoSrc, setPhotoSrc] = useState(() => photos.local);
   const isActive = Boolean(occupancy);
   const isFrozen = !isActive && isArenaSlotFrozenForUi(slot.islandCode, masterKeyActive);
   const isSignInOpen = !isActive && !isFrozen;
@@ -276,18 +273,6 @@ function CountryGirlSlotCard({
         {isFrozen ? <ArenaSlotIceFrostOverlay hideStamp /> : null}
         {isActive ? (
           <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={photoSrc}
-              alt={`${displayName} · ${slot.country}${countryMeta.languageLabel ? ` · ${countryMeta.languageLabel}` : ""}`}
-              className="ai-real-slot-photo"
-              loading={slotRank <= 4 ? "eager" : "lazy"}
-              decoding="async"
-              referrerPolicy="no-referrer"
-              onError={() => {
-                setPhotoSrc((current) => (current === photos.url ? current : photos.url));
-              }}
-            />
             <div className="ai-real-slot-scan" aria-hidden="true" />
             <div className="ai-real-slot-vignette" aria-hidden="true" />
           </>
@@ -601,19 +586,7 @@ export function ArenaFront12EliteSlots({
       </div>
     </section>
 
-      {joinSlot ? (
-        <ArenaJoinSignupModal
-          open
-          slotRank={joinSlot.rank}
-          countryLabel={`${joinSlot.flag} ${joinSlot.country}`}
-          onClose={() => setJoinSlot(null)}
-          onJoined={() => {
-            const slot = joinSlot;
-            setJoinSlot(null);
-            setGirlSignInSlot(slot);
-          }}
-        />
-      ) : null}
+
 
       {girlSignInSlot ? (
         <ArenaSlotWomanSignupModal

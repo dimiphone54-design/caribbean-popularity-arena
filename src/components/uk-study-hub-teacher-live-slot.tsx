@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { LiveSlotMarketRateCard } from "@/components/live-slot-market-rate-card";
 import {
   EMPTY_TEACHER_APPLICATION,
   UK_PROFESSOR_LEVELS,
@@ -33,7 +34,7 @@ function GiftButton({
       <span className="text-xl" aria-hidden="true">{tier.emoji}</span>
       <span className="text-[10px] font-black uppercase tracking-[0.1em] text-[#fef9c3]">{tier.label}</span>
       <span className="text-[10px] font-bold text-[#fbbf24]">£{tier.amountGbp}</span>
-      <span className="text-[9px] text-[#86efac]/70">100% to teacher</span>
+      <span className="text-[9px] text-[#86efac]/70">Platform payout share</span>
     </button>
   );
 }
@@ -59,7 +60,7 @@ function GiftToast({
       <p className="mt-2 text-sm font-black text-[#fef9c3]">
         You sent {tier.label} to {teacherName}!
       </p>
-      <p className="mt-1 text-xs text-[#86efac]">£{tier.amountGbp} goes 100% to the teacher 🎉</p>
+      <p className="mt-1 text-xs text-[#86efac]">£{tier.amountGbp} is processed by platform checkout and paid out by the platform 🎉</p>
       <p className="mt-1 text-[10px] text-[#64748b]">{tier.effect}</p>
       <button
         type="button"
@@ -145,7 +146,7 @@ function TeacherApplyForm({ onClose }: { onClose: () => void }) {
         <p className="text-sm font-black text-[#f0fdf4]">Application received!</p>
         <p className="text-xs leading-5 text-[#86efac]/80">
           We&apos;ll review your profile and add you to the UK Study Hub live slots.
-          Gift payouts will go to the card details you provided.
+          Approved creator payouts will be sent by the platform using the payout details you provided.
         </p>
         <button type="button" onClick={onClose}
           className="mt-2 rounded-lg border border-[#86efac]/30 px-4 py-1.5 text-xs font-bold text-[#86efac] transition hover:border-[#86efac]/60">
@@ -166,7 +167,7 @@ function TeacherApplyForm({ onClose }: { onClose: () => void }) {
         </p>
         <h3 className="mt-1 text-base font-black text-[#f0fdf4]">Apply to go live</h3>
         <p className="mt-1 text-xs leading-5 text-[#94a3b8]">
-          Free to go live. Students gift you directly — you keep 100% this month.
+          Free to go live. Students pay through platform checkout and approved teacher payouts are handled by the platform.
         </p>
       </header>
 
@@ -260,11 +261,11 @@ function TeacherApplyForm({ onClose }: { onClose: () => void }) {
         <div className="space-y-3">
           <div className="rounded-xl border border-[#fbbf24]/20 bg-[#1c1200]/50 p-3">
             <p className="text-[10px] font-bold text-[#fbbf24]">
-              🎁 Gifts from students go 100% to you this month
+              🎁 Gifts from students are processed through the platform this month
             </p>
             <p className="mt-1 text-[10px] text-[#94a3b8]">
-              Enter your card details so we can send your gift earnings directly to you.
-              Your card info is handled securely — we never store raw card numbers.
+              Enter payout details so the platform can send your approved creator earnings.
+              Sensitive payment information should be tokenized by a real payout provider before production use.
             </p>
           </div>
           <FieldInput id="tf-cardholder" label="Cardholder name"

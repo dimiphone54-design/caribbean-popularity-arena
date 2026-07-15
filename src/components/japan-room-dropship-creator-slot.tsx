@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { DropshipBuyButton } from "@/components/dropshipping/dropship-buy-button";
-import { JapanRoomDropshipCreatorSignupPanel } from "@/components/japan-room-dropship-creator-signup-panel";
+
 import { formatDropshipPrice } from "@/lib/dropshipping";
 import { getDropshipMarketCopy, getDropshipProductDisplay } from "@/lib/dropship-market-copy";
 import {
@@ -31,7 +31,6 @@ export function JapanRoomDropshipCreatorSlot() {
 
   const [occupancy, setOccupancy] = useState<ArenaSlotOccupancy | null>(null);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
-  const [entryNotice, setEntryNotice] = useState<string | null>(null);
 
   useEffect(() => {
     const sync = () => {
@@ -102,7 +101,6 @@ export function JapanRoomDropshipCreatorSlot() {
           {countdownLabel ? (
             <p className="japan-dropship-creator-slot-countdown">{countdownLabel} live left</p>
           ) : null}
-          {entryNotice ? <p className="japan-dropship-creator-slot-entered">{entryNotice}</p> : null}
 
           <ul className="japan-dropship-creator-slot-products" role="list">
             {products.map((product) => {
@@ -133,15 +131,6 @@ export function JapanRoomDropshipCreatorSlot() {
               <DropshipBuyButton product={featured} countryName="Japan" compact />
             ) : null}
           </div>
-
-          {!isLive ? (
-            <JapanRoomDropshipCreatorSignupPanel
-              slot={slot}
-              onEntered={(name) => {
-                setEntryNotice(`${name} is live · SLOT 12 · showing Japan dropship picks`);
-              }}
-            />
-          ) : null}
 
           <p className="japan-dropship-creator-slot-foot">
             {copy.marketOnlyBadge} · {copy.shipsFrom} Japan suppliers · creator shows · fan buys below

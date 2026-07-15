@@ -215,51 +215,154 @@ export function DropshipMarketPanel({
         <>
           <DropshipCategoryLanes selectedLane={selectedLane} onSelectLane={setSelectedLane} compact={isRoom} countryId={countryId} />
 
-          <ul className="dropship-options-grid mt-3" role="list">
-            {visibleOptionProducts.map((product) => {
-              const display = getDropshipProductDisplay(product, countryId);
-              return (
-              <li key={product.id} className="dropship-product-card dropship-product-card--option" role="listitem">
-                <div
-                  className="dropship-product-thumb"
-                  style={{ backgroundImage: `url('${product.imageUrl}')` }}
-                  aria-hidden="true"
-                />
-                <div className="dropship-product-body">
-                  <p className="dropship-product-category">{display.name ?? display.category}</p>
-                  <p className="dropship-product-desc">{display.description}</p>
-                  <p className="dropship-product-ship">{copy.shipsFrom} {display.shipsFrom}</p>
-                  <p className="dropship-product-price">{formatDropshipPrice(product.price, product.currency, countryId)}</p>
-                  <DropshipBuyButton product={product} countryName={countryName} onOrdered={refreshOrders} compact={isRoom} />
-                </div>
-              </li>
-              );
-            })}
-          </ul>
+          {isRoom && countryId === "uk" && !selectedLane ? (
+            <>
+              <p className="dropship-section-label mt-3 text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">Lane picks</p>
+              <ul className="dropship-product-grid mt-2" role="list">
+                {visibleOptionProducts.map((product) => {
+                  const display = getDropshipProductDisplay(product, countryId);
+                  return (
+                  <li key={product.id} className="dropship-product-card" role="listitem">
+                    <div
+                      className="dropship-product-thumb"
+                      style={{ backgroundImage: `url('${product.imageUrl}')` }}
+                      aria-hidden="true"
+                    />
+                    <div className="dropship-product-body">
+                      <p className="dropship-product-category">{display.name ?? display.category}</p>
+                      <p className="dropship-product-desc">{display.description}</p>
+                      <p className="dropship-product-ship">{copy.shipsFrom} {display.shipsFrom}</p>
+                      <p className="dropship-product-price">{formatDropshipPrice(product.price, product.currency, countryId)}</p>
+                      <DropshipBuyButton product={product} countryName={countryName} flag={flag} onOrderedAction={refreshOrders} compact={isRoom} />
+                    </div>
+                  </li>
+                  );
+                })}
+              </ul>
+              {featuredProducts.length > 0 ? (
+                <>
+                  <p className="dropship-section-label mt-4 text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">UK picks</p>
+                  <ul className="dropship-product-grid mt-2" role="list">
+                    {featuredProducts.map((product) => {
+                      const display = getDropshipProductDisplay(product, countryId);
+                      return (
+                      <li key={product.id} className="dropship-product-card" role="listitem">
+                        <div
+                          className="dropship-product-thumb"
+                          style={{ backgroundImage: `url('${product.imageUrl}')` }}
+                          aria-hidden="true"
+                        />
+                        <div className="dropship-product-body">
+                          <p className="dropship-product-category">{display.name ?? display.category}</p>
+                          <p className="dropship-product-desc">{display.description}</p>
+                          <p className="dropship-product-ship">{copy.shipsFrom} {display.shipsFrom}</p>
+                          <p className="dropship-product-price">{formatDropshipPrice(product.price, product.currency, countryId)}</p>
+                          <DropshipBuyButton
+                            product={product}
+                            countryName={countryName}
+                            flag={flag}
+                            onOrderedAction={refreshOrders}
+                            compact={isRoom}
+                            footer={product.id === "uk-park-games-kit" ? (
+                              <div className="space-y-2">
+                                <div className="rounded-lg border border-[#b8ff3c]/15 bg-[#b8ff3c]/5 p-2.5">
+                                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#b8ff3c]">Live Slots</p>
+                                  <div className="mt-2 space-y-1.5">
+                                    <div className="rounded-lg border border-white/8 bg-[#0a0010]/50 px-2.5 py-2">
+                                      <div className="flex items-center justify-between">
+                                        <span className="text-[11px] font-bold text-[#fef9c3]">Slot 1</span>
+                                        <span className="rounded-full bg-[#b8ff3c]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#b8ff3c]">LIVE</span>
+                                      </div>
+                                      <p className="mt-1 text-[10px] text-[#8fa3c4]">Go Live · Show Your Makeup · Get Gifted</p>
+                                      <p className="mt-0.5 text-[9px] text-white/40">1hr slot · Most gifts = champion</p>
+                                    </div>
+                                    <div className="rounded-lg border border-white/8 bg-[#0a0010]/50 px-2.5 py-2">
+                                      <div className="flex items-center justify-between">
+                                        <span className="text-[11px] font-bold text-[#fef9c3]">Slot 2</span>
+                                        <span className="rounded-full border border-white/10 bg-white/5 px-1.5 py-0.5 text-[9px] text-white/40">OPEN</span>
+                                      </div>
+                                      <p className="mt-1 text-[10px] text-[#8fa3c4]">Waiting for creator</p>
+                                      <p className="mt-0.5 text-[9px] text-white/40">1hr slot · Claim to go live</p>
+                                    </div>
+                                    <div className="rounded-lg border border-[#d7b46a]/15 bg-[#d7b46a]/5 px-2.5 py-2">
+                                      <p className="text-[10px] font-bold text-[#d7b46a]">Gift Tiers</p>
+                                      <div className="mt-1.5 flex flex-wrap gap-1">
+                                        {["💄 £1", "🪞 £2", "💗 £5", "👑 £10", "💎 £25", "🏆 £50"].map((gift) => (
+                                          <span key={gift} className="rounded-full border border-white/10 bg-white/5 px-1.5 py-0.5 text-[9px] text-white/60">{gift}</span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <div className="rounded-lg border border-white/8 bg-[#0a0010]/50 px-2.5 py-2">
+                                      <p className="text-[10px] font-bold text-[#fef9c3]">Champion</p>
+                                      <p className="mt-1 text-[10px] text-[#8fa3c4]">Jade Monroe · £184</p>
+                                      <div className="mt-1 flex flex-wrap gap-1">
+                                        {["Sienna Clarke £112", "Aaliyah Grant £87", "Priya Sharma £63", "Leila Dupont £41"].map((entry) => (
+                                          <span key={entry} className="text-[9px] text-white/40">{entry}</span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : undefined}
+                          />
+                        </div>
+                      </li>
+                      );
+                    })}
+                  </ul>
+                </>
+              ) : null}
+            </>
+          ) : (
+            <>
+              <ul className="dropship-options-grid mt-3" role="list">
+                {visibleOptionProducts.map((product) => {
+                  const display = getDropshipProductDisplay(product, countryId);
+                  return (
+                  <li key={product.id} className="dropship-product-card dropship-product-card--option" role="listitem">
+                    <div
+                      className="dropship-product-thumb"
+                      style={{ backgroundImage: `url('${product.imageUrl}')` }}
+                      aria-hidden="true"
+                    />
+                    <div className="dropship-product-body">
+                      <p className="dropship-product-category">{display.name ?? display.category}</p>
+                      <p className="dropship-product-desc">{display.description}</p>
+                      <p className="dropship-product-ship">{copy.shipsFrom} {display.shipsFrom}</p>
+                      <p className="dropship-product-price">{formatDropshipPrice(product.price, product.currency, countryId)}</p>
+                      <DropshipBuyButton product={product} countryName={countryName} flag={flag} onOrderedAction={refreshOrders} compact={isRoom} />
+                    </div>
+                  </li>
+                  );
+                })}
+              </ul>
 
-          {!selectedLane && featuredProducts.length > 0 ? (
-            <ul className="dropship-product-grid mt-4" role="list">
-              {featuredProducts.map((product) => {
-                const display = getDropshipProductDisplay(product, countryId);
-                return (
-                <li key={product.id} className="dropship-product-card" role="listitem">
-                  <div
-                    className="dropship-product-thumb"
-                    style={{ backgroundImage: `url('${product.imageUrl}')` }}
-                    aria-hidden="true"
-                  />
-                  <div className="dropship-product-body">
-                    <p className="dropship-product-category">{display.name ?? display.category}</p>
-                    <p className="dropship-product-desc">{display.description}</p>
-                    <p className="dropship-product-ship">{copy.shipsFrom} {display.shipsFrom}</p>
-                    <p className="dropship-product-price">{formatDropshipPrice(product.price, product.currency, countryId)}</p>
-                    <DropshipBuyButton product={product} countryName={countryName} onOrdered={refreshOrders} compact={isRoom} />
-                  </div>
-                </li>
-                );
-              })}
-            </ul>
-          ) : null}
+              {!selectedLane && featuredProducts.length > 0 ? (
+                <ul className="dropship-product-grid mt-4" role="list">
+                  {featuredProducts.map((product) => {
+                    const display = getDropshipProductDisplay(product, countryId);
+                    return (
+                    <li key={product.id} className="dropship-product-card" role="listitem">
+                      <div
+                        className="dropship-product-thumb"
+                        style={{ backgroundImage: `url('${product.imageUrl}')` }}
+                        aria-hidden="true"
+                      />
+                      <div className="dropship-product-body">
+                        <p className="dropship-product-category">{display.name ?? display.category}</p>
+                        <p className="dropship-product-desc">{display.description}</p>
+                        <p className="dropship-product-ship">{copy.shipsFrom} {display.shipsFrom}</p>
+                        <p className="dropship-product-price">{formatDropshipPrice(product.price, product.currency, countryId)}</p>
+                        <DropshipBuyButton product={product} countryName={countryName} flag={flag} onOrderedAction={refreshOrders} compact={isRoom} />
+                      </div>
+                    </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
+            </>
+          )}
         </>
       )}
 

@@ -1,10 +1,12 @@
+import { env } from "@/lib/env";
+
 const PAYPAL_BASE = "https://api-m.sandbox.paypal.com";
 
 function getPayPalConfig() {
   const clientId = process.env.PAYPAL_CLIENT_ID ?? "";
   const secret = process.env.PAYPAL_CLIENT_SECRET ?? "";
-  const env = process.env.PAYPAL_ENV ?? "sandbox";
-  return { clientId, secret, env };
+  const paypalEnv = process.env.PAYPAL_ENV ?? "sandbox";
+  return { clientId, secret, env: paypalEnv };
 }
 
 export async function getPayPalAccessToken(): Promise<string> {
@@ -61,8 +63,8 @@ export async function createPayPalOrder(input: {
         brand_name: "Caribbean Freedom Arena",
         landing_page: "BILLING",
         user_action: "PAY_NOW",
-        return_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/payments/paypal/return`,
-        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/payments/paypal/cancel`,
+        return_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? env.app.url}/payments/paypal/return`,
+        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? env.app.url}/payments/paypal/cancel`,
       },
     }),
   });

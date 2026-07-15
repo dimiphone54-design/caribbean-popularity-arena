@@ -27,10 +27,10 @@ export type DropshipProduct = {
 
 export const dropshipMarketMeta = {
   title: "Dropship Market",
-  subtitle: "Browse · contact seller directly · pay the seller off-site",
+  subtitle: "Browse · platform checkout · platform-managed supplier payout",
   slug: "dropship-market",
   legalNote:
-    "Arena lists suppliers only. Contact the seller and arrange payment outside this site. Delivery and returns are between buyer and seller."
+    "Arena operates platform checkout for listed supplier lanes. Customer payment is collected by the platform and supplier payout is managed by the platform. Delivery and returns remain subject to supplier fulfillment terms."
 } as const;
 
 export function getDropshipMarketHref(countryId?: string) {
@@ -97,13 +97,13 @@ const catalog: DropshipProduct[] = [
     id: "uk-football-scarf",
     countryId: "uk",
     name: "UK Stadium Football Scarf",
-    description: "Knit scarf · ships from Manchester supplier",
+    description: "Knit scarf · official match day style · Manchester warehouse",
     price: 24,
     currency: "USD",
     category: "Football merch",
     shipsFrom: shipsFrom("uk", "Manchester"),
     flag: "🇬🇧",
-    imageUrl: ukDropshipWomenPhotos.gamesNight,
+    imageUrl: "/uk-football-scarf.png",
     supplierNote: "Dropship · UK warehouse lane"
   },
   {
@@ -116,21 +116,8 @@ const catalog: DropshipProduct[] = [
     category: "Outdoor games",
     shipsFrom: shipsFrom("uk", "London"),
     flag: "🇬🇧",
-    imageUrl: ukDropshipWomenPhotos.parkGamesSix,
+    imageUrl: "/uk-park-games-kit.png",
     supplierNote: "Dropship · outdoor lane"
-  },
-  {
-    id: "uk-fish-chips-box",
-    countryId: "uk",
-    name: "British Fish & Chips Gift Box",
-    description: "Classic UK national dish hamper · park lunch set",
-    price: 32,
-    currency: "USD",
-    category: "Food kit",
-    shipsFrom: shipsFrom("uk"),
-    flag: "🇬🇧",
-    imageUrl: ukDropshipWomenPhotos.fishChips,
-    supplierNote: "Dropship · food partner"
   },
   {
     id: "co-arepa-kit",
@@ -532,7 +519,7 @@ const catalog: DropshipProduct[] = [
     category: "Lifestyle",
     shipsFrom: shipsFrom("japan"),
     flag: "🇯🇵",
-    imageUrl: "/japan-dropship-host-desk.png",
+    imageUrl: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=800&q=80&auto=format&fit=crop",
     supplierNote: "Dropship · JAPAN lane"
   },
   {
@@ -545,8 +532,34 @@ const catalog: DropshipProduct[] = [
     category: "Fashion",
     shipsFrom: shipsFrom("japan", "JAPAN"),
     flag: "🇯🇵",
-    imageUrl: "/japan-dropship-host-portrait.png",
+    imageUrl: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&q=80&auto=format&fit=crop",
     supplierNote: "Dropship · street supplier"
+  },
+  {
+    id: "jp-kimono-wrap",
+    countryId: "japan",
+    name: "JAPAN Kimono Silk Wrap",
+    description: "Traditional silk wrap · modern style",
+    price: 48,
+    currency: "USD",
+    category: "Fashion · kimono",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · kimono partner"
+  },
+  {
+    id: "jp-kendo-tee",
+    countryId: "japan",
+    name: "JAPAN Kendo Spirit Tee",
+    description: "Martial arts inspired · arena ready",
+    price: 32,
+    currency: "USD",
+    category: "Fashion · kendo",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · martial arts lane"
   },
   {
     id: "jp-matcha-kit",
@@ -558,8 +571,194 @@ const catalog: DropshipProduct[] = [
     category: "Food kit",
     shipsFrom: shipsFrom("japan"),
     flag: "🇯🇵",
-    imageUrl: "/japan-dropship-host-kimono.png",
+    imageUrl: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80&auto=format&fit=crop",
     supplierNote: "Dropship · matcha partner"
+  },
+  // ── Anime & Japan-Exclusive Drops ──
+  {
+    id: "jp-anime-tee",
+    countryId: "japan",
+    name: "JAPAN Exclusive Anime Tee",
+    description: "Japan-exclusive · limited anime print",
+    price: 34,
+    currency: "USD",
+    category: "Anime · limited",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · anime supplier"
+  },
+  {
+    id: "jp-gashapon-figure",
+    countryId: "japan",
+    name: "JAPAN Gashapon Mini Figure Set",
+    description: "Capsule toy · blind box collectible",
+    price: 18,
+    currency: "USD",
+    category: "Collectibles",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1772160801956-e471dbee631b?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · gashapon lane"
+  },
+  {
+    id: "jp-manga-box",
+    countryId: "japan",
+    name: "JAPAN Limited Edition Manga Box",
+    description: "Collector manga · Japan-exclusive print",
+    price: 42,
+    currency: "USD",
+    category: "Manga · exclusive",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · manga partner"
+  },
+  {
+    id: "jp-char-pouch",
+    countryId: "japan",
+    name: "JAPAN Character Goods Pouch",
+    description: "Kawaii pouch · Japan-exclusive collab",
+    price: 22,
+    currency: "USD",
+    category: "Accessories",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · character goods"
+  },
+  // ── J-Beauty / Glass Skin ──
+  {
+    id: "jp-glass-skin-kit",
+    countryId: "japan",
+    name: "JAPAN Glass Skin Starter Kit",
+    description: "PDRN serum · sheet mask · glow set",
+    price: 38,
+    currency: "USD",
+    category: "Skincare · glass skin",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · J-beauty partner"
+  },
+  {
+    id: "jp-pdrn-masks",
+    countryId: "japan",
+    name: "JAPAN PDRN Sheet Mask Pack (10)",
+    description: "Viral PDRN masks · glass skin 2026",
+    price: 24,
+    currency: "USD",
+    category: "Sheet masks · viral",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · PDRN supplier"
+  },
+  {
+    id: "jp-rice-serum",
+    countryId: "japan",
+    name: "JAPAN Rice Water Serum",
+    description: "Rice bran extract · traditional glow",
+    price: 29,
+    currency: "USD",
+    category: "Serum · traditional",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · rice water lane"
+  },
+  {
+    id: "jp-beauty-box",
+    countryId: "japan",
+    name: "JAPAN Beauty Essentials Box",
+    description: "Curated J-beauty · 5-piece set",
+    price: 45,
+    currency: "USD",
+    category: "J-beauty · curated",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · beauty curator"
+  },
+  // ── Aesthetic Stationery ──
+  {
+    id: "jp-precision-pens",
+    countryId: "japan",
+    name: "JAPAN Precision Pen Set (0.3mm)",
+    description: "Monozukuri gel pens · 6-color set",
+    price: 16,
+    currency: "USD",
+    category: "Pens · Monozukuri",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · pen supplier"
+  },
+  {
+    id: "jp-travelers-notebook",
+    countryId: "japan",
+    name: "JAPAN Traveler's Notebook Kit",
+    description: "Leather notebook · refill inserts",
+    price: 28,
+    currency: "USD",
+    category: "Notebook · analog",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · notebook partner"
+  },
+  {
+    id: "jp-sticker-pack",
+    countryId: "japan",
+    name: "JAPAN Sticker Collector Pack",
+    description: "Kawaii stickers · 50-piece set",
+    price: 14,
+    currency: "USD",
+    category: "Stickers · kawaii",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · sticker lane"
+  },
+  // ── Viral Snacks ──
+  {
+    id: "jp-spicy-box",
+    countryId: "japan",
+    name: "JAPAN Spicy Snack Challenge Box",
+    description: "Viral spicy snacks · challenge pack",
+    price: 26,
+    currency: "USD",
+    category: "Snacks · viral",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1783615294331-7ec7c558019a?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · snack supplier"
+  },
+  {
+    id: "jp-dagashi-pack",
+    countryId: "japan",
+    name: "JAPAN Dagashi Variety Pack",
+    description: "Retro candy · 20-piece variety",
+    price: 20,
+    currency: "USD",
+    category: "Snacks · retro",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1718155424418-aa8034ceb1a3?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · dagashi lane"
+  },
+  {
+    id: "jp-matcha-sweets",
+    countryId: "japan",
+    name: "JAPAN Matcha Sweets Box",
+    description: "Matcha chocolates · mochi · KitKat",
+    price: 32,
+    currency: "USD",
+    category: "Sweets · matcha",
+    shipsFrom: shipsFrom("japan", "JAPAN"),
+    flag: "🇯🇵",
+    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=80&auto=format&fit=crop",
+    supplierNote: "Dropship · matcha sweets"
   }
 ];
 
@@ -586,16 +785,16 @@ const laneImageByCountryLane: Partial<
     automotive: chinaDropshipPeoplePhotos.handshake
   },
   japan: {
-    tech: "/japan-dropship-host-desk.png",
-    automotive: "/japan-dropship-host-portrait.png"
+    tech: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=800&q=80&auto=format&fit=crop",
+    automotive: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80&auto=format&fit=crop"
   },
   ecuador: {
     tech: ecuadorDropshipPeoplePhotos.hatsTeam,
     automotive: ecuadorDropshipPeoplePhotos.volunteers
   },
   uk: {
-    tech: ukDropshipWomenPhotos.londonSummerFive,
-    automotive: ukDropshipWomenPhotos.londonParkGirls
+    tech: "/uk-tech-gadgets-pack.png",
+    automotive: "/uk-car-accessories-kit.png"
   }
 };
 
@@ -608,7 +807,7 @@ const laneCatalog: DropshipProduct[] = internationalSuiteCountries.flatMap((coun
       id: `${country.id}-lane-tech`,
       countryId: country.id,
       name: `${country.name} Tech & Gadgets Pack`,
-      description: "Phone accessories · cables · gadget bundle · local supplier ships direct",
+      description: "Phone accessories · cables · gadget bundle",
       price: 29,
       currency: "USD",
       category: "📱 Tech & Gadgets",
@@ -622,7 +821,7 @@ const laneCatalog: DropshipProduct[] = internationalSuiteCountries.flatMap((coun
       id: `${country.id}-lane-automotive`,
       countryId: country.id,
       name: `${country.name} Car Accessories Kit`,
-      description: "Interior accessories · care kit · local supplier ships direct",
+      description: "Interior accessories · care kit",
       price: 35,
       currency: "USD",
       category: "🚗 Automotive & Car Accessories",

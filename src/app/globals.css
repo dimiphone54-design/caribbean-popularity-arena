@@ -234,7 +234,7 @@ a {
   background-size: cover;
   background-position: center 38%;
   background-repeat: no-repeat;
-  filter: brightness(1.14) contrast(1.08) saturate(1.12);
+  filter: brightness(1.2) contrast(1.1) saturate(1.2);
   transform: scale(1.02);
 }
 
@@ -244,8 +244,8 @@ a {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(4, 8, 18, 0.38) 0%, rgba(4, 8, 18, 0.18) 44%, rgba(4, 8, 18, 0.52) 100%),
-    radial-gradient(ellipse 92% 78% at 50% 40%, transparent 0%, rgba(4, 8, 18, 0.22) 100%);
+    linear-gradient(180deg, rgba(4, 8, 18, 0.12) 0%, rgba(4, 8, 18, 0.06) 44%, rgba(4, 8, 18, 0.18) 100%),
+    radial-gradient(ellipse 92% 78% at 50% 40%, transparent 0%, rgba(4, 8, 18, 0.08) 100%);
 }
 
 .command-center-room-content {
@@ -261,23 +261,74 @@ a {
 }
 
 .command-center-room-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 1.25rem;
   background:
-    linear-gradient(rgba(8, 12, 24, 0.42), rgba(6, 10, 20, 0.36)) padding-box,
-    linear-gradient(145deg, rgba(247, 231, 170, 0.28), rgba(0, 201, 167, 0.16)) border-box;
-  backdrop-filter: blur(6px) saturate(130%);
-  -webkit-backdrop-filter: blur(6px) saturate(130%);
+    linear-gradient(rgba(8, 12, 24, 0.52), rgba(6, 10, 20, 0.46)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(247, 231, 170, 0.38),
+      rgba(215, 180, 106, 0.18),
+      rgba(138, 100, 32, 0.28)
+    )
+    border-box;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 10px 32px rgba(0, 0, 0, 0.28);
+    0 0 0 1px rgba(215, 180, 106, 0.06),
+    0 0 40px rgba(215, 180, 106, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 32px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
 }
 
-.command-center-room-shell .command-center-room-content section article,
-.command-center-room-shell .command-center-room-content section > div.rounded-2xl {
-  background:
-    linear-gradient(rgba(8, 12, 24, 0.34), rgba(6, 10, 20, 0.28)) padding-box,
-    linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)) border-box !important;
-  backdrop-filter: blur(5px) saturate(120%);
-  -webkit-backdrop-filter: blur(5px) saturate(120%);
+.command-center-room-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    165deg,
+    rgba(247, 231, 170, 0.12) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(215, 180, 106, 0.06) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.command-center-room-panel::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(247, 231, 170, 0.04) 60deg,
+    transparent 120deg
+  );
+  animation: commandCenterCardSpin 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes commandCenterCardSpin {
+  to { transform: rotate(360deg); }
+}
+
+.command-center-room-shell .command-center-room-content section article > * {
+  position: relative;
+  z-index: 2;
+}
+
+.command-center-room-shell .command-center-room-content section > div.command-center-room-panel > * {
+  position: relative;
+  z-index: 2;
 }
 
 .luxury-glass-card {
@@ -23338,12 +23389,13 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.28rem;
-  padding: 0.22rem 0.48rem;
-  border-radius: 999px;
+  padding: 0.24rem 0.52rem 0.18rem;
+  border-radius: 0.2rem 0.2rem 0 0;
   border: 1px solid rgba(52, 211, 153, 0.4);
-  background: rgba(0, 0, 0, 0.62);
+  border-bottom: none;
+  background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(6px);
-  font-size: 0.46rem;
+  font-size: 0.5rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -23599,8 +23651,8 @@ a {
 .ai-real-slot.ai-real-slot-dense .ai-real-slot-on-cam {
   bottom: 1.05rem;
   left: 0.28rem;
-  padding: 0.1rem 0.28rem;
-  font-size: 0.38rem;
+  padding: 0.18rem 0.4rem 0.14rem;
+  font-size: 0.42rem;
 }
 
 .ai-real-slot.ai-real-slot-dense .ai-real-slot-fire-badge {

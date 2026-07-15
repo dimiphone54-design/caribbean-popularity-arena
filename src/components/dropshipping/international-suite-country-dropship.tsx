@@ -91,7 +91,7 @@ export function InternationalSuiteCountryDropship({
               <p className="a2030-intl-dropship-mini-price">
                 {formatDropshipPrice(product.price, product.currency, countryId)}
               </p>
-              <DropshipBuyButton product={product} countryName={countryName} compact />
+              <DropshipBuyButton product={product} countryName={countryName} flag={flag} compact />
             </div>
           </li>
           );
@@ -115,7 +115,7 @@ export function InternationalSuiteCountryDropship({
                 <p className="a2030-intl-dropship-mini-price">
                   {formatDropshipPrice(product.price, product.currency, countryId)}
                 </p>
-                <DropshipBuyButton product={product} countryName={countryName} compact />
+                <DropshipBuyButton product={product} countryName={countryName} flag={flag} compact />
               </div>
             </li>
             );

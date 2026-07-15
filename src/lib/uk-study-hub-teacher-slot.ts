@@ -186,9 +186,9 @@ export const ukTeacherSlotMeta = {
   title:        "Teach Live · Free to Go Live",
   description:
     "Caribbean Freedom Arena partners with qualified UK educators to deliver live study sessions " +
-    "directly to students. Teachers broadcast at no cost. All student gifts are paid in full to the educator.",
+    "directly to students. Teachers broadcast at no cost. Student gifts are processed through platform checkout and teacher payouts are handled by the platform.",
   hostFreeNote: "✅ Free to go live — no cost to teachers",
-  giftNote:     "🎁 First month: 100% of gifts go directly to the teacher",
+  giftNote:     "🎁 Student gifts use platform checkout and approved teacher payouts are handled by the platform",
   applyLabel:   "Apply to teach here →",
-  applyHint:    "Fill in your profile and card details. We review and add you to the hub.",
+  applyHint:    "Fill in your profile and payout details. We review and add you to the hub.",
 } as const;

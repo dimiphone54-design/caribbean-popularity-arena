@@ -52,7 +52,7 @@ export function ChinaDropshipRatesPanel() {
         <li className="ecuador-dropship-rates-cell" role="listitem">
           <p className="ecuador-dropship-rates-label">Seller region</p>
           <p className="ecuador-dropship-rates-value">中国供应商 · China</p>
-          <p className="ecuador-dropship-rates-note">Arrange price and payment directly with the seller</p>
+          <p className="ecuador-dropship-rates-note">Price is shown on-platform and customer payment goes through platform checkout</p>
         </li>
         <li className="ecuador-dropship-rates-cell" role="listitem">
           <p className="ecuador-dropship-rates-label">Ships from</p>
