@@ -142,6 +142,7 @@ export function JapanRoomDropshipCreatorSignupPanel({
   }
 
   return (
+    <div className="a2030-holo-panel rounded-[1.25rem] border border-[#ff4466]/20 p-2.5 sm:p-3">
     <form className="japan-dropship-creator-signup" onSubmit={(event) => void handleSubmit(event)}>
       <div className="japan-dropship-creator-signup-rules" aria-label="Creator rules">
         <p className="japan-dropship-creator-signup-rules-title">Rules · read before you enter</p>
@@ -232,5 +233,6 @@ export function JapanRoomDropshipCreatorSignupPanel({
         </Link>
       </p>
     </form>
+    </div>
   );
 }

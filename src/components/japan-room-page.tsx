@@ -101,7 +101,7 @@ export function JapanRoomPage() {
             </section>
 
             {/* ── Fashion row ──────────────────────────────── */}
-            <section className="w-full px-1" aria-label="Japan Fashion">
+            <section className="w-full px-1 -mt-6" aria-label="Japan Fashion">
               <JapanRoomFashionTabPanel />
             </section>
             </div>
