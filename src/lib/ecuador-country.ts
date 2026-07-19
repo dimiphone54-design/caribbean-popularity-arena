@@ -26,9 +26,9 @@ export const ecuadorCountryHighlights = {
 
 /** Ecuador · dual lane · trend activity */
 export const ecuadorDualLanePanel = {
-  kicker: "Dual lane",
-  title: "Ecuador · dual lane",
-  detail: "Quito · Guayaquil · Andes-Pacific open"
+  kicker: "Doble pista",
+  title: "Ecuador · doble pista",
+  detail: "Quito · Guayaquil · Andes–Pacífico abierto"
 } as const;
 
 export const ecuadorTrendActivities: CountryTrendActivity[] = [
@@ -149,9 +149,9 @@ export const ecuadorRoomBrand = {
   welcomeTitle: "Bienvenidos a Ecuador",
   tagline:
     "¡Dale pues, pilas! · ecuavoley en la cancha · fútbol de barrio · dominó ecuatoriano · Yo Nunca con la cuadra.",
-  liveKicker: "Live lanes — tap to open",
-  cultureKicker: "Ecuador · cities & culture",
-  foodKicker: "Ecuadorian fuel"
+  liveKicker: "Pistas en vivo — toca para abrir",
+  cultureKicker: "Ecuador · ciudades y cultura",
+  foodKicker: "Combustible ecuatoriano"
 } as const;
 
 /** Ecuador · culture panel items */
@@ -161,30 +161,31 @@ export type EcuadorCulturePanelItem = {
 };
 
 export const ecuadorCulturePanel = {
-  title: "Ecuador · cities & culture",
+  title: "Ecuador · ciudades y cultura",
   items: [
     {
-      label: "Quito · UNESCO old town",
-      imageUrl: "/ecuador-culture-quito-old-town.png"
+      label: "Quito · centro histórico UNESCO",
+      // Real Quito historic center photo (also used in Coast & City)
+      imageUrl: "/ecuador-coast-city-3.jpg"
     },
     {
-      label: "Guayaquil · Pacific port",
+      label: "Guayaquil · puerto del Pacífico",
       imageUrl: "/ecuador-culture-guayaquil-pacific-port.png"
     },
     {
-      label: "Cuenca · Andean colonial",
+      label: "Cuenca · colonial andina",
       imageUrl: "/ecuador-culture-cuenca-andean-colonial.png"
     },
     {
-      label: "Galápagos · live nature",
+      label: "Galápagos · naturaleza en vivo",
       imageUrl: "/ecuador-culture-galapagos-live-nature.png"
     },
     {
-      label: "Otavalo · artisan market",
+      label: "Otavalo · mercado artesanal",
       imageUrl: "/ecuador-culture-otavalo-artisan-market.png"
     },
     {
-      label: "Amazon · Oriente rainforest",
+      label: "Amazonía · selva del Oriente",
       imageUrl: "/ecuador-culture-amazon-oriente-rainforest.png"
     }
   ] satisfies ReadonlyArray<EcuadorCulturePanelItem>
@@ -196,10 +197,10 @@ export type EcuadorFoodPanelItem = {
 };
 
 export const ecuadorFoodPanel = {
-  title: "Ecuadorian fuel",
+  title: "Combustible ecuatoriano",
   items: [
     {
-      label: "Encebollado — the national fish soup",
+      label: "Encebollado — la sopa nacional",
       imageUrl: "/ecuador-food-encebollado.png"
     },
     {
@@ -207,11 +208,11 @@ export const ecuadorFoodPanel = {
       imageUrl: "/ecuador-food-ceviche-camaron.png"
     },
     {
-      label: "Llapingachos — potato patties",
+      label: "Llapingachos — tortillas de papa",
       imageUrl: "/ecuador-food-llapingachos.png"
     },
     {
-      label: "Hornado — roast pork & mote",
+      label: "Hornado — chancho asado con mote",
       imageUrl: "/ecuador-food-hornado.png"
     },
     {
@@ -232,6 +233,8 @@ export type EcuadorIronFangStatPanel = {
   kicker: string;
   title: string;
   detail: string;
+  cta?: string;
+  statusLabel?: string;
   gameId?: EcuadorRoomPlayableGame;
   footballLane?: boolean;
   videoSrc?: string;
@@ -240,27 +243,37 @@ export type EcuadorIronFangStatPanel = {
 
 export const ecuadorIronFangStatPanels: ReadonlyArray<EcuadorIronFangStatPanel> = [
   {
-    kicker: "Tendencia en vivo",
-    title: "LigaPro · fútbol",
-    detail: "Predicciones · banter · football en todas las salas",
+    kicker: "Deportes en vivo",
+    title: "Fútbol LigaPro",
+    detail: "Día de partido · clip real de La Tri · fixtures · chat de la sala",
+    cta: "Abrir pista de deportes",
+    statusLabel: "En vivo",
     footballLane: true,
-    videoSrc: "/ecuador-arena-flash-live-clip.mp4",
-    posterSrc: "/ecuador-room-indurama-team.png"
+    // Real Ecuador football (Enner Valencia goal · Qatar 2022 · Wikimedia CC-BY 4.0)
+    videoSrc: "/ecuador-ligapro-football-live.mp4",
+    posterSrc: "/ecuador-ligapro-football-poster.jpg"
   },
   {
-    kicker: "Tendencia en vivo",
-    title: "Ecuavoley dominical",
-    detail: "Vóley a tres · cancha de barrio · familia reunida",
+    kicker: "Juego nacional",
+    title: "Ecuavoley",
+    detail: "Vóley a tres clásico · cancha real · simulador en vivo",
+    cta: "Entrar a Ecuavoley",
+    statusLabel: "En vivo",
     gameId: "Ecuavoley",
-    videoSrc: "/ecuador-arena-flash-live-clip.mp4",
-    posterSrc: "/ecuador-room-indurama-team.png"
+    // Real Ecuavoley match clip (trimmed from Ecuador court play)
+    videoSrc: "/ecuador-ecuavoley-live.mp4",
+    posterSrc: "/ecuador-ecuavoley-poster.jpg"
   },
   {
-    kicker: "Juego original",
+    kicker: "Original CFA",
     title: "Dominó Ecuatoriano",
-    detail: "Bloque · doble seis · vs IA · ¡Dale pues, pilas!",
+    detail: "Reglas de bloque · doble seis · mesa real · juega vs IA",
+    cta: "Abrir mesa de dominó",
+    statusLabel: "En vivo",
     gameId: "Dominó Ecuatoriano",
-    posterSrc: "/ecuador-room-gaming-party.png"
+    // Real domino table play clip for the panel loop
+    videoSrc: "/ecuador-domino-live.mp4",
+    posterSrc: "/ecuador-domino-poster.jpg"
   }
 ];
 

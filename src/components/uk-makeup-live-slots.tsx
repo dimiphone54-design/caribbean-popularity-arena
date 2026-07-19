@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LiveSlotMarketRateCard } from "@/components/live-slot-market-rate-card";
 import {
   EMPTY_MAKEUP_SIGNUP,
   MAKEUP_GIFT_TIERS,
@@ -44,7 +43,7 @@ function GiftToast({ tier, creatorName, onDone }: { tier: MakeupGiftTier; creato
     <div className="fixed inset-x-4 bottom-24 z-50 mx-auto max-w-sm rounded-2xl border border-[#ff2bd6]/50 bg-[#0a0010]/95 p-4 text-center shadow-[0_0_40px_rgba(255,43,214,0.3)] backdrop-blur-md" role="alert">
       <p className="text-4xl">{tier.emoji}</p>
       <p className="mt-2 text-sm font-black text-[#fef9c3]">You sent {tier.label} to <span className="text-[#ff2bd6]">{creatorName}</span>!</p>
-      <p className="mt-1 text-xs text-[#86efac]">Platform checkout processes £{tier.amountGbp}. Creator share is paid out by the platform 💖</p>
+      <p className="mt-1 text-xs text-[#86efac]">£{tier.amountGbp} gift sent · thanks for supporting 💖</p>
       <p className="mt-1 text-[10px] text-[#64748b]">{tier.effect}</p>
       <button type="button" onClick={onDone} className="mt-3 rounded-lg border border-[#ff2bd6]/30 px-4 py-1.5 text-xs font-bold text-[#fef9c3] hover:border-[#ff2bd6]/60 transition">Close</button>
     </div>
@@ -312,7 +311,6 @@ function LiveSlotCard({ slot, onClaim, onGift }: {
                     <span className="text-xl">{tier.emoji}</span>
                     <span className="text-[9px] font-black text-[#fef9c3]">{tier.label}</span>
                     <span className="text-[9px] font-bold text-[#ff2bd6]">£{tier.amountGbp}</span>
-                    <span className="text-[8px] text-[#86efac]/60">Platform payout share</span>
                   </button>
                 ))}
               </div>
@@ -328,14 +326,14 @@ function LiveSlotCard({ slot, onClaim, onGift }: {
   );
 }
 
-/* ─── Tournament table ───────────────────────────────── */
+/* ─── Tournament table · public (names/rank only · exact past £ in Command Center) ─── */
 function TournamentTable({ entries }: { entries: MakeupTournamentEntry[] }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-[#ff2bd6]/20 bg-[#0a0010]/80">
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#ff2bd6]/15">
         <div>
           <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#ff2bd6]">🏆 Makeup Live · Tournament</p>
-          <p className="text-[10px] text-[#64748b]">All-time champions · most gifted wins</p>
+          <p className="text-[10px] text-[#64748b]">Free champions board · names + rank · gift £ totals in Command Center only</p>
         </div>
         <span className="text-2xl">👑</span>
       </div>
@@ -352,7 +350,9 @@ function TournamentTable({ entries }: { entries: MakeupTournamentEntry[] }) {
               <p className="truncate text-[9px] text-[#64748b]">{entry.instagramHandle} · {entry.makeupStyle} · {entry.country}</p>
             </div>
             <div className="text-right shrink-0">
-              <p className="text-xs font-black text-[#fbbf24]">£{entry.totalGiftsGbp}</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#94a3b8]">
+                {entry.isChampion ? "Champ" : "Top board"}
+              </p>
               <p className="text-[9px] text-[#374151]">{entry.sessionDate}</p>
             </div>
           </div>
@@ -460,8 +460,7 @@ export function UKMakeupLiveSlots() {
         </div>
       )}
 
-      {/* Tournament table */}
-      <LiveSlotMarketRateCard countryId="uk" title="UK makeup live rates · 5% below public reference" />
+      {/* Tournament table · public ranks only (exact past £ + market rates → Command Center) */}
       <TournamentTable entries={tournament} />
     </section>
   );

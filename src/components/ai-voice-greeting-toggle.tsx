@@ -16,7 +16,10 @@ export function AiVoiceGreetingToggle({ className = "", variant = "pill" }: AiVo
   const roomSlug = roomSlugFromPathname(pathname);
   const ecuadorRoom = roomSlug.includes("ecuador");
 
-  if (!ready || !isAiVoiceSupported()) return null;
+  // Gate on provider `ready` only (set after mount). Never branch on `window` during
+  // SSR/first paint — that desyncs server HTML vs client tree.
+  if (!ready) return null;
+  if (!isAiVoiceSupported()) return null;
 
   const hideFloatingVoice =
     variant === "pill" &&

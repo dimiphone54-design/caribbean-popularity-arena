@@ -16,7 +16,7 @@ const capitalCoordinates: Record<string, { lat: number; lon: number; city?: stri
   EC: { lat: -0.1807, lon: -78.4678, city: "Quito" },
   TT: { lat: 10.6549, lon: -61.5019, city: "Port of Spain" },
   JM: { lat: 17.997, lon: -76.7936, city: "Kingston" },
-  VE: { lat: 10.4806, lon: -66.9036, city: "Caracas" },
+  ES: { lat: 41.3874, lon: 2.1686, city: "Barcelona" },
   PL: { lat: 52.2297, lon: 21.0122, city: "Warsaw" },
   TN: { lat: 36.8065, lon: 10.1815, city: "Tunis" },
   GY: { lat: 6.8013, lon: -58.1551, city: "Georgetown" },

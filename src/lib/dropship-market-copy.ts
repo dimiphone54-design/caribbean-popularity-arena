@@ -3,7 +3,7 @@ import { internationalSuiteCountries } from "@/lib/international-suite";
 
 export type DropshipCopyLocale = "en" | "es" | "es-CO" | "es-EC" | "ja" | "zh";
 
-const spanishCountryIds = new Set(["venezuela", "trinidad", "jamaica", "guyana"]);
+const spanishCountryIds = new Set(["spain", "trinidad", "jamaica", "guyana"]);
 
 export function resolveDropshipCopyLocale(countryId: string): DropshipCopyLocale {
   if (countryId === "japan") return "ja";
@@ -24,6 +24,10 @@ export function isChinaDropshipMarket(countryId: string) {
 
 export function isEcuadorDropshipMarket(countryId: string) {
   return resolveDropshipCopyLocale(countryId) === "es-EC";
+}
+
+export function isUkDropshipMarket(countryId: string) {
+  return countryId === "uk";
 }
 
 export function isEastAsiaDropshipMarket(countryId: string) {
@@ -108,21 +112,31 @@ export type DropshipMarketCopy = {
 };
 
 const enCopy: DropshipMarketCopy = {
-  title: "Dropship Market",
-  subtitle: "Browse · buy on arena · supplier ships direct to you",
-  marketOnlyBadge: "MARKET ONLY",
+  title: "Direct Dropship Lane",
+  subtitle: "Supplier Ships Direct · Secure USD Checkout",
+  marketOnlyBadge: "USD CHECKOUT",
   dropshipBadge: "DROPSHIP",
-  roomSub: (_flag, countryName) => `${countryName} · supplier ships direct · market only`,
-  roomIntroAria: (countryName) => `${countryName} dropship market intro`,
+  roomSub: (_flag, countryName) =>
+    `${countryName} Direct Dropship · supplier ships direct · secure USD checkout`,
+  roomIntroAria: (countryName) => `${countryName} Direct Dropship Lane`,
   steps: [
-    { title: "1 · Browse", body: "Pick a product from this country lane." },
-    { title: "2 · Pay", body: "Checkout on arena · enter ship address." },
-    { title: "3 · Supplier ships", body: "Partner packs direct · no stock here." },
-    { title: "4 · Track", body: "Same email · status updates here." }
+    {
+      title: "Browse",
+      body: "Discover authentic products — tech, auto, crafts, food, and local specialties."
+    },
+    { title: "Order", body: "Pay securely on the Arena in USD (WiPay or Paddle)." },
+    {
+      title: "Fulfillment",
+      body: "Local supplier packs and ships directly from their warehouse."
+    },
+    {
+      title: "Delivery",
+      body: "3–7 business days domestic · 7–21 days international"
+    }
   ],
   shipsFrom: "Ships from",
-  buy: "Contact seller",
-  contactSeller: "Contact seller",
+  buy: "Buy",
+  contactSeller: "Buy",
   categoryAria: "Dropship category options",
   categoryTech: "📱 Tech & Gadgets",
   categoryAutomotive: "🚗 Automotive & Car Accessories",
@@ -147,7 +161,7 @@ const enCopy: DropshipMarketCopy = {
   aiTitle: "LIVE AI GENERATOR · DROPSHIPPING",
   aiSub: "AI AUTOMATED · EXACT INFO",
   aiExact: "EXACT",
-  aiLead: "Real-time FX · Arena Plus split · auto exact calc.",
+  aiLead: "Real-time FX · multi-country currency · auto exact calc.",
   aiFrom: "From",
   aiTo: "To",
   aiUsd: "USD",
@@ -232,7 +246,7 @@ const esCOCopy: DropshipMarketCopy = {
   aiTitle: "GENERADOR AI EN VIVO · DROPSHIPPING",
   aiSub: "AI AUTOMATIZADO · INFO EXACTA",
   aiExact: "EXACTO",
-  aiLead: "FX en tiempo real · reparto Arena Plus · cálculo exacto automático.",
+  aiLead: "FX en tiempo real · multi-país · cálculo exacto automático.",
   aiFrom: "De",
   aiTo: "A",
   aiUsd: "USD",
@@ -316,7 +330,7 @@ const esCopy: DropshipMarketCopy = {
   aiTitle: "GENERADOR AI EN VIVO · DROPSHIPPING",
   aiSub: "AI AUTOMATIZADO · INFO EXACTA",
   aiExact: "EXACTO",
-  aiLead: "FX en tiempo real · reparto Arena Plus · cálculo exacto automático.",
+  aiLead: "FX en tiempo real · multi-país · cálculo exacto automático.",
   aiFrom: "De",
   aiTo: "A",
   aiUsd: "USD",
@@ -360,27 +374,68 @@ const esCopy: DropshipMarketCopy = {
   openFullMarket: (countryName) => `Abrir mercado completo ${countryName} →`
 };
 
-/** Ecuador · dropship room copy · USD lane · Quito · Guayaquil */
+/** UK · public Tech & Automotive lane (fee / payouts live in Command Center only) */
+const enUKCopy: DropshipMarketCopy = {
+  ...enCopy,
+  title: "United Kingdom Tech & Automotive Lane",
+  subtitle: "Premium Dropship · Supplier Ships Direct from UK",
+  marketOnlyBadge: "USD CHECKOUT",
+  dropshipBadge: "DROPSHIP",
+  roomSub: () => "Premium Dropship · Supplier Ships Direct from UK",
+  roomIntroAria: () => "United Kingdom Tech and Automotive Dropship Lane",
+  legalShort:
+    "Secure USD checkout on the Arena · UK supplier ships direct · tracking provided",
+  steps: [
+    { title: "Browse", body: "Choose 📱 Tech & Gadgets or 🚗 Automotive & Car Accessories." },
+    { title: "Pay", body: "Secure USD checkout on the Arena." },
+    { title: "Ship", body: "UK supplier packs and ships direct from London." },
+    { title: "Track", body: "Tracking provided after dispatch." }
+  ],
+  buy: "Buy",
+  contactSeller: "Buy",
+  categoryAria: "UK dropship categories · Tech & Automotive",
+  categoryTech: "📱 Tech & Gadgets",
+  categoryAutomotive: "🚗 Automotive & Car Accessories",
+  checkoutNote: () =>
+    "Secure USD checkout on the Arena. UK supplier ships direct · tracking provided.",
+  checkoutPay: "Pay · dropship",
+  enterHint: "Browse · pay · UK ships direct · track",
+  marketPageDesc: () =>
+    "United Kingdom Tech & Automotive Lane · premium dropship · supplier ships direct from UK",
+  laneTechName: () => "Tech & Gadgets Pack",
+  laneTechDesc: "Premium phone accessories, fast-charging cables, and essential gadget bundle",
+  laneAutoName: () => "Car Interior & Care Kit",
+  laneAutoDesc: "Complete premium vehicle detailing set and luxury interior accessories",
+  aiLead: "UK Tech & Automotive · USD lane"
+};
+
+/** Ecuador · clean public Direct Dropship copy (ops details live in Command Center) */
 const esECCopy: DropshipMarketCopy = {
   ...esCopy,
-  subtitle: "Explora · compra en la arena · proveedor ecuatoriano envía directo a tu puerta",
-  roomSub: (flag, countryName) =>
-    `${flag} ${countryName} · proveedor envía directo · carril USD · Quito y Guayaquil · solo mercado`,
-  legalShort:
-    "Proveedor ecuatoriano envía · carril USD · hubs Quito y Guayaquil · aranceles pueden aplicar fuera de Ecuador",
+  title: "Ecuador Direct Dropship Lane",
+  subtitle: "Supplier Ships Direct · Secure USD Checkout",
+  marketOnlyBadge: "USD CHECKOUT",
+  dropshipBadge: "DROPSHIP",
+  roomSub: () => "Supplier Ships Direct · Secure USD Checkout",
+  legalShort: "Supplier ships from Quito or Guayaquil · secure USD checkout · tracking included",
   steps: [
-    { title: "1 · Explorar", body: "Elige producto del carril Ecuador — kits, artesanías, tech y auto." },
-    {
-      title: "2 · Pagar",
-      body: "Checkout en la arena · USD · ingresa dirección de envío · procesamiento 3.4% + $0.30."
-    },
-    {
-      title: "3 · Proveedor envía",
-      body: "Socio en Quito o Guayaquil empaca directo · sin inventario en la arena · 3–7 días nacional."
-    },
-    { title: "4 · Rastrear", body: "Mismo correo · estado: pago → preparando → enviado → entregado." }
+    { title: "Browse", body: "Browse authentic Ecuadorian products" },
+    { title: "Pay", body: "Pay securely on the Arena (USD)" },
+    { title: "Ship", body: "Supplier in Quito or Guayaquil ships direct" },
+    { title: "Receive", body: "Receive with tracking" }
   ],
-  aiLead: "FX en tiempo real · reparto Arena Plus 50/50 y 70/30 · cálculo exacto automático · carril USD Ecuador."
+  buy: "Buy",
+  contactSeller: "Buy",
+  checkoutNote: () =>
+    "Pay securely on the Arena (USD). Supplier in Quito or Guayaquil ships direct with tracking.",
+  checkoutPay: "Pay · dropship",
+  enterHint: "Browse · pay · supplier ships · track",
+  marketPageDesc: () => "Ecuador Direct Dropship Lane · supplier ships direct · secure USD checkout",
+  laneTechName: () => "Tech & Gadgets Bundle",
+  laneTechDesc: "Phone accessories, chargers & cables",
+  laneAutoName: () => "Auto Interior Care Kit",
+  laneAutoDesc: "Complete vehicle detailing set",
+  aiLead: "Ecuador USD dropship lane"
 };
 
 const jaCopy: DropshipMarketCopy = {
@@ -422,7 +477,7 @@ const jaCopy: DropshipMarketCopy = {
   aiTitle: "ライブAIジェネレーター · ドロップシップ",
   aiSub: "AI自動 · 正確情報",
   aiExact: "正確",
-  aiLead: "リアルタイム為替 · アリーナプラス分配 · 自動正確計算。",
+  aiLead: "リアルタイム為替 · 多国通貨 · 自動正確計算。",
   aiFrom: "から",
   aiTo: "へ",
   aiUsd: "USD",
@@ -509,7 +564,7 @@ const zhCopy: DropshipMarketCopy = {
   aiTitle: "实时AI生成器 · 代发货",
   aiSub: "AI自动 · 精确信息",
   aiExact: "精确",
-  aiLead: "实时汇率 · 竞技场Plus分成 · 自动精确计算。",
+  aiLead: "实时汇率 · 多国货币 · 自动精确计算。",
   aiFrom: "从",
   aiTo: "到",
   aiUsd: "USD",
@@ -587,20 +642,35 @@ const colombiaProductCopy: Record<string, ProductCopyEntry> = {
 };
 
 const spanishProductCopy: Record<string, ProductCopyEntry> = {
+  "ec-tech-gadgets": {
+    name: "Tech & Gadgets Bundle",
+    description: "Phone accessories, chargers & cables",
+    category: "Tech & Gadgets",
+    shipsFrom: "Quito"
+  },
+  "ec-auto-care": {
+    name: "Auto Interior Care Kit",
+    description: "Complete vehicle detailing set",
+    category: "Automotive",
+    shipsFrom: "Quito"
+  },
   "ec-ceviche-kit": {
-    name: "Kit ceviche Guayaquil",
-    description: "Preparación ceviche costero · limón · chifles",
-    category: "Kit comida"
+    name: "Guayaquil Ceviche Kit",
+    description: "Authentic coastal recipe + ingredients",
+    category: "Food kit",
+    shipsFrom: "Guayaquil"
   },
   "ec-quito-craft": {
-    name: "Pack artesanal Andes · Quito",
-    description: "Textiles tejidos · folleto cultura marimba",
-    category: "Artesanías"
+    name: "Andes Artisan Collection",
+    description: "Handwoven textiles + cultural guide",
+    category: "Crafts",
+    shipsFrom: "Quito"
   },
   "ec-carnival-wear": {
-    name: "Accesorios carnaval Ecuador",
-    description: "Colores de festival · kit listo para desfile",
-    category: "Moda"
+    name: "Carnival Ready Pack",
+    description: "Festival accessories & colors",
+    category: "Fashion",
+    shipsFrom: "Quito"
   },
   "jm-dancehall-tee": {
     name: "Camiseta dancehall Kingston",
@@ -842,6 +912,7 @@ export function getDropshipCountryDisplayName(countryId: string, countryName: st
 }
 
 export function getDropshipMarketCopy(countryId: string): DropshipMarketCopy {
+  if (countryId === "uk") return enUKCopy;
   return copyByLocale[resolveDropshipCopyLocale(countryId)] ?? enCopy;
 }
 

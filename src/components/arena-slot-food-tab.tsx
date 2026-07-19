@@ -8,13 +8,15 @@ export const CHINA_FOOD_TAB_HASH = "china-food";
 export const JAPAN_FOOD_TAB_HASH = "japan-food";
 export const COLOMBIA_FOOD_TAB_HASH = "colombia-food";
 export const ECUADOR_FOOD_TAB_HASH = "ecuador-food";
+export const TRINIDAD_FOOD_TAB_HASH = "trinidad-food";
 
 export const FOOD_TAB_HASH_BY_ISLAND_CODE: Record<string, string> = {
   UK: UK_FOOD_TAB_HASH,
   CN: CHINA_FOOD_TAB_HASH,
   JP: JAPAN_FOOD_TAB_HASH,
   CO: COLOMBIA_FOOD_TAB_HASH,
-  EC: ECUADOR_FOOD_TAB_HASH
+  EC: ECUADOR_FOOD_TAB_HASH,
+  TT: TRINIDAD_FOOD_TAB_HASH
 };
 
 export const FOOD_ROOM_FALLBACK_BY_ISLAND_CODE: Record<string, string> = {
@@ -49,23 +51,32 @@ export function ArenaSlotFoodTab(props: ArenaSlotFoodTabProps | ArenaSlotFoodRoo
   const sectionId =
     props.mode === "room" ? (props.sectionId ?? DEFAULT_FOOD_TAB_HASH) : DEFAULT_FOOD_TAB_HASH;
   const countryName = props.mode === "room" ? (props.countryName ?? "room") : "room";
-  const [open, setOpen] = useState(props.mode === "room" ? (props.defaultOpen ?? false) : false);
+  const defaultOpen = props.mode === "room" ? (props.defaultOpen ?? false) : false;
+  const [open, setOpen] = useState(defaultOpen);
 
   useEffect(() => {
     if (isLinkMode || typeof window === "undefined") return;
     const syncFromHash = () => {
-      const matches = window.location.hash.replace("#", "") === sectionId;
-      setOpen(matches);
+      const hash = window.location.hash.replace("#", "");
+      const matches = hash === sectionId;
       if (matches) {
+        setOpen(true);
         requestAnimationFrame(() => {
           document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
         });
+        return;
       }
+      // Empty hash: keep defaultOpen panels open (e.g. Ecuador Comida panel)
+      if (!hash && defaultOpen) {
+        setOpen(true);
+        return;
+      }
+      if (hash) setOpen(false);
     };
     syncFromHash();
     window.addEventListener("hashchange", syncFromHash);
     return () => window.removeEventListener("hashchange", syncFromHash);
-  }, [sectionId, isLinkMode]);
+  }, [sectionId, isLinkMode, defaultOpen]);
 
   if (isLinkMode) {
     return (

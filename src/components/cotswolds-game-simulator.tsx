@@ -127,11 +127,11 @@ const GAME_CONFIG: Record<string, GameConfig> = {
   "Best Makeup Look": {
     kind: "aim",
     emoji: "💄",
-    goal: "Time the brush — land the stroke in the glam zone for the best live look.",
+    goal: "Time the brush — land the stroke in the glam zone for Bella’s signature summer look.",
     action: "SET LOOK!",
     targetWord: "glam zone",
     opponent: "Glam judge",
-    field: "Hyde Park · live 3h"
+    field: "Hyde Park Edition · live 1h"
   },
   Ecuavoley: {
     kind: "aim",
@@ -145,29 +145,29 @@ const GAME_CONFIG: Record<string, GameConfig> = {
   "Kendo Stage Duel": {
     kind: "aim",
     emoji: "⚔️",
-    goal: "Time the strike — clash swords as the flame window opens on the JAPAN stage.",
-    action: "STRIKE!",
-    targetWord: "flame window",
-    opponent: "Rival kendoka",
-    field: "JAPAN dojo stage · live"
+    goal: "タイミングを合わせて斬れ — 日本ステージの炎の窓が開いた瞬間に剣を交えろ。",
+    action: "斬れ！",
+    targetWord: "炎の窓",
+    opponent: "ライバル剣道家",
+    field: "日本道場ステージ · ライブ"
   },
   "Wushu Duilian": {
     kind: "aim",
     emoji: "🥋",
-    goal: "Time the clash — land the strike as the duilian window opens on the Shanghai stage.",
-    action: "CLASH!",
-    targetWord: "duilian window",
-    opponent: "Rival martial artist",
-    field: "Shanghai stage · 武术对练"
+    goal: "把握时机 — 在上海舞台对练窗口打开时打出招式。",
+    action: "交锋！",
+    targetWord: "对练窗口",
+    opponent: "对手武者",
+    field: "上海舞台 · 武术对练"
   },
   "Wushu Sanda": {
     kind: "aim",
     emoji: "🥋",
-    goal: "Time the strike — land the hit as the sanda window opens in the octagon cage.",
-    action: "HIT!",
-    targetWord: "sanda window",
-    opponent: "Rival sanda fighter",
-    field: "Shanghai octagon · 散打"
+    goal: "把握时机 — 在八角笼散打窗口打开时击中。",
+    action: "击！",
+    targetWord: "散打窗口",
+    opponent: "散打对手",
+    field: "上海八角笼 · 散打"
   },
   Football: {
     kind: "aim",
@@ -267,6 +267,198 @@ const GAME_CONFIG: Record<string, GameConfig> = {
     targetWord: "house zone",
     opponent: "Skip rival",
     field: "Elite snow indoor lane"
+  },
+  /** Colombia · live lane alias */
+  Voleibol: {
+    kind: "aim",
+    emoji: "🏐",
+    goal: "Time the spike — hit as the ball crosses the net sweet spot.",
+    action: "¡REMATE!",
+    targetWord: "zona de red",
+    opponent: "Bloqueador",
+    field: "Parque abierto · Colombia"
+  },
+  /** Colombia Gaming Hub · 10 free-play concepts */
+  "Leyendas de los Andes": {
+    kind: "aim",
+    emoji: "🦅",
+    goal: "Time the strike — land the Andean hero skill in the flame window.",
+    action: "ULTIMATE!",
+    targetWord: "hero window",
+    opponent: "Rival Andean hero",
+    field: "Andes arena · 5v5"
+  },
+  "Pase Dorado Colombiano": {
+    kind: "tap",
+    emoji: "🎫",
+    goal: "Tap fast — grind XP before the seasonal track timer ends.",
+    action: "CLAIM!",
+    targetWord: "XP burst",
+    opponent: "Season clock",
+    field: "Pase Dorado · emerald track"
+  },
+  "Fuerza Urbana Bogotá": {
+    kind: "aim",
+    emoji: "⚔️",
+    goal: "Time the shot — clear the Bogotá rooftop window before the squad drops.",
+    action: "FIRE!",
+    targetWord: "rooftop zone",
+    opponent: "Rival squad",
+    field: "Bogotá skyline · night ops"
+  },
+  "Ciudad Creadora": {
+    kind: "tap",
+    emoji: "🏗️",
+    goal: "Tap fast — place plaza blocks before the build timer hits zero.",
+    action: "BUILD!",
+    targetWord: "plaza block",
+    opponent: "Creator rival",
+    field: "Historic plaza · UGC room"
+  },
+  "Cápsula Esmeralda": {
+    kind: "aim",
+    emoji: "🎁",
+    goal: "Stop the capsule on the emerald drop window for a rare cosmetic.",
+    action: "OPEN!",
+    targetWord: "emerald drop",
+    opponent: "RNG swirl",
+    field: "Esmeralda capsule lane"
+  },
+  "Fiesta Colombiana": {
+    kind: "tap",
+    emoji: "🎉",
+    goal: "Tap the carnival beat — hit festival markers before the rival dancer.",
+    action: "FEST!",
+    targetWord: "carnival beat",
+    opponent: "Carnaval rival",
+    field: "Carnaval de Barranquilla"
+  },
+  "Paraíso Cafetero": {
+    kind: "aim",
+    emoji: "🧩",
+    goal: "Stop the match marker on the coffee bean cluster for a clear.",
+    action: "MATCH!",
+    targetWord: "bean cluster",
+    opponent: "Puzzle timer",
+    field: "Eje Cafetero · match-three"
+  },
+  "Imperio del Cóndor": {
+    kind: "aim",
+    emoji: "👑",
+    goal: "Claim the map tile — lock resources when the condor marker hits the zone.",
+    action: "CLAIM!",
+    targetWord: "map tile",
+    opponent: "Alliance rival",
+    field: "Colombia world map · strategy"
+  },
+  "Liga Profesional Andina": {
+    kind: "aim",
+    emoji: "🏆",
+    goal: "Time the championship shot — score as the Andean league window opens.",
+    action: "¡GOL!",
+    targetWord: "final window",
+    opponent: "Finals keeper",
+    field: "Liga Andina · ranked final"
+  },
+  "Joyas de Colombia": {
+    kind: "tap",
+    emoji: "💎",
+    goal: "Tap fast — collect emerald gems before the coast timer ends.",
+    action: "COLLECT!",
+    targetWord: "jewel burst",
+    opponent: "Gem rush",
+    field: "Caribbean · Pacific jewels"
+  },
+  /** Spain · Top 10 Free-to-Play Duplicates */
+  "Puerto Chisme: Fusiona y Cuenta": {
+    kind: "tap",
+    emoji: "🏘️",
+    goal: "Tap fast — merge gossip tiles before the chisme timer runs out.",
+    action: "¡CHISME!",
+    targetWord: "fusion zone",
+    opponent: "Rival gossip",
+    field: "Puerto Chisme · merge lane"
+  },
+  "Gatodoku: Puzzle Mental": {
+    kind: "aim",
+    emoji: "🐱",
+    goal: "Stop the marker on the cat puzzle zone for a brain power clear.",
+    action: "¡RESUELVE!",
+    targetWord: "cat puzzle zone",
+    opponent: "Gato rival",
+    field: "Gatodoku · brain arena"
+  },
+  "MundoLibre": {
+    kind: "tap",
+    emoji: "🌍",
+    goal: "Tap fast — build your world block by block before the creation timer ends.",
+    action: "¡CONSTRUYE!",
+    targetWord: "build zone",
+    opponent: "Creator rival",
+    field: "MundoLibre · sandbox world"
+  },
+  "Liga Fútbol Móvil 26": {
+    kind: "aim",
+    emoji: "⚽",
+    goal: "Para el tiro — detén el marcador cuando el balón cruza la zona de gol.",
+    action: "¡GOOOOL!",
+    targetWord: "zona de gol",
+    opponent: "Portero rival",
+    field: "LaLiga · Camp Nou · Bernabéu"
+  },
+  "Rey Disparo": {
+    kind: "aim",
+    emoji: "👑",
+    goal: "Time the shot — hit the crown target in the shooter window.",
+    action: "¡FUEGO!",
+    targetWord: "crown target",
+    opponent: "Rey rival",
+    field: "Madrid shooter arena"
+  },
+  "Explosión de Bloques": {
+    kind: "aim",
+    emoji: "🧱",
+    goal: "Stop the marker on the block cluster for an explosive clear.",
+    action: "¡EXPLOTA!",
+    targetWord: "block cluster",
+    opponent: "Block rival",
+    field: "Explosión · puzzle lane"
+  },
+  "Campeones de Criaturas": {
+    kind: "aim",
+    emoji: "🐉",
+    goal: "Time the capture — hit the creature window for a monster catch.",
+    action: "¡CAPTURA!",
+    targetWord: "creature window",
+    opponent: "Wild creature",
+    field: "Criaturas arena · battle"
+  },
+  "Estrellas de Pelea": {
+    kind: "tap",
+    emoji: "⭐",
+    goal: "Tap fast — collect stars and defeat rivals in the brawler arena.",
+    action: "¡PELEA!",
+    targetWord: "star zone",
+    opponent: "Brawler rival",
+    field: "Arena ES · 3v3 brawler"
+  },
+  "Monopolio VA!": {
+    kind: "aim",
+    emoji: "🎲",
+    goal: "Stop the dice marker on the property zone to claim a monopoly.",
+    action: "¡TIRA!",
+    targetWord: "property zone",
+    opponent: "Monopolio rival",
+    field: "Monopolio VA! · board"
+  },
+  "Partida Real": {
+    kind: "aim",
+    emoji: "👑",
+    goal: "Stop the match marker on the jewel cluster for a royal match.",
+    action: "¡MATCH!",
+    targetWord: "jewel cluster",
+    opponent: "Puzzle timer",
+    field: "Partida Real · match-three"
   }
 };
 
@@ -560,7 +752,13 @@ function EastAsiaLiveStagePreview({
         <span className="east-asia-live-stage-flame" />
         <span className="east-asia-live-stage-spark" />
       </div>
-      <p className="east-asia-live-stage-caption">{countryLabel} · live on stage</p>
+      <p className="east-asia-live-stage-caption">
+        {countryLabel === "Japan" || countryLabel === "日本"
+          ? "JAPAN Stage · 日本 · ステージライブ"
+          : countryLabel === "China" || countryLabel === "中国"
+            ? "上海舞台 · 中国 · 舞台直播"
+            : `${countryLabel} · live on stage`}
+      </p>
     </div>
   );
 }

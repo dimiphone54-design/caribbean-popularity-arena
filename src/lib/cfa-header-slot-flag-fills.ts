@@ -61,14 +61,14 @@ export const CFA_HEADER_SLOT_FLAG_FILLS: Record<string, CfaHeaderFlagFillSpec> =
       { offset: "100%", color: "#000000" }
     ]
   },
-  VE: {
+  ES: {
     stops: [
-      { offset: "0%", color: "#FFCC00" },
-      { offset: "33.3%", color: "#FFCC00" },
-      { offset: "33.3%", color: "#00247D" },
-      { offset: "66.6%", color: "#00247D" },
-      { offset: "66.6%", color: "#CF142B" },
-      { offset: "100%", color: "#CF142B" }
+      { offset: "0%", color: "#AA151B" },
+      { offset: "25%", color: "#AA151B" },
+      { offset: "25%", color: "#F1BF00" },
+      { offset: "75%", color: "#F1BF00" },
+      { offset: "75%", color: "#AA151B" },
+      { offset: "100%", color: "#AA151B" }
     ]
   },
   PL: {

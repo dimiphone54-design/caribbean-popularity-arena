@@ -33,11 +33,17 @@ export function RoomLocalePicker({ className = "" }: { className?: string }) {
 
   return (
     <details className={`room-locale-picker ${className}`.trim()}>
-      <summary className="room-locale-picker-summary cursor-pointer list-none rounded-2xl border px-3 py-2 text-[11px] font-semibold text-[#fecdd3] transition [&::-webkit-details-marker]:hidden">
-        <span className="room-locale-picker-label block text-[9px] font-bold uppercase tracking-[0.16em] text-[#fda4af]/80">
+      <summary
+        className="room-locale-picker-summary cursor-pointer list-none rounded-2xl border px-3 py-2 text-[11px] font-semibold text-[#fecdd3] transition [&::-webkit-details-marker]:hidden"
+        suppressHydrationWarning
+      >
+        <span
+          className="room-locale-picker-label block text-[9px] font-bold uppercase tracking-[0.16em] text-[#fda4af]/80"
+          suppressHydrationWarning
+        >
           {t.localePickerLabel}
         </span>
-        <span className="room-locale-picker-current mt-1 inline-flex items-center gap-1.5">
+        <span className="room-locale-picker-current mt-1 inline-flex items-center gap-1.5" suppressHydrationWarning>
           {formatRoomLocaleOptionLabel(selected)}
           <span className="text-[#fb7185]/60" aria-hidden="true">
             ▾

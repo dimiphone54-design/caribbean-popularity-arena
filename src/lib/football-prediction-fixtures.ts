@@ -1,45 +1,170 @@
 import type { FootballMatch } from "@/lib/football-prediction-arena";
 
-function hoursFromNow(h: number) {
-  return new Date(Date.now() + h * 3600000).toISOString();
-}
+/**
+ * Fixed ISO kickoffs — never use Date.now() here.
+ * Relative times cause SSR HTML ≠ client hydration text.
+ */
 
-function daysFromNow(d: number, hour = 15) {
-  const date = new Date();
-  date.setDate(date.getDate() + d);
-  date.setHours(hour, 0, 0, 0);
-  return date.toISOString();
-}
-
-/** Demo fixtures · replace with sports API when FOOTBALL_DATA_API_KEY is set */
-export function getDemoFootballFixtures(): FootballMatch[] {
+/** Colombia room only · real Liga BetPlay / Copa / Selección sides */
+export function getColombiaFootballFixtures(): FootballMatch[] {
   return [
+    {
+      id: "co-millonarios-santafe",
+      competition: "liga-betplay",
+      competitionLabel: "Liga BetPlay · Superclásico capitalino",
+      league: "liga-betplay",
+      homeTeam: "Millonarios",
+      awayTeam: "Independiente Santa Fe",
+      homeFlag: "🇨🇴",
+      awayFlag: "🇨🇴",
+      kickoff: "2026-07-26T01:00:00.000Z",
+      status: "scheduled"
+    },
+    {
+      id: "co-nacional-dim",
+      competition: "liga-betplay",
+      competitionLabel: "Liga BetPlay · Clásico paisa",
+      league: "liga-betplay",
+      homeTeam: "Atlético Nacional",
+      awayTeam: "Independiente Medellín",
+      homeFlag: "🇨🇴",
+      awayFlag: "🇨🇴",
+      kickoff: "2026-07-26T22:30:00.000Z",
+      status: "scheduled"
+    },
+    {
+      id: "co-america-cali",
+      competition: "liga-betplay",
+      competitionLabel: "Liga BetPlay · Clásico vallecaucano",
+      league: "liga-betplay",
+      homeTeam: "América de Cali",
+      awayTeam: "Deportivo Cali",
+      homeFlag: "🇨🇴",
+      awayFlag: "🇨🇴",
+      kickoff: "2026-07-27T01:10:00.000Z",
+      status: "scheduled"
+    },
+    {
+      id: "co-junior-tolima",
+      competition: "liga-betplay",
+      competitionLabel: "Liga BetPlay Dimayor",
+      league: "liga-betplay",
+      homeTeam: "Junior de Barranquilla",
+      awayTeam: "Deportes Tolima",
+      homeFlag: "🇨🇴",
+      awayFlag: "🇨🇴",
+      kickoff: "2026-07-28T00:00:00.000Z",
+      status: "scheduled"
+    },
+    {
+      id: "co-bucaramanga-once",
+      competition: "copa-colombia",
+      competitionLabel: "Copa Colombia",
+      league: "copa-colombia",
+      homeTeam: "Atlético Bucaramanga",
+      awayTeam: "Once Caldas",
+      homeFlag: "🇨🇴",
+      awayFlag: "🇨🇴",
+      kickoff: "2026-07-29T23:00:00.000Z",
+      status: "scheduled"
+    },
+    {
+      id: "co-seleccion-ecuador",
+      competition: "international",
+      competitionLabel: "Eliminatorias · Selección Colombia",
+      league: "international",
+      homeTeam: "Colombia",
+      awayTeam: "Ecuador",
+      homeFlag: "🇨🇴",
+      awayFlag: "🇪🇨",
+      kickoff: "2026-08-05T00:30:00.000Z",
+      status: "scheduled"
+    },
+    {
+      id: "co-nacional-america-finished",
+      competition: "liga-betplay",
+      competitionLabel: "Liga BetPlay · clásico",
+      league: "liga-betplay",
+      homeTeam: "Atlético Nacional",
+      awayTeam: "América de Cali",
+      homeFlag: "🇨🇴",
+      awayFlag: "🇨🇴",
+      kickoff: "2026-07-12T01:00:00.000Z",
+      status: "finished",
+      homeScore: 2,
+      awayScore: 1,
+      firstGoalScorer: "Morelos",
+      homeScorers: ["Morelos", "Duque"],
+      awayScorers: ["Ramos"]
+    }
+  ];
+}
+
+/** Demo fixtures · UK focus lane · replace with sports API when FOOTBALL_DATA_API_KEY is set */
+export function getDemoFootballFixtures(countryId?: string): FootballMatch[] {
+  if (countryId === "colombia") {
+    return getColombiaFootballFixtures();
+  }
+
+  return [
+    {
+      id: "pl-city-liverpool",
+      competition: "premier-league",
+      competitionLabel: "Premier League",
+      league: "premier-league",
+      homeTeam: "Manchester City",
+      awayTeam: "Liverpool",
+      homeFlag: "🇬🇧",
+      awayFlag: "🇬🇧",
+      kickoff: "2026-07-25T14:30:00.000Z",
+      status: "scheduled"
+    },
     {
       id: "pl-arsenal-chelsea",
       competition: "premier-league",
-      competitionLabel: "Premier League",
+      competitionLabel: "London Derby · Premier League",
       league: "premier-league",
       homeTeam: "Arsenal",
       awayTeam: "Chelsea",
       homeFlag: "🇬🇧",
       awayFlag: "🇬🇧",
-      homeCrestUrl: "/football-clubs/arsenal-fc.svg",
-      awayCrestUrl: "/football-clubs/chelsea-fc.svg",
-      kickoff: daysFromNow(2, 17),
+      kickoff: "2026-07-25T17:15:00.000Z",
       status: "scheduled"
     },
     {
-      id: "ucl-real-bayern",
+      id: "fac-manutd-tottenham",
+      competition: "fa-cup",
+      competitionLabel: "FA Cup",
+      league: "fa-cup",
+      homeTeam: "Manchester United",
+      awayTeam: "Tottenham",
+      homeFlag: "🇬🇧",
+      awayFlag: "🇬🇧",
+      kickoff: "2026-07-26T19:00:00.000Z",
+      status: "scheduled"
+    },
+    {
+      id: "ucl-villa-newcastle",
       competition: "champions-league",
       competitionLabel: "Champions League",
       league: "champions-league",
-      homeTeam: "Real Madrid",
-      awayTeam: "Bayern Munich",
-      homeFlag: "🇪🇸",
-      awayFlag: "🇩🇪",
-      homeCrestUrl: "/football-clubs/real-madrid-fc.svg",
-      awayCrestUrl: "/football-clubs/bayern-munich-fc.svg",
-      kickoff: daysFromNow(3, 20),
+      homeTeam: "Aston Villa",
+      awayTeam: "Newcastle",
+      homeFlag: "🇬🇧",
+      awayFlag: "🇬🇧",
+      kickoff: "2026-07-24T20:00:00.000Z",
+      status: "scheduled"
+    },
+    {
+      id: "efl-leeds-sunderland",
+      competition: "championship",
+      competitionLabel: "EFL Championship",
+      league: "championship",
+      homeTeam: "Leeds United",
+      awayTeam: "Sunderland",
+      homeFlag: "🇬🇧",
+      awayFlag: "🇬🇧",
+      kickoff: "2026-07-28T14:00:00.000Z",
       status: "scheduled"
     },
     {
@@ -51,23 +176,7 @@ export function getDemoFootballFixtures(): FootballMatch[] {
       awayTeam: "Sevilla",
       homeFlag: "🇮🇹",
       awayFlag: "🇪🇸",
-      homeCrestUrl: "/football-clubs/roma-fc.svg",
-      awayCrestUrl: "/football-clubs/sevilla-fc.svg",
-      kickoff: hoursFromNow(8),
-      status: "scheduled"
-    },
-    {
-      id: "fac-manutd-liverpool",
-      competition: "fa-cup",
-      competitionLabel: "FA Cup",
-      league: "fa-cup",
-      homeTeam: "Man United",
-      awayTeam: "Liverpool",
-      homeFlag: "🇬🇧",
-      awayFlag: "🇬🇧",
-      homeCrestUrl: "/football-clubs/man-united-fc.svg",
-      awayCrestUrl: "/football-clubs/liverpool-fc.svg",
-      kickoff: hoursFromNow(26),
+      kickoff: "2026-07-27T19:00:00.000Z",
       status: "scheduled"
     },
     {
@@ -79,35 +188,7 @@ export function getDemoFootballFixtures(): FootballMatch[] {
       awayTeam: "Trinidad & Tobago",
       homeFlag: "🇬🇧",
       awayFlag: "🇹🇹",
-      homeCrestUrl: "/football-clubs/england-national.svg",
-      awayCrestUrl: "/football-clubs/trinidad-tobago-national.svg",
-      kickoff: daysFromNow(5, 19),
-      status: "scheduled"
-    },
-    {
-      id: "wc-brazil-france",
-      competition: "world-cup",
-      competitionLabel: "World Cup",
-      league: "world-cup",
-      homeTeam: "Brazil",
-      awayTeam: "France",
-      homeFlag: "🇧🇷",
-      awayFlag: "🇫🇷",
-      homeCrestUrl: "/football-clubs/brazil-national.svg",
-      awayCrestUrl: "/football-clubs/france-national.svg",
-      kickoff: daysFromNow(12, 18),
-      status: "scheduled"
-    },
-    {
-      id: "euro-spain-germany",
-      competition: "euro",
-      competitionLabel: "European Championships",
-      league: "euro",
-      homeTeam: "Spain",
-      awayTeam: "Germany",
-      homeFlag: "🇪🇸",
-      awayFlag: "🇩🇪",
-      kickoff: daysFromNow(9, 20),
+      kickoff: "2026-08-02T18:00:00.000Z",
       status: "scheduled"
     },
     {
@@ -119,7 +200,7 @@ export function getDemoFootballFixtures(): FootballMatch[] {
       awayTeam: "Tottenham",
       homeFlag: "🇬🇧",
       awayFlag: "🇬🇧",
-      kickoff: hoursFromNow(-48),
+      kickoff: "2026-07-10T14:00:00.000Z",
       status: "finished",
       homeScore: 2,
       awayScore: 1,

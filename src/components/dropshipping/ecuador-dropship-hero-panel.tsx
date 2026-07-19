@@ -53,8 +53,8 @@ export function EcuadorDropshipHeroPanel({ compact = false }: { compact?: boolea
       </div>
       <div className="dropship-ecuador-hero-beam" aria-hidden="true" />
       <span className="dropship-ecuador-hero-beam-notch" aria-hidden="true" />
-      <p className="dropship-ecuador-hero-label">🇪🇨 Ecuador · equipo dropship</p>
-      <span className="dropship-ecuador-hero-live">● EN VIVO · carril dropship</span>
+      <p className="dropship-ecuador-hero-label">🇪🇨 Ecuador Direct Dropship Lane</p>
+      <span className="dropship-ecuador-hero-live">● SUPPLIER SHIPS DIRECT · USD</span>
     </div>
   );
 }

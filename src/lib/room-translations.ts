@@ -74,9 +74,6 @@ const intlRoomDescriptionsEs: Record<string, { description: string }> = {
   "uk-flag-cotswolds": {
     description: "Película en cuatro parques · bienvenida museo · nieve · drones · reloj UK en vivo."
   },
-  "football-lads": {
-    description: "Domingo · banter de pub · prompts de partido · energía fútbol UK."
-  },
   "colombia-room": {
     description: "Arepas · empanadas · Medellín · Bogotá · reggaeton · salsa · vallenato."
   },
@@ -97,9 +94,6 @@ const intlRoomDescriptionsEs: Record<string, { description: string }> = {
 const intlRoomDescriptionsEn: Record<string, { description: string }> = {
   "uk-flag-cotswolds": {
     description: "Four-quarter park movie slide · museum welcome · snow · drones · live UK clock."
-  },
-  "football-lads": {
-    description: "Sunday league squad · pub banter · men's match-day prompts · UK football energy."
   },
   "colombia-room": {
     description: "Arepas · empanadas · Medellín · Bogotá · reggaeton · salsa · vallenato."
@@ -125,7 +119,7 @@ const intlCountryTaglinesEs: Record<string, string> = {
   ecuador: "Comida ecuatoriana · cultura andina · baile · juegos · ecuavoley",
   trinidad: "Soca · Puerto España · energía Carnival",
   jamaica: "Dancehall · Kingston · vibras isleñas",
-  venezuela: "Caracas · música · fuego latino",
+  spain: "Barcelona · flamenco · cultura mediterránea",
   poland: "Varsovia · moda · estilo polaco",
   tunisia: "Túnez · cultura · árabe · francés",
   guyana: "Georgetown · comedia · mezcla caribeña",
@@ -140,7 +134,7 @@ const intlCountryTaglinesEn: Record<string, string> = {
   ecuador: "Ecuadorian food · Andes culture · dance · games · ecuavoley",
   trinidad: "Soca · Port of Spain · Carnival energy",
   jamaica: "Dancehall · Kingston · island vibes",
-  venezuela: "Caracas · music · Latin fire",
+  spain: "Barcelona · flamenco · Mediterranean culture",
   poland: "Warsaw · fashion · Polish style",
   tunisia: "Tunis · culture · Arabic · French",
   guyana: "Georgetown · comedy · Caribbean mix",
@@ -418,7 +412,7 @@ const bundles: Record<ContentLocaleId, RoomTranslationBundle> = {
     gateTimeLeft: "restante",
     colombia: {
       eyebrow: "Pasión colombiana · amor en vivo",
-      title: "Sala Colombia",
+      title: "Colombia Room",
       tagline:
         "Aquí el amor suena fuerte — como serenata bajo la luna, con sabor a café y sal de mar.",
       subtitle: "Romance al máximo · salsa · mar caribe · comida con amor · un live por corazón",

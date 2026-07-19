@@ -15,7 +15,7 @@ const spotlightCards = [
   {
     id: "coffee-spot",
     badge: "#1 Coffee spot",
-    title: "People dining with coffee",
+    title: "Gente comiendo con café",
     caption: "Eje Cafetero · tables full · fresh cups · mountain aroma",
     image: colombiaCoffeeSpotlightImage,
     accent: "border-yellow-400/35"

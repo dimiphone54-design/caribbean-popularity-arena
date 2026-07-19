@@ -8,9 +8,17 @@ export type LegalDocument = {
 export const legalDocuments: LegalDocument[] = [
   {
     slug: "terms",
-    title: "Terms and Conditions",
+    title: "Terms of Service",
     file: "terms-and-conditions.md",
-    description: "Platform rules, eligibility, accounts, liability, and governing law."
+    description:
+      "Platform rules, 18+ eligibility, gifts (70/30 split), voting fees, boosts, live rooms, liability, and governing law."
+  },
+  {
+    slug: "creator-agreement",
+    title: "Creator Agreement",
+    file: "creator-participation-agreement.md",
+    description:
+      "Creator revenue split, payout schedule, live queue rules, boosts, content standards, and enforcement."
   },
   {
     slug: "privacy",
@@ -23,12 +31,6 @@ export const legalDocuments: LegalDocument[] = [
     title: "Community Guidelines",
     file: "community-guidelines.md",
     description: "Community standards, prohibited conduct, and enforcement."
-  },
-  {
-    slug: "creator-agreement",
-    title: "Creator Participation Agreement",
-    file: "creator-participation-agreement.md",
-    description: "Creator eligibility, content standards, and licensing."
   },
   {
     slug: "refunds",
@@ -82,6 +84,7 @@ export function getLegalDocumentBySlug(slug: string) {
 export const footerLegalMicroLinks = [
   { label: "Legal Center", href: "/legal" },
   { label: "Terms", href: "/legal/terms", slug: "terms" },
+  { label: "Creator Agreement", href: "/legal/creator-agreement", slug: "creator-agreement" },
   { label: "Privacy", href: "/legal/privacy", slug: "privacy" },
   { label: "Community", href: "/legal/community", slug: "community" },
   { label: "Safety", href: "/legal/safety", slug: "safety" }

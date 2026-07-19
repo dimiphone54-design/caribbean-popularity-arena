@@ -35,7 +35,7 @@ export function ColombiaRoomAccessStatus({ roomSlug, countryName, flag }: Colomb
   }
 
   return (
-    <p className="colombia-room-access-status mt-4 text-center text-[11px] font-bold uppercase tracking-[0.14em] text-[#fda4af]">
+    <p className="colombia-room-access-status mt-1.5 text-center text-[11px] font-bold uppercase tracking-[0.14em] text-[#fda4af]">
       {flag} {countryName} {t.colombia.accessLive} {formatCountryRoomAccessTimeLeft(accessLeftMs)} {t.gateTimeLeft}
     </p>
   );

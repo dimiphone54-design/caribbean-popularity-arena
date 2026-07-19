@@ -22,6 +22,8 @@ export type DropshipProduct = {
   sellerContact?: string;
   storeUrl?: string;
   sellerEmail?: string;
+  /** Link‑out only: external payment URL the seller controls. Platform NEVER touches payments. */
+  sellerPaymentUrl?: string;
   lane?: DropshipLaneId;
 };
 
@@ -77,7 +79,7 @@ const islandCodeByCountryId: Record<string, string> = {
   ecuador: "EC",
   trinidad: "TT",
   jamaica: "JM",
-  venezuela: "VE",
+  spain: "ES",
   poland: "PL",
   tunisia: "TN",
   guyana: "GY",
@@ -94,17 +96,45 @@ function shipsFrom(countryId: string, city?: string) {
 
 const catalog: DropshipProduct[] = [
   {
-    id: "uk-football-scarf",
+    id: "uk-football-fan-pack",
     countryId: "uk",
-    name: "UK Stadium Football Scarf",
-    description: "Knit scarf · official match day style · Manchester warehouse",
-    price: 24,
+    name: "Premium Football Fan Pack",
+    description:
+      "Official team scarf, phone case, keychain & car air freshener (Arsenal, Man United, Liverpool, etc.)",
+    price: 27,
     currency: "USD",
     category: "Football merch",
     shipsFrom: shipsFrom("uk", "Manchester"),
     flag: "🇬🇧",
     imageUrl: "/uk-football-scarf.png",
-    supplierNote: "Dropship · UK warehouse lane"
+    supplierNote: "Dropship · Manchester football merch · supplier ships direct"
+  },
+  {
+    id: "uk-british-heritage-travel",
+    countryId: "uk",
+    name: "British Heritage Travel Kit",
+    description:
+      "Portable power bank, travel adapter, noise-cancelling earbuds & UK travel essentials",
+    price: 42,
+    currency: "USD",
+    category: "Travel essentials",
+    shipsFrom: shipsFrom("uk", "Manchester"),
+    flag: "🇬🇧",
+    imageUrl: "/uk-british-heritage-travel-kit.jpg",
+    supplierNote: "Dropship · Manchester travel · supplier ships direct"
+  },
+  {
+    id: "uk-smart-home-gadgets",
+    countryId: "uk",
+    name: "Smart Home Gadgets Bundle",
+    description: "LED lighting strips, wireless charger, mini projector & smart plugs",
+    price: 38,
+    currency: "USD",
+    category: "Smart home",
+    shipsFrom: shipsFrom("uk", "London"),
+    flag: "🇬🇧",
+    imageUrl: "/uk-tech-gadgets-pack.png",
+    supplierNote: "Dropship · London smart home · supplier ships direct"
   },
   {
     id: "uk-park-games-kit",
@@ -159,43 +189,69 @@ const catalog: DropshipProduct[] = [
     supplierNote: "Dropship · specialty coffee lane"
   },
   {
+    id: "ec-tech-gadgets",
+    countryId: "ecuador",
+    name: "Tech & Gadgets Bundle",
+    description: "Phone accessories, chargers & cables",
+    price: 29,
+    currency: "USD",
+    category: "Tech & Gadgets",
+    shipsFrom: shipsFrom("ecuador", "Quito"),
+    flag: "🇪🇨",
+    imageUrl: ecuadorDropshipPeoplePhotos.hatsTeam,
+    supplierNote: "Dropship · Quito tech · supplier ships direct"
+  },
+  {
+    id: "ec-auto-care",
+    countryId: "ecuador",
+    name: "Auto Interior Care Kit",
+    description: "Complete vehicle detailing set",
+    price: 35,
+    currency: "USD",
+    category: "Automotive",
+    shipsFrom: shipsFrom("ecuador", "Quito"),
+    flag: "🇪🇨",
+    imageUrl: ecuadorDropshipPeoplePhotos.volunteers,
+    supplierNote: "Dropship · Quito auto · supplier ships direct"
+  },
+  {
     id: "ec-ceviche-kit",
     countryId: "ecuador",
     name: "Guayaquil Ceviche Kit",
-    description: "Coastal ceviche prep · lime · plantain chips",
+    description: "Authentic coastal recipe + ingredients",
     price: 27,
     currency: "USD",
     category: "Food kit",
     shipsFrom: shipsFrom("ecuador", "Guayaquil"),
     flag: "🇪🇨",
     imageUrl: ecuadorDropshipPeoplePhotos.bancoGuayaquil,
-    supplierNote: "Dropship · coast lane"
+    supplierNote: "Dropship · Guayaquil coast · supplier ships direct"
   },
   {
     id: "ec-quito-craft",
     countryId: "ecuador",
-    name: "Quito Andes Craft Pack",
-    description: "Woven textiles · marimba culture booklet",
+    name: "Andes Artisan Collection",
+    description: "Beautiful handwoven textiles · traditional Otavalo patterns · authentic cultural fashion",
     price: 31,
     currency: "USD",
     category: "Crafts",
-    shipsFrom: shipsFrom("ecuador"),
+    shipsFrom: shipsFrom("ecuador", "Quito"),
     flag: "🇪🇨",
-    imageUrl: ecuadorDropshipPeoplePhotos.hatsTeam,
-    supplierNote: "Dropship · Quito artisan"
+    imageUrl: "/ecuador-andes-artisan-1.jpg",
+    supplierNote: "Dropship · Otavalo Andes artisan · supplier ships direct"
   },
   {
     id: "ec-carnival-wear",
     countryId: "ecuador",
-    name: "Ecuador Carnival Accessories",
-    description: "Festival colors · parade-ready kit",
+    name: "Carnival Ready Pack",
+    description: "Explosive festival colors · parade-ready looks · street energy",
     price: 22,
     currency: "USD",
     category: "Fashion",
     shipsFrom: shipsFrom("ecuador", "Quito"),
     flag: "🇪🇨",
-    imageUrl: ecuadorDropshipPeoplePhotos.volunteers,
-    supplierNote: "Dropship · festival lane"
+    imageUrl: "/ecuador-carnival-ready-1.jpg",
+    supplierNote: "Dropship · festival lane · real Ambato / carnival energy · supplier ships direct"
   },
   {
     id: "jm-dancehall-tee",
@@ -276,41 +332,41 @@ const catalog: DropshipProduct[] = [
     supplierNote: "Dropship · party lane"
   },
   {
-    id: "ve-music-merch",
-    countryId: "venezuela",
-    name: "Caracas Latin Fire Merch",
-    description: "Music culture tee · Caracas print",
-    price: 25,
-    currency: "USD",
+    id: "es-flamenco-merch",
+    countryId: "spain",
+    name: "Barcelona Flamenco Tee",
+    description: "Flamenco culture tee · Barcelona print",
+    price: 28,
+    currency: "EUR",
     category: "Fashion",
-    shipsFrom: shipsFrom("venezuela"),
-    flag: "🇻🇪",
-    imageUrl: "/arena-real-people/ve.jpg",
-    supplierNote: "Dropship · Caracas lane"
+    shipsFrom: shipsFrom("spain"),
+    flag: "🇪🇸",
+    imageUrl: "/arena-real-people/es.jpg",
+    supplierNote: "Dropship · Barcelona lane"
   },
   {
-    id: "ve-beach-kit",
-    countryId: "venezuela",
-    name: "Caribbean Coast Beach Kit",
-    description: "Towel · tote · coastal colors",
-    price: 33,
-    currency: "USD",
+    id: "es-beach-kit",
+    countryId: "spain",
+    name: "Mediterranean Beach Kit",
+    description: "Towel · tote · Mediterranean colors",
+    price: 31,
+    currency: "EUR",
     category: "Outdoor",
-    shipsFrom: shipsFrom("venezuela", "Caracas"),
-    flag: "🇻🇪",
-    imageUrl: "/arena-real-people/ve.jpg",
+    shipsFrom: shipsFrom("spain", "Barcelona"),
+    flag: "🇪🇸",
+    imageUrl: "/arena-real-people/es.jpg",
     supplierNote: "Dropship · coast supplier"
   },
   {
-    id: "ve-flag-set",
-    countryId: "venezuela",
-    name: "Venezuela Pride Set",
+    id: "es-flag-set",
+    countryId: "spain",
+    name: "Spain Pride Set",
     description: "Flag · pin · sticker bundle",
-    price: 19,
-    currency: "USD",
+    price: 20,
+    currency: "EUR",
     category: "Merch",
-    shipsFrom: shipsFrom("venezuela"),
-    flag: "🇻🇪",
+    shipsFrom: shipsFrom("spain"),
+    flag: "🇪🇸",
     imageUrl: "/arena-real-people/slot-04.jpg",
     supplierNote: "Dropship · merch lane"
   },
@@ -493,7 +549,7 @@ const catalog: DropshipProduct[] = [
     category: "Food kit",
     shipsFrom: shipsFrom("china", "Shanghai"),
     flag: "🇨🇳",
-    imageUrl: chinaDropshipPeoplePhotos.teamMeeting,
+    imageUrl: "https://images.unsplash.com/photo-1734333107760-7389a4f29af8?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200",
     supplierNote: "Dropship · tea partner"
   },
   {
@@ -578,8 +634,8 @@ const catalog: DropshipProduct[] = [
   {
     id: "jp-anime-tee",
     countryId: "japan",
-    name: "JAPAN Exclusive Anime Tee",
-    description: "Japan-exclusive · limited anime print",
+    name: "日本限定アニメTシャツ",
+    description: "日本限定 · 限定アニメプリント",
     price: 34,
     currency: "USD",
     category: "Anime · limited",
@@ -591,8 +647,8 @@ const catalog: DropshipProduct[] = [
   {
     id: "jp-gashapon-figure",
     countryId: "japan",
-    name: "JAPAN Gashapon Mini Figure Set",
-    description: "Capsule toy · blind box collectible",
+    name: "日本ガシャポンミニフィギュアセット",
+    description: "カプセルトイ · ブラインドボックス",
     price: 18,
     currency: "USD",
     category: "Collectibles",
@@ -604,8 +660,8 @@ const catalog: DropshipProduct[] = [
   {
     id: "jp-manga-box",
     countryId: "japan",
-    name: "JAPAN Limited Edition Manga Box",
-    description: "Collector manga · Japan-exclusive print",
+    name: "日本限定版マンガボックス",
+    description: "コレクターマンガ · 日本限定版",
     price: 42,
     currency: "USD",
     category: "Manga · exclusive",
@@ -617,8 +673,8 @@ const catalog: DropshipProduct[] = [
   {
     id: "jp-char-pouch",
     countryId: "japan",
-    name: "JAPAN Character Goods Pouch",
-    description: "Kawaii pouch · Japan-exclusive collab",
+    name: "日本キャラクターグッズポーチ",
+    description: "かわいいポーチ · 日本限定コラボ",
     price: 22,
     currency: "USD",
     category: "Accessories",
@@ -769,7 +825,7 @@ const laneImageByCountryId: Record<string, string> = {
   ecuador: ecuadorDropshipPeoplePhotos.bancoGuayaquil,
   trinidad: "/arena-real-people/tt.jpg",
   jamaica: "/arena-real-people/jm.jpg",
-  venezuela: "/arena-real-people/ve.jpg",
+  spain: "/arena-real-people/es.jpg",
   poland: "/arena-real-people/pl.jpg",
   tunisia: "/arena-real-people/tn.jpg",
   guyana: "/arena-real-people/gy.jpg",
@@ -801,34 +857,43 @@ const laneImageByCountryLane: Partial<
 const laneCatalog: DropshipProduct[] = internationalSuiteCountries.flatMap((country) => {
   const defaultImage = laneImageByCountryId[country.id] ?? "/arena-real-people/slot-01.jpg";
   const laneImages = laneImageByCountryLane[country.id];
+  const isUk = country.id === "uk";
 
   return [
     {
       id: `${country.id}-lane-tech`,
       countryId: country.id,
-      name: `${country.name} Tech & Gadgets Pack`,
-      description: "Phone accessories · cables · gadget bundle",
+      name: isUk ? "Tech & Gadgets Pack" : `${country.name} Tech & Gadgets Pack`,
+      description: isUk
+        ? "Premium phone accessories, fast-charging cables, and essential gadget bundle"
+        : "Phone accessories · cables · gadget bundle",
       price: 29,
       currency: "USD",
       category: "📱 Tech & Gadgets",
-      shipsFrom: shipsFrom(country.id),
+      shipsFrom: isUk ? shipsFrom("uk", "London") : shipsFrom(country.id),
       flag: country.flag,
       imageUrl: laneImages?.tech ?? defaultImage,
-      supplierNote: "Dropship · tech lane",
+      supplierNote: isUk
+        ? "Dropship · London tech · supplier ships direct"
+        : "Dropship · tech lane",
       lane: "tech"
     },
     {
       id: `${country.id}-lane-automotive`,
       countryId: country.id,
-      name: `${country.name} Car Accessories Kit`,
-      description: "Interior accessories · care kit",
+      name: isUk ? "Car Interior & Care Kit" : `${country.name} Car Accessories Kit`,
+      description: isUk
+        ? "Complete premium vehicle detailing set and luxury interior accessories"
+        : "Interior accessories · care kit",
       price: 35,
       currency: "USD",
       category: "🚗 Automotive & Car Accessories",
-      shipsFrom: shipsFrom(country.id),
+      shipsFrom: isUk ? shipsFrom("uk", "London") : shipsFrom(country.id),
       flag: country.flag,
       imageUrl: laneImages?.automotive ?? defaultImage,
-      supplierNote: "Dropship · automotive lane",
+      supplierNote: isUk
+        ? "Dropship · London auto · supplier ships direct"
+        : "Dropship · automotive lane",
       lane: "automotive"
     }
   ];
@@ -843,6 +908,32 @@ export const colombiaDropshipPanelProductIds = [
   "co-coffee-gift"
 ] as const;
 
+/** Ecuador Direct Dropship Lane · featured SKUs (15% fee is Command Center only) */
+export const ecuadorDropshipPanelProductIds = [
+  "ec-tech-gadgets",
+  "ec-auto-care",
+  "ec-ceviche-kit",
+  "ec-quito-craft",
+  "ec-carnival-wear"
+] as const;
+
+export const ecuadorFeaturedDropshipProducts = ecuadorDropshipPanelProductIds
+  .map((id) => catalog.find((product) => product.id === id))
+  .filter((product): product is DropshipProduct => Boolean(product));
+
+/** UK Tech & Automotive Lane · public featured SKUs (fee % Command Center only) */
+export const ukDropshipPanelProductIds = [
+  "uk-lane-tech",
+  "uk-lane-automotive",
+  "uk-british-heritage-travel",
+  "uk-smart-home-gadgets",
+  "uk-football-fan-pack"
+] as const;
+
+export const ukFeaturedDropshipProducts = ukDropshipPanelProductIds
+  .map((id) => catalog.find((product) => product.id === id))
+  .filter((product): product is DropshipProduct => Boolean(product));
+
 export function getDropshipProductsForCountry(countryId: string, lane?: DropshipLaneId | null) {
   if (lane) {
     return catalog.filter((product) => product.countryId === countryId && product.lane === lane);
@@ -852,6 +943,14 @@ export function getDropshipProductsForCountry(countryId: string, lane?: Dropship
     return colombiaDropshipPanelProductIds
       .map((id) => catalog.find((product) => product.id === id))
       .filter((product): product is DropshipProduct => Boolean(product));
+  }
+
+  if (countryId === "ecuador") {
+    return ecuadorFeaturedDropshipProducts;
+  }
+
+  if (countryId === "uk") {
+    return ukFeaturedDropshipProducts;
   }
 
   return catalog.filter((product) => product.countryId === countryId && !product.lane);
@@ -878,6 +977,10 @@ export function getDropshipProduct(productId: string) {
 }
 
 export function formatDropshipPrice(amount: number, currency: string, countryId?: string) {
+  // Public UK / Ecuador / Japan: clean single currency — no dual FX conversion string
+  if (countryId === "uk" || countryId === "ecuador" || countryId === "japan") {
+    return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(amount);
+  }
   if (countryId && currency === "USD") {
     return formatDropshipDualPrice(amount, countryId);
   }

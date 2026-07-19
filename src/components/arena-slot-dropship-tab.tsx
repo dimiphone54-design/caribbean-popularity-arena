@@ -2,19 +2,22 @@
 
 import Link from "next/link";
 import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
+import { isPublicDropshipVisible } from "@/lib/real-money";
 
 export const UK_DROPSHIP_TAB_HASH = "uk-dropshipping";
 export const CHINA_DROPSHIP_TAB_HASH = "china-dropshipping";
 export const JAPAN_DROPSHIP_TAB_HASH = "japan-dropshipping";
 export const COLOMBIA_DROPSHIP_TAB_HASH = "colombia-dropshipping";
 export const ECUADOR_DROPSHIP_TAB_HASH = "ecuador-dropshipping";
+export const TRINIDAD_DROPSHIP_TAB_HASH = "trinidad-dropshipping";
 
 export const DROPSHIP_TAB_HASH_BY_ISLAND_CODE: Record<string, string> = {
   UK: UK_DROPSHIP_TAB_HASH,
   CN: CHINA_DROPSHIP_TAB_HASH,
   JP: JAPAN_DROPSHIP_TAB_HASH,
   CO: COLOMBIA_DROPSHIP_TAB_HASH,
-  EC: ECUADOR_DROPSHIP_TAB_HASH
+  EC: ECUADOR_DROPSHIP_TAB_HASH,
+  TT: TRINIDAD_DROPSHIP_TAB_HASH
 };
 
 export const DROPSHIP_ROOM_FALLBACK_BY_ISLAND_CODE: Record<string, string> = {
@@ -54,9 +57,10 @@ export function ArenaSlotDropshipTab(
     props.mode === "room" ? (props.sectionId ?? DEFAULT_DROPSHIP_TAB_HASH) : DEFAULT_DROPSHIP_TAB_HASH;
   const countryName = props.mode === "room" ? (props.countryName ?? "room") : "room";
   const [open, setOpen] = useState(props.mode === "room" ? (props.defaultOpen ?? false) : false);
+  const publicDropshipOn = isPublicDropshipVisible();
 
   useEffect(() => {
-    if (isLinkMode || typeof window === "undefined") return;
+    if (!publicDropshipOn || isLinkMode || typeof window === "undefined") return;
     const syncFromHash = () => {
       const matches = window.location.hash.replace("#", "") === sectionId;
       setOpen(matches);
@@ -69,7 +73,9 @@ export function ArenaSlotDropshipTab(
     syncFromHash();
     window.addEventListener("hashchange", syncFromHash);
     return () => window.removeEventListener("hashchange", syncFromHash);
-  }, [sectionId, isLinkMode]);
+  }, [sectionId, isLinkMode, publicDropshipOn]);
+
+  if (!publicDropshipOn) return null;
 
   if (isLinkMode) {
     return (

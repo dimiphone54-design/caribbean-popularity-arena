@@ -18,6 +18,7 @@ import { DropshipBuyButton } from "@/components/dropshipping/dropship-buy-button
 import { DropshipCategoryLanes } from "@/components/dropshipping/dropship-category-lanes";
 import { ColombiaDropshipHeroPanel } from "@/components/dropshipping/colombia-dropship-hero-panel";
 import { ChinaDropshipHeroPanel } from "@/components/dropshipping/china-dropship-hero-panel";
+import { isPublicDropshipVisible } from "@/lib/real-money";
 
 type InternationalSuiteCountryDropshipProps = {
   countryId: string;
@@ -47,6 +48,7 @@ export function InternationalSuiteCountryDropship({
         ? featuredProducts
         : featuredProducts.slice(0, 2);
 
+  if (!isPublicDropshipVisible()) return null;
   if (!optionProducts.length) return null;
 
   const legal = getDropshipCountryLegal(countryId);
@@ -123,11 +125,17 @@ export function InternationalSuiteCountryDropship({
         </ul>
       ) : null}
 
-      <DropshipAiConverter
-        defaultCountryId={countryId}
-        defaultUsd={visibleOptionProducts[0]?.price ?? featuredProducts[0]?.price ?? 29}
-        variant="compact"
-      />
+      {/* Public Japan / UK / Ecuador / China: no LIVE AI FX converter clutter */}
+      {countryId !== "japan" &&
+      countryId !== "uk" &&
+      countryId !== "ecuador" &&
+      countryId !== "china" ? (
+        <DropshipAiConverter
+          defaultCountryId={countryId}
+          defaultUsd={visibleOptionProducts[0]?.price ?? featuredProducts[0]?.price ?? 29}
+          variant="compact"
+        />
+      ) : null}
     </div>
   );
 }

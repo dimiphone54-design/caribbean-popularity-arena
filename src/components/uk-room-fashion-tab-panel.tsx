@@ -16,13 +16,15 @@ export function UkRoomFashionTabPanel() {
   return (
     <div className="uk-room-fashion-tab-panel space-y-6">
 
-      {/* ── ACTIVITYS Tournament ───────────────────────────── */}
+      {/* ── ACTIVITYS Tournament · free public board ───────────────────────────── */}
       <section className={UK_ROOM_PANEL}>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase sm:text-xs">
-            ACTIVITYS
+            🇬🇧 Tournament · ACTIVITYS
           </p>
-          <span className="a2030-pulse-ring inline-flex h-2 w-2 rounded-full bg-[#b8ff3c]" />
+          <span className="inline-flex items-center rounded-full border border-[#86efac]/30 bg-[#86efac]/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.08em] text-[#86efac]">
+            Free board
+          </span>
         </div>
         <ol className="cotswolds-hero-board mt-3" role="list">
           {cotswoldsHeroQuarterSet.map((feed, index) => (

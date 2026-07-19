@@ -93,17 +93,24 @@ export function DropshipOrderTracker({ countryId, countryName, flag, refreshKey 
               <p className="text-xs font-semibold text-white">{order.productName}</p>
               <p className="mt-1 text-[11px] text-[#9aa8c6]">{order.productCategory}</p>
               <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-[#d7b46a]">
-                <span>{order.currency} {order.amount}</span>
+                <span>
+                  {order.currency} {order.amount}
+                </span>
                 <span>•</span>
                 <span>{copy.orderStatus?.[order.status] ?? order.status}</span>
                 <span>•</span>
-                <span>{new Date(order.createdAt).toLocaleString()}</span>
+                <span>
+                  {new Date(order.createdAt).toLocaleString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                  })}
+                </span>
               </div>
-              <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-[#9aa8c6]">
-                <span>Platform {order.platformPct}% · {order.currency} {order.platformAmount}</span>
-                <span>•</span>
-                <span>Supplier {order.supplierPct}% · {order.currency} {order.supplierAmount}</span>
-              </div>
+              {/* Platform / supplier fee splits stay owner-only in Command Center — never on public order UI */}
             </li>
           ))}
         </ul>

@@ -1,4 +1,5 @@
 import { isArenaMasterKeyActive } from "@/lib/arena-master-key";
+import { isArenaFront12VisibleSlot } from "@/lib/arena-front12-slot-order";
 import {
   getInternationalSuiteActiveCountryLabel,
   getInternationalSuiteActiveIslandCodes,
@@ -8,6 +9,8 @@ import {
 /** UI-safe · pass masterKeyActive from useArenaMasterKeyActive (false during SSR). */
 export function isArenaSlotSignInOpenForUi(islandCode: string, masterKeyActive = false) {
   if (masterKeyActive) return true;
+  // Front 12 nation slots · all READY for girl sign-in (same card style)
+  if (isArenaFront12VisibleSlot(islandCode)) return true;
   return isInternationalSuiteCountryActiveByIslandCode(islandCode);
 }
 

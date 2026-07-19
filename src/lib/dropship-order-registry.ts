@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 import { isPayPalConfigured } from "@/lib/paypal";
 import type { DropshipProduct } from "@/lib/dropshipping";
-import { getDropshipRevenueSplit } from "@/lib/dropship-pricing";
+import { getDropshipRevenueSplitForCountry } from "@/lib/dropship-pricing";
 
 export type DropshipOrderStatus = "pending_payment" | "ordered" | "shipped" | "delivered";
 
@@ -81,7 +81,7 @@ export function createDropshipOrder(input: CreateDropshipOrderInput) {
   const now = new Date().toISOString();
   const id = `dso_${randomUUID()}`;
   const orderToken = createOrderToken();
-  const split = getDropshipRevenueSplit(input.product.price);
+  const split = getDropshipRevenueSplitForCountry(input.product.price, input.countryId);
   const record: DropshipOrderRecord = {
     id,
     orderToken,

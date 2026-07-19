@@ -1,9 +1,9 @@
 "use client";
 
 const LOOKS = [
-  { id: 1, name: "Leila Dupont", style: "London glow", city: "London" },
-  { id: 2, name: "Runway Edit", style: "Street luxe", city: "Manchester" },
-  { id: 3, name: "Night Fit", style: "After-dark", city: "Birmingham" }
+  { id: 1, name: "Runway Edit", style: "Street luxe", city: "Manchester" },
+  { id: 2, name: "Night Fit", style: "After-dark", city: "Birmingham" },
+  { id: 3, name: "Park Walk", style: "Soft utility", city: "London" }
 ] as const;
 
 function VariantCard({ title, description, className, itemsClassName }: { title: string; description: string; className: string; itemsClassName: string }) {

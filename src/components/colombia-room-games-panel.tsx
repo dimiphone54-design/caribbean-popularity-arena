@@ -87,11 +87,11 @@ export function ColombiaRoomGamesPanel() {
                     />
                   </span>
                   <span className="cotswolds-game-meter">
-                    {playing ? "In the simulator · play live" : `${row.ready}% ready · tap to play`}
+                    {playing ? "En el simulador · juega en vivo" : `${row.ready}% listo · toca para jugar`}
                   </span>
                 </span>
                 <span className={`cotswolds-game-cta${playing ? " cotswolds-game-cta--live" : ""}`}>
-                  {playing ? "● PLAYING" : "▶ PLAY GAME"}
+                  {playing ? "● JUGANDO" : "▶ JUGAR"}
                 </span>
               </button>
             );

@@ -17,26 +17,26 @@ export type ColombiaFoodItem = {
 export const colombiaCulturePanelItems: ColombiaCultureItem[] = [
   {
     id: "medellin",
-    title: "Medellín nightlife",
-    vibe: "Rooftop lights · reggaeton · eternal spring city",
+    title: "Noche de Medellín",
+    vibe: "Luces de rooftop · reggaeton · ciudad de la eterna primavera",
     image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=280&fit=crop"
   },
   {
     id: "bogota",
-    title: "Bogotá city vibes",
-    vibe: "Andes skyline · cafés · late-night culture",
+    title: "Vibra de Bogotá",
+    vibe: "Skyline andino · cafés · cultura de madrugada",
     image: "https://images.unsplash.com/photo-1583267746897-2cf415887172?w=400&h=280&fit=crop"
   },
   {
     id: "cali",
-    title: "Cali salsa culture",
-    vibe: "Dance floors · brass · salsa capital energy",
+    title: "Cultura salsa de Cali",
+    vibe: "Pistas de baile · vientos · capital de la salsa",
     image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=280&fit=crop"
   },
   {
     id: "music",
-    title: "Colombian music",
-    vibe: "Salsa · Reggaeton · Vallenato",
+    title: "Música colombiana",
+    vibe: "Salsa · reggaeton · vallenato",
     image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=280&fit=crop"
   }
 ];
@@ -45,31 +45,31 @@ export const colombiaFoodPanelItems: ColombiaFoodItem[] = [
   {
     id: "arepas",
     name: "Arepas",
-    vibe: "Golden corn comfort · street to table",
+    vibe: "Maíz dorado · de la calle a la mesa",
     image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=280&fit=crop"
   },
   {
     id: "empanadas",
     name: "Empanadas",
-    vibe: "Crispy fold · salsa on the side",
-    image: "https://images.unsplash.com/photo-1626700051175-6818013e5787?w=400&h=280&fit=crop"
+    vibe: "Crujientes · ají al lado",
+    image: "/colombia-food-cali-empanadas.png"
   },
   {
     id: "bandeja",
-    name: "Bandeja Paisa",
-    vibe: "Hearty platter · mountain soul food",
+    name: "Bandeja paisa",
+    vibe: "Plato contundente · alma de montaña",
     image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=280&fit=crop"
   },
   {
     id: "ajiaco",
     name: "Ajiaco",
-    vibe: "Bogotá soup · capers · cream swirl",
+    vibe: "Sopa bogotana · alcaparras · crema",
     image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=280&fit=crop"
   },
   {
     id: "street",
-    name: "Colombian street food",
-    vibe: "Night markets · buñuelos · hot arepa stands",
+    name: "Comida de calle colombiana",
+    vibe: "Mercados de noche · buñuelos · arepas calientes",
     image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=280&fit=crop"
   }
 ];
@@ -99,7 +99,7 @@ export type ColombiaLiveChatMessage = {
 
 export const colombiaRoomLiveMeta = {
   title: "Colombia Room",
-  badge: "LIVE",
+  badge: "EN VIVO",
   subtitle: "Romance al máximo · salsa lenta · mar caribe · comida con amor · un live por corazón"
 };
 
@@ -207,127 +207,127 @@ export const colombiaComuna13PartyImage = "/colombia-slide-comuna13-party.png";
 export const colombiaRoomSlides: ColombiaRoomSlide[] = [
   {
     category: "horses",
-    title: "Feria de Manizales · Colombia's biggest horse show",
+    title: "Feria de Manizales · el gran show ecuestre del país",
     desc: "El gran show ecuestre del país · caballos de paso · arenas llenas · pasión por el caballo",
     img: colombiaHorseShowSpotlightImage,
     highlights: [
       {
         label: "Manizales · Caldas",
-        detail: "Feria de Manizales — the largest horse show in Colombia"
+        detail: "Feria de Manizales — el show ecuestre más grande de Colombia"
       },
       {
         label: "Caballo de paso fino",
-        detail: "National paso fino contest · elegance · Colombian pride"
+        detail: "Concurso nacional de paso fino · elegancia · orgullo colombiano"
       },
       {
-        label: "Live arena energy",
-        detail: "Packed stands · music · parade of horses under the lights"
+        label: "Energía de arena en vivo",
+        detail: "Graderías llenas · música · desfile de caballos bajo las luces"
       },
       {
-        label: "Love for horses",
-        detail: "Finca · track · backyard · Colombia loves its horses"
+        label: "Amor por los caballos",
+        detail: "Finca · pista · patio · Colombia ama sus caballos"
       }
     ]
   },
   {
     category: "coffee",
-    title: "#1 Coffee Spot · Eje Cafetero",
-    desc: "People dining with coffee · the number-one cup · mountain aroma · café with love",
+    title: "El #1 del café · Eje Cafetero",
+    desc: "Gente comiendo con café · la taza número uno · aroma de montaña · café con amor",
     img: colombiaCoffeeSpotlightImage,
     highlights: [
       {
         label: "Salento · Pereira",
-        detail: "#1 coffee spot · finca view · tables full of people"
+        detail: "El #1 del café · vista de finca · mesas llenas de gente"
       },
       {
-        label: "Dining with coffee",
-        detail: "Families · couples · slow conversation over fresh cups"
+        label: "Comiendo con café",
+        detail: "Familias · parejas · charla lenta sobre tazas frescas"
       },
       {
-        label: "Premium tinto",
-        detail: "Just poured · warm aroma · Colombia's finest coffee"
+        label: "Tinto premium",
+        detail: "Recién servido · aroma caliente · el mejor café de Colombia"
       },
       {
-        label: "Coffee Cultural Landscape",
-        detail: "UNESCO Eje Cafetero · heart of Colombian coffee culture"
+        label: "Paisaje Cultural Cafetero",
+        detail: "UNESCO Eje Cafetero · corazón de la cultura cafetera colombiana"
       }
     ]
   },
   {
     category: "cartagena-umbrellas",
     title: "Calle de las Sombrillas · Getsemaní",
-    desc: "Cartagena's umbrella city · rainbow canopy · narrow colourful alley",
+    desc: "La ciudad de sombrillas de Cartagena · toldo arcoíris · callejón colorido",
     img: colombiaCartagenaUmbrellasImage,
     highlights: [
       {
         label: "Getsemaní · Callejón Angosto",
-        detail: "The famous umbrella street · shade · colour · photo spot"
+        detail: "La famosa calle de las sombrillas · sombra · color · foto obligada"
       },
       {
-        label: "Umbrella city",
-        detail: "Hundreds of umbrellas floating above the lane · Caribbean charm"
+        label: "Ciudad de sombrillas",
+        detail: "Cientos de sombrillas flotando · encanto caribeño"
       },
       {
-        label: "Street art & cafés",
-        detail: "Wings murals · flags · bars · old city minutes away"
+        label: "Arte urbano y cafés",
+        detail: "Murales de alas · banderas · bares · casco viejo a minutos"
       },
       {
-        label: "Cartagena magic",
-        detail: "Colonial walls · tropical heat · the most colourful walk"
+        label: "Magia de Cartagena",
+        detail: "Murallas coloniales · calor tropical · el paseo más colorido"
       }
     ]
   },
   {
     category: "cartagena-church",
     title: "Catedral de Santa Catalina · Cartagena",
-    desc: "Historic church · yellow tower · colonial faith in the old city",
+    desc: "Iglesia histórica · torre amarilla · fe colonial en la ciudad vieja",
     img: colombiaCartagenaChurchImage,
     highlights: [
       {
         label: "Cartagena de Indias",
-        detail: "Cathedral of Santa Catalina of Alexandria · heart of the walled city"
+        detail: "Catedral de Santa Catalina de Alejandría · corazón de la ciudad amurallada"
       },
       {
-        label: "Colonial church",
-        detail: "Yellow facade · bell tower · centuries of Caribbean history"
+        label: "Iglesia colonial",
+        detail: "Fachada amarilla · campanario · siglos de historia caribeña"
       },
       {
-        label: "Plaza & old streets",
-        detail: "Cobblestones · balconies · sunset over the historic centre"
+        label: "Plaza y calles viejas",
+        detail: "Adoquines · balcones · atardecer sobre el centro histórico"
       },
       {
-        label: "Faith & culture",
-        detail: "Processions · architecture · Colombia's Caribbean soul"
+        label: "Fe y cultura",
+        detail: "Procesiones · arquitectura · alma caribeña de Colombia"
       }
     ]
   },
   {
     category: "medellin-metro",
-    title: "Metro de Medellín · city train",
-    desc: "Train outside · crowd on the platform · white & green · Línea B",
+    title: "Metro de Medellín · tren de la ciudad",
+    desc: "Tren afuera · gente en el andén · blanco y verde · Línea B",
     img: colombiaMedellinMetroImage,
     highlights: [
       {
-        label: "Outside the train",
-        detail: "Full exterior · people waiting · Estadio · Medellín pride"
+        label: "Afuera del tren",
+        detail: "Exterior completo · gente esperando · Estadio · orgullo paisa"
       },
       {
         label: "Medellín · Antioquia",
-        detail: "Colombia's only metro · clean · fast · city pride"
+        detail: "El único metro de Colombia · limpio · rápido · orgullo de ciudad"
       },
       {
-        label: "Elevated line",
-        detail: "Runs above the streets · connects barrios · valley views"
+        label: "Línea elevada",
+        detail: "Corre sobre las calles · conecta barrios · vistas del valle"
       },
       {
-        label: "Metrocable link",
-        detail: "Train + cable cars · hills · Comuna 13 · innovation"
+        label: "Enlace Metrocable",
+        detail: "Tren + cables · lomas · Comuna 13 · innovación"
       }
     ]
   },
   {
     category: "nightlife",
-    title: "Colombia After Dark",
+    title: "Colombia de noche",
     desc: "Noches de pasión — lo que Colombia vive cuando cae el sol",
     img: "/colombia-nightlife-real.png",
     hotspots: [
@@ -340,7 +340,7 @@ export const colombiaRoomSlides: ColombiaRoomSlide[] = [
   },
   {
     category: "food",
-    title: "Trending Plates Across Colombia",
+    title: "Platos que pegan en Colombia",
     desc: "Gente comiendo con alegría — cada plato con su nombre y su región",
     scenes: [
       {
@@ -389,23 +389,23 @@ export const colombiaRoomSlides: ColombiaRoomSlide[] = [
   },
   {
     category: "beach",
-    title: "Caribbean Colour Beaches",
+    title: "Playas de color caribeño",
     desc: "Mar de colores · gente feliz · sol · amor a la orilla — todo con respeto",
     img: "/colombia-beach-happy.png",
     beaches: [
-      { name: "Bocagrande · Cartagena", colour: "Coral sand · city sea breeze" },
-      { name: "San Andrés · Johnny Cay", colour: "Seven-colour sea · palm shade" },
-      { name: "Taganga · Santa Marta", colour: "Fishing bay · sunset boats" },
-      { name: "Palomino · La Guajira", colour: "Golden dunes · gentle surf" },
-      { name: "Playa Blanca · Barú", colour: "White sand · glass water · boat day trips" }
+      { name: "Bocagrande · Cartagena", colour: "Arena coral · brisa de ciudad" },
+      { name: "San Andrés · Johnny Cay", colour: "Mar de siete colores · sombra de palma" },
+      { name: "Taganga · Santa Marta", colour: "Bahía de pescadores · botes al atardecer" },
+      { name: "Palomino · La Guajira", colour: "Dunas doradas · oleaje suave" },
+      { name: "Playa Blanca · Barú", colour: "Arena blanca · agua de cristal · paseos en lancha" }
     ]
   },
   {
     category: "park",
-    title: "Bogotá Park Life",
-    desc: "People dancing · volleyball · picnics · speaker circles in the green",
+    title: "Vida de parque en Bogotá",
+    desc: "Gente bailando · voleibol · picnic · círculos con parlante en el verde",
     img: "/colombia-park-people.png",
-    activities: ["Salsa in the open lawn", "Volleyball & fútbol", "Picnic blankets & buñuelos", "Cycling & dog walks"]
+    activities: ["Salsa en el césped", "Voleibol y fútbol", "Mantas de picnic y buñuelos", "Ciclismo y paseos con perro"]
   }
 ];
 
@@ -436,8 +436,9 @@ export const colombiaLiveCreators: ColombiaLiveCreator[] = [
     id: "isabella",
     name: "Isabella Morales",
     username: "@isa.bogota",
-    profileImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
-    previewImage: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&h=675&fit=crop",
+    profileImage: "/colombia-live-isabella-morales-stream-v2.jpg",
+    /** Live stream portrait · Live 1 talk topic only (different from Lucia Live 2) */
+    previewImage: "/colombia-live-isabella-morales-stream-v2.jpg",
     viewers: 1204,
     lane: "Reggaeton · Bogotá"
   },
@@ -463,8 +464,9 @@ export const colombiaLiveCreators: ColombiaLiveCreator[] = [
     id: "lucia",
     name: "Lucia T.",
     username: "@lucia.night",
-    profileImage: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop",
-    previewImage: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=675&fit=crop",
+    profileImage: "/colombia-live-lucia-t-stream.jpg",
+    /** Live stream portrait · used on Live 2 real-time venue slot */
+    previewImage: "/colombia-live-lucia-t-stream.jpg",
     viewers: 488,
     lane: "Cumbia · Pereira"
   }
@@ -517,13 +519,14 @@ const colombiaTopicSlotCreators: Record<string, string> = {
 };
 
 const colombiaTopicPreviewImages: Record<string, string> = {
-  "co-talk-country": "/colombia-bg-paragliding-crowd.png",
+  // Isabella Morales Live 1 talk topics · her stream portrait only
+  "co-talk-country": "/colombia-live-isabella-morales-stream-v2.jpg",
   "co-talk-football": "/colombia-bg-football-match.png",
   "co-talk-menu": "/colombia-food-medellin-bandeja.png",
-  "co-talk-university": "/colombia-park-people.png",
+  "co-talk-university": "/colombia-live-isabella-morales-stream-v2.jpg",
   "co-talk-music": "/colombia-nightlife-real.png",
   "co-talk-city": "/colombia-bg-coffee-couple.png",
-  "co-talk-qa": "/colombia-beach-happy.png"
+  "co-talk-qa": "/colombia-live-isabella-morales-stream-v2.jpg"
 };
 
 const colombiaVenueSlotCreators: Record<string, string> = {
@@ -543,8 +546,12 @@ const colombiaVenueSlotCreators: Record<string, string> = {
 
 export function getColombiaTopicLiveSlot(topicId: string): ColombiaLiveCreator {
   const creatorId = colombiaTopicSlotCreators[topicId] ?? "isabella";
-  const preview = colombiaTopicPreviewImages[topicId] ?? colombiaTopicPreviewImages["co-medellin"]!;
   const creator = colombiaLiveCreators.find((entry) => entry.id === creatorId) ?? colombiaLiveCreators[0]!;
+  // Isabella Live 1 always shows her live-stream portrait (not scenic stock)
+  const preview =
+    creatorId === "isabella"
+      ? creator.previewImage
+      : (colombiaTopicPreviewImages[topicId] ?? creator.previewImage);
 
   return {
     ...creator,
@@ -556,10 +563,13 @@ export function getColombiaVenueLiveSlot(venueId: string): ColombiaLiveCreator {
   const venue = findColombiaLiveVenue(venueId);
   const creatorId = colombiaVenueSlotCreators[venueId] ?? "camila";
   const creator = colombiaLiveCreators.find((entry) => entry.id === creatorId) ?? colombiaLiveCreators[1]!;
+  // Lucia Live 2 always shows her live-stream portrait (not scenic venue stock)
+  const preview =
+    creatorId === "lucia" ? creator.previewImage : venue.previewImage;
 
   return {
     ...creator,
-    previewImage: venue.previewImage
+    previewImage: preview
   };
 }
 

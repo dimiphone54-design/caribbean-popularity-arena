@@ -2902,3 +2902,82 @@
   padding: 0.6rem 0.7rem;
   gap: 0.25rem;
 }
+
+/* UK room dropshipping · same shell pattern as Japan room */
+.arena-2030-cotswolds .uk-room-dropship-head-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Nested intro card · flush under kicker (mirrors Japan head-stack) */
+.arena-2030-cotswolds .uk-room-dropship-head-stack .dropship-market-room-intro-panel {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.arena-2030-cotswolds .uk-room-dropship-head-stack .uk-tech-auto-dropship-hero {
+  margin-bottom: 0;
+}
+
+/* Inner market panel · transparent under outer holo (Japan-style nesting) */
+.arena-2030-cotswolds .dropship-market-panel--uk-tech-auto,
+.arena-2030-cotswolds #uk-dropshipping .dropship-market-panel,
+.arena-2030-cotswolds #uk-dropshipping .dropship-market-room-intro-panel {
+  border-color: rgba(215, 180, 106, 0.28);
+  background:
+    linear-gradient(rgba(4, 6, 14, 0.28), rgba(4, 6, 14, 0.28)) padding-box,
+    linear-gradient(135deg, rgba(247, 231, 170, 0.42), rgba(215, 180, 106, 0.2), rgba(138, 100, 32, 0.32))
+      border-box !important;
+  box-shadow: none;
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.55rem 0.75rem;
+}
+
+.arena-2030-cotswolds #uk-dropshipping .dropship-market-panel--room-aligned {
+  margin-top: 0.5rem;
+}
+
+/* Category chips · large & obvious on UK room (Tech / Automotive) */
+.arena-2030-cotswolds #uk-dropshipping .dropship-category-lanes,
+.arena-2030-cotswolds .dropship-market-panel--uk-tech-auto .dropship-category-lanes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.45rem;
+  margin-bottom: 0.65rem;
+}
+
+.arena-2030-cotswolds #uk-dropshipping .dropship-category-lane,
+.arena-2030-cotswolds .dropship-market-panel--uk-tech-auto .dropship-category-lane {
+  padding: 0.55rem 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  border-color: rgba(215, 180, 106, 0.4);
+  background: rgba(215, 180, 106, 0.08);
+  color: #fef9c3;
+}
+
+.arena-2030-cotswolds #uk-dropshipping .dropship-category-lane--active,
+.arena-2030-cotswolds .dropship-market-panel--uk-tech-auto .dropship-category-lane--active {
+  border-color: rgba(245, 200, 66, 0.65);
+  background: rgba(245, 200, 66, 0.16);
+  box-shadow: 0 0 18px rgba(245, 200, 66, 0.18);
+  color: #fff8dc;
+}
+
+.arena-2030-cotswolds .dropship-market-panel--uk-tech-auto .dropship-product-grid {
+  margin-top: 0.5rem;
+}
+
+.arena-2030-cotswolds #uk-dropshipping .dropship-product-card {
+  background: rgba(6, 10, 22, 0.38);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}

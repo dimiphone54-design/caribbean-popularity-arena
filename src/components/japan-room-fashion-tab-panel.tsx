@@ -3,10 +3,13 @@
 import Image from "next/image";
 import { getAllDropshipProductsForCountry } from "@/lib/dropshipping";
 
+const JA_FONT =
+  '"Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif';
+
 const lanes = [
-  { emoji: "👘", label: "Street · kimono" },
-  { emoji: "🎌", label: "Kendo fits" },
-  { emoji: "🛍️", label: "Lifestyle box" },
+  { emoji: "👘", label: "ストリート · 着物" },
+  { emoji: "🎌", label: "剣道スタイル" },
+  { emoji: "🛍️", label: "ライフスタイルボックス" },
 ];
 
 export function JapanRoomFashionTabPanel() {
@@ -15,10 +18,15 @@ export function JapanRoomFashionTabPanel() {
   );
 
   return (
-    <div className="a2030-holo-panel rounded-[1.25rem] border border-[#ff4466]/20 p-2.5 sm:p-3">
+    <div
+      className="a2030-holo-panel rounded-[1.25rem] border border-[#ff4466]/20 p-2.5 sm:p-3"
+      aria-label="日本 · ストリート"
+      lang="ja"
+      style={{ fontFamily: JA_FONT }}
+    >
       <header className="text-center">
-        <p className="text-[9px] font-black uppercase tracking-[0.16em] text-[#fbbf24]">👘 fashion · street couture</p>
-        <h2 className="mt-1 font-['Bebas_Neue',sans-serif] text-lg tracking-widest text-[#eef6ff] sm:text-xl">JAPAN · street</h2>
+        <p className="text-[9px] font-black tracking-[0.12em] text-[#fbbf24]">👘 ファッション · ストリートクチュール</p>
+        <h2 className="mt-1 text-lg font-black tracking-wide text-[#eef6ff] sm:text-xl">日本 · ストリート</h2>
       </header>
       <div className="mt-2 flex flex-wrap justify-center gap-1.5">
         {lanes.map((l) => (

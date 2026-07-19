@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FIFA_RECENT_RESULTS,
   formatFifaPlayedAt,
@@ -63,7 +63,9 @@ function FifaWinRow({ game }: { game: FifaRecentResult }) {
     <li className="uk-fifa-card" role="listitem">
       <div className="uk-fifa-card-head">
         <span className="uk-fifa-card-league">{game.league}</span>
-        <span className="uk-fifa-card-time">{formatFifaPlayedAt(game.playedAt)}</span>
+        <span className="uk-fifa-card-time" suppressHydrationWarning>
+          {formatFifaPlayedAt(game.playedAt)}
+        </span>
       </div>
       <div className="uk-fifa-card-match">
         <div className="uk-fifa-card-team uk-fifa-card-team--home">
@@ -87,6 +89,17 @@ function FifaWinRow({ game }: { game: FifaRecentResult }) {
 /* ── Status pill helper ── */
 
 function MatchStatusPill({ match, isLocked }: { match: FootballMatch; isLocked: boolean }) {
+  // Stable first paint label — live countdown only after mount (avoids Date.now SSR mismatch)
+  const [countdown, setCountdown] = useState("Upcoming");
+
+  useEffect(() => {
+    if (match.status !== "scheduled") return;
+    const tick = () => setCountdown(formatKickoffCountdown(match.kickoff));
+    tick();
+    const id = window.setInterval(tick, 30_000);
+    return () => window.clearInterval(id);
+  }, [match.kickoff, match.status]);
+
   if (match.status === "live") {
     return (
       <span className="uk-fixture-status uk-fixture-status--live">
@@ -98,9 +111,12 @@ function MatchStatusPill({ match, isLocked }: { match: FootballMatch; isLocked: 
   if (match.status === "finished") {
     return <span className="uk-fixture-status uk-fixture-status--ft">FT</span>;
   }
+  if (isLocked) {
+    return <span className="uk-fixture-status uk-fixture-status--upcoming">Locked</span>;
+  }
   return (
-    <span className="uk-fixture-status uk-fixture-status--upcoming">
-      {formatKickoffCountdown(match.kickoff)}
+    <span className="uk-fixture-status uk-fixture-status--upcoming" suppressHydrationWarning>
+      {countdown}
     </span>
   );
 }
@@ -108,13 +124,33 @@ function MatchStatusPill({ match, isLocked }: { match: FootballMatch; isLocked: 
 /* ── Kickoff time display ── */
 
 function KickoffTimeDisplay({ match }: { match: FootballMatch }) {
-  const date = new Date(match.kickoff);
-  const time = `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;
-  const day = date.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+  // Defer locale formatting until mount — Node vs browser Intl can disagree on first paint
+  const [label, setLabel] = useState<{ time: string; day: string } | null>(null);
+
+  useEffect(() => {
+    const date = new Date(match.kickoff);
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/London",
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      hourCycle: "h23"
+    }).formatToParts(date);
+    const get = (type: Intl.DateTimeFormatPartTypes) =>
+      parts.find((part) => part.type === type)?.value ?? "";
+    setLabel({
+      time: `${get("hour").padStart(2, "0")}:${get("minute").padStart(2, "0")}`,
+      day: `${get("weekday")} ${get("day")} ${get("month")}`
+    });
+  }, [match.kickoff]);
+
   return (
     <span className="uk-fixture-kickoff">
-      <span className="uk-fixture-kickoff-time">{time}</span>
-      <span className="uk-fixture-kickoff-date">{day}</span>
+      <span className="uk-fixture-kickoff-time">{label?.time ?? "--:--"}</span>
+      <span className="uk-fixture-kickoff-date">{label?.day ?? "London"}</span>
     </span>
   );
 }

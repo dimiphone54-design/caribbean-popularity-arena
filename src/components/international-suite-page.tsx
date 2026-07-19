@@ -8,10 +8,12 @@ import { useRoomLocale } from "@/components/room-locale-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { formatIntlSuiteRoomCount } from "@/lib/room-translations";
 import { internationalSuiteCountries } from "@/lib/international-suite";
+import { isPublicDropshipVisible } from "@/lib/real-money";
 
 export function InternationalSuitePage() {
   const { locale, t } = useRoomLocale();
   const roomCount = internationalSuiteCountries.reduce((total, country) => total + country.rooms.length, 0);
+  const showDropship = isPublicDropshipVisible();
 
   return (
     <>
@@ -36,15 +38,17 @@ export function InternationalSuitePage() {
                 </span>
               </div>
 
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                <DropshipEnterButton />
-                <Link
-                  href="/rooms/dropship-market?country=colombia"
-                  className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#d7b46a] underline underline-offset-2"
-                >
-                  Market only · all 12 lanes →
-                </Link>
-              </div>
+              {showDropship ? (
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <DropshipEnterButton />
+                  <Link
+                    href="/rooms/dropship-market?country=colombia"
+                    className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#d7b46a] underline underline-offset-2"
+                  >
+                    Market only · all 12 lanes →
+                  </Link>
+                </div>
+              ) : null}
 
               <div className="a2030-intl-suite-page-intro mt-5 border-t border-[#d7b46a]/15 pt-4">
                 <p className="text-sm font-black uppercase tracking-[0.08em] text-[#eef6ff] sm:text-base">

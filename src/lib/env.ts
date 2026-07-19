@@ -46,7 +46,16 @@ export const env = {
   },
   features: {
     enableVotingWrites: readEnv("NEXT_PUBLIC_ENABLE_VOTING_WRITES", "false") === "true",
-    enableMembershipCheckout: hasUsableValue(readEnv("PAYPAL_CLIENT_ID")) && hasUsableValue(readEnv("PAYPAL_CLIENT_SECRET")),
+    /** Real charges require explicit enable — credentials alone do not unlock checkout. */
+    enableRealMoney: readEnv("NEXT_PUBLIC_REAL_MONEY_ENABLED", "false") === "true",
+    enableMembershipCheckout:
+      readEnv("NEXT_PUBLIC_REAL_MONEY_ENABLED", "false") === "true" &&
+      readEnv("NEXT_PUBLIC_ENABLE_MEMBERSHIP_CHECKOUT", "false") === "true" &&
+      hasUsableValue(readEnv("PAYPAL_CLIENT_ID")) &&
+      hasUsableValue(readEnv("PAYPAL_CLIENT_SECRET")),
+    enableDropshipPurchases:
+      readEnv("NEXT_PUBLIC_REAL_MONEY_ENABLED", "false") === "true" &&
+      readEnv("NEXT_PUBLIC_ENABLE_DROPSHIP_PURCHASES", "false") === "true",
     enableAnalytics: readEnv("NEXT_PUBLIC_ENABLE_ANALYTICS", "false") === "true",
     enableArenaEngine: readEnv("NEXT_PUBLIC_ENABLE_ARENA_ENGINE", "true") === "true"
   }

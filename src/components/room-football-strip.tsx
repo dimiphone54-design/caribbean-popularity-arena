@@ -9,7 +9,7 @@ type RoomFootballStripProps = {
   roomSlug: string;
 };
 
-/** Football in every room · prediction arena strip */
+/** Football strip for non-Colombia rooms (Colombia uses RoomColombiaFootballPanel) */
 export function RoomFootballStrip({ countryId, countryName, flag, roomSlug }: RoomFootballStripProps) {
   return (
     <section
@@ -20,7 +20,9 @@ export function RoomFootballStrip({ countryId, countryName, flag, roomSlug }: Ro
       <header className="room-football-strip-head">
         <p className="room-football-strip-kicker">{flag} Football · every room</p>
         <h2 className="room-football-strip-title">{countryName} match-day lane</h2>
-        <p className="room-football-strip-sub">API-Sports live fixtures · predictions · leaderboard · every country room</p>
+        <p className="room-football-strip-sub">
+          API-Sports live fixtures · predictions · leaderboard · every country room
+        </p>
       </header>
       <FootballPredictionArena countryId={countryId} countryName={countryName} flag={flag} />
     </section>

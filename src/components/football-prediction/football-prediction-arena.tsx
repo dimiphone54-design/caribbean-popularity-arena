@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import "@/components/football-prediction/football-prediction.css";
 import {
+  COLOMBIA_FOOTBALL_COMPETITIONS,
   FOOTBALL_COMPETITIONS,
   FOOTBALL_PREDICTION_POINTS,
   formatKickoffCountdown,
@@ -14,7 +15,10 @@ import {
   type FootballPredictionRow,
   type FootballPredictedWinner
 } from "@/lib/football-prediction-arena";
-import { getDemoFootballFixtures } from "@/lib/football-prediction-fixtures";
+import {
+  getColombiaFootballFixtures,
+  getDemoFootballFixtures
+} from "@/lib/football-prediction-fixtures";
 import {
   cacheFootballFixtures,
   computeUserFootballStats,
@@ -27,6 +31,7 @@ import {
 } from "@/lib/football-prediction-storage";
 import { readTargetShooterUserId, readTargetShooterUsername } from "@/lib/target-shooter-user";
 import { UkFootballFifaWinsScreen } from "@/components/uk-football-fifa-wins-screen";
+import { UkFootballPredictionHero } from "@/components/uk-football-prediction-hero";
 
 type TabId = "matches" | "active" | "leaderboard" | "stats" | "tournaments";
 
@@ -75,32 +80,59 @@ export function FootballPredictionArena({
   leagueStrip,
   onClose
 }: FootballPredictionArenaProps) {
+  const isColombia = countryId === "colombia";
+  const competitionOptions = isColombia ? COLOMBIA_FOOTBALL_COMPETITIONS : FOOTBALL_COMPETITIONS;
+
   const [tab, setTab] = useState<TabId>(initialTab);
-  const [matches, setMatches] = useState<FootballMatch[]>(getDemoFootballFixtures());
+  // Fixed demo fixtures (no Date.now) so SSR HTML matches first client paint
+  const [matches, setMatches] = useState<FootballMatch[]>(() =>
+    isColombia ? getColombiaFootballFixtures() : getDemoFootballFixtures()
+  );
   const [predictions, setPredictions] = useState<FootballPredictionRow[]>([]);
-  const [rankings, setRankings] = useState(readLocalFootballRankings());
+  // Never read localStorage during useState init — server [] vs client ranks = hydration fail
+  const [rankings, setRankings] = useState<ReturnType<typeof readLocalFootballRankings>>([]);
   const [leaderboardKind, setLeaderboardKind] = useState<FootballLeaderboardKind>("global");
   const [competitionFilter, setCompetitionFilter] = useState<string>(initialCompetitionFilter);
   const [drafts, setDrafts] = useState<Record<string, FootballPredictionInput>>({});
   const [notice, setNotice] = useState<string | null>(null);
   const [fixtureSource, setFixtureSource] = useState<"api-sports" | "demo">("demo");
   const [liveCount, setLiveCount] = useState(0);
+  const [userId, setUserId] = useState("arena-guest");
+  const [username, setUsername] = useState("Arena Player");
+  const [clockReady, setClockReady] = useState(false);
 
-  const userId = readTargetShooterUserId();
-  const username = readTargetShooterUsername();
+  // Keep latest matches without putting them in loadFixtures deps (avoids update-depth loops)
+  const matchesRef = useRef(matches);
+  matchesRef.current = matches;
 
-  const refresh = useCallback(
-    (fixtureRows?: FootballMatch[]) => {
-      const scored = scoreLocalPredictions(fixtureRows ?? matches);
-      setPredictions(scored);
-      const ranks = buildLocalFootballRankings(scored);
-      writeLocalFootballRankings(ranks);
-      setRankings(ranks);
-    },
-    [matches]
-  );
+  useEffect(() => {
+    setUserId(readTargetShooterUserId());
+    setUsername(readTargetShooterUsername());
+    setRankings(readLocalFootballRankings());
+    setClockReady(true);
+  }, []);
+
+  const refresh = useCallback((fixtureRows?: FootballMatch[]) => {
+    const rows = fixtureRows ?? matchesRef.current;
+    const scored = scoreLocalPredictions(rows);
+    setPredictions(scored);
+    const ranks = buildLocalFootballRankings(scored);
+    writeLocalFootballRankings(ranks);
+    setRankings(ranks);
+  }, []);
 
   const loadFixtures = useCallback(async () => {
+    // Colombia room · real local sides only — never mix PL / European demos
+    if (countryId === "colombia") {
+      const rows = getColombiaFootballFixtures();
+      setMatches(rows);
+      cacheFootballFixtures(rows);
+      setFixtureSource("demo");
+      setLiveCount(rows.filter((match) => match.status === "live").length);
+      refresh(rows);
+      return;
+    }
+
     try {
       const res = await fetch("/api/games/football-prediction/fixtures", { cache: "no-store" });
       const json = (await res.json()) as {
@@ -122,19 +154,21 @@ export function FootballPredictionArena({
       setLiveCount(0);
       refresh(rows);
     }
-  }, [refresh]);
+  }, [countryId, refresh]);
 
   useEffect(() => {
     setCompetitionFilter(initialCompetitionFilter);
   }, [initialCompetitionFilter]);
 
+  // Mount + country change only. Colombia fixtures are static (no poll).
   useEffect(() => {
     void loadFixtures();
+    if (countryId === "colombia") return;
     const timer = window.setInterval(() => {
       void loadFixtures();
     }, 5 * 60_000);
     return () => window.clearInterval(timer);
-  }, [loadFixtures]);
+  }, [countryId, loadFixtures]);
 
   const stats = useMemo(
     () => computeUserFootballStats(userId, predictions, rankings),
@@ -142,7 +176,10 @@ export function FootballPredictionArena({
   );
 
   const myPredictions = predictions.filter((p) => p.user_id === userId);
-  const upcoming = matches.filter((m) => m.status === "scheduled" && !isMatchLocked(m));
+  // Until mount, treat scheduled matches as open (avoid Date.now lock filter SSR drift)
+  const upcoming = matches.filter(
+    (m) => m.status === "scheduled" && (!clockReady || !isMatchLocked(m))
+  );
   const filteredMatches =
     competitionFilter === "all"
       ? matches
@@ -203,13 +240,19 @@ export function FootballPredictionArena({
   const predictionTabs = (
     <nav className="football-prediction-tabs" aria-label="Football prediction sections">
       {(
-        [
-          ["matches", "Upcoming"],
-          ["active", "My picks"],
-          ["leaderboard", "Leaderboards"],
-          ["stats", "Statistics"],
-          ["tournaments", "Tournaments"]
-        ] as const
+        isColombia
+          ? ([
+              ["matches", "Partidos"],
+              ["active", "Mis picks"],
+              ["leaderboard", "Tabla"]
+            ] as const)
+          : ([
+              ["matches", "Upcoming"],
+              ["active", "My picks"],
+              ["leaderboard", "Leaderboards"],
+              ["stats", "Statistics"],
+              ["tournaments", "Tournaments"]
+            ] as const)
       ).map(([id, label]) => (
         <button
           key={id}
@@ -246,22 +289,22 @@ export function FootballPredictionArena({
                 value={competitionFilter}
                 onChange={(e) => setCompetitionFilter(e.target.value)}
               >
-                <option value="all">All competitions</option>
-                {FOOTBALL_COMPETITIONS.map((c) => (
+                <option value="all">{isColombia ? "Todas las ligas" : "All competitions"}</option>
+                {competitionOptions.map((c) => (
                   <option key={c.id} value={c.id}>{c.label}</option>
                 ))}
               </select>
             </label>
             <p className="football-prediction-open-count">
               {liveCount > 0 ? `${liveCount} live · ` : ""}
-              {upcoming.length} open fixtures
-              {fixtureSource === "api-sports" ? " · API-Sports" : ""}
+              {upcoming.length} {isColombia ? "partidos abiertos" : "open fixtures"}
+              {!isColombia && fixtureSource === "api-sports" ? " · API-Sports" : ""}
             </p>
           </div>
 
           <div className="football-prediction-match-list">
             {filteredMatches.map((match) => {
-              const locked = isMatchLocked(match);
+              const locked = clockReady && isMatchLocked(match);
               const existing = myPredictions.find((p) => p.match_id === match.id);
               const draft = getDraft(match.id);
 
@@ -297,12 +340,17 @@ export function FootballPredictionArena({
                         <span className="football-prediction-live-badge"> LIVE</span>
                       ) : null}
                     </span>
-                    <span className={`football-prediction-lock${locked ? " football-prediction-lock--locked" : ""}`}>
+                    <span
+                      className={`football-prediction-lock${locked ? " football-prediction-lock--locked" : ""}`}
+                      suppressHydrationWarning
+                    >
                       {match.status === "live"
                         ? `🔴 ${match.homeScore ?? 0}-${match.awayScore ?? 0}`
                         : locked
                           ? "🔒 Locked"
-                          : formatKickoffCountdown(match.kickoff)}
+                          : clockReady
+                            ? formatKickoffCountdown(match.kickoff)
+                            : "Upcoming"}
                     </span>
                   </header>
                   <div className="football-prediction-teams">
@@ -560,29 +608,29 @@ export function FootballPredictionArena({
       aria-label="Football Prediction Arena"
     >
       {embeddedInUkHub ? (
-        <div className="uk-football-hub-split uk-football-hub-split--compact-toolbar">
-          <div className="uk-football-command-pane uk-football-command-pane--compact" aria-label="Football prediction controls">
-            {/* A · Compact toolbar — one slim identity row */}
-            <header className="uk-football-command-toolbar">
-              <p className="uk-football-command-kicker">🇬🇧 UK football · Predict &amp; climb</p>
-              <span className="uk-football-command-live" aria-hidden="true" />
-              <h2 className="uk-football-command-title">
-                {flag} Football prediction arena
-              </h2>
-              <span className="uk-football-hub-filter-pill" title="Active league filter">
-                {embedLeagueLabel}
-              </span>
-            </header>
-            {leagueStrip}
-            {predictionTabs}
-            {tab === "matches" ? (
-              <div className="uk-football-command-board-intro">
-                <h3 className="uk-football-combined-section-title">Recent FIFA wins</h3>
-                <p className="uk-football-combined-section-sub">Real scores · flags · arena nights</p>
+        <div className="uk-football-hub-split uk-football-hub-split--alive">
+          <div className="uk-football-command-pane uk-football-command-pane--alive" aria-label="Football prediction controls">
+            <UkFootballPredictionHero />
+            <div className="uk-fp-hero-controls">
+              <div className="uk-fp-hero-filter-row">
+                <span className="uk-football-hub-filter-pill" title="Active league filter">
+                  {embedLeagueLabel}
+                </span>
+                <span className="uk-fp-hero-controls-live" aria-hidden="true">
+                  ● LIVE BOARD
+                </span>
               </div>
-            ) : null}
+              {leagueStrip}
+              {predictionTabs}
+              {tab === "matches" ? (
+                <div className="uk-football-command-board-intro">
+                  <h3 className="uk-football-combined-section-title">Recent Big Wins</h3>
+                  <p className="uk-football-combined-section-sub">Real scores · flags · glory nights</p>
+                </div>
+              ) : null}
+            </div>
           </div>
-          <div className="uk-football-board-pane" aria-label="Football prediction board">
+          <div className="uk-football-board-pane uk-football-board-pane--alive" aria-label="Football prediction board">
             {notice ? (
               <p className="football-prediction-notice" role="status">{notice}</p>
             ) : null}

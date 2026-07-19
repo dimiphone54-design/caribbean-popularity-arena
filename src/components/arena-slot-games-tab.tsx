@@ -8,13 +8,15 @@ export const CHINA_GAMES_TAB_HASH = "china-games";
 export const JAPAN_GAMES_TAB_HASH = "japan-games";
 export const COLOMBIA_GAMES_TAB_HASH = "colombia-games";
 export const ECUADOR_GAMES_TAB_HASH = "ecuador-games";
+export const TRINIDAD_GAMES_TAB_HASH = "trinidad-games";
 
 export const GAMES_TAB_HASH_BY_ISLAND_CODE: Record<string, string> = {
   UK: UK_GAMES_TAB_HASH,
   CN: CHINA_GAMES_TAB_HASH,
   JP: JAPAN_GAMES_TAB_HASH,
   CO: COLOMBIA_GAMES_TAB_HASH,
-  EC: ECUADOR_GAMES_TAB_HASH
+  EC: ECUADOR_GAMES_TAB_HASH,
+  TT: TRINIDAD_GAMES_TAB_HASH
 };
 
 export const GAMES_ROOM_FALLBACK_BY_ISLAND_CODE: Record<string, string> = {
@@ -53,21 +55,31 @@ export function ArenaSlotGamesTab(props: ArenaSlotGamesTabProps | ArenaSlotGames
   const countryName = props.mode === "room" ? (props.countryName ?? "room") : "room";
   const [open, setOpen] = useState(props.mode === "room" ? (props.defaultOpen ?? false) : false);
 
+  const defaultOpen = props.mode === "room" ? (props.defaultOpen ?? false) : false;
+
   useEffect(() => {
     if (isLinkMode || typeof window === "undefined") return;
     const syncFromHash = () => {
-      const matches = window.location.hash.replace("#", "") === sectionId;
-      setOpen(matches);
+      const hash = window.location.hash.replace("#", "");
+      const matches = hash === sectionId;
       if (matches) {
+        setOpen(true);
         requestAnimationFrame(() => {
           document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
         });
+        return;
       }
+      // Empty hash: keep defaultOpen panels open (e.g. Ecuador Juegos panel)
+      if (!hash && defaultOpen) {
+        setOpen(true);
+        return;
+      }
+      if (hash) setOpen(false);
     };
     syncFromHash();
     window.addEventListener("hashchange", syncFromHash);
     return () => window.removeEventListener("hashchange", syncFromHash);
-  }, [sectionId, isLinkMode]);
+  }, [sectionId, isLinkMode, defaultOpen]);
 
   if (isLinkMode) {
     return (

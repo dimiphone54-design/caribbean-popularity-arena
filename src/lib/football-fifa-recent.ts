@@ -83,16 +83,32 @@ export const FIFA_RECENT_RESULTS: FifaRecentResult[] = [
   }
 ];
 
+/** Fixed locale + London TZ · formatToParts + h23 so Node/browser SSR stays aligned */
 export function formatFifaPlayedAt(iso: string) {
   const date = new Date(iso);
-  const day = date.toLocaleDateString("en-GB", {
+  if (Number.isNaN(date.getTime())) return "—";
+
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London",
     weekday: "short",
     day: "numeric",
-    month: "short"
-  });
-  const hours = date.getHours().toString().padStart(2, "0");
-  const minutes = date.getMinutes().toString().padStart(2, "0");
-  return `${day} · ${hours}:${minutes}`;
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    hourCycle: "h23"
+  }).formatToParts(date);
+
+  const get = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((part) => part.type === type)?.value ?? "";
+
+  const weekday = get("weekday");
+  const day = get("day");
+  const month = get("month");
+  const hour = get("hour").padStart(2, "0");
+  const minute = get("minute").padStart(2, "0");
+
+  return `${weekday} ${day} ${month} · ${hour}:${minute}`;
 }
 
 export function fifaWinLabel(game: FifaRecentResult) {

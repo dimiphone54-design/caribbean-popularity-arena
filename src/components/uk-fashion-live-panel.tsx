@@ -18,15 +18,6 @@ const VOTE_GIFT_TIERS = [
   { id: "rocket",  emoji: "🚀",  label: "Rocket",  amountGbp: 20, effect: "Rocket launch · arena spotlight" },
 ];
 
-/** Per-look shop items — fallback used when no specific items defined */
-const LOOK_SHOP_ITEMS: Record<number, { label: string; price: string; hint: string }[]> = {
-  3: [
-    { label: "Ivory blazer · tailored fit", price: "£49", hint: "Ships from London supplier" },
-    { label: "White tee · crew neck",       price: "£12", hint: "Cotswolds mall lane" },
-    { label: "Black slim trousers",         price: "£35", hint: "Street tailoring lane" },
-  ],
-};
-
 const DEFAULT_SHOP_ITEMS = [
   { label: "Statement piece · UK edit", price: "£19", hint: "Ships this week" },
   { label: "Arena fit essential",       price: "£29", hint: "Cotswolds style lane" },
@@ -114,7 +105,7 @@ function LookCard({
             Votes
           </span>
           <span className="text-[10px] font-black text-[#ff2bd6]">
-            {look.votes.toLocaleString()}
+            {look.votes.toLocaleString("en-US")}
           </span>
         </div>
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#1a0020]">
@@ -216,10 +207,11 @@ function LookCard({
  * The Go Live / Makeup Live Slots live inside the Fashion tab.
  */
 export function UKFashionLivePanel() {
+  // Deterministic seed votes only — Math.random() in useState breaks SSR hydration
   const [looks] = useState(() =>
     UK_LOOKS.map((l, i) => ({
       ...l,
-      votes: [312, 189, 97][i] ?? Math.floor(Math.random() * 80 + 20),
+      votes: [312, 189, 97][i] ?? 42 + i * 7
     }))
   );
 

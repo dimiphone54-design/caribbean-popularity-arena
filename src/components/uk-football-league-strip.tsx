@@ -7,12 +7,15 @@ import {
 
 const LEAGUE_EMOJI: Record<FootballCompetitionId, string> = {
   "premier-league": "🏴",
+  "fa-cup": "🏆",
+  championship: "🛡️",
   "champions-league": "⭐",
   "europa-league": "🟠",
-  "fa-cup": "🏆",
   international: "🌍",
   "world-cup": "🌐",
-  euro: "🇪🇺"
+  euro: "🇪🇺",
+  "liga-betplay": "🇨🇴",
+  "copa-colombia": "🏆"
 };
 
 type UkFootballLeagueStripProps = {

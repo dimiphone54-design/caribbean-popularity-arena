@@ -33,7 +33,7 @@ export const internationalSuiteMeta = {
   slug: "international-suite",
   name: "International SUITE",
   description:
-    "Slide through countries — UK · China · Japan · Colombia · Ecuador rooms open inside. Pick your room and enter."
+    "Slide through countries — UK · China · Japan · Colombia · Ecuador rooms open inside. Poland & Lithuania live in Command Center only."
 } as const;
 
 type CountryProfile = {
@@ -82,11 +82,11 @@ const countryProfilesByCode: Record<string, CountryProfile> = {
     region: "Caribbean · Greater Antilles",
     tagline: "Dancehall · Kingston · island vibes"
   },
-  VE: {
-    id: "venezuela",
-    name: "Venezuela",
-    region: "South America · Caribbean coast",
-    tagline: "Caracas · music · Latin fire"
+  ES: {
+    id: "spain",
+    name: "Spain",
+    region: "Europe · Iberian Peninsula",
+    tagline: "Barcelona · flamenco · Mediterranean culture"
   },
   PL: {
     id: "poland",
@@ -127,13 +127,6 @@ const dedicatedRoomsByCode: Record<string, InternationalSuiteRoom[]> = {
       roomSlug: "uk-flag-cotswolds",
       roomLabel: "United Kingdom",
       description: "Four-quarter park movie slide · museum welcome · snow · drones · live UK clock.",
-      status: "open"
-    },
-    {
-      id: "uk-football-lads",
-      roomSlug: "football-lads",
-      roomLabel: "FOOTBALL LADS",
-      description: "Sunday league squad · pub banter · men's match-day prompts · UK football energy.",
       status: "open"
     }
   ],
@@ -226,7 +219,11 @@ function buildInternationalSuiteCountries(): InternationalSuiteCountry[] {
 /** International SUITE only · frozen in nav dropdown + country scroll */
 const internationalSuiteFrozenCountryIds = new Set(["trinidad"]);
 
+/** Removed from public main · live only in Command Center FREEZE COMING SOON */
+export const INTERNATIONAL_SUITE_COMMAND_CENTER_ONLY_IDS = new Set(["poland", "lithuania", "jamaica", "tunisia", "guyana"]);
+
 export function isInternationalSuiteCountryFrozen(country: InternationalSuiteCountry) {
+  if (INTERNATIONAL_SUITE_COMMAND_CENTER_ONLY_IDS.has(country.id)) return true;
   if (countryHasBuiltSuiteRooms(country)) return false;
   if (internationalSuiteFrozenCountryIds.has(country.id)) return true;
   return true;
@@ -307,14 +304,16 @@ export function getInternationalSuiteBuiltRoomCountries() {
     .filter((country): country is InternationalSuiteCountry => Boolean(country));
 }
 
-/** Homepage nav + suite scroll · UK · China · Japan · Colombia · Ecuador first, then rest */
+/** Homepage nav + suite scroll · UK · China · Japan · Colombia · Ecuador first, then rest (no PL/LT) */
 export function getInternationalSuiteNavCountries() {
   const pinned = new Set<string>(internationalSuiteBuiltRoomCountryIds);
   const featured = getInternationalSuiteBuiltRoomCountries();
   const rest = internationalSuiteCountries
     .filter(
       (country) =>
-        country.rooms.some((room) => room.status === "open") && !pinned.has(country.id)
+        !INTERNATIONAL_SUITE_COMMAND_CENTER_ONLY_IDS.has(country.id) &&
+        country.rooms.some((room) => room.status === "open") &&
+        !pinned.has(country.id)
     )
     .sort(
       (a, b) =>

@@ -7,9 +7,11 @@ import { CotswoldsPage } from "@/components/cotswolds-page";
 import { EcuadorRoomPage } from "@/components/ecuador-room-page";
 import { TheEldersTablePage } from "@/components/the-elders-table-page";
 import { FashionMonthPage } from "@/components/fashion-month-page";
-import { FootballLadsPage } from "@/components/football-lads-page";
 import { ChinaRoomPage } from "@/components/china-room-page";
 import { JapanRoomPage } from "@/components/japan-room-page";
+import { TrinidadRoomPage } from "@/components/trinidad-room-page";
+import { SpainRoomPage } from "@/components/spain-room-page";
+import { AiPowerhouseRoomPage } from "@/components/ai-powerhouse-room-page";
 import { InternationalSuitePage } from "@/components/international-suite-page";
 import { IslandHubPage } from "@/components/island-hub-page";
 
@@ -48,10 +50,6 @@ export default async function RoomPage({ params }: { params: Promise<{ slug: str
     return <ComedyFestPage />;
   }
 
-  if (slug === "football-lads") {
-    return <FootballLadsPage />;
-  }
-
   if (slug === "fashion-month") {
     return <FashionMonthPage />;
   }
@@ -66,6 +64,18 @@ export default async function RoomPage({ params }: { params: Promise<{ slug: str
 
   if (slug === "china-room") {
     return <ChinaRoomPage />;
+  }
+
+  if (slug === "trinidad-room") {
+    return <TrinidadRoomPage />;
+  }
+
+  if (slug === "spain-room") {
+    return <SpainRoomPage />;
+  }
+
+  if (slug === "ai-powerhouse-room") {
+    return <AiPowerhouseRoomPage />;
   }
 
   if (slug === "international-suite") {

@@ -2,11 +2,11 @@
 
 import { Arena2030Backdrop, Arena2030Header } from "@/components/arena-2030-backdrop";
 import { CountryRoomStudyHubTabPanel } from "@/components/country-room-study-hub-tab-panel";
-import { DropshipAiConverter } from "@/components/dropshipping/dropship-ai-converter";
 import {
   DropshipMarketPanel,
   DropshipMarketRoomIntroPanel
 } from "@/components/dropshipping/dropship-market-panel";
+import { PublicDropshipGate } from "@/components/dropshipping/public-dropship-gate";
 import { JapanGachaCapsulePanel } from "@/components/japan-gacha-capsule-panel";
 import { JapanRoomAnimeDropsPanel } from "@/components/japan-room-anime-drops-panel";
 import { JapanRoomFashionTabPanel } from "@/components/japan-room-fashion-tab-panel";
@@ -15,6 +15,7 @@ import { JapanRoomGamesTabPanel } from "@/components/japan-room-games-tab-panel"
 import { JapanRoomJBeautyPanel } from "@/components/japan-room-jbeauty-panel";
 import { JapanRoomSnacksPanel } from "@/components/japan-room-snacks-panel";
 import { JapanRoomStationeryPanel } from "@/components/japan-room-stationery-panel";
+import { ArenaSlotAiPowerhouseTab } from "@/components/arena-slot-ai-powerhouse-tab";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
 import { japanRoomGameLane } from "@/lib/east-asia-room-games";
@@ -45,23 +46,35 @@ export function JapanRoomPage() {
             />
 
             <div className="space-y-1.5">
-            {/* ── Japan Dropshipping ── */}
-            <section className="w-full px-1" aria-label="Japan Dropshipping market">
-              <div className="a2030-holo-panel rounded-[1.25rem] border border-[#ff4466]/20 p-2.5 sm:p-3">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <p className="text-[9px] font-black uppercase tracking-[0.16em] text-[#ff4466]">🇯🇵 Japan dropshipping</p>
-                  <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#ff4466]" />
+            {/* ── Japan Dropshipping (public hidden · Command Center only) ── */}
+            <PublicDropshipGate>
+              <section className="w-full px-1" aria-label="Japan Dropshipping market">
+                <div className="a2030-holo-panel rounded-[1.25rem] border border-[#ff4466]/20 p-2.5 sm:p-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-[9px] font-black uppercase tracking-[0.16em] text-[#ff4466]">🇯🇵 Japan dropshipping</p>
+                    <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#ff4466]" />
+                  </div>
+                  <div className="japan-room-dropship-head-stack mt-2">
+                    <DropshipMarketRoomIntroPanel
+                      countryId={lane.countryId}
+                      countryName={lane.countryName}
+                      flag={lane.flag}
+                    />
+                  </div>
+                  <DropshipMarketPanel
+                    countryId={lane.countryId}
+                    countryName={lane.countryName}
+                    flag={lane.flag}
+                    layout="room"
+                    hideRoomIntro
+                    hideAiConverter
+                  />
                 </div>
-                <div className="japan-room-dropship-head-stack mt-2">
-                  <DropshipAiConverter defaultCountryId={lane.countryId} defaultToCountryId="colombia" defaultUsd={29} variant="full" />
-                  <DropshipMarketRoomIntroPanel countryId={lane.countryId} countryName={lane.countryName} flag={lane.flag} stackUnderAi />
-                </div>
-                <DropshipMarketPanel countryId={lane.countryId} countryName={lane.countryName} flag={lane.flag} layout="room" hideRoomIntro hideAiConverter />
-              </div>
-            </section>
+              </section>
+            </PublicDropshipGate>
 
             {/* ── Gacha + Marketplace row ── */}
-            <section className="w-full px-1" aria-label="Japan Gacha & Marketplace">
+            <section className="w-full px-1" aria-label="日本ガチャ · マーケット">
               <div className="grid gap-1.5 sm:grid-cols-2">
                 {/* Gacha */}
                 <JapanGachaCapsulePanel />
@@ -82,29 +95,31 @@ export function JapanRoomPage() {
               <JapanRoomFoodTabPanel />
             </section>
 
-            <div className="-mt-6">
-            {/* ── Games + Stationery + Snacks row ── */}
-            <section className="w-full px-1" aria-label="Japan Games & More">
-              <div className="grid gap-1.5 sm:grid-cols-3">
-                <div className="a2030-holo-panel rounded-[1.25rem] border border-[#ff4466]/20 p-2.5 sm:p-3">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="text-[9px] font-black uppercase tracking-[0.16em] text-[#ff4466]">🇯🇵 games</p>
-                    <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#ff4466]" />
-                  </div>
-                  <div className="mt-2">
-                    <JapanRoomGamesTabPanel />
-                  </div>
-                </div>
-                <JapanRoomStationeryPanel />
-                <JapanRoomSnacksPanel />
-              </div>
-            </section>
+            <div className="-mt-6 space-y-1.5">
+              {/* ── Sports Arena + Kendo live stage · full width ── */}
+              <section className="w-full px-1" aria-label="バイラルゲーム · ライブステージ · Japan sports">
+                <JapanRoomGamesTabPanel />
+              </section>
 
-            {/* ── Fashion row ──────────────────────────────── */}
-            <section className="w-full px-1 -mt-6" aria-label="Japan Fashion">
-              <JapanRoomFashionTabPanel />
-            </section>
+              {/* ── Desk Lab · full width ── */}
+              <section className="w-full px-1" aria-label="Japan Desk Lab">
+                <JapanRoomStationeryPanel />
+              </section>
+
+              {/* ── Snack Lab · full width ── */}
+              <section className="w-full px-1" aria-label="Japan Snack Lab">
+                <JapanRoomSnacksPanel />
+              </section>
+
+              {/* ── Fashion ── */}
+              <section className="w-full px-1" aria-label="Japan Fashion">
+                <JapanRoomFashionTabPanel />
+              </section>
             </div>
+
+            <section className="w-full px-1" aria-label="AI Powerhouse · Japan">
+              <ArenaSlotAiPowerhouseTab mode="link" label="AI POWERHOUSE" />
+            </section>
             </div>
           </RoomCountryPageShell>
         </div>

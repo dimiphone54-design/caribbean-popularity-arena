@@ -39,6 +39,11 @@ export const arenaSlotCountryWelcomes: ArenaSlotCountryWelcome[] = [
     islandCode: "LT",
     welcome:
       "Sveiki atvykę į Lietuvą — nuo Vilniaus senamiesčio iki gyvos arenos, kur baltų kraštų kultūra ir stilius jus pasitinka namuose."
+  },
+  {
+    islandCode: "TT",
+    welcome:
+      "Welcome to Trinidad & Tobago — twin islands of carnival rhythm, doubles, and steelpan, where the Caribbean spirit lives in every street party."
   }
 ];
 
@@ -51,4 +56,4 @@ export function getArenaSlotTabWelcome(islandCode: string) {
 }
 
 /** Front 12 countries with full Dropshipping · Games · Fashion · Food · Study Hub tabs */
-export const ARENA_FRONT_SLOT_TAB_CODES = new Set(["UK", "CN", "JP", "CO", "EC"]);
+export const ARENA_FRONT_SLOT_TAB_CODES = new Set(["UK", "CN", "JP", "CO", "EC", "TT"]);

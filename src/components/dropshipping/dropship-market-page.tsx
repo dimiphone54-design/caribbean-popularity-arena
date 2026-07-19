@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { dropshipMarketMeta, getDropshipCountryById, resolveDropshipCountryId } from "@/lib/dropshipping";
 import { getDropshipCountryDisplayName, getDropshipMarketCopy } from "@/lib/dropship-market-copy";
 import { internationalSuiteCountries } from "@/lib/international-suite";
+import { DROPSHIP_PUBLIC_HIDDEN_MESSAGE, isPublicDropshipVisible } from "@/lib/real-money";
 
 export function DropshipMarketPage() {
   const searchParams = useSearchParams();
@@ -21,6 +22,38 @@ export function DropshipMarketPage() {
 
   const copy = getDropshipMarketCopy(country.id);
   const displayName = getDropshipCountryDisplayName(country.id, country.name);
+  const publicDropshipOn = isPublicDropshipVisible();
+
+  if (!publicDropshipOn) {
+    return (
+      <>
+        <main className="arena-2030 relative min-h-screen overflow-hidden pb-56">
+          <Arena2030Backdrop intensity="deep" />
+          <div className="relative z-10">
+            <RoomCountryPageShell>
+              <Arena2030Header
+                title="Dropship market · private"
+                description={DROPSHIP_PUBLIC_HIDDEN_MESSAGE}
+              />
+              <section className="country-room-section a2030-holo-panel rounded-[1.5rem] border border-[#d7b46a]/30 p-5">
+                <p className="text-sm leading-6 text-[#d7e3f6]">{DROPSHIP_PUBLIC_HIDDEN_MESSAGE}</p>
+                <p className="mt-3 text-xs text-[#9fb4d4]">
+                  Owner tools stay under Command Center. Public rooms remain open for live, chat, and free testing.
+                </p>
+                <Link
+                  href="/#home"
+                  className="mt-4 inline-flex rounded-full border border-[#d7b46a]/40 px-4 py-2 text-[11px] font-black uppercase tracking-[0.12em] text-[#d7b46a]"
+                >
+                  Back to Arena
+                </Link>
+              </section>
+            </RoomCountryPageShell>
+          </div>
+        </main>
+        <SiteFooter />
+      </>
+    );
+  }
 
   return (
     <>

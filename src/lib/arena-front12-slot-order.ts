@@ -1,15 +1,21 @@
 import type { ArenaCreatorSlot } from "@/lib/arena-experience";
 
-/** Front slots grid · exact lineup · UK · Japan · China · Ecuador · Colombia · Poland · Lithuania */
+/**
+ * Front 12 nation slots · exact public lineup (all READY for girl sign-in).
+ * Order matches arenaCreators ranks 1–12.
+ */
 export const ARENA_FRONT12_SLOT_DISPLAY_ORDER = [
-  "UK",
-  "JP",
-  "CN",
-  "EC",
   "CO",
-  "PL",
-  "LT"
+  "UK",
+  "EC",
+  "TT",
+  "ES",
+  "CN",
+  "JP"
 ] as const;
+
+/** Owner catalog only · frozen country lanes removed from public */
+export const ARENA_COMMAND_CENTER_ONLY_ISLAND_CODES = ["LT", "JM", "PL", "TN", "GY", "VE"] as const;
 
 export type ArenaFront12VisibleIslandCode = (typeof ARENA_FRONT12_SLOT_DISPLAY_ORDER)[number];
 

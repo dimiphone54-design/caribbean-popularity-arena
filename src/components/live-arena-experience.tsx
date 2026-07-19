@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { Arena2030Backdrop } from "@/components/arena-2030-backdrop";
 import { ArenaFront12EliteSlots } from "@/components/arena-front12-elite-slots";
@@ -9,7 +8,6 @@ import { ArenaFront12EliteSlots } from "@/components/arena-front12-elite-slots";
 import { CaribbeanFreedomArenaEliteHeader } from "@/components/caribbean-freedom-arena-elite-header";
 import { CaribbeanFreedomArenaInstallApp } from "@/components/caribbean-freedom-arena-install-app";
 import { CreatorApplyForm, MemberRegistrationForm } from "@/components/compliance-registration-forms";
-import { ArenaLoungeScrollPanel } from "@/components/arena-lounge-scroll-panel";
 import { CfaNavPopularityArenaPill } from "@/components/cfa-nav-popularity-arena-pill";
 import { CfaNavFreedomElite2050Pill } from "@/components/cfa-nav-freedom-elite-2050-pill";
 import { CfaNavMemberSignInPill } from "@/components/cfa-nav-member-sign-in-pill";
@@ -35,7 +33,7 @@ import {
   type ArenaCreatorSlot,
   type BoostPack
 } from "@/lib/arena-experience";
-import { isCommandCenterEnabled } from "@/lib/command-center-access";
+import { CommandCenterOwnerNavLink } from "@/components/command-center-owner-nav-link";
 import { arenaDisplayCopy, formatFreeLabel } from "@/lib/arena-display-labels";
 
 type Particle = {
@@ -99,7 +97,7 @@ export function LiveArenaExperience() {
   const [slots, setSlots] = useState<SlotState[]>(arenaCreators);
   const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
   const [selectedEntrySlotId, setSelectedEntrySlotId] = useState<number | null>(null);
-  const [openDemoPanel, setOpenDemoPanel] = useState<"apply" | "rooms" | "dashboard" | "bank" | null>(null);
+  const [openDemoPanel, setOpenDemoPanel] = useState<"apply" | "rooms" | "bank" | null>(null);
   const [openPopularityWorldMap, setOpenPopularityWorldMap] = useState(false);
   const [openPopularityRecords, setOpenPopularityRecords] = useState(false);
   const [popularityRecordsTab, setPopularityRecordsTab] = useState<PopularityRecordsTab>("matches");
@@ -501,26 +499,11 @@ export function LiveArenaExperience() {
           <CfaNavMemberSignInPill onOpen={() => setOpenDemoPanel("bank")} />
         </div>
 
-        <div className="a2030-nav-actions relative z-10 flex min-w-0 shrink items-center justify-end gap-1.5 sm:gap-2">
+        <div className="a2030-nav-actions relative z-10 flex min-w-0 shrink items-center justify-end gap-1 sm:gap-1.5">
           <div className="hidden min-w-0 xl:contents">
-            <ArenaLoungeScrollPanel variant="nav" />
             <CaribbeanFreedomArenaInstallApp variant="nav" />
           </div>
-          {isCommandCenterEnabled ? (
-            <Link
-              href="/command-center"
-              className="a2030-lounge-link a2030-micro hidden rounded-lg px-4 py-2 text-[11px] font-bold uppercase tracking-[0.1em] lg:inline-flex"
-            >
-              Command Center
-            </Link>
-          ) : null}
-          <button
-            type="button"
-            onClick={() => setOpenDemoPanel("dashboard")}
-            className="a2030-micro hidden rounded-lg border border-white/15 bg-transparent px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[#b8c9e1] transition hover:border-[#d7b46a]/35 lg:inline-flex"
-          >
-            Dashboard
-          </button>
+          <CommandCenterOwnerNavLink />
           <ReportAbuseButton className="hidden rounded-lg border border-[#c9a227]/30 bg-[#c9a227]/10 px-3 py-2 text-xs font-bold text-[#c9a227] transition hover:border-[#c9a227]/50 sm:inline-flex" compact />
           <button
             type="button"
@@ -627,10 +610,6 @@ export function LiveArenaExperience() {
               onCardTiltReset={resetCardTilt}
               onSlotNotice={(message, tone) => showToast(message, tone ?? "gold")}
             />
-          </div>
-
-          <div className="pb-8 pt-2 sm:pb-12">
-            <ArenaLoungeScrollPanel variant="hero" />
           </div>
         </div>
       </div>
@@ -773,7 +752,13 @@ export function LiveArenaExperience() {
               >
                 ×
               </button>
-              <FreeDemoPanel panel={openDemoPanel} onNotice={(message) => showToast(message, "gold")} />
+              <FreeDemoPanel
+                panel={openDemoPanel}
+                onNotice={(message) => showToast(message, "gold")}
+                onComplete={() => {
+                  setOpenDemoPanel(null);
+                }}
+              />
             </div>
           </div>
         </div>
@@ -795,10 +780,12 @@ export function LiveArenaExperience() {
 
 function FreeDemoPanel({
   panel,
-  onNotice
+  onNotice,
+  onComplete
 }: {
-  panel: "apply" | "rooms" | "dashboard" | "bank";
+  panel: "apply" | "rooms" | "bank";
   onNotice: (message: string) => void;
+  onComplete?: () => void;
 }) {
   const content = {
     apply: {
@@ -813,12 +800,6 @@ function FreeDemoPanel({
       subtitle: "Fan rooms are open to browse for free.",
       items: ["Soca room", "Dancehall room", "Carnival fashion room", "Island lounge"]
     },
-    dashboard: {
-      icon: "📊",
-      title: "Dashboard",
-      subtitle: `Creator dashboard preview opens with ${formatFreeLabel(0)}.`,
-      items: ["Votes overview", "Country rank", "Waiting-list position", "12-hour rotation status"]
-    },
     bank: {
       icon: "🏦",
       title: "Member Sign In",
@@ -829,35 +810,49 @@ function FreeDemoPanel({
 
   return (
     <div>
-      <div className={`text-center${panel === "bank" ? " a2030-signup-panel-head" : ""}`}>
-        <div className="text-5xl">{content.icon}</div>
-        <h2 className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#f5c842] to-[#ff5c2b]">
-          {content.title}
-        </h2>
-        <p className="mt-2 text-sm leading-6 text-[#7a82a8]">{content.subtitle}</p>
-        <p className="mt-3 inline-flex rounded-full border border-[#00c9a7]/30 bg-[#00c9a7]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#00c9a7]">
-          {formatFreeLabel(0)} · Open Preview
-        </p>
-      </div>
-
       {panel === "apply" ? (
-        <CreatorApplyForm onSubmitted={() => onNotice("Creator application preview submitted with required legal acceptances.")} />
-      ) : panel === "bank" ? (
         <>
-          <MemberRegistrationForm
-            title="Member"
-            onSubmitted={() => onNotice("Member registration preview submitted with Terms and Privacy acceptance.")}
-          />
+          <div className={`text-center${panel === "bank" ? " a2030-signup-panel-head" : ""}`}>
+            <div className="text-5xl">{content.icon}</div>
+            <h2 className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#f5c842] to-[#ff5c2b]">
+              {content.title}
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-[#7a82a8]">{content.subtitle}</p>
+            <p className="mt-3 inline-flex rounded-full border border-[#00c9a7]/30 bg-[#00c9a7]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#00c9a7]">
+              {formatFreeLabel(0)} · Open Preview
+            </p>
+          </div>
+          <CreatorApplyForm onSubmitted={() => onNotice("Creator application preview submitted with required legal acceptances.")} />
         </>
+      ) : panel === "bank" ? (
+        <MemberRegistrationForm
+          title="Member"
+          onSubmitted={() => {
+            onNotice("Welcome · signed in · active countries open");
+            onComplete?.();
+          }}
+        />
       ) : (
-        <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          {content.items.map((item) => (
-            <div key={item} className="rounded-xl border border-white/[0.07] bg-[#111830] p-4">
-              <p className="text-sm font-black text-[#f0edf8]">{item}</p>
-              <p className="mt-1 text-xs text-[#7a82a8]">Open demo access enabled</p>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className={`text-center${panel === "bank" ? " a2030-signup-panel-head" : ""}`}>
+            <div className="text-5xl">{content.icon}</div>
+            <h2 className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#f5c842] to-[#ff5c2b]">
+              {content.title}
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-[#7a82a8]">{content.subtitle}</p>
+            <p className="mt-3 inline-flex rounded-full border border-[#00c9a7]/30 bg-[#00c9a7]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#00c9a7]">
+              {formatFreeLabel(0)} · Open Preview
+            </p>
+          </div>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {content.items.map((item) => (
+              <div key={item} className="rounded-xl border border-white/[0.07] bg-[#111830] p-4">
+                <p className="text-sm font-black text-[#f0edf8]">{item}</p>
+                <p className="mt-1 text-xs text-[#7a82a8]">Open demo access enabled</p>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

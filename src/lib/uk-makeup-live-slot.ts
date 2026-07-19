@@ -4,13 +4,14 @@
  * - Girls sign up, go live, receive gifts
  * - Most gifts = champion · stays in tournament table
  * - After 1hr slot ends: email sent with earnings · slot opens again
- * - Platform cut: 0% first month (creator keeps 100%)
+ * - Platform cut: 30% gifts (creator keeps 70%) · fair UK rates
  */
 
 export const MAKEUP_SLOT_DURATION_MS = 60 * 60 * 1000; // 1 hour
 export const MAKEUP_SLOT_COUNT = 2;
-export const PLATFORM_MAKEUP_CUT_PERCENT = 0; // first month free
-export const CREATOR_MAKEUP_PAYOUT_PERCENT = 100;
+/** Fair UK rates · Best Makeup Look (Bella keeps 70%) */
+export const PLATFORM_MAKEUP_CUT_PERCENT = 30;
+export const CREATOR_MAKEUP_PAYOUT_PERCENT = 70;
 
 /* ─── Gift tiers ─────────────────────────────────────── */
 export type MakeupGiftTier = {
@@ -145,17 +146,35 @@ export const MAKEUP_TOURNAMENT_SEED: MakeupTournamentEntry[] = [
 
 export const makeupSlotMeta = {
   kicker:       "UK Fashion · Makeup Live · 1hr Slots",
-  title:        "Go Live · Show Your Makeup · Get Gifted",
+  title:        "Go Live · Show Your Makeup · Free tournament board",
   description:
-    "Two live slots. Each girl goes live for exactly 1 hour showing her makeup look. " +
-    "Fans send gifts through platform checkout — most gifted stays champion. After 1hr the slot opens for the next creator. " +
-    "Approved creator payouts are sent by the platform worldwide.",
+    "Two live slots. Each creator goes live for exactly 1 hour showing her makeup look. " +
+    "Watch free · free tournament ranks. Paid gifts and checkout stay frozen in Command Center until launch.",
   slotRules: [
     "🕐 Exactly 1 hour per live session",
-    "🎁 Fans gift through platform checkout — creator payout handled by the platform",
-    "👑 Most gifted = Champion of the session",
-    "📧 Email sent after session with your total earnings",
-    "🏆 Your name stays in the tournament table forever",
-    "🌍 Platform payout sent worldwide — PayPal, bank, or card",
+    "👀 Free watch · free tournament board (names + rank)",
+    "👑 Champ badge on the free board",
+    "🏆 Your name stays in the tournament table",
+    "🎁 Paid gifts / payouts frozen → Command Center FREEZE COMING SOON",
   ],
+} as const;
+
+/** Tournament gift £ seed · Command Center freeze only (public shows ranks without £) */
+export const UK_TOURNAMENT_FREEZE_CATALOG = {
+  panelTitle: "🇬🇧 Tournament · activity + Makeup Live board",
+  publicStatus: "LIVE free board · ranks & play · gift £ frozen",
+  room: "/rooms/uk-flag-cotswolds · Tournament panel",
+  freePublic: [
+    "Tournament activity sets (park girls · Holland Park games · free LIVE play)",
+    "Makeup Live tournament ranks · names · styles · champ badge",
+    "No public gift £ totals on the board"
+  ],
+  frozenMoney: [
+    "Exact past gift earnings per tournament seed (Jade £184 · Sienna £112 · …)",
+    "Most-gifted cash champion model",
+    "Platform checkout gifts driving tournament placement",
+    "Payout email / worldwide creator payout on this lane"
+  ],
+  reopenNote:
+    "When ready: restore gift totals on CC only or public as product requires; enable real-money flags for paid gifts."
 } as const;

@@ -8,7 +8,7 @@ export const slotIdToCountryCode: Record<number, string> = {
   4: "EC",
   5: "TT",
   6: "JM",
-  7: "VE",
+  7: "ES",
   8: "PL",
   9: "TN",
   10: "GY",

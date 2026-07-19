@@ -1,6 +1,6 @@
-# Terms and Conditions
+# Terms of Service
 
-**Caribbean Popularity Arena**
+**Caribbean Popularity Arena · Caribbean Freedom Arena**
 
 **Effective Date:** [EFFECTIVE DATE]  
 **Last Updated:** [LAST UPDATED DATE]
@@ -9,10 +9,14 @@
 
 ## Operator Information
 
-These Terms and Conditions ("**Terms**") govern access to and use of the Caribbean Popularity Arena platform, website, applications, and related services (collectively, the "**Platform**") operated by **[REGISTERED BUSINESS NAME]** ("**Company**," "**we**," "**us**," or "**our**"), a business registered in the **Republic of Trinidad and Tobago** (Registration No. **[BUSINESS REGISTRATION NUMBER]**), with registered address at **[REGISTERED BUSINESS ADDRESS]**.
+These Terms of Service (also called "**Terms and Conditions**" or "**Terms**") govern access to and use of the Caribbean Popularity Arena / Caribbean Freedom Arena platform, website, applications, country rooms, live features, games, dropship tools, and related services (collectively, the "**Platform**") operated by **[REGISTERED BUSINESS NAME]** ("**Company**," "**we**," "**us**," or "**our**"), a business registered in the **Republic of Trinidad and Tobago** (Registration No. **[BUSINESS REGISTRATION NUMBER]**), with registered address at **[REGISTERED BUSINESS ADDRESS]**.
 
 **Legal Contact:** [LEGAL@EXAMPLE.COM]  
-**Support:** [SUPPORT@EXAMPLE.COM]
+**Support:** [SUPPORT@EXAMPLE.COM]  
+**Billing:** [BILLING@EXAMPLE.COM]  
+**Creators:** [CREATORS@EXAMPLE.COM]
+
+**Related documents:** [Privacy Policy](/legal/privacy) · [Creator Participation Agreement](/legal/creator-agreement) · [Refund and Payment Policy](/legal/refunds) · [Community Guidelines](/legal/community)
 
 ---
 
@@ -141,13 +145,78 @@ These Terms and Conditions ("**Terms**") govern access to and use of the Caribbe
 
 ## 12. Paid Access Features
 
-12.1 Certain features may require payment, credits, subscriptions, access passes, or other fees disclosed at checkout or within the Platform.
+12.1 Certain features may require payment, credits, subscriptions, access passes, gifts, voting access, boosts, dropship checkout, or other fees disclosed at checkout or within the Platform.
 
 12.2 Prices, taxes, currency, billing intervals, and included features may vary by region and are subject to change in accordance with applicable law and our Refund and Payment Policy.
 
 12.3 Payments are made for access to Platform features, software services, digital experiences, community participation, and related functionality.
 
 12.4 **Payments do not purchase access to any specific individual** and **do not guarantee** communication, responses, relationships, meetings, matches, introductions, or outcomes of any kind.
+
+---
+
+## 12A. Virtual Gifts, Tips, and Platform Split
+
+12A.1 Fans may send **virtual gifts and tips** during live sessions or other gift-enabled features. Gift prices are shown before purchase.
+
+12A.2 **Default revenue split for gifts and tips** (unless a different rate is clearly disclosed for a promo or lane before you pay or go live):
+
+| Party | Share of gift face value |
+| --- | --- |
+| **Creator** | **70%** |
+| **Platform (Company)** | **30%** service commission |
+
+12A.3 Example: A **£10** gift → Creator **£7** · Platform **£3**.
+
+12A.4 The Platform commission covers hosting, checkout, fraud tooling, support, and operations. Creator payout timing is described in the **Creator Participation Agreement**.
+
+12A.5 Gifts are digital consumables. They are generally **non-refundable** once delivered, except as required by law or our Refund and Payment Policy.
+
+12A.6 Chargebacks and fraud may reverse gift value and reduce Creator balances.
+
+---
+
+## 12B. Voting Access Fees
+
+12B.1 Some lives, games, or arenas charge fans a **voting access fee** for a limited window (for example **£3–£5** during a one-hour live, or **USD $3–$6** for a multi-hour vote window). Exact prices appear at checkout.
+
+12B.2 Voting access purchases digital voting power or exclusive view features only. They do not guarantee a win for any Creator or outcome for any fan.
+
+12B.3 Unless an event notice states otherwise, voting access fees are **Platform revenue**. Where Creators receive a share of a vote pool, that share is disclosed for the event.
+
+12B.4 Vote manipulation (bots, fake accounts, paid rings) is prohibited and may void results.
+
+---
+
+## 12C. Premium Boosts and VIP Features
+
+12C.1 Creators or fans may purchase optional **boosts**, VIP access, lockouts, or visibility upgrades at disclosed prices.
+
+12C.2 Boosts increase opportunity for visibility only. They do not guarantee rankings, gifts, matches, or income.
+
+12C.3 Applied boosts are non-refundable except where required by law.
+
+---
+
+## 12D. Country Rooms, Games, and Live Lanes
+
+12D.1 Country rooms (including United Kingdom Cotswolds, Japan, Ecuador, and others) may host games, sports arenas, study hubs, fashion/makeup lives, dropship lanes, and community tools.
+
+12D.2 Park-style games and sports content may be suitable for general audiences as sport, but **monetized live features, tipping, VIP, and adult community tools remain 18+**.
+
+12D.3 Live sessions may use fixed timers (for example a **60-minute** makeup live) and **auto queues** that promote the next verified Creator when a session ends.
+
+12D.4 Demo boards, simulators, and illustrative earnings are for product experience only unless marked as a real paid session.
+
+---
+
+## 12E. Dropship and Marketplace Purchases
+
+12E.1 Dropship purchases use Platform checkout. Local suppliers may ship direct. Delivery times and returns follow supplier and published fulfillment terms.
+
+12E.2 Platform service fees for dropship (if any) may be internal commercial terms; public pages may show clean product pricing without fee breakdowns.
+
+12E.3 You are responsible for providing accurate shipping information.
 
 ---
 
@@ -385,14 +454,52 @@ These Terms and Conditions ("**Terms**") govern access to and use of the Caribbe
 
 ---
 
-## 37. Contact Information
+## 37. Creator Payouts and Cross-Reference
+
+37.1 Creators who monetize on the Platform are also bound by the **Creator Participation Agreement** at `/legal/creator-agreement`.
+
+37.2 That Agreement explains in detail:
+
+(a) **revenue splits** (including the default **70% Creator / 30% Platform** gift split);  
+(b) **payout schedule** (reconciliation, weekly batches, minimum thresholds, holds);  
+(c) **live session and auto-queue rules**;  
+(d) **boost, voting pool, and brand-deal** terms;  
+(e) **creator conduct and enforcement**.
+
+37.3 Members and fans are not entitled to Creator payout details beyond what is shown at purchase, except as required by law.
+
+---
+
+## 38. Summary of Key Platform Rules (Plain Language)
+
+38.1 **Be 18+** to use the Platform.
+
+38.2 **Pay only through official Platform checkout** for gifts, votes, boosts, memberships, and dropship.
+
+38.3 **No harassment, scams, impersonation, or illegal content.**
+
+38.4 **No bots or fake engagement** on votes, gifts, or rankings.
+
+38.5 **Payments buy digital features**, not people, meetings, or guaranteed outcomes.
+
+38.6 **Creators keep 70% of standard gifts; Platform keeps 30%**, unless a promo says otherwise.
+
+38.7 **Report abuse** via in-product tools or [SAFETY@EXAMPLE.COM] / [ABUSE@EXAMPLE.COM].
+
+38.8 This summary does not replace the full Terms or Creator Agreement.
+
+---
+
+## 39. Contact Information
 
 **[REGISTERED BUSINESS NAME]**  
 **Address:** [REGISTERED BUSINESS ADDRESS]  
 **Registration No.:** [BUSINESS REGISTRATION NUMBER]  
 **Legal:** [LEGAL@EXAMPLE.COM]  
 **Support:** [SUPPORT@EXAMPLE.COM]  
-**Privacy:** [PRIVACY@EXAMPLE.COM]
+**Privacy:** [PRIVACY@EXAMPLE.COM]  
+**Billing:** [BILLING@EXAMPLE.COM]  
+**Creators:** [CREATORS@EXAMPLE.COM]
 
 ---
 

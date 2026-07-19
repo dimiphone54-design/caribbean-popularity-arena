@@ -26,17 +26,6 @@ export const ARENA_SPORTS_MAP_ZONES: ArenaSportsMapZone[] = [
     ]
   },
   {
-    id: "football-lads",
-    title: "Football Lads Room",
-    flag: "🇬🇧",
-    subtitle: "/rooms/football-lads",
-    sports: [
-      { name: "Football", emoji: "⚽" },
-      { name: "Five-a-side", emoji: "⚽" },
-      { name: "FIFA / predictions", emoji: "🎯" }
-    ]
-  },
-  {
     id: "uk-cotswolds",
     title: "UK Cotswolds Room",
     flag: "🇬🇧",
@@ -93,7 +82,7 @@ export const ARENA_SPORTS_MAP_ZONES: ArenaSportsMapZone[] = [
   },
   {
     id: "china",
-    title: "China Room",
+    title: "China",
     flag: "🇨🇳",
     subtitle: "/rooms/china-room",
     sports: [

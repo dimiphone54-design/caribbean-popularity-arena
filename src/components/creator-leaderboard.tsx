@@ -73,7 +73,7 @@ export function CreatorLeaderboard() {
                     Arena score
                   </p>
                   <p className="mt-1 font-luxury-serif text-3xl text-[var(--luxury-champagne)]">
-                    {creator.score.toLocaleString()}
+                    {creator.score.toLocaleString("en-US")}
                   </p>
                   <p className="mt-1 inline-flex items-center gap-1 text-sm font-bold text-emerald-300/90">
                     <TrendingUp className="size-4" aria-hidden="true" />

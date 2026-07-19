@@ -24,7 +24,7 @@ const eldersGift = "Free";
 const loungeList = arenaLoungeRooms.map((room) => `${room.label} (${room.href})`).join(" · ");
 const countryNames = internationalSuiteCountries.map((c) => c.name).join(", ");
 const builtRooms =
-  "Colombia Room (/rooms/colombia-room) · Ecuador Room (/rooms/ecuador-room) · UK Cotswolds (/rooms/uk-flag-cotswolds) · Football Lads (/rooms/football-lads) · Japan Room (/rooms/japan-room) · China Room (/rooms/china-room)";
+  "Colombia Room (/rooms/colombia-room) · Ecuador Room (/rooms/ecuador-room) · UK Cotswolds (/rooms/uk-flag-cotswolds) · Japan Room (/rooms/japan-room) · China Room (/rooms/china-room)";
 const legalCount = legalDocuments.length;
 
 const guideEntries: GuideEntry[] = [
@@ -212,12 +212,12 @@ const guideEntries: GuideEntry[] = [
   {
     topic: "uk",
     keywords: ["uk", "united kingdom", "britain", "british", "cotswold", "cotswolds", "london", "england"],
-    answer: "UK rooms: Cotswolds (/rooms/uk-flag-cotswolds) — park slideshow · museum · football · live gate · dropship · archive. Football Lads (/rooms/football-lads) — squad · match-day · live gate. Both use ${countryLiveGift} country live gift."
+    answer: "UK room: Cotswolds (/rooms/uk-flag-cotswolds) — park slideshow · museum · football · live gate · dropship · archive. Uses ${countryLiveGift} country live gift."
   },
   {
     topic: "football",
     keywords: ["football", "soccer", "lads", "manchester", "premier", "sunday league"],
-    answer: "Football Lads (/rooms/football-lads) — Sunday league squad · pub banter · men's match-day prompts · UK football energy. Live gift gate + dropship market. UK clock top-right."
+    answer: "UK room Cotswolds (/rooms/uk-flag-cotswolds) — Sunday league squad · pub banter · men's match-day prompts · UK football energy. Live gift gate + dropship market. UK clock top-right."
   },
   {
     topic: "trinidad",
@@ -333,7 +333,7 @@ const guideEntries: GuideEntry[] = [
   {
     topic: "nav",
     keywords: ["nav", "menu", "top bar", "header", "button", "link"],
-    answer: "Top nav on #home: brand · island tabs · Apply as Creator · Member Sign In · Command Center/Dashboard (if enabled) · Install App · Report Abuse. Lounge scroll below hero for rooms."
+    answer: "Top nav on #home: brand · island tabs · Apply as Creator · Member Sign In · Command Center (if enabled) · Install App · Report Abuse. Lounge scroll below hero for rooms."
   },
   {
     topic: "hello",

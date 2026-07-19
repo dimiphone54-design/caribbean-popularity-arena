@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
 import { createPayPalOrder } from "@/lib/paypal";
-import { createDropshipOrder, canAcceptDropshipPayments, updateDropshipOrderByToken } from "@/lib/dropship-order-registry";
+import {
+  createDropshipOrder,
+  updateDropshipOrderByToken
+} from "@/lib/dropship-order-registry";
 import { getDropshipProductsForCountry, getDropshipOptionProductsForCountry } from "@/lib/dropshipping";
+import { createVaultEntry, getPlatformCheckoutMode, getVaultSummary } from "@/lib/platform-vault";
+import {
+  DROPSHIP_PURCHASE_FREEZE_MESSAGE,
+  isDropshipPurchaseEnabled
+} from "@/lib/real-money";
 
 type CreateBody = {
   email?: string;
@@ -17,6 +25,13 @@ function getProduct(countryId: string, productId: string) {
 }
 
 export async function POST(request: Request) {
+  if (!isDropshipPurchaseEnabled()) {
+    return NextResponse.json(
+      { ok: false, error: DROPSHIP_PURCHASE_FREEZE_MESSAGE, frozen: true },
+      { status: 503 }
+    );
+  }
+
   let body: CreateBody = {};
   try {
     body = (await request.json()) as CreateBody;
@@ -47,20 +62,42 @@ export async function POST(request: Request) {
     product
   });
 
-  if (!canAcceptDropshipPayments()) {
+  // Always pile into platform vault (orders + owed amounts)
+  const vaultEntry = await createVaultEntry({
+    kind: "dropship",
+    countryId,
+    countryName,
+    flag,
+    itemLabel: product.name,
+    sku: product.id,
+    amountUsd: localOrder.amount,
+    platformUsd: Number(localOrder.platformAmount),
+    counterpartUsd: Number(localOrder.supplierAmount),
+    counterpartLabel: "supplier",
+    buyerEmail: email,
+    refId: localOrder.id,
+    note: `Dropship vault · ${countryName} · pending collection`
+  });
+
+  const mode = getPlatformCheckoutMode();
+  const summary = await getVaultSummary();
+
+  if (mode === "vault") {
     return NextResponse.json({
       ok: true,
-      mode: "manual",
+      mode: "vault",
       order: localOrder,
-      message: "Saved order lead. Add PayPal credentials to enable live checkout."
+      vaultId: vaultEntry.id,
+      summary,
+      message: `Saved to platform vault · ${flag} ${countryName} · $${localOrder.amount} pending · no real charge yet. Pay when PayPal is live.`
     });
   }
 
   try {
     const paypal = await createPayPalOrder({
       amountUsd: localOrder.amount,
-      description: `${product.name} · ${countryName} dropship order · platform merchant checkout`,
-      customId: `dropship:${localOrder.id}:${email}`
+      description: `Caribbean Freedom Arena · ${countryName} dropship · ${product.name} · platform merchant`,
+      customId: `cfa:dropship:${countryId}:${localOrder.id}`.slice(0, 127)
     });
 
     const updated = updateDropshipOrderByToken(localOrder.orderToken, {
@@ -71,11 +108,21 @@ export async function POST(request: Request) {
       ok: true,
       mode: "paypal",
       order: updated ?? localOrder,
+      vaultId: vaultEntry.id,
       approveUrl: paypal.approveUrl,
-      paypalOrderId: paypal.id
+      paypalOrderId: paypal.id,
+      summary
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Checkout unavailable";
-    return NextResponse.json({ ok: false, error: message }, { status: 500 });
+    // Vault already has the order — business keeps piling up
+    return NextResponse.json({
+      ok: true,
+      mode: "vault",
+      order: localOrder,
+      vaultId: vaultEntry.id,
+      summary,
+      message: `Vault saved · PayPal error (${message}). No real charge yet.`
+    });
   }
 }

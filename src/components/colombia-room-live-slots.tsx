@@ -48,15 +48,15 @@ export function ColombiaRoomLiveSlots({
 
   return (
     <div key={`${topicId}-${venueId}`} className="colombia-live-slots mx-auto w-full max-w-4xl">
-      <div className="colombia-live-slots-tonight mb-4 rounded-2xl border border-[#fbbf24]/35 bg-[#1a0208]/35 px-4 py-3 text-center backdrop-blur-md sm:px-5">
-        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#fbbf24]">{tonightKicker}</p>
-        <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#fecdd3]/90">
+      <div className="colombia-live-slots-tonight mb-2 rounded-xl border border-[#fbbf24]/35 bg-[#1a0208]/35 px-3 py-2 text-center backdrop-blur-md sm:px-4">
+        <p className="text-[9px] font-black uppercase tracking-[0.16em] text-[#fbbf24]">{tonightKicker}</p>
+        <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#fecdd3]/90">
           {countryRoomLiveSessionHours}h · {tonightSession}
         </p>
       </div>
 
-      <div className="grid grid-cols-2 items-start gap-3 sm:gap-4">
-        <div className="flex min-w-0 flex-col gap-3">
+      <div className="grid grid-cols-2 items-start gap-2 sm:gap-2.5">
+        <div className="flex min-w-0 flex-col gap-2">
           <article className="colombia-live-slot-mini group overflow-hidden rounded-xl border border-[#fb7185]/35 bg-[#1a0208]/35 shadow-[0_8px_28px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:border-[#fbbf24]/40">
             <div className="relative aspect-[4/5] w-full bg-[#2a0510] sm:aspect-[3/4]">
               <img
@@ -85,20 +85,20 @@ export function ColombiaRoomLiveSlots({
           </article>
 
           <div
-            className={`colombia-slot-topic-chosen rounded-xl border border-[#fb7185]/35 bg-[#2a0510]/55 px-3 py-3 text-center backdrop-blur-sm${
+            className={`colombia-slot-topic-chosen rounded-xl border border-[#fb7185]/35 bg-[#2a0510]/55 px-2.5 py-2 text-center backdrop-blur-sm${
               topicChosenFlash ? " colombia-slot-chosen-flash-rose" : ""
             }`}
           >
-            <p className="text-[9px] font-black uppercase tracking-[0.14em] text-[#fecdd3]/85">{slotTopicTitle}</p>
-            <p className="colombia-handwriting mt-1 text-lg font-semibold leading-tight text-[#fff1f2] sm:text-xl">
+            <p className="text-[8px] font-black uppercase tracking-[0.12em] text-[#fecdd3]/85">{slotTopicTitle}</p>
+            <p className="colombia-handwriting mt-0.5 text-base font-semibold leading-tight text-[#fff1f2] sm:text-lg">
               {topicFlag} {topicLabel}
             </p>
-            <p className="colombia-handwriting-soft mt-1 text-xs leading-5 text-[#fda4af]/92">{topicBlurb}</p>
-            <p className="mt-2 text-[10px] leading-4 text-[#fecdd3]/80">{slotTopicCaption}</p>
+            <p className="colombia-handwriting-soft mt-0.5 line-clamp-2 text-[11px] leading-4 text-[#fda4af]/92">{topicBlurb}</p>
+            <p className="mt-1 line-clamp-1 text-[9px] leading-4 text-[#fecdd3]/80">{slotTopicCaption}</p>
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-col gap-3">
+        <div className="flex min-w-0 flex-col gap-2">
           <article className="colombia-live-slot-mini group overflow-hidden rounded-xl border border-[#fb7185]/35 bg-[#1a0208]/35 shadow-[0_8px_28px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:border-[#fbbf24]/40">
             <div className="relative aspect-[4/5] w-full bg-[#2a0510] sm:aspect-[3/4]">
               <img
@@ -127,16 +127,16 @@ export function ColombiaRoomLiveSlots({
           </article>
 
           <div
-            className={`colombia-slot-topic-chosen rounded-xl border border-[#fbbf24]/35 bg-[#2a0510]/55 px-3 py-3 text-center backdrop-blur-sm${
+            className={`colombia-slot-topic-chosen rounded-xl border border-[#fbbf24]/35 bg-[#2a0510]/55 px-2.5 py-2 text-center backdrop-blur-sm${
               venueChosenFlash ? " colombia-slot-chosen-flash-gold" : ""
             }`}
           >
-            <p className="text-[9px] font-black uppercase tracking-[0.14em] text-[#fbbf24]/85">{slotVenueTitle}</p>
-            <p className="colombia-handwriting mt-1 text-lg font-semibold leading-tight text-[#fff1f2] sm:text-xl">
+            <p className="text-[8px] font-black uppercase tracking-[0.12em] text-[#fbbf24]/85">{slotVenueTitle}</p>
+            <p className="colombia-handwriting mt-0.5 text-base font-semibold leading-tight text-[#fff1f2] sm:text-lg">
               {venueEmoji} {venueLabel}
             </p>
-            <p className="colombia-handwriting-soft mt-1 text-xs leading-5 text-[#fda4af]/92">{venueBlurb}</p>
-            <p className="mt-2 text-[10px] leading-4 text-[#fecdd3]/80">{slotVenueCaption}</p>
+            <p className="colombia-handwriting-soft mt-0.5 line-clamp-2 text-[11px] leading-4 text-[#fda4af]/92">{venueBlurb}</p>
+            <p className="mt-1 line-clamp-1 text-[9px] leading-4 text-[#fecdd3]/80">{slotVenueCaption}</p>
           </div>
         </div>
       </div>

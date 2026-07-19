@@ -260,8 +260,7 @@ export const COUNTRY_TREND_ROOM_SLUGS = new Set([
   "ecuador-room",
   "japan-room",
   "china-room",
-  "uk-flag-cotswolds",
-  "football-lads"
+  "uk-flag-cotswolds"
 ]);
 
 export const COUNTRY_TREND_BY_ROOM_SLUG: Record<
@@ -272,8 +271,7 @@ export const COUNTRY_TREND_BY_ROOM_SLUG: Record<
   "ecuador-room": { country: "ecuador", trendLocale: "es-EC" },
   "japan-room": { country: "japan", trendLocale: "ja" },
   "china-room": { country: "china", trendLocale: "zh" },
-  "uk-flag-cotswolds": { country: "uk", trendLocale: "en" },
-  "football-lads": { country: "uk", trendLocale: "en" }
+  "uk-flag-cotswolds": { country: "uk", trendLocale: "en" }
 };
 
 export function getCountryTrendPanelOrder(roomSlug: string): CountryTrendId[] {
@@ -285,7 +283,6 @@ export function getCountryTrendPanelOrder(roomSlug: string): CountryTrendId[] {
   if (roomSlug.includes("ecuador")) return ["ecuador"];
   if (
     roomSlug.includes("uk-flag") ||
-    roomSlug.includes("football-lads") ||
     roomSlug.includes("cotswolds")
   ) {
     return ["uk"];
@@ -502,7 +499,7 @@ export function getCountryTrendPanelUi(roomSlug: string, locale: ContentLocaleId
 
   const useSpanish = isSpanishTrendLocale(trendLocale);
   const isUkRoom =
-    roomSlug.includes("uk-flag") || roomSlug.includes("football-lads") || roomSlug.includes("cotswolds");
+    roomSlug.includes("uk-flag") || roomSlug.includes("cotswolds");
 
   if (isUkRoom && !useSpanish) {
     return {
@@ -543,7 +540,6 @@ export function roomSlugFromPathname(pathname: string | null) {
 
 const roomsWithBottomDock = new Set([
   "comedy-fest",
-  "football-lads",
   "uk-flag-cotswolds",
   "fashion-month",
   "the-elders-table"

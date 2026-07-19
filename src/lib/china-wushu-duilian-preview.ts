@@ -17,32 +17,31 @@ export const wushuDuilianStagePreview = {
 /** China room · octagon cage · real-life Wushu Sanda combat (full contact) */
 export const wushuCombatOctagonPreview = {
   youtubeId: "ggN_grtKONo",
-  titleEn: "IWUF 10th Sanda World Cup · Men's 70kg Final · Wushu Combat",
+  titleEn: "第十届散打世界杯 · 男子70公斤级决赛 · 武术实战",
   titleZh: "第十届散打世界杯 · 男子70公斤级决赛 · 武术实战",
-  detailEn: "Full-contact Sanda · punches, kicks & throws · IWUF official bout",
+  detailEn: "散打实战 · 拳腿摔 · 国际武联官方决赛",
   detailZh: "散打实战 · 拳腿摔 · 国际武联官方决赛",
   durationLabel: "8:19",
-  badgeLabel: "4K · WUSHU COMBAT"
+  badgeLabel: "4K · 武术实战"
 } as const;
 
-/** English origin copy · single octagon panel */
+/** Full origin copy · Chinese · always shown under 4K octagon */
 export const wushuDuilianOriginStory = {
-  panelTitle: "Wushu Duilian",
-  gameLabel: "Wushu Duilian · 武术对练",
-  lead:
-    "Wushu Duilian originated in ancient China as a blend of military training and theatrical entertainment.",
+  panelTitle: "武术对练",
+  gameLabel: "武术对练 · Wushu Duilian",
+  lead: "武术对练起源于古代中国，融合了军事训练与舞台表演娱乐。",
   sections: [
     {
-      title: "Military Roots",
-      body: "Thousands of years ago, soldiers used choreographed weapon routines to train troops safely without killing each other."
+      title: "军事渊源",
+      body: "数千年前，士兵用编排好的器械套路安全练兵，既能训练又不互相伤害。"
     },
     {
-      title: "Opera & Street Theater",
-      body: "During the Qing Dynasty, martial artists joined Chinese opera troupes, adding acrobatics and dramatic flair to entertain the public."
+      title: "戏曲与街头表演",
+      body: "清朝时期，武者加入戏班，加入杂技与戏剧张力，面向大众表演。"
     },
     {
-      title: "Modern Sport",
-      body: "In 1958, China formalized it into a regulated, non-combat sport under the state's official Wushu system."
+      title: "现代体育",
+      body: "1958年，中国将其规范为非对抗性竞技项目，纳入国家武术体系。"
     }
   ]
 } as const;

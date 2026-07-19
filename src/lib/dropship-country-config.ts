@@ -31,8 +31,9 @@ const configs: DropshipCountryConfig[] = [
     flag: "🇬🇧",
     currencyCode: "GBP",
     usdToLocalRate: 0.79,
-    legalShort: "UK supplier ships · GBP lane · UK consumer rights via supplier policy",
-    legalDropship: `${baseLegal} UK lane: fulfilled from UK warehouses or partners.`
+    legalShort:
+      "Secure USD checkout on the Arena · UK supplier ships direct · tracking provided",
+    legalDropship: `${baseLegal} UK Tech & Automotive Lane: customer pays USD on Arena (WiPay/Paddle). Supplier ships direct from London or other UK warehouses. No arena inventory.`
   },
   {
     countryId: "lithuania",
@@ -49,8 +50,8 @@ const configs: DropshipCountryConfig[] = [
     flag: "🇪🇨",
     currencyCode: "USD",
     usdToLocalRate: 1,
-    legalShort: "Proveedor ecuatoriano envía · carril USD · hubs Quito y Guayaquil",
-    legalDropship: `${baseLegal} Ecuador lane: supplier ships from Quito and Guayaquil hubs.`
+    legalShort: "Ecuador Direct Dropship · USD · Quito & Guayaquil ship direct",
+    legalDropship: `${baseLegal} Ecuador Direct Dropship Lane: customer pays USD on Arena (WiPay/Paddle). Supplier in Quito or Guayaquil ships direct. No arena inventory.`
   },
   {
     countryId: "trinidad",
@@ -71,13 +72,13 @@ const configs: DropshipCountryConfig[] = [
     legalDropship: `${baseLegal} Jamaica lane: Kingston-region suppliers.`
   },
   {
-    countryId: "venezuela",
-    countryName: "Venezuela",
-    flag: "🇻🇪",
-    currencyCode: "USD",
-    usdToLocalRate: 1,
-    legalShort: "Venezuela lane · USD display · supplier export lane",
-    legalDropship: `${baseLegal} Venezuela lane: USD display for lane stability.`
+    countryId: "spain",
+    countryName: "Spain",
+    flag: "🇪🇸",
+    currencyCode: "EUR",
+    usdToLocalRate: 0.92,
+    legalShort: "Spain lane · EUR conversion · EU supplier network",
+    legalDropship: `${baseLegal} Spain lane: EU fulfilment partners.`
   },
   {
     countryId: "poland",

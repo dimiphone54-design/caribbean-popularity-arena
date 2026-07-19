@@ -5,9 +5,12 @@ export type FootballCompetitionId =
   | "champions-league"
   | "europa-league"
   | "fa-cup"
+  | "championship"
   | "international"
   | "world-cup"
-  | "euro";
+  | "euro"
+  | "liga-betplay"
+  | "copa-colombia";
 
 export type FootballMatchStatus = "scheduled" | "live" | "finished";
 
@@ -79,12 +82,22 @@ export const FOOTBALL_PREDICTION_POINTS = {
 
 export const FOOTBALL_COMPETITIONS: Array<{ id: FootballCompetitionId; label: string }> = [
   { id: "premier-league", label: "Premier League" },
+  { id: "fa-cup", label: "FA Cup" },
+  { id: "championship", label: "EFL Championship" },
   { id: "champions-league", label: "Champions League" },
   { id: "europa-league", label: "Europa League" },
-  { id: "fa-cup", label: "FA Cup" },
   { id: "international", label: "International" },
   { id: "world-cup", label: "World Cup" },
-  { id: "euro", label: "European Championships" }
+  { id: "euro", label: "European Championships" },
+  { id: "liga-betplay", label: "Liga BetPlay Dimayor" },
+  { id: "copa-colombia", label: "Copa Colombia" }
+];
+
+/** Colombia room · only Liga / Copa / Selección */
+export const COLOMBIA_FOOTBALL_COMPETITIONS: Array<{ id: FootballCompetitionId; label: string }> = [
+  { id: "liga-betplay", label: "Liga BetPlay Dimayor" },
+  { id: "copa-colombia", label: "Copa Colombia" },
+  { id: "international", label: "Selección Colombia" }
 ];
 
 export function isMatchLocked(match: FootballMatch, nowMs = Date.now()) {

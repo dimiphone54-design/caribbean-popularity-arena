@@ -58,11 +58,11 @@ export const arenaSlotTrendingTopicsByCode: Record<string, ArenaSlotTrendTopic[]
     { emoji: "💃", label: "Teach mi yuh dance moves · dancehall to yard", hint: "Let's exchange dance moves" },
     { emoji: "🎵", label: "Wi playlist swap · what's trending in your ends?", hint: "Music · vibes · sound clash" }
   ]),
-  VE: cultureExchangeTopics("VE", [
+  ES: cultureExchangeTopics("ES", [
     { emoji: "🌍", label: "Intercambiemos cultura y tradiciones", hint: "Let's exchange culture talk" },
     { emoji: "😂", label: "Los mejores chistes de tu país · compartamos", hint: "Swap your country's funniest jokes" },
-    { emoji: "💃", label: "Cambiemos pasos · merengue, salsa y tu ritmo", hint: "Let's exchange dance moves" },
-    { emoji: "🌆", label: "Caracas de noche · qué está de moda hoy", hint: "City nights · what's trending" }
+    { emoji: "💃", label: "Cambiemos pasos · flamenco, salsa y tu ritmo", hint: "Let's exchange dance moves" },
+    { emoji: "🌆", label: "Barcelona de noche · qué está de moda hoy", hint: "City nights · what's trending" }
   ]),
   PL: cultureExchangeTopics("PL", [
     { emoji: "🌍", label: "Wymieńmy się kulturą · opowiedz o swoim kraju", hint: "Let's exchange culture talk" },
@@ -117,10 +117,10 @@ export const arenaSlotViralGamesByCode: Record<string, ArenaSlotTrendTopic[]> = 
     { emoji: "🟣", label: "Among Us · vakarėlio kambarys", hint: "Viral online party game" }
   ]),
   EC: slotPrompts("EC", "game", [
-    { emoji: "🏐", label: "Ecuavoley · partido en la cancha", hint: "Ecuador's three-player volleyball classic" },
-    { emoji: "🍻", label: "Yo Nunca · talk-show de fiesta", hint: "Never have I ever · live party game" },
-    { emoji: "⚽", label: "LigaPro · FIFA · banter online", hint: "Barcelona SC · Liga de Quito · football nights" },
-    { emoji: "🃏", label: "Dominó · mesa en vivo", hint: "Caribbean table talk · online" }
+    { emoji: "🏐", label: "Ecuavoley · partido en la cancha", hint: "Clásico de vóley a tres de Ecuador" },
+    { emoji: "🍻", label: "Yo Nunca · talk-show de fiesta", hint: "Yo Nunca · juego de fiesta en vivo" },
+    { emoji: "⚽", label: "LigaPro · FIFA · banter online", hint: "Barcelona SC · Liga de Quito · noches de fútbol" },
+    { emoji: "🃏", label: "Dominó · mesa en vivo", hint: "Charla de mesa · en línea" }
   ]),
   TT: slotPrompts("TT", "game", [
     { emoji: "⚽", label: "FIFA · we playing tonight?", hint: "Caribbean football game nights online" },
@@ -134,11 +134,11 @@ export const arenaSlotViralGamesByCode: Record<string, ArenaSlotTrendTopic[]> = 
     { emoji: "🎲", label: "Ludo King · board game online", hint: "Viral Caribbean mobile classic" },
     { emoji: "🍺", label: "Never Have I Ever · talk-show yard game", hint: "Party talk-show game · live banter" }
   ]),
-  VE: slotPrompts("VE", "game", [
+  ES: slotPrompts("ES", "game", [
     { emoji: "🧱", label: "Roblox · mundos virales", hint: "Online viral worlds · TikTok trends" },
     { emoji: "🧠", label: "Preguntados · trivia talk-show", hint: "Trivia Crack · quiz showdown" },
     { emoji: "👽", label: "Among Us · sala en vivo", hint: "Online party deduction game" },
-    { emoji: "⚽", label: "Fútbol · banter en vivo", hint: "Match-night football talk" }
+    { emoji: "⚽", label: "La Liga · banter en vivo", hint: "Match-night football talk" }
   ]),
   PL: slotPrompts("PL", "game", [
     { emoji: "🎯", label: "Counter-Strike 2 · ranked online", hint: "Poland's favourite competitive shooter" },
@@ -159,7 +159,7 @@ export const arenaSlotViralGamesByCode: Record<string, ArenaSlotTrendTopic[]> = 
     { emoji: "🃏", label: "Dominoes · talk-show table lime", hint: "Caribbean domino classic · online tables" }
   ]),
   CN: slotPrompts("CN", "game", [
-    { emoji: "🥋", label: "武术对练 · 今晚舞台", hint: "Wushu Duilian · choreographed duo sparring on live stage" },
+    { emoji: "🥋", label: "武术对练 · 今晚舞台", hint: "武术对练 · 编排双人对练 · 直播舞台" },
     { emoji: "🌟", label: "原神 · 联机探索", hint: "Genshin Impact · viral online co-op" },
     { emoji: "🥚", label: "蛋仔派对 ·  viral 综艺游戏", hint: "Eggy Party · viral variety-style online game" },
     { emoji: "📺", label: "奔跑吧兄弟 · talk-show 游戏夜", hint: "Running Man style · viral talk-show games" }

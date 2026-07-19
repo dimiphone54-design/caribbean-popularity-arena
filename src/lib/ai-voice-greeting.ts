@@ -4,7 +4,7 @@ import {
 } from "@/lib/ai-voice-language";
 import { getArenaMasterCountryTitle, isArenaPrimaryMasterRecognized } from "@/lib/arena-master-identity";
 import { internationalSuiteCountries } from "@/lib/international-suite";
-import { localeToUtteranceLang, type RoomLocaleId } from "@/lib/room-locale";
+import { isSpanishContentLocale, localeToUtteranceLang, type RoomLocaleId } from "@/lib/room-locale";
 import { formatWelcomeVoiceGreeting, formatArenaSiteWelcomeVoice } from "@/lib/member-username-storage";
 
 function cleanName(username: string) {
@@ -140,13 +140,21 @@ const spanishMaleVoicePatterns = [
   /Google español Male/i
 ];
 
-/** Colombia Room — Bienvenido a Columbia · or El Maestro for owner. */
-export function buildColombiaRoomWelcomeSegments(): GreetingSegment[] {
-  if (isArenaPrimaryMasterRecognized()) {
+/**
+ * Colombia Room AI Voice — Welcome in the room language.
+ * Public Español (CO) → “Bienvenido a Colombia.”
+ * MASTER (English room) → “Welcome to Colombia. The Master.”
+ */
+export function buildColombiaRoomWelcomeSegments(locale: RoomLocaleId = "es-CO"): GreetingSegment[] {
+  const es = isSpanishContentLocale(locale);
+  const isMaster = isArenaPrimaryMasterRecognized();
+
+  if (isMaster) {
+    const masterTitle = getArenaMasterCountryTitle("colombia");
     return [
       {
-        text: getArenaMasterCountryTitle("colombia"),
-        rate: 0.9,
+        text: es ? `Bienvenido a Colombia. ${masterTitle}.` : "Welcome to Colombia. The Master.",
+        rate: 0.92,
         pitch: 1.06,
         volume: 1
       }
@@ -155,7 +163,7 @@ export function buildColombiaRoomWelcomeSegments(): GreetingSegment[] {
 
   return [
     {
-      text: "Bienvenido a Columbia.",
+      text: es ? "Bienvenido a Colombia." : "Welcome to Colombia.",
       rate: 0.88,
       pitch: 1.06
     }
@@ -218,26 +226,31 @@ function pickColombianFemaleVoice(voices: SpeechSynthesisVoice[]) {
   return null;
 }
 
-async function speakColombiaRoomSegments(segments: GreetingSegment[]) {
+async function speakColombiaRoomSegments(segments: GreetingSegment[], locale: RoomLocaleId = "es-CO") {
   if (segments.length === 0 || !isAiVoiceSupported()) return;
 
   const synth = window.speechSynthesis;
   synth.cancel();
+  synth.resume();
   synth.getVoices();
 
   const voices = await waitForVoices(4800);
-  const voice = pickColombianFemaleVoice(voices);
+  const es = isSpanishContentLocale(locale);
+  const utteranceLang = es ? COLOMBIA_ROOM_UTTERANCE_LANG : resolveRoomLocaleUtteranceLang(locale);
+  const voice = es
+    ? pickColombianFemaleVoice(voices) ?? pickLocalFemaleVoice(voices, locale)
+    : pickLocalFemaleVoice(voices, locale);
 
   for (const segment of segments) {
-    await speakSegmentWithLang(segment, voice, COLOMBIA_ROOM_UTTERANCE_LANG);
+    await speakSegmentWithLang(segment, voice, utteranceLang);
     if (segment.pauseAfterMs) {
       await delay(segment.pauseAfterMs);
     }
   }
 }
 
-export async function speakColombiaRoomWelcome() {
-  await speakColombiaRoomSegments(buildColombiaRoomWelcomeSegments());
+export async function speakColombiaRoomWelcome(locale: RoomLocaleId = "es-CO") {
+  await speakColombiaRoomSegments(buildColombiaRoomWelcomeSegments(locale), locale);
 }
 
 const ECUADOR_ROOM_UTTERANCE_LANG = "es-EC";
@@ -299,7 +312,7 @@ export async function speakEcuadorRoomWelcome() {
 const countryRoomUtteranceLang: Record<string, string> = {
   colombia: "es-CO",
   ecuador: "es-EC",
-  venezuela: "es-419",
+  spain: "es-ES",
   uk: "en-GB",
   japan: "ja-JP",
   china: "zh-CN",
@@ -315,12 +328,19 @@ function resolveCountryRoomName(countryId: string) {
   return internationalSuiteCountries.find((entry) => entry.id === countryId)?.name ?? countryId;
 }
 
-/** Any country room · master title or standard welcome. */
-export function buildCountryRoomVoiceSegments(countryId: string, locale: RoomLocaleId = "en"): GreetingSegment[] {
-  if (isArenaPrimaryMasterRecognized()) {
+/**
+ * Spain Room AI Voice — Welcome in the room language.
+ * Public Español → “Bienvenido a España.”
+ * MASTER (English room) → “Welcome to Spain. The Master.”
+ */
+export function buildSpainRoomWelcomeSegments(locale: RoomLocaleId = "es"): GreetingSegment[] {
+  const es = isSpanishContentLocale(locale);
+  const isMaster = isArenaPrimaryMasterRecognized();
+
+  if (isMaster) {
     return [
       {
-        text: getArenaMasterCountryTitle(countryId),
+        text: es ? "Bienvenido a España. El Maestro." : "Welcome to Spain. The Master.",
         rate: 0.92,
         pitch: 1.06,
         volume: 1
@@ -328,14 +348,58 @@ export function buildCountryRoomVoiceSegments(countryId: string, locale: RoomLoc
     ];
   }
 
-  if (countryId === "colombia") return buildColombiaRoomWelcomeSegments();
-  if (countryId === "ecuador") return buildEcuadorRoomWelcomeSegments();
-
-  return buildCountryRoomWelcomeSegments(resolveCountryRoomName(countryId), locale);
+  return [
+    {
+      text: es ? "Bienvenido a España." : "Welcome to Spain.",
+      rate: 0.9,
+      pitch: 1.06
+    }
+  ];
 }
 
-async function speakCountryRoomVoiceSegments(segments: GreetingSegment[], countryId: string) {
+/**
+ * Any country room · Welcome in the active room language.
+ * MASTER in Spanish rooms uses English room locale → Welcome English.
+ */
+export function buildCountryRoomVoiceSegments(countryId: string, locale: RoomLocaleId = "en"): GreetingSegment[] {
+  if (countryId === "colombia") return buildColombiaRoomWelcomeSegments(locale);
+  if (countryId === "spain") return buildSpainRoomWelcomeSegments(locale);
+  if (countryId === "ecuador") return buildEcuadorRoomWelcomeSegments();
+
+  const isMaster = isArenaPrimaryMasterRecognized();
+  const countryName = resolveCountryRoomName(countryId);
+  const welcome = buildCountryRoomWelcomeSegments(countryName, locale);
+
+  if (isMaster) {
+    const masterTitle = getArenaMasterCountryTitle(countryId);
+    const es = isSpanishContentLocale(locale);
+    return [
+      {
+        text: es
+          ? `${welcome[0]?.text ?? `Bienvenido a ${countryName}.`} ${masterTitle}.`
+          : `Welcome to ${countryName}. The Master.`,
+        rate: 0.92,
+        pitch: 1.06,
+        volume: 1
+      }
+    ];
+  }
+
+  return welcome;
+}
+
+async function speakCountryRoomVoiceSegments(
+  segments: GreetingSegment[],
+  countryId: string,
+  locale: RoomLocaleId
+) {
   if (segments.length === 0 || !isAiVoiceSupported()) return;
+
+  // Colombia has dedicated voice path (es-CO female / English for MASTER).
+  if (countryId === "colombia") {
+    await speakColombiaRoomSegments(segments, locale);
+    return;
+  }
 
   const synth = window.speechSynthesis;
   synth.cancel();
@@ -343,17 +407,28 @@ async function speakCountryRoomVoiceSegments(segments: GreetingSegment[], countr
   synth.getVoices();
 
   const voices = await waitForVoices(4800);
-  const utteranceLang = countryRoomUtteranceLang[countryId] ?? "en-US";
-  const spanishLane = countryId === "colombia" || countryId === "ecuador" || countryId === "venezuela";
+  const es = isSpanishContentLocale(locale);
+  const utteranceLang = es
+    ? countryRoomUtteranceLang[countryId] ?? resolveRoomLocaleUtteranceLang(locale)
+    : resolveRoomLocaleUtteranceLang(locale);
+  const spanishLane = es && (countryId === "ecuador" || countryId === "spain" || countryId === "colombia");
   const voice = spanishLane
-    ? pickColombianFemaleVoice(voices)
-    : voices.find((entry) => entry.lang.toLowerCase().startsWith(utteranceLang.split("-")[0] ?? "en")) ??
+    ? pickColombianFemaleVoice(voices) ?? pickLocalFemaleVoice(voices, locale)
+    : pickLocalFemaleVoice(voices, locale) ??
+      voices.find((entry) => entry.lang.toLowerCase().startsWith(utteranceLang.split("-")[0] ?? "en")) ??
       voices[0] ??
       null;
 
+  // Always have a voice — some browsers mute if voice is null after cancel.
+  const resolvedVoice =
+    voice ??
+    voices.find((entry) => entry.lang.toLowerCase().startsWith(utteranceLang.split("-")[0] ?? "en")) ??
+    voices[0] ??
+    null;
+
   for (const segment of segments) {
     synth.resume();
-    await speakSegmentWithLang(segment, voice, utteranceLang);
+    await speakSegmentWithLang(segment, resolvedVoice, utteranceLang);
     synth.resume();
     if (segment.pauseAfterMs) {
       await delay(segment.pauseAfterMs);
@@ -362,7 +437,8 @@ async function speakCountryRoomVoiceSegments(segments: GreetingSegment[], countr
 }
 
 export async function speakCountryRoomVoice(countryId: string, locale: RoomLocaleId = "en") {
-  await speakCountryRoomVoiceSegments(buildCountryRoomVoiceSegments(countryId, locale), countryId);
+  primeAiVoice();
+  await speakCountryRoomVoiceSegments(buildCountryRoomVoiceSegments(countryId, locale), countryId, locale);
 }
 
 /** Silently prime the speech engine on a user gesture so auto-greetings are allowed. */

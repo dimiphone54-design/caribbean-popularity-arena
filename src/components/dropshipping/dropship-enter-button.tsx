@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { getDropshipMarketHref } from "@/lib/dropshipping";
 import { getDropshipCountryDisplayName, getDropshipMarketCopy } from "@/lib/dropship-market-copy";
 import { navigateIntlSuiteLink } from "@/lib/intl-suite-navigate";
+import { isPublicDropshipVisible } from "@/lib/real-money";
 
 type DropshipEnterButtonProps = {
   countryId?: string;
@@ -33,6 +34,8 @@ export function DropshipEnterButton({
     : undefined;
   const label =
     displayName && flag ? copy.enterMarketWithCountry(flag, displayName) : copy.enterMarketFull;
+
+  if (!isPublicDropshipVisible()) return null;
 
   return (
     <Link

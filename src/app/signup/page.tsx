@@ -9,12 +9,14 @@ export default function SignupPage() {
         Caribbean Freedom Arena
       </p>
       <h1 className="mt-3 text-center font-['Bebas_Neue',sans-serif] text-4xl tracking-wider text-[#eef6ff]">
-        Creator sign-up
+        Member Sign In
       </h1>
-      <p className="mt-3 text-center text-sm leading-6 text-[#9aa8c6]">
-        Terms, creator info, and form panels in the same style · no credit information
+
+      <p className="mt-5 text-center text-xs font-black uppercase tracking-[0.2em] text-[#00c9a7]">
+        Free · No credit information
       </p>
-      <MemberRegistrationWizard title="Creator" onSubmitted={() => undefined} />
+
+      <MemberRegistrationWizard title="Member" onSubmitted={() => undefined} />
     </main>
   );
 }

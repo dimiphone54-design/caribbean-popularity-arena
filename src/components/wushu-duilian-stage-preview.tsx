@@ -5,12 +5,12 @@ import {
   wushuDuilianStagePreview
 } from "@/lib/china-wushu-duilian-preview";
 
-/** Center-stage clip · real championship Wushu Duilian (对练) */
+/** Center-stage clip · real championship Wushu Duilian (对练) · Chinese captions */
 export function WushuDuilianStagePreview() {
-  const { youtubeId, titleZh, titleEn, detailZh, detailEn, durationLabel } = wushuDuilianStagePreview;
+  const { youtubeId, titleZh, detailZh, durationLabel } = wushuDuilianStagePreview;
 
   return (
-    <div className="arena-agora-duilian-preview">
+    <div className="arena-agora-duilian-preview" lang="zh-CN">
       <div className="arena-agora-duilian-preview-badge">
         <span className="arena-agora-duilian-preview-badge-dot" aria-hidden="true" />
         对练预览 · {durationLabel}
@@ -19,7 +19,7 @@ export function WushuDuilianStagePreview() {
       <div className="arena-agora-duilian-preview-frame">
         <iframe
           src={getWushuDuilianPreviewEmbedSrc(youtubeId)}
-          title={titleEn}
+          title={titleZh}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
@@ -28,10 +28,7 @@ export function WushuDuilianStagePreview() {
 
       <div className="arena-agora-duilian-preview-caption">
         <p className="arena-agora-duilian-preview-caption-zh">{titleZh}</p>
-        <p className="arena-agora-duilian-preview-caption-en">{titleEn}</p>
-        <p className="arena-agora-duilian-preview-caption-detail">
-          {detailZh} · {detailEn}
-        </p>
+        <p className="arena-agora-duilian-preview-caption-detail">{detailZh}</p>
       </div>
     </div>
   );

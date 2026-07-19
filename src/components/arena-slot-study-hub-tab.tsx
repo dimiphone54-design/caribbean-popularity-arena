@@ -8,13 +8,15 @@ export const CHINA_STUDY_HUB_TAB_HASH = "china-study-hub";
 export const JAPAN_STUDY_HUB_TAB_HASH = "japan-study-hub";
 export const COLOMBIA_STUDY_HUB_TAB_HASH = "colombia-study-hub";
 export const ECUADOR_STUDY_HUB_TAB_HASH = "ecuador-study-hub";
+export const TRINIDAD_STUDY_HUB_TAB_HASH = "trinidad-study-hub";
 
 export const STUDY_HUB_TAB_HASH_BY_ISLAND_CODE: Record<string, string> = {
   UK: UK_STUDY_HUB_TAB_HASH,
   CN: CHINA_STUDY_HUB_TAB_HASH,
   JP: JAPAN_STUDY_HUB_TAB_HASH,
   CO: COLOMBIA_STUDY_HUB_TAB_HASH,
-  EC: ECUADOR_STUDY_HUB_TAB_HASH
+  EC: ECUADOR_STUDY_HUB_TAB_HASH,
+  TT: TRINIDAD_STUDY_HUB_TAB_HASH
 };
 
 export const STUDY_HUB_ROOM_FALLBACK_BY_ISLAND_CODE: Record<string, string> = {
@@ -49,23 +51,31 @@ export function ArenaSlotStudyHubTab(props: ArenaSlotStudyHubTabProps | ArenaSlo
   const sectionId =
     props.mode === "room" ? (props.sectionId ?? DEFAULT_STUDY_HUB_TAB_HASH) : DEFAULT_STUDY_HUB_TAB_HASH;
   const countryName = props.mode === "room" ? (props.countryName ?? "room") : "room";
-  const [open, setOpen] = useState(props.mode === "room" ? (props.defaultOpen ?? false) : false);
+  const defaultOpen = props.mode === "room" ? (props.defaultOpen ?? false) : false;
+  const [open, setOpen] = useState(defaultOpen);
 
   useEffect(() => {
     if (isLinkMode || typeof window === "undefined") return;
     const syncFromHash = () => {
-      const matches = window.location.hash.replace("#", "") === sectionId;
-      setOpen(matches);
+      const hash = window.location.hash.replace("#", "");
+      const matches = hash === sectionId;
       if (matches) {
+        setOpen(true);
         requestAnimationFrame(() => {
           document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
         });
+        return;
       }
+      if (!hash && defaultOpen) {
+        setOpen(true);
+        return;
+      }
+      if (hash) setOpen(false);
     };
     syncFromHash();
     window.addEventListener("hashchange", syncFromHash);
     return () => window.removeEventListener("hashchange", syncFromHash);
-  }, [sectionId, isLinkMode]);
+  }, [sectionId, isLinkMode, defaultOpen]);
 
   if (isLinkMode) {
     return (

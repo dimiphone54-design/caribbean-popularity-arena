@@ -18,35 +18,35 @@ export type GachaRarityConfig = {
 
 export const GACHA_RARITIES: Record<GachaRarity, GachaRarityConfig> = {
   common: {
-    label: "Common",
+    label: "コモン",
     color: "#94a3b8",
     glow: "rgba(148, 163, 184, 0.3)",
     dropRate: 0.50,
     pullCost: 100,
   },
   uncommon: {
-    label: "Uncommon",
+    label: "アンコモン",
     color: "#34d399",
     glow: "rgba(52, 211, 153, 0.3)",
     dropRate: 0.25,
     pullCost: 100,
   },
   rare: {
-    label: "Rare",
+    label: "レア",
     color: "#60a5fa",
     glow: "rgba(96, 165, 250, 0.3)",
     dropRate: 0.15,
     pullCost: 100,
   },
   "super-rare": {
-    label: "Super Rare",
+    label: "スーパーレア",
     color: "#c084fc",
     glow: "rgba(192, 132, 252, 0.4)",
     dropRate: 0.08,
     pullCost: 100,
   },
   legendary: {
-    label: "Legendary",
+    label: "レジェンド",
     color: "#fbbf24",
     glow: "rgba(251, 191, 36, 0.5)",
     dropRate: 0.02,
@@ -56,34 +56,34 @@ export const GACHA_RARITIES: Record<GachaRarity, GachaRarityConfig> = {
 
 export const GACHA_ITEMS: GachaItem[] = [
   // Common (8 items) — 50%
-  { id: "g-sakura-eraser", name: "Sakura Eraser Set", emoji: "🌸", rarity: "common", description: "Cherry blossom scented erasers · 3-pack" },
-  { id: "g-maneki-neko-mini", name: "Maneki-neko Mini", emoji: "🐱", rarity: "common", description: "Lucky招き猫 desk figurine · 5cm" },
-  { id: "g-matcha-sticker", name: "Matcha Sticker Sheet", emoji: "🍵", rarity: "common", description: "Green tea themed stickers · 12pcs" },
-  { id: "g-tape-roll", name: "Washi Tape Roll", emoji: "🎀", rarity: "common", description: "Patterned masking tape · 15mm" },
-  { id: "g-pencil-topper", name: "Kawaii Pencil Topper", emoji: "✏️", rarity: "common", description: "Animal character pencil cap · random" },
-  { id: "g-origami-paper", name: "Origami Paper Pack", emoji: "🦢", rarity: "common", description: "Traditional patterns · 20 sheets" },
-  { id: "g-magnet-cat", name: "Neko Fridge Magnet", emoji: "🧲", rarity: "common", description: "Cat pose magnet · resin" },
-  { id: "g-bookmark-sakura", name: "Sakura Bookmark", emoji: "📖", rarity: "common", description: "Metal cherry blossom bookmark" },
+  { id: "g-sakura-eraser", name: "さくら消しゴムセット", emoji: "🌸", rarity: "common", description: "桜の香り消しゴム · 3個入り" },
+  { id: "g-maneki-neko-mini", name: "招き猫ミニ", emoji: "🐱", rarity: "common", description: "開運デスクフィギュア · 5cm" },
+  { id: "g-matcha-sticker", name: "抹茶ステッカーシート", emoji: "🍵", rarity: "common", description: "緑茶モチーフシール · 12枚" },
+  { id: "g-tape-roll", name: "マスキングテープ", emoji: "🎀", rarity: "common", description: "和柄マスキングテープ · 15mm" },
+  { id: "g-pencil-topper", name: "かわいい鉛筆キャップ", emoji: "✏️", rarity: "common", description: "動物キャラ鉛筆キャップ · ランダム" },
+  { id: "g-origami-paper", name: "折り紙パック", emoji: "🦢", rarity: "common", description: "伝統模様 · 20枚" },
+  { id: "g-magnet-cat", name: "ねこマグネット", emoji: "🧲", rarity: "common", description: "猫ポーズマグネット · 樹脂" },
+  { id: "g-bookmark-sakura", name: "さくらブックマーク", emoji: "📖", rarity: "common", description: "メタル桜しおり" },
 
   // Uncommon (6 items) — 25%
-  { id: "g-ramen-pin", name: "Ramen Pin Badge", emoji: "🍜", rarity: "uncommon", description: " enamel ramen bowl pin · Japan exclusive" },
-  { id: "g-washi-set", name: "Kawaii Washi Tape Set", emoji: "🎨", rarity: "uncommon", description: "5-roll decorative tape set" },
-  { id: "g-keychain-totoro", name: "Forest Spirit Keychain", emoji: "🌿", rarity: "uncommon", description: "Glow-in-the-dark keychain" },
-  { id: "g-tenugui-cloth", name: "Tenugui Hand Towel", emoji: "🧣", rarity: "uncommon", description: "Traditional printed cotton cloth" },
-  { id: "g-chopstick-set", name: "Bamboo Chopstick Set", emoji: "🥢", rarity: "uncommon", description: " Lacquered pair · travel pouch" },
-  { id: "g-sake-cup", name: "Mini Sake Cup", emoji: "🍶", rarity: "uncommon", description: "Ceramic ochoko · hand-glazed" },
+  { id: "g-ramen-pin", name: "ラーメンピンバッジ", emoji: "🍜", rarity: "uncommon", description: "ラーメン丼ピン · 日本限定" },
+  { id: "g-washi-set", name: "かわいい和紙テープセット", emoji: "🎨", rarity: "uncommon", description: "デコテープ5本セット" },
+  { id: "g-keychain-totoro", name: "森の精霊キーホルダー", emoji: "🌿", rarity: "uncommon", description: "蓄光キーホルダー" },
+  { id: "g-tenugui-cloth", name: "手ぬぐい", emoji: "🧣", rarity: "uncommon", description: "伝統プリント綿手ぬぐい" },
+  { id: "g-chopstick-set", name: "竹箸セット", emoji: "🥢", rarity: "uncommon", description: "漆塗りペア · 携帯ポーチ付" },
+  { id: "g-sake-cup", name: "ミニお猪口", emoji: "🍶", rarity: "uncommon", description: "陶器お猪口 · 手塗り釉薬" },
 
   // Rare (3 items) — 15%
-  { id: "g-torii-pin", name: "Enamel Torii Pin", emoji: "⛩️", rarity: "rare", description: "Gold-plated torii gate pin · limited" },
-  { id: "g-furoshiki", name: "Furoshiki Wrap Cloth", emoji: "🎁", rarity: "rare", description: "Silk blend wrapping cloth · 70cm" },
-  { id: "g-ceramic-cup", name: "Handmade Tea Cup", emoji: "🏺", rarity: "rare", description: "Wabi-sabi ceramic · each unique" },
+  { id: "g-torii-pin", name: "鳥居ピン", emoji: "⛩️", rarity: "rare", description: "金メッキ鳥居ピン · 限定" },
+  { id: "g-furoshiki", name: "風呂敷", emoji: "🎁", rarity: "rare", description: "シルク混ラッピングクロス · 70cm" },
+  { id: "g-ceramic-cup", name: "手づくり湯のみ", emoji: "🏺", rarity: "rare", description: "わびさび陶器 · 一点もの" },
 
   // Super Rare (2 items) — 8%
-  { id: "g-daruma", name: "Hand-painted Daruma", emoji: "🎯", rarity: "super-rare", description: "Fukusuke daruma · hand-painted gold" },
-  { id: "g-ukiyoe-print", name: "Ukiyo-e Mini Print", emoji: "🖼️", rarity: "super-rare", description: "Woodblock-style art print · A6" },
+  { id: "g-daruma", name: "手描きだるま", emoji: "🎯", rarity: "super-rare", description: "福助だるま · 金彩手描き" },
+  { id: "g-ukiyoe-print", name: "浮世絵ミニプリント", emoji: "🖼️", rarity: "super-rare", description: "木版風アート · A6" },
 
   // Legendary (1 item) — 2%
-  { id: "g-shikishi", name: "Signed Shikishi Board", emoji: "✨", rarity: "legendary", description: "Gold-foil art board · hand-signed · 1 of 100" },
+  { id: "g-shikishi", name: "サイン入り色紙", emoji: "✨", rarity: "legendary", description: "金箔アートボード · 直筆サイン · 100枚限定" },
 ];
 
 export const GACHA_COIN_CONFIG = {

@@ -10,20 +10,23 @@ export function ChinaRoomGamesTabPanel() {
   const lane = chinaRoomGameLane;
 
   return (
-    <div className="china-room-games-tab-panel space-y-5">
+    <div className="china-room-games-tab-panel">
       <CountryRoomLiveAccessGate
         roomSlug={lane.roomSlug}
         countryId={lane.countryId}
         countryName={lane.countryName}
         flag={lane.flag}
         gateLayout="underneath"
+        hideUnlockedStatus
       >
-        <ChinaWushuWarfarePanel />
-        <RoomSportsStack
-          roomSlug={lane.roomSlug}
-          showStagePreview
-          stageCaption={`${lane.hostLabel} · 剑棍 · 对练`}
-        />
+        <div className="china-room-games-inner">
+          <ChinaWushuWarfarePanel />
+          <RoomSportsStack
+            roomSlug={lane.roomSlug}
+            showStagePreview
+            stageCaption={`${lane.hostLabel} · 剑 · 棍 · 对练`}
+          />
+        </div>
       </CountryRoomLiveAccessGate>
     </div>
   );

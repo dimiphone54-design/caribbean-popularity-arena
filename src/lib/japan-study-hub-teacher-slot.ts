@@ -1,9 +1,10 @@
 /**
  * Japan Study Hub · Teacher Live Slot config
- * First month: platform takes 0% — teacher keeps 100% of all gifts.
+ * Public = free campus (apply · teach · join). Gift ¥ catalog → Command Center FREEZE COMING SOON.
  */
 
-export const PLATFORM_GIFT_CUT_PERCENT = 50;
+/** Command Center freeze catalog only — not public UI */
+export const PLATFORM_GIFT_CUT_PERCENT = 0;
 export const TEACHER_GIFT_PAYOUT_PERCENT = 100;
 
 export type JapanTeacherSubject = {
@@ -14,16 +15,16 @@ export type JapanTeacherSubject = {
 };
 
 export const JAPAN_TEACHER_SUBJECTS: JapanTeacherSubject[] = [
-  { id: "jlpt-n5",     emoji: "🟢", label: "JLPT N5",        tag: "Hiragana · katakana · basic kanji" },
-  { id: "jlpt-n4",     emoji: "🔵", label: "JLPT N4",        tag: "Basic grammar · kanji · reading" },
-  { id: "jlpt-n3",     emoji: "🟡", label: "JLPT N3",        tag: "Intermediate grammar · kanji · listening" },
-  { id: "jlpt-n2",     emoji: "🟠", label: "JLPT N2",        tag: "Advanced grammar · newspaper reading" },
-  { id: "jlpt-n1",     emoji: "🔴", label: "JLPT N1",        tag: "Business Japanese · academic writing" },
-  { id: "hiragana",    emoji: "あ", label: "Hiragana",        tag: "Reading · writing · stroke order" },
-  { id: "katakana",    emoji: "ア", label: "Katakana",        tag: "Reading · writing · loanwords" },
-  { id: "kanji",       emoji: "漢", label: "Kanji",           tag: "Stroke order · readings · radicals" },
-  { id: "conversation", emoji: "💬", label: "Conversation",    tag: "Speaking practice · daily dialogue" },
-  { id: "anime-jp",    emoji: "🎌", label: "Anime Japanese",  tag: "Pop culture vocab · slang · anime lines" },
+  { id: "jlpt-n5",     emoji: "🟢", label: "JLPT N5",     tag: "ひらがな · カタカナ · 基本漢字" },
+  { id: "jlpt-n4",     emoji: "🔵", label: "JLPT N4",     tag: "基礎文法 · 漢字 · 読解" },
+  { id: "jlpt-n3",     emoji: "🟡", label: "JLPT N3",     tag: "中級文法 · 漢字 · 聴解" },
+  { id: "jlpt-n2",     emoji: "🟠", label: "JLPT N2",     tag: "上級文法 · 新聞読解" },
+  { id: "jlpt-n1",     emoji: "🔴", label: "JLPT N1",     tag: "ビジネス日本語 · 学術文章" },
+  { id: "hiragana",    emoji: "あ", label: "ひらがな",     tag: "読み · 書き · 筆順" },
+  { id: "katakana",    emoji: "ア", label: "カタカナ",     tag: "読み · 書き · 外来語" },
+  { id: "kanji",       emoji: "漢", label: "漢字",         tag: "筆順 · 読み · 部首" },
+  { id: "conversation", emoji: "💬", label: "会話",         tag: "スピーキング · 日常対話" },
+  { id: "anime-jp",    emoji: "🎌", label: "アニメ日本語", tag: "ポップカルチャー語彙 · スラング · 名台詞" },
 ];
 
 export const JAPAN_TEACHER_LEVELS = [
@@ -32,9 +33,9 @@ export const JAPAN_TEACHER_LEVELS = [
   "JLPT N3",
   "JLPT N2",
   "JLPT N1",
-  "Native Speaker",
-  "Certified Instructor",
-  "University Lecturer",
+  "ネイティブスピーカー",
+  "認定講師",
+  "大学講師",
 ] as const;
 
 export type JapanTeacherLevel = typeof JAPAN_TEACHER_LEVELS[number];
@@ -51,11 +52,6 @@ export type JapanTeacherApplicationForm = {
   yearsTeaching: string;
   availability: string;
   shortBio: string;
-  cardholderName: string;
-  cardNumber: string;
-  cardExpiry: string;
-  cardCvc: string;
-  payoutEmail: string;
 };
 
 export const EMPTY_JAPAN_TEACHER_APPLICATION: JapanTeacherApplicationForm = {
@@ -70,11 +66,6 @@ export const EMPTY_JAPAN_TEACHER_APPLICATION: JapanTeacherApplicationForm = {
   yearsTeaching:        "",
   availability:         "",
   shortBio:             "",
-  cardholderName:       "",
-  cardNumber:           "",
-  cardExpiry:           "",
-  cardCvc:              "",
-  payoutEmail:          "",
 };
 
 export type JapanTeacherGiftTier = {
@@ -125,52 +116,52 @@ export type JapanTeacherProfile = {
 export const JAPAN_TEACHER_SLOTS: JapanTeacherProfile[] = [
   {
     id:               "japan-slot-1",
-    name:             "Apply to teach",
-    title:            "Your subject here",
-    subject:          "Open slot",
+    name:             "講師応募",
+    title:            "担当科目をここに",
+    subject:          "オープンスロット",
     subjectId:        "",
     flag:             "🇯🇵",
     avatarInitials:   "+",
-    bio:              "This slot is open. Japanese teachers apply to go live free in the Study Hub.",
+    bio:              "この枠は空いています。日本人の先生は学習ハブで無料でライブ配信に応募できます。",
     isLive:           false,
     viewers:          0,
     totalGiftsYen:    0,
   },
   {
     id:               "japan-slot-2",
-    name:             "Apply to teach",
-    title:            "Your subject here",
-    subject:          "Open slot",
+    name:             "講師応募",
+    title:            "担当科目をここに",
+    subject:          "オープンスロット",
     subjectId:        "",
     flag:             "🇯🇵",
     avatarInitials:   "+",
-    bio:              "This slot is open. Japanese teachers apply to go live free in the Study Hub.",
+    bio:              "この枠は空いています。日本人の先生は学習ハブで無料でライブ配信に応募できます。",
     isLive:           false,
     viewers:          0,
     totalGiftsYen:    0,
   },
   {
     id:               "japan-slot-3",
-    name:             "Apply to teach",
-    title:            "Your subject here",
-    subject:          "Open slot",
+    name:             "講師応募",
+    title:            "担当科目をここに",
+    subject:          "オープンスロット",
     subjectId:        "",
     flag:             "🇯🇵",
     avatarInitials:   "+",
-    bio:              "This slot is open. Japanese teachers apply to go live free in the Study Hub.",
+    bio:              "この枠は空いています。日本人の先生は学習ハブで無料でライブ配信に応募できます。",
     isLive:           false,
     viewers:          0,
     totalGiftsYen:    0,
   },
   {
     id:               "japan-slot-4",
-    name:             "Apply to teach",
-    title:            "Your subject here",
-    subject:          "Open slot",
+    name:             "講師応募",
+    title:            "担当科目をここに",
+    subject:          "オープンスロット",
     subjectId:        "",
     flag:             "🇯🇵",
     avatarInitials:   "+",
-    bio:              "This slot is open. Japanese teachers apply to go live free in the Study Hub.",
+    bio:              "この枠は空いています。日本人の先生は学習ハブで無料でライブ配信に応募できます。",
     isLive:           false,
     viewers:          0,
     totalGiftsYen:    0,
@@ -178,13 +169,31 @@ export const JAPAN_TEACHER_SLOTS: JapanTeacherProfile[] = [
 ];
 
 export const japanTeacherSlotMeta = {
-  kicker:       "Japan Study Hub · Teacher Live Slots",
-  title:        "Teach Live · Free to Go Live",
+  kicker:       "日本学習ハブ · 講師ライブ枠 · 東京",
+  title:        "ライブ授業 · 無料で配信開始",
   description:
-    "Caribbean Freedom Arena partners with qualified Japanese educators to deliver live study sessions " +
-    "directly to students. Teachers broadcast at no cost. Student gifts are processed through platform checkout and teacher payouts are handled by the platform.",
-  hostFreeNote: "✅ Free to go live — no cost to teachers",
-  giftNote:     "🎁 Student gifts use platform checkout and approved teacher payouts are handled by the platform",
-  applyLabel:   "Apply to teach here →",
-  applyHint:    "Fill in your profile and payout details. We review and add you to the hub.",
+    "Caribbean Freedom Arena は日本人教育者とライブ学習セッションで提携しています。" +
+    "講師は無料応募 · 無料配信 · 生徒も無料参加。この公開キャンパスレーンではお支払いはありません。",
+  hostFreeNote: "✅ 無料で配信開始 — 講師費用なし",
+  giftNote:     "",
+  applyLabel:   "ここで講師応募 →",
+  applyHint:    "無料 · カード不要 · 公開学習ハブに振込フォームなし",
+} as const;
+
+/** Owner freeze detail · FREEZE COMING SOON */
+export const JAPAN_STUDY_HUB_FREEZE_CATALOG = {
+  panelTitle: "🇯🇵 Japan Study Hub · teacher live · gifts",
+  publicStatus: "LIVE free campus · money removed",
+  room: "/rooms/japan-room · Study Hub",
+  freePublic: [
+    "JLPT / conversation teacher slots · free apply",
+    "Personal · Academic · Teaching form only",
+    "Free go-live · free join session UI"
+  ],
+  frozenMoney: [
+    "Student gifts Fude-pen ¥100 → Dragon ¥10,000",
+    "Platform gift checkout / payout forms",
+    "Gift session totals on teacher cards"
+  ],
+  reopenNote: "Restore gift UI + payout step when NEXT_PUBLIC_REAL_MONEY_ENABLED=true."
 } as const;

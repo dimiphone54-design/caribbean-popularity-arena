@@ -2,7 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { useRoomLocale } from "@/components/room-locale-provider";
-import { isAiVoiceSupported, speakCountryRoomVoice, stopAiVoice } from "@/lib/ai-voice-greeting";
+import {
+  isAiVoiceSupported,
+  primeAiVoice,
+  speakCountryRoomVoice,
+  stopAiVoice
+} from "@/lib/ai-voice-greeting";
 import { resolveContentLocale } from "@/lib/room-locale";
 import {
   hasCountryRoomVoiceWelcomed,
@@ -10,33 +15,57 @@ import {
   readVoiceGreetingEnabled
 } from "@/lib/member-username-storage";
 
-/** Auto country-room AI voice · once per session · master = localized “The Master”. */
+/**
+ * Auto country-room AI voice when AI Voice is ON.
+ * Waits for room language + MASTER detect to settle, then says Welcome
+ * in the room language (public local · MASTER English).
+ */
 export function CountryRoomVoiceWelcome({ countryId }: { countryId: string }) {
   const { locale } = useRoomLocale();
-  const spokenRef = useRef(false);
+  const spokenForCountryRef = useRef<string | null>(null);
+  const latestLocaleRef = useRef(locale);
 
   useEffect(() => {
-    spokenRef.current = false;
+    latestLocaleRef.current = locale;
+  }, [locale]);
+
+  useEffect(() => {
+    spokenForCountryRef.current = null;
   }, [countryId]);
 
   useEffect(() => {
-    if (spokenRef.current) return;
+    if (!countryId) return;
     if (!readVoiceGreetingEnabled()) return;
     if (!isAiVoiceSupported()) return;
+    if (spokenForCountryRef.current === countryId) return;
     if (hasCountryRoomVoiceWelcomed(countryId)) return;
 
+    // User-gesture warm-up when possible · helps Chrome autoplay policy.
+    primeAiVoice();
+
+    // Delay so room-locale-provider can apply local language / MASTER English.
     const timer = window.setTimeout(() => {
-      if (spokenRef.current) return;
-      spokenRef.current = true;
+      if (spokenForCountryRef.current === countryId) return;
+      if (hasCountryRoomVoiceWelcomed(countryId)) return;
+      if (!readVoiceGreetingEnabled()) return;
+
+      spokenForCountryRef.current = countryId;
       markCountryRoomVoiceWelcomed(countryId);
-      void speakCountryRoomVoice(countryId, resolveContentLocale(locale));
-    }, 900);
+
+      const roomLocale = resolveContentLocale(latestLocaleRef.current);
+      void speakCountryRoomVoice(countryId, roomLocale);
+    }, 1400);
 
     return () => {
       window.clearTimeout(timer);
-      stopAiVoice();
     };
   }, [countryId, locale]);
+
+  useEffect(() => {
+    return () => {
+      stopAiVoice();
+    };
+  }, [countryId]);
 
   return null;
 }

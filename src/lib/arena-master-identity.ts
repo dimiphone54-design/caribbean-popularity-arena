@@ -14,7 +14,7 @@ export const ARENA_PRIMARY_MASTER = {
 const masterTitleByCountryId: Record<string, string> = {
   colombia: "El Maestro",
   ecuador: "El Maestro",
-  venezuela: "El Maestro",
+  spain: "El Maestro",
   uk: "The Master",
   lithuania: "Meistras",
   trinidad: "The Master",

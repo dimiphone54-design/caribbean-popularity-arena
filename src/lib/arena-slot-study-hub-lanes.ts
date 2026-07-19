@@ -24,9 +24,9 @@ const studyHubByCountryId: Record<string, ArenaSlotStudyHubPanel> = {
     ]
   },
   china: {
-    kicker: "中国研学 · 上海 · 直播课堂",
-    title: "中国 · 学习中心",
-    description: "直播课堂、普通话练习与上海研学路线，为中国房间而生。",
+    kicker: "🇨🇳 中国研学 · 上海校园",
+    title: "中国研学 · 上海 · 未来课堂",
+    description: "面向学生、旅行者、语言学习者、教师与中国文化探索者的数字校园。",
     lanes: [
       { emoji: "📖", label: "普通话 · 直播课堂", hint: "上海舞台 · 口语练习" },
       { emoji: "🖌️", label: "书法 · 文化研学", hint: "传统文脉 · 现代舞台" },
@@ -35,39 +35,75 @@ const studyHubByCountryId: Record<string, ArenaSlotStudyHubPanel> = {
     ]
   },
   japan: {
-    kicker: "日本研学 · 東京 · ライブキャンパス",
+    kicker: "日本学習ハブ · 東京 · ライブキャンパス",
     title: "日本 · 学習ハブ",
-    description: "Matcha focus lanes, language drills, and arena study nights for the JAPAN room.",
+    description: "抹茶フォーカス · 語学ドリル · アリーナ学習ナイト。",
     lanes: [
-      { emoji: "📘", label: "日本語 · live drill", hint: "Kanji · conversation lane" },
-      { emoji: "🎋", label: "Matcha focus · quiet desk", hint: "Minimal study · stage calm" },
-      { emoji: "⚔️", label: "Kendo discipline · study ethic", hint: "Focus · routine lane" },
-      { emoji: "💡", label: "Tech · culture notes", hint: "JAPAN wired · live recap" }
+      { emoji: "📘", label: "日本語 · ライブドリル", hint: "漢字 · 会話レーン" },
+      { emoji: "🎋", label: "抹茶フォーカス · 静かなデスク", hint: "ミニマル自習 · ステージの静けさ" },
+      { emoji: "⚔️", label: "剣道の規律 · 学習の心得", hint: "集中 · ルーティンレーン" },
+      { emoji: "💡", label: "テック · カルチャーノート", hint: "日本発 · ライブまとめ" }
     ]
   },
   colombia: {
-    kicker: "Estudio Colombia · campus · Bogotá",
+    kicker: "Estudio Colombia · campus gratis · Bogotá",
     title: "Colombia · Centro de estudio",
-    description: "Clases, amigos, campus life y tips de estudio para la sala Colombia.",
+    description:
+      "Campus gratis: clases, amigos, vida universitaria y tips de estudio para la sala Colombia — sin asientos de pago en público.",
     lanes: [
-      { emoji: "🎓", label: "Campus life · clases en vivo", hint: "Bogotá · Medellín wired" },
-      { emoji: "📱", label: "Study tips · creator lane", hint: "Assistant topics · live Q&A" },
-      { emoji: "🎵", label: "Salsa break · focus reset", hint: "Rhythm · return to books" },
-      { emoji: "☕", label: "Café estudio · arepa fuel", hint: "Late-night revision" }
+      { emoji: "🎓", label: "Vida en campus · clases en vivo", hint: "Bogotá · Medellín · únete gratis" },
+      { emoji: "📱", label: "Tips de estudio · pista creator", hint: "Temas del asistente · Q&A en vivo gratis" },
+      { emoji: "🎵", label: "Pausa de salsa · reset de foco", hint: "Ritmo · de vuelta a los libros" },
+      { emoji: "☕", label: "Café estudio · arepa fuel", hint: "Repaso de madrugada · círculo gratis" }
     ]
   },
+
   ecuador: {
-    kicker: "Estudio Ecuador · Quito · campus",
-    title: "Ecuador · Centro de estudio",
-    description: "Energía de campus en los Andes, círculos de estudio en español y repaso en vivo para la sala Ecuador.",
+    kicker: "🇪🇨 Centro de estudio · Quito · Guayaquil",
+    title: "Centro de estudio Ecuador",
+    description:
+      "Aprendizaje en vivo con profes reales — enfoque andino, escritorios nocturnos de la costa, círculos de ensayo y tutorías.",
     lanes: [
-      { emoji: "🏔️", label: "Quito campus · Andes study", hint: "Altitude focus · library lane" },
-      { emoji: "📚", label: "Español · essay circle", hint: "Live prompts · peer review" },
-      { emoji: "🌊", label: "Guayaquil coast · night desk", hint: "Coastal calm · revision" },
-      { emoji: "⚽", label: "Ecuavóley break · team study", hint: "Court energy · group prep" }
+      { emoji: "🏔️", label: "Campus Andes · Quito", hint: "Estilo universitario · concentración profunda" },
+      { emoji: "📚", label: "Ensayo y conversación en español", hint: "Feedback en vivo · escritura · oralidad" },
+      { emoji: "🌊", label: "Escritorio nocturno · Guayaquil", hint: "Clases de noche · productividad costera" },
+      { emoji: "⚽", label: "Pausas de Ecuavóley", hint: "Estudio + cancha · profes de la comunidad" },
+      { emoji: "👩‍🏫", label: "Profes y tutores", hint: "Profes certificados EC · sesiones 1:1" },
+      { emoji: "🔐", label: "Acceso premium", hint: "Salas cerradas · grabaciones · tickets de clase" }
     ]
   }
 };
+
+/** Colombia Study Hub money · Command Center FREEZE COMING SOON only */
+export const COLOMBIA_STUDY_HUB_FREEZE_CATALOG = {
+  panelTitle: "🇨🇴 Colombia Study Hub · paid model",
+  publicStatus: "LIVE free campus · money removed from public",
+  room: "/rooms/colombia-room#colombia-study-hub",
+  freePublic: [
+    "Bogotá · Medellín campus life · free clases en vivo",
+    "Study tips · salsa break · café estudio free circles",
+    "No premium seats / paid tutoring on public panel"
+  ],
+  moneyLanes: [
+    {
+      label: "Premium tutoring",
+      value: "Platform cut on paid 1:1 and group lessons"
+    },
+    {
+      label: "Teacher listing",
+      value: "Optional monthly teacher subscription to list on campus"
+    },
+    {
+      label: "Premium student access",
+      value: "Locked rooms · recordings · materials · monthly pass"
+    },
+    {
+      label: "Ticketed workshops",
+      value: "Commission on live class tickets and campus events"
+    }
+  ],
+  reopenNote: "Restore premium Study Hub money UI when NEXT_PUBLIC_REAL_MONEY_ENABLED=true."
+} as const;
 
 export function getArenaSlotStudyHubPanel(countryId: string) {
   return studyHubByCountryId[countryId] ?? studyHubByCountryId.uk!;

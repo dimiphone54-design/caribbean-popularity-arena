@@ -19,6 +19,7 @@ import {
   type ArenaSlotOccupancy
 } from "@/lib/arena-slot-occupancy";
 import { getOccupiedArenaSlotCountdownLabel } from "@/lib/arena-slot-countdown";
+import { isPublicDropshipVisible } from "@/lib/real-money";
 
 /** Japan room · 1 live slot under gift panel · women creators · dropship showcase */
 export function JapanRoomDropshipCreatorSlot() {
@@ -52,6 +53,8 @@ export function JapanRoomDropshipCreatorSlot() {
   const creatorName = isLive ? occupancy!.displayName : meta.defaultCreatorName;
   const countdownLabel = isLive ? getOccupiedArenaSlotCountdownLabel(remainingSeconds) : null;
 
+  if (!isPublicDropshipVisible()) return null;
+
   return (
     <section
       id="japan-dropship-creator-slot"
@@ -79,7 +82,7 @@ export function JapanRoomDropshipCreatorSlot() {
           {isLive ? (
             <span className="japan-dropship-creator-slot-live-pill">
               <span className="japan-dropship-creator-slot-live-dot" aria-hidden="true" />
-              LIVE · {meta.viewers.toLocaleString()} watching
+              LIVE · {meta.viewers.toLocaleString("en-US")} watching
             </span>
           ) : (
             <span className="japan-dropship-creator-slot-open-pill">Slot open · apply below</span>

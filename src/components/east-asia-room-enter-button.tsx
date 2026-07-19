@@ -26,7 +26,7 @@ export function EastAsiaRoomEnterButton({
   const router = useRouter();
   const href = `/rooms/${countryId}-room`;
   const gameLabel =
-    countryId === "japan" ? "Kendo stage duel · sword + flame" : "Wushu Duilian · sword + staff sparring";
+    countryId === "japan" ? "剣道ステージデュエル · 剣 · 炎" : "Wushu Duilian · sword + staff sparring";
 
   return (
     <Link

@@ -3,6 +3,7 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import { PLATFORM_COMMERCE_COPY } from "@/lib/platform-commerce";
+import { REAL_MONEY_FREEZE_MESSAGE, isRealMoneyEnabled } from "@/lib/real-money";
 
 type PayPalCheckoutButtonProps = {
   plan: string;
@@ -23,6 +24,22 @@ export function PayPalCheckoutButton({
   const [error, setError] = useState<string | null>(null);
 
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? "";
+  const realMoneyOn = isRealMoneyEnabled();
+
+  if (!realMoneyOn) {
+    return (
+      <div>
+        <button
+          type="button"
+          disabled
+          className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full border border-[var(--luxury-mist)]/20 bg-black/25 px-5 py-3 text-sm font-bold text-[var(--luxury-mist)]"
+        >
+          Payments frozen
+        </button>
+        <p className="mt-2 text-center text-xs text-[var(--luxury-mist)]/80">{REAL_MONEY_FREEZE_MESSAGE}</p>
+      </div>
+    );
+  }
 
   if (!clientId) {
     return (

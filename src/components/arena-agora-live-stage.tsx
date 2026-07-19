@@ -288,12 +288,12 @@ export function ArenaAgoraLiveStage({
                   onClick={() => void joinLive(true)}
                   className="arena-agora-live-stage-go-live rounded-2xl px-8 py-3.5 text-sm font-black uppercase tracking-[0.18em] sm:px-12 sm:py-4 sm:text-base"
                 >
-                  {china ? "开始直播 · GO LIVE" : japan ? "配信開始 · GO LIVE" : "Go live"}
+                  {china ? "开始直播" : japan ? "配信開始 · GO LIVE" : "Go live"}
                 </button>
               ) : (
                 <p className="max-w-xs rounded-lg bg-black/45 px-3 py-2 text-[11px] leading-5 text-[#c4d4ef]/85">
                   {china
-                    ? "主人 · Command Center 主密钥 → 开始直播"
+                    ? "主人 · 指挥中心主密钥 → 开始直播"
                     : japan
                       ? "オーナー · Command Centerでマスターキー → 配信開始"
                       : "Owner · unlock master key in Command Center → Go live"}

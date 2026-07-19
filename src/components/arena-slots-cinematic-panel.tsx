@@ -1,18 +1,17 @@
-const SLOT_TITLE = "12 SLOTS";
-const SLOT_BIRTHDAY = "🎂 Birthday Queen · 5 Extra Live Hours · Own The Night · All Eyes On Her";
-const SLOT_SUB =
-  "GIRL SIGN-IN OPEN · UK · ECUADOR · TRINIDAD · 3-HOUR LIVE RUN";
+const SLOT_TITLE = "FREEDOM";
+const SLOT_SCROLL = "Welcome aboard — glad you're here🌍";
 
-const JACKPOT_REEL_NUMBERS = Array.from({ length: 12 }, (_, index) => String(index + 1).padStart(2, "0"));
+/** Same 12-step jackpot reel as the numbers — mini clap frames spin in the window */
+const JACKPOT_REEL_CLAPS = ["👏", "👏🏻", "👏🏼", "👏🏽", "👏🏾", "👏🏿", "👏", "👏🏻", "👏🏼", "👏🏽", "👏🏾", "👏🏿"] as const;
 
-function JackpotReelTwelve() {
+function JackpotReelClap() {
   return (
-    <span className="ai-real-slot-cine-jackpot-reel" aria-label="12">
+    <span className="ai-real-slot-cine-jackpot-reel ai-real-slot-cine-jackpot-reel--clap" aria-label="FREEDOM">
       <span className="ai-real-slot-cine-jackpot-reel-window" aria-hidden="true">
         <span className="ai-real-slot-cine-jackpot-reel-strip">
-          {JACKPOT_REEL_NUMBERS.map((value) => (
-            <span key={value} className="ai-real-slot-cine-jackpot-reel-digit">
-              {value}
+          {JACKPOT_REEL_CLAPS.map((clap, index) => (
+            <span key={`${clap}-${index}`} className="ai-real-slot-cine-jackpot-reel-digit ai-real-slot-cine-jackpot-reel-digit--clap">
+              {clap}
             </span>
           ))}
         </span>
@@ -26,8 +25,8 @@ function TitleLine() {
     <div className="ai-real-slot-cine-title-row">
       <span className="ai-real-slot-cine-movie-project ai-real-slot-cine-movie-project-title">
         <span className="ai-real-slot-cine-title-hot">
-          <JackpotReelTwelve />
-          <span className="ai-real-slot-cine-title-word">SLOTS</span>
+          <JackpotReelClap />
+          <span className="ai-real-slot-cine-title-word">FREEDOM</span>
         </span>
       </span>
     </div>
@@ -35,14 +34,6 @@ function TitleLine() {
 }
 
 function ScrollSubtitle() {
-  const scrollCopy = (
-    <>
-      <span className="ai-real-slot-cine-birthday-inline">{SLOT_BIRTHDAY}</span>
-      <span className="ai-real-slot-cine-scroll-sep"> · </span>
-      {SLOT_SUB}
-    </>
-  );
-
   return (
     <div className="ai-real-slot-cine-scroll-row ai-real-slot-cine-scroll-row-sub">
       <div
@@ -50,10 +41,14 @@ function ScrollSubtitle() {
         style={{ ["--ai-slot-scroll-duration" as string]: "16s" }}
       >
         <span className="ai-real-slot-cine-scroll-item">
-          <span className="ai-real-slot-cine-movie-project ai-real-slot-cine-movie-project-sub">{scrollCopy}</span>
+          <span className="ai-real-slot-cine-movie-project ai-real-slot-cine-movie-project-sub">
+            {SLOT_SCROLL}
+          </span>
         </span>
         <span className="ai-real-slot-cine-scroll-item" aria-hidden="true">
-          <span className="ai-real-slot-cine-movie-project ai-real-slot-cine-movie-project-sub">{scrollCopy}</span>
+          <span className="ai-real-slot-cine-movie-project ai-real-slot-cine-movie-project-sub">
+            {SLOT_SCROLL}
+          </span>
         </span>
       </div>
     </div>
@@ -62,7 +57,7 @@ function ScrollSubtitle() {
 
 export function ArenaSlotsCinematicPanel() {
   return (
-    <div className="ai-real-slot-cine" aria-label="12 slots · pending until player sign-in">
+    <div className="ai-real-slot-cine" aria-label="FREEDOM">
       <span className="ai-real-slot-cine-letterbox ai-real-slot-cine-letterbox-top" aria-hidden="true" />
       <span className="ai-real-slot-cine-letterbox ai-real-slot-cine-letterbox-bottom" aria-hidden="true" />
 
@@ -84,7 +79,7 @@ export function ArenaSlotsCinematicPanel() {
 
           <div className="ai-real-slot-cine-scroll-stage">
             <p className="sr-only">
-              {SLOT_TITLE}. {SLOT_BIRTHDAY}. {SLOT_SUB}
+              {SLOT_TITLE}. {SLOT_SCROLL}
             </p>
             <TitleLine />
             <ScrollSubtitle />

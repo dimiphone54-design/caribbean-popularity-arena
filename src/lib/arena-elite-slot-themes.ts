@@ -51,11 +51,11 @@ const themesByIslandCode: Record<string, ArenaEliteSlotTheme> = {
     scene: "Kingston · Dancehall nights",
     tier: "Platinum"
   },
-  VE: {
-    accent: "#fbbf24",
-    accentSoft: "rgba(251, 191, 36, 0.16)",
-    glow: "rgba(251, 191, 36, 0.28)",
-    scene: "Caracas · Avila glow",
+  ES: {
+    accent: "#c084fc",
+    accentSoft: "rgba(192, 132, 252, 0.16)",
+    glow: "rgba(192, 132, 252, 0.28)",
+    scene: "Barcelona · La Rambla",
     tier: "Gold"
   },
   PL: {

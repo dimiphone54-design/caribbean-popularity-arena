@@ -17,6 +17,35 @@ export default function LegalIndexPage() {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mb-8 grid gap-4 md:grid-cols-2">
+          <Link
+            href="/legal/terms"
+            className="rounded-2xl border border-[#f5c842]/35 bg-gradient-to-br from-[#120f06]/90 to-[#050d1d]/90 p-5 transition hover:border-[#f5c842]/55"
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#f5c842]">Start here · members &amp; fans</p>
+            <h2 className="mt-2 text-xl font-semibold text-[#f7efe0]">Terms of Service</h2>
+            <p className="mt-2 text-sm leading-6 text-[#b8c9e1]">
+              18+ rules · gifts (70% creator / 30% platform) · voting fees · boosts · live rooms · plain-language
+              summary.
+            </p>
+            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#f5c842]">Open Terms →</p>
+          </Link>
+          <Link
+            href="/legal/creator-agreement"
+            className="rounded-2xl border border-[#ff2bd6]/35 bg-gradient-to-br from-[#120018]/90 to-[#050d1d]/90 p-5 transition hover:border-[#ff2bd6]/55"
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#ff2bd6]">Creators · hosts · lives</p>
+            <h2 className="mt-2 text-xl font-semibold text-[#f7efe0]">Creator Agreement</h2>
+            <p className="mt-2 text-sm leading-6 text-[#b8c9e1]">
+              Revenue split · weekly payout schedule · minimums · holds · auto queue · boosts · conduct rules.
+            </p>
+            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#ff2bd6]">
+              Open Creator Agreement →
+            </p>
+          </Link>
+        </div>
+
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-[#8fa3bf]">All legal documents</p>
         <div className="grid gap-4 md:grid-cols-2">
           {legalDocuments.map((document) => (
             <Link

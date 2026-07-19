@@ -40,9 +40,18 @@ export function EastAsiaRoomGamesPanel({ lane }: EastAsiaRoomGamesPanelProps) {
             {kicker}
           </p>
           <h2 className="mt-2 font-['Bebas_Neue',sans-serif] text-2xl tracking-widest text-[#eef6ff] sm:text-3xl">
-            {lane.flag} {lane.countryName}: {lane.primaryGameName}
+            {isJapan
+              ? `${lane.flag} 日本: 剣道ステージデュエル`
+              : isChina
+                ? `${lane.flag} 中国: 武术对练`
+                : `${lane.flag} ${lane.countryName}: ${lane.primaryGameName}`}
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#c4d4ef]/90">{lane.primaryGameTag}</p>
+          {isJapan ? (
+            <p className="mt-2 text-[11px] font-semibold text-[#fbbf24]">
+              ⚔️ 剣道ステージデュエル · PLAYをタップ、または下でライブプレイ
+            </p>
+          ) : null}
         </header>
 
         <div className="east-asia-live-stage east-asia-live-stage--preview mt-4" aria-hidden="true">
@@ -70,19 +79,20 @@ export function EastAsiaRoomGamesPanel({ lane }: EastAsiaRoomGamesPanelProps) {
             className={`cotswolds-game-row ${lane.rowClass}${simOpen ? " cotswolds-game-row--live" : ""}`}
           >
             <span className="cotswolds-hero-rank cotswolds-game-rank" aria-hidden="true">
-              <span className="cotswolds-hero-rank-word">SET</span>
+              <span className="cotswolds-hero-rank-word">{isJapan ? "セット" : isChina ? "组" : "SET"}</span>
               <span className="cotswolds-hero-rank-num">01</span>
             </span>
             <span className="cotswolds-game-main">
-              <span className="cotswolds-game-tag">{lane.primaryGameTag.split("·")[0]?.trim()}</span>
+              <span className="cotswolds-game-tag">{lane.primaryGameTag}</span>
               <span className="cotswolds-game-name">
                 <span className="cotswolds-game-flag" aria-hidden="true">
                   {lane.islandCode === "CN" ? "🥋" : "⚔️"}
                 </span>
-                {lane.primaryGameName}
+                {isJapan ? "剣道ステージデュエル" : isChina ? "武术对练" : lane.primaryGameName}
               </span>
               <span className="cotswolds-game-host">
-                {lane.hostLabel} · {primary?.hint ?? "Live stage duel"}
+                {lane.hostLabel}
+                {isJapan || isChina ? null : ` · ${primary?.hint ?? "Live stage duel"}`}
               </span>
               <span className="cotswolds-game-graph" aria-hidden="true">
                 <span
@@ -91,11 +101,31 @@ export function EastAsiaRoomGamesPanel({ lane }: EastAsiaRoomGamesPanelProps) {
                 />
               </span>
               <span className="cotswolds-game-meter">
-                {simOpen ? "On stage · play live" : `${ready}% ready · tap to play`}
+                {isJapan
+                  ? simOpen
+                    ? "ステージ上 · ライブプレイ"
+                    : `${ready}% 準備完了 · タップでプレイ`
+                  : isChina
+                    ? simOpen
+                      ? "舞台上 · 直播游玩"
+                      : `${ready}% 就绪 · 点击游玩`
+                    : simOpen
+                      ? "On stage · play live"
+                      : `${ready}% ready · tap to play`}
               </span>
             </span>
             <span className={`cotswolds-game-cta${simOpen ? " cotswolds-game-cta--live" : ""}`}>
-              {simOpen ? "● PLAYING" : "▶ PLAY GAME"}
+              {isJapan
+                ? simOpen
+                  ? "● プレイ中"
+                  : "▶ ゲームをプレイ"
+                : isChina
+                  ? simOpen
+                    ? "● 游玩中"
+                    : "▶ 开始游戏"
+                  : simOpen
+                    ? "● PLAYING"
+                    : "▶ PLAY GAME"}
             </span>
           </button>
         </div>

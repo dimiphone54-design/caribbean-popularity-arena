@@ -138,8 +138,8 @@ const seedMatchScores: PopularityMatchScore[] = [
   },
   {
     id: "match-uk-football-1",
-    roomSlug: "football-lads",
-    roomLabel: "FOOTBALL LADS",
+    roomSlug: "uk-flag-cotswolds",
+    roomLabel: "United Kingdom",
     countryId: "uk",
     flag: "🇬🇧",
     player: "SundayLeagueKing",
@@ -261,8 +261,8 @@ const seedDropshipSales: PopularityDropshipSale[] = [
   },
   {
     id: "sale-uk-football",
-    roomSlug: "football-lads",
-    roomLabel: "FOOTBALL LADS",
+    roomSlug: "uk-flag-cotswolds",
+    roomLabel: "United Kingdom",
     countryId: "uk",
     flag: "🇬🇧",
     productName: "Sunday league kit drop",
@@ -287,8 +287,8 @@ const seedDropshipSales: PopularityDropshipSale[] = [
 
 const fifaSportsRecords: PopularitySportsRecord[] = FIFA_RECENT_RESULTS.map((game) => {
   const caribbean = game.league.toLowerCase().includes("caribbean");
-  const roomSlug = caribbean ? "trinidad-front12-slot" : "football-lads";
-  const roomLabel = caribbean ? "Caribbean Freedom Cup" : "FOOTBALL LADS";
+  const roomSlug = caribbean ? "trinidad-front12-slot" : "uk-flag-cotswolds";
+  const roomLabel = caribbean ? "Caribbean Freedom Cup" : "United Kingdom";
   const countryId = caribbean ? "trinidad" : "uk";
   const flag = caribbean ? "🇹🇹" : "🇬🇧";
   const topScorer = game.homeScore >= game.awayScore ? game.homeTeam : game.awayTeam;
@@ -315,8 +315,8 @@ const seedSportsRecords: PopularitySportsRecord[] = [
   ...fifaSportsRecords,
   {
     id: "sport-uk-predict-1",
-    roomSlug: "football-lads",
-    roomLabel: "FOOTBALL LADS",
+    roomSlug: "uk-flag-cotswolds",
+    roomLabel: "United Kingdom",
     countryId: "uk",
     flag: "🇬🇧",
     sport: "Football",
@@ -330,8 +330,8 @@ const seedSportsRecords: PopularitySportsRecord[] = [
   },
   {
     id: "sport-uk-five-a-side-1",
-    roomSlug: "football-lads",
-    roomLabel: "FOOTBALL LADS",
+    roomSlug: "uk-flag-cotswolds",
+    roomLabel: "United Kingdom",
     countryId: "uk",
     flag: "🇬🇧",
     sport: "Football",
@@ -468,9 +468,9 @@ export function getSeedPopularitySportsRecords(roomSlug?: string) {
 }
 
 export function getPopularitySportsRoomHref(roomSlug: string) {
-  if (roomSlug === "all") return "/rooms/football-lads";
+  if (roomSlug === "all") return "/rooms/uk-flag-cotswolds";
   const room = getPopularityArenaRoomOptions().find((entry) => entry.roomSlug === roomSlug);
-  return room?.href ?? "/rooms/football-lads";
+  return room?.href ?? "/rooms/uk-flag-cotswolds";
 }
 
 export function mergePopularityDropshipSales(

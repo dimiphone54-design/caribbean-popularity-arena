@@ -63,7 +63,9 @@ function FifaWinRow({ game }: { game: FifaRecentResult }) {
           <span className="uk-football-fifa-win-name">{game.awayTeam}</span>
         </div>
       </div>
-      <p className="uk-football-fifa-win-time">{formatFifaPlayedAt(game.playedAt)}</p>
+      <p className="uk-football-fifa-win-time" suppressHydrationWarning>
+        {formatFifaPlayedAt(game.playedAt)}
+      </p>
     </li>
   );
 }

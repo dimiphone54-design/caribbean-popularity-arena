@@ -16,7 +16,6 @@ export const fashionMonthRegions = "Caribbean · London · Paris · Milan · NYC
 export const fashionMonthLooks: FashionMonthLook[] = [
   { id: 1, name: "Amara Laurent", age: 23, flag: "🇹🇹", city: "Port of Spain", style: "Carnival couture", accent: "Gold mesh" },
   { id: 2, name: "Zuri Blake", age: 24, flag: "🇯🇲", city: "Kingston", style: "Dancehall glam", accent: "Neon silk" },
-  { id: 3, name: "Leila Dupont", age: 22, flag: "🇬🇧", city: "London", style: "Street tailoring", accent: "Ivory blazer" },
   { id: 4, name: "Naomi Clarke", age: 25, flag: "🇧🇧", city: "Bridgetown", style: "Resort runway", accent: "Coral linen" },
   { id: 5, name: "Isla Mendez", age: 21, flag: "🇩🇴", city: "Santo Domingo", style: "Evening drape", accent: "Ruby satin" },
   { id: 6, name: "Chloe Renard", age: 23, flag: "🇫🇷", city: "Paris", style: "Haute minimal", accent: "Black chrome" },

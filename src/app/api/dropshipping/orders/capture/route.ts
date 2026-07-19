@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
 import { capturePayPalOrder } from "@/lib/paypal";
 import { markDropshipOrderPaid } from "@/lib/dropship-order-registry";
+import { REAL_MONEY_FREEZE_MESSAGE, isRealMoneyEnabled } from "@/lib/real-money";
 
 type CaptureBody = {
   paypalOrderId?: string;
 };
 
 export async function POST(request: Request) {
+  if (!isRealMoneyEnabled()) {
+    return NextResponse.json(
+      { ok: false, error: REAL_MONEY_FREEZE_MESSAGE, frozen: true },
+      { status: 503 }
+    );
+  }
+
   let body: CaptureBody = {};
   try {
     body = (await request.json()) as CaptureBody;

@@ -7,15 +7,18 @@ import { CotswoldsGameSimulator } from "@/components/cotswolds-game-simulator";
 import { CotswoldsParkVideoBackdrop } from "@/components/cotswolds-park-video-backdrop";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { ukFoodScenes, ukFoodLanes } from "@/components/uk-room-food-tab-panel";
+import { UkBestMakeupLookPanel } from "@/components/uk-best-makeup-look-panel";
 import { UkFashionPanel } from "@/components/uk-fashion-panel";
 import { UkFootballHubStack } from "@/components/uk-football-hub-stack";
+import { UkParkGamesLanePanel } from "@/components/uk-park-games-lane-panel";
 import { UkRoomCornerScroll } from "@/components/uk-room-corner-scroll";
 import { UKStudyHubTeacherLiveSlot } from "@/components/uk-study-hub-teacher-live-slot";
-import { DropshipMarketPanel } from "@/components/dropshipping/dropship-market-panel";
+import { UkRoomDropshipPanel } from "@/components/uk-room-dropship-panel";
+import { ArenaSlotAiPowerhouseTab } from "@/components/arena-slot-ai-powerhouse-tab";
 import { useRoomLocale } from "@/components/room-locale-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { UkRoomHorizontalTitle } from "@/components/uk-wind-flag";
-import { cotswoldsLondonParkGirls, cotswoldsMenActivityPanels } from "@/lib/cotswolds";
+import { cotswoldsMenActivityPanels } from "@/lib/cotswolds";
 
 export function CotswoldsPage() {
   const { t } = useRoomLocale();
@@ -62,6 +65,9 @@ export function CotswoldsPage() {
               </div>
             </header>
 
+            {/* ── UK Dropshipping · FIRST main panel (Japan-style shell) · hard to miss ── */}
+            <UkRoomDropshipPanel />
+
             {/* ── UK Study Hub · standalone panel ── */}
             <section
               className="country-room-section relative overflow-hidden rounded-[1.25rem] border border-[#fbbf24]/20"
@@ -94,16 +100,6 @@ export function CotswoldsPage() {
 
             <UkFootballHubStack countryId="uk" countryName="United Kingdom" flag="🇬🇧" />
 
-            {/* ── UK Dropshipping · standalone panel ── */}
-            <section className="country-room-section w-full" aria-label="UK Dropshipping market">
-              <DropshipMarketPanel
-                countryId="uk"
-                countryName="United Kingdom"
-                flag="🇬🇧"
-                layout="room"
-              />
-            </section>
-
             {/* ── UK Welcome panel #2 ── */}
             <figure className="cotswolds-museum-box country-room-section">
               <div className="cotswolds-museum-box-inner">
@@ -113,51 +109,27 @@ export function CotswoldsPage() {
               </div>
             </figure>
 
-            {/* ── UK Park Games · standalone panel ── */}
-            <section className="country-room-section w-full" aria-label="UK Park Games">
-              <div className="a2030-holo-panel scroll-mt-24 rounded-[1.25rem] border border-[#b8ff3c]/20 p-3 sm:p-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase text-[#b8ff3c] sm:text-xs">
-                    🇬🇧 UK park games
-                  </p>
-                  <span className="a2030-pulse-ring inline-flex h-2 w-2 rounded-full bg-[#b8ff3c]" />
-                </div>
-                <div className="mt-3 space-y-1.5" role="list">
-                  {cotswoldsLondonParkGirls.map((member, index) => {
-                    const parts = member.game.split("·");
-                    const orderTag = parts.length > 1 ? parts[0].trim() : `Game ${index + 1}`;
-                    const gameName = (parts.length > 1 ? parts.slice(1).join("·") : member.game).trim();
-                    const ready = 46 + ((member.id * 13) % 48);
-                    return (
-                      <button
-                        key={member.id}
-                        type="button"
-                        className="flex w-full items-center gap-2 rounded-lg border border-white/5 bg-[#0a0010]/50 px-3 py-2 text-left transition hover:border-[#b8ff3c]/25 hover:bg-[#b8ff3c]/5"
-                      >
-                        <span className="text-lg" aria-hidden="true">{member.flag}</span>
-                        <span className="min-w-0 flex-1">
-                          <span className="block text-[12px] font-bold text-[#fef9c3]">{gameName}</span>
-                          <span className="block text-[10px] text-[#8fa3c4]">{member.name.split(" ")[0]} · {member.area}</span>
-                        </span>
-                        <span className="shrink-0 rounded-full bg-[#b8ff3c]/10 px-2 py-0.5 text-[9px] font-bold text-[#b8ff3c]">
-                          {ready}% ready
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
+            {/* ── Best Makeup Look · own panel (Bella · Hyde Park) ── */}
+            <UkBestMakeupLookPanel />
 
-            {/* ── UK Food · standalone panel ── */}
+            {/* ── UK Park Games · full 5-lane under makeup ── */}
+            <UkParkGamesLanePanel />
+
+            {/* ── UK Food · free culture (dropship prices → Command Center freeze) ── */}
             <section className="country-room-section w-full" aria-label="UK Food">
               <div className="a2030-holo-panel scroll-mt-24 rounded-[1.25rem] border border-[#fbbf24]/20 p-3 sm:p-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase text-[#fbbf24] sm:text-xs">
                     🇬🇧 UK food
                   </p>
-                  <span className="a2030-pulse-ring inline-flex h-2 w-2 rounded-full bg-[#fbbf24]" />
+                  <span className="inline-flex items-center rounded-full border border-[#86efac]/30 bg-[#86efac]/10 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-[0.1em] text-[#86efac]">
+                    Free browse
+                  </span>
                 </div>
+                <p className="mt-2 text-[11px] leading-5 text-[#9fb4d4]">
+                  Park lunch · national dish culture · free browse. Paid food kits stay frozen in Command
+                  Center.
+                </p>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {ukFoodScenes.map((scene) => (
                     <figure
@@ -196,9 +168,13 @@ export function CotswoldsPage() {
               </div>
             </section>
 
-            {/* ── UK Fashion · standalone panel ── */}
-            <section className="country-room-section w-full" aria-label="UK Fashion panel">
+            {/* ── Tournament · free activity board (gift £ totals → Command Center freeze) ── */}
+            <section className="country-room-section w-full" aria-label="UK Tournament">
               <UkFashionPanel />
+            </section>
+
+            <section className="w-full px-1" aria-label="AI Powerhouse · United Kingdom">
+              <ArenaSlotAiPowerhouseTab mode="link" label="AI POWERHOUSE" />
             </section>
           </RoomCountryPageShell>
         </div>

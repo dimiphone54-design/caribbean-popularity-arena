@@ -92,7 +92,7 @@ export function CountryTrendActivitiesPanel() {
   };
 
   const isUkRoom =
-    roomSlug.includes("uk-flag") || roomSlug.includes("football-lads") || roomSlug.includes("cotswolds");
+    roomSlug.includes("uk-flag") || roomSlug.includes("cotswolds");
 
   return (
     <aside

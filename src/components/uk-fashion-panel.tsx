@@ -3,45 +3,28 @@
 import { useState } from "react";
 import { CotswoldsGameSimulator } from "@/components/cotswolds-game-simulator";
 import { CotswoldsHeroPlayersFilm } from "@/components/cotswolds-hero-players-film";
-import { fashionMonthLooks } from "@/lib/fashion-month";
 import {
   cotswoldsHeroQuarterSet,
   cotswoldsHollandParkWomenFeed,
   cotswoldsLondonParkGirlsFeed,
 } from "@/lib/cotswolds";
 
-const UK_LOOKS = fashionMonthLooks.filter(
-  (l) => l.flag === "🇬🇧" || l.city === "London"
-);
-
+/** Free activity tournament board · money/gift totals live in Command Center freeze */
 export function UkFashionPanel() {
   const [heroSim, setHeroSim] = useState<{ name: string; host: string } | null>(null);
 
   return (
     <div className="space-y-3">
-      {/* ── Looks ── */}
-      <div className="a2030-holo-panel rounded-[1.25rem] border border-[#ff2bd6]/18 p-3">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-[#ff2bd6]">Looks</p>
-        <div className="mt-2 grid grid-cols-3 gap-1.5" role="list">
-          {UK_LOOKS.map((look) => (
-            <div
-              key={look.id}
-              className="flex min-h-[50px] items-center rounded-lg border border-[#ff2bd6]/10 bg-[#0a0010]/55 px-2 py-1.5"
-              role="listitem"
-            >
-              <div className="min-w-0">
-                <p className="truncate text-[11px] font-black text-[#fef9c3]">{look.name}</p>
-                <p className="mt-0.5 truncate text-[9px] text-[#ff2bd6]">{look.style}</p>
-                <p className="mt-0.5 truncate text-[8px] text-[#8fa3c4]">{look.flag} {look.city}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Tournament ── */}
+      {/* ── Tournament · free public ranks / play ── */}
       <div className="a2030-holo-panel rounded-[1.25rem] border border-[#d7b46a]/25 p-3">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">Tournament</p>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">
+            🇬🇧 Tournament
+          </p>
+          <span className="rounded-full border border-[#86efac]/30 bg-[#86efac]/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.08em] text-[#86efac]">
+            Free board
+          </span>
+        </div>
         <div className="mt-2 space-y-1.5" role="list">
           {cotswoldsHeroQuarterSet.map((feed, index) => (
             <div

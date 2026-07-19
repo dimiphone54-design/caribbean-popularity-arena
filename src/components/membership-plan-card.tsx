@@ -6,6 +6,7 @@ import { Check } from "lucide-react";
 import { ArenaPlusIceFrostOverlay } from "@/components/arena-plus-ice-frost-overlay";
 import { EldersTableLockPanel } from "@/components/elders-table-lock-panel";
 import { PayPalCheckoutButton } from "@/components/paypal-checkout-button";
+import { isRealMoneyEnabled } from "@/lib/real-money";
 
 type Plan = {
   name: string;
@@ -99,13 +100,17 @@ export function MembershipPlanCard({ plan }: { plan: Plan }) {
           <span className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full border border-[var(--luxury-mist)]/20 bg-black/25 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--luxury-mist)]">
             Coming Soon
           </span>
-        ) : payConfig ? (
+        ) : payConfig && isRealMoneyEnabled() ? (
           <PayPalCheckoutButton
             plan={payConfig.planId}
             amountUsd={payConfig.priceUsd}
             label={`Pay $${payConfig.priceUsd} — ${plan.name}`}
             onSuccess={() => setPaid(true)}
           />
+        ) : payConfig ? (
+          <span className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full border border-[var(--luxury-mist)]/20 bg-black/25 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--luxury-mist)]">
+            Payments frozen
+          </span>
         ) : (
           <Link
             href={plan.href ?? "#vote"}

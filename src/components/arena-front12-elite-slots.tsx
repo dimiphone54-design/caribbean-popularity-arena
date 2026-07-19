@@ -3,13 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState, type CSSProperties, type MouseEvent } from "react";
 
-import { ArenaSlotTrendingTopics } from "@/components/arena-slot-trending-topics";
 import { ArenaSlotIceFrostOverlay } from "@/components/arena-slot-ice-frost-overlay";
 import { ArenaSlotWomanSignupModal } from "@/components/arena-slot-woman-signup-modal";
 import { CountryLocalClock } from "@/components/country-local-clock";
 import { useArenaSlotOccupancies } from "@/components/use-arena-slot-occupancies";
 import type { ArenaCreatorSlot } from "@/lib/arena-experience";
-import { formatFreeLabel } from "@/lib/arena-display-labels";
 import { getArenaCountrySlotMeta } from "@/lib/arena-country-slot-meta";
 import { getArenaEliteSlotTheme } from "@/lib/arena-elite-slot-themes";
 import {
@@ -21,19 +19,14 @@ import {
   type ArenaSlotOccupancy
 } from "@/lib/arena-slot-occupancy";
 import { ArenaSlotsCinematicPanel } from "@/components/arena-slots-cinematic-panel";
-import {
-  arenaSlotSignInFrozenShortCopy,
-  arenaSlotSignInOpenLabel,
-  isArenaSlotFrozenForUi
-} from "@/lib/arena-slot-sign-in-access";
+import { isArenaSlotFrozenForUi } from "@/lib/arena-slot-sign-in-access";
 import { masterKeyEnterSlotRoom } from "@/lib/arena-master-key";
-import { getAllDropshipProductsForCountry } from "@/lib/dropshipping";
 import {
   getInternationalSuitePrimaryRoomHref,
-  getInternationalSuiteRoomHref,
   internationalSuiteCountries
 } from "@/lib/international-suite";
 import { useArenaMasterKeyActive } from "@/components/use-arena-master-key-active";
+import { isPublicDropshipVisible } from "@/lib/real-money";
 import {
   ArenaSlotDropshipTab,
   DROPSHIP_ROOM_FALLBACK_BY_ISLAND_CODE,
@@ -59,21 +52,30 @@ import {
   STUDY_HUB_ROOM_FALLBACK_BY_ISLAND_CODE,
   STUDY_HUB_TAB_HASH_BY_ISLAND_CODE
 } from "@/components/arena-slot-study-hub-tab";
+import { ArenaSlotAiPowerhouseTab } from "@/components/arena-slot-ai-powerhouse-tab";
 import {
   filterArenaFront12Slots,
   isArenaFront12VisibleSlot,
   withArenaFront12DisplayRanks
 } from "@/lib/arena-front12-slot-order";
-import {
-  ARENA_FRONT_SLOT_TAB_CODES,
-  getArenaSlotTabWelcome
-} from "@/lib/arena-slot-country-welcome";
+import { getArenaSlotTabWelcome } from "@/lib/arena-slot-country-welcome";
 import { getArenaSlotDisplayLabels, getArenaSlotTabLabels } from "@/lib/arena-slot-display-locale";
-import { resolveArenaSlotLiveDisplayName } from "@/lib/arena-slot-live-display";
 
-export const formatPendingSlotLabel = (rank: number) => `SLOT ${rank} - available`;
+const ROOM_SLUG_BY_ISLAND_CODE: Record<string, string> = {
+  TT: "trinidad-room",
+  CO: "colombia-room",
+  EC: "ecuador-room",
+  JP: "japan-room",
+  CN: "china-room",
+  UK: "uk-flag-cotswolds",
+  ES: "spain-room",
+};
 
-export const formatFrozenSlotLabel = (rank: number) => `SLOT ${rank} - frozen`;
+export const formatPendingSlotLabel = (_rank: number) => "FREEDOM";
+
+export const formatFrozenSlotLabel = (_rank: number) => "FREEDOM";
+
+export const formatReadySlotLabel = (_rank: number) => "FREEDOM";
 
 export type ArenaFront12SlotState = ArenaCreatorSlot & {
   hasVoted?: boolean;
@@ -92,8 +94,6 @@ type ArenaFront12EliteSlotsProps = {
   onSlotNotice?: (message: string, tone?: "gold" | "warning") => void;
 };
 
-const formatVotes = (votes: number) => votes.toLocaleString("en-US");
-
 type CountryGirlSlotCardProps = {
   slot: ArenaFront12SlotState;
   occupancy: ArenaSlotOccupancy | null;
@@ -110,12 +110,12 @@ type CountryGirlSlotCardProps = {
 function CountryGirlSlotCard({
   slot,
   occupancy,
-  freeEntryAmountUsd,
+  freeEntryAmountUsd: _freeEntryAmountUsd,
   onVote,
   onFireUp,
   onMensEntry,
-  onCardTilt,
-  onCardTiltReset,
+  onCardTilt: _onCardTilt,
+  onCardTiltReset: _onCardTiltReset,
   onGirlSignIn,
   onSlotNotice
 }: CountryGirlSlotCardProps) {
@@ -123,8 +123,10 @@ function CountryGirlSlotCard({
   const masterKeyActive = useArenaMasterKeyActive();
   const theme = getArenaEliteSlotTheme(slot);
   const countryMeta = getArenaCountrySlotMeta(slot);
-  const isActive = Boolean(occupancy);
-  const isFrozen = !isActive && isArenaSlotFrozenForUi(slot.islandCode, masterKeyActive);
+  const hasOccupancy = Boolean(occupancy);
+  const isVisible = isArenaFront12VisibleSlot(slot.islandCode);
+  const isActive = hasOccupancy || isVisible;
+  const isFrozen = !hasOccupancy && !isVisible && isArenaSlotFrozenForUi(slot.islandCode, masterKeyActive);
   const isSignInOpen = !isActive && !isFrozen;
   const remainingSeconds = occupancy
     ? getArenaSlotOccupancyRemainingSeconds(occupancy)
@@ -133,17 +135,7 @@ function CountryGirlSlotCard({
     ? getOccupiedArenaSlotCountdownLabel(remainingSeconds)
     : formatArenaSlotCountdown(3 * 60 * 60);
   const slotRank = slot.displayRank ?? slot.rank;
-  const displayName = isActive
-    ? resolveArenaSlotLiveDisplayName(slot.id, occupancy!)
-    : isFrozen
-      ? formatFrozenSlotLabel(slotRank)
-      : slot.name;
   const suiteCountry = internationalSuiteCountries.find((entry) => entry.islandCode === slot.islandCode);
-  const openRooms = suiteCountry?.rooms.filter((room) => room.status === "open") ?? [];
-  const dropshipProducts = suiteCountry
-    ? getAllDropshipProductsForCountry(suiteCountry.id).slice(0, 3)
-    : [];
-  const signInStatus = isFrozen ? "Frozen" : "Open";
   const dropshipTabHash = DROPSHIP_TAB_HASH_BY_ISLAND_CODE[slot.islandCode] ?? null;
   const primaryRoomHref =
     (suiteCountry && getInternationalSuitePrimaryRoomHref(suiteCountry)) ||
@@ -232,10 +224,10 @@ function CountryGirlSlotCard({
       className={`ai-real-slot ai-real-slot-dense${slot.islandCode === "UK" ? " ai-real-slot-uk" : ""} ${isFrozen ? "ai-real-slot-pending ai-real-slot-frozen cfa-slot-frozen-surface" : !isActive ? "ai-real-slot-pending ai-real-slot-pending-clickable" : ""} ${slotRank <= 3 && isActive ? "ai-real-slot-top" : ""} ${slot.isOnFire && isActive && slot.islandCode !== "CO" ? "ai-real-slot-fire" : ""}`}
       aria-label={
         isActive
-          ? `${slot.country} · ${displayName}${countryMeta.languageLabel ? ` · ${countryMeta.languageLabel}` : ""} · live`
+          ? `${displayLabels.country} · FREEDOM · live`
           : isFrozen
-            ? `${slot.country} · ${formatFrozenSlotLabel(slotRank)} · frozen`
-            : `${slot.country} · girl sign-in`
+            ? `${displayLabels.country} · FREEDOM · frozen`
+            : `${displayLabels.country} · FREEDOM`
       }
       aria-disabled={isFrozen ? true : undefined}
     >
@@ -291,11 +283,9 @@ function CountryGirlSlotCard({
             {isFrozen ? (
               <>
                 <p className="ai-real-slot-pending-title ai-real-slot-pending-title-frozen">
-                  {formatFrozenSlotLabel(slotRank)}
+                  FREEDOM
                 </p>
-                <p className="ai-real-slot-pending-sub">
-                  Sign-in closed · {arenaSlotSignInOpenLabel} only
-                </p>
+                <p className="ai-real-slot-pending-sub">FREEDOM</p>
               </>
             ) : null}
           </div>
@@ -307,7 +297,7 @@ function CountryGirlSlotCard({
           </span>
           {!isActive ? (
             <span className={`ai-real-slot-tier${isFrozen ? " ai-real-slot-tier-frozen" : ""}`}>
-              {isFrozen ? "Frozen · sign-in closed" : "Awaiting sign-in"}
+              FREEDOM
             </span>
           ) : null}
           <time
@@ -325,13 +315,13 @@ function CountryGirlSlotCard({
         ) : null}
 
         {slot.isOnFire && isActive && slot.islandCode !== "CO" ? (
-          <span className="ai-real-slot-fire-badge">🔥 ON FIRE</span>
+          <span className="ai-real-slot-fire-badge">FREEDOM</span>
         ) : null}
 
         {isActive ? (
-          <p className="ai-real-slot-scene">{theme.scene}</p>
+          <p className="ai-real-slot-scene">FREEDOM</p>
         ) : isFrozen ? (
-          <p className="ai-real-slot-scene ai-real-slot-scene-frozen">{slot.country} · frozen · no sign-in</p>
+          <p className="ai-real-slot-scene ai-real-slot-scene-frozen">FREEDOM</p>
         ) : null}
       </div>
 
@@ -339,67 +329,46 @@ function CountryGirlSlotCard({
         {isActive ? (
           <>
             <div className="ai-real-slot-info-head">
-              <h3 className="ai-real-slot-name">{displayName}</h3>
-              <p className="ai-real-slot-meta ai-real-slot-meta-inline">
-                {slot.categoryIcon} {slot.category} · {displayLabels.country} · {displayLabels.metaLiveLabel} · 3h slot
-                {slot.language ? (
-                  <>
-                    {" "}
-                    · <span className="ai-real-slot-lang-label">Lang</span> {slot.language}
-                  </>
-                ) : null}
+              <h3 className="ai-real-slot-name">{slot.country}</h3>
+              <p className="ai-real-slot-welcome-line">
+                {tabWelcome ?? `Welcome to ${slot.country} — ${slot.category}`}
               </p>
             </div>
-            {!ARENA_FRONT_SLOT_TAB_CODES.has(slot.islandCode) ? (
-              <ArenaSlotTrendingTopics islandCode={slot.islandCode} country={slot.country} compact />
-            ) : null}
-            <blockquote className="ai-real-slot-quote">“{slot.quote}”</blockquote>
-
-            <div className="ai-real-slot-stats-band">
-              <div className="ai-real-slot-metrics">
-                <span className="ai-real-slot-votes">
-                  <span className="ai-real-slot-votes-label">{displayLabels.votesLiveLabel}</span>
-                  {formatVotes(slot.votes)} votes
-                </span>
-                <span className={slot.trendTone === "down" ? "ai-real-slot-trend-down" : "ai-real-slot-trend-up"}>
-                  {slot.trend}
-                </span>
-              </div>
-              <div className="ai-real-slot-progress" aria-hidden="true">
-                <span style={{ width: `${slot.progress}%` }} />
-              </div>
-            </div>
+            <blockquote className="ai-real-slot-quote">&ldquo;{slot.quote}&rdquo;</blockquote>
 
             <div className="ai-real-slot-actions">
-              <button
-                type="button"
-                className={`ai-real-slot-btn-vote ${slot.hasVoted ? "ai-real-slot-btn-vote-done" : ""}`}
-              >
-                {slot.hasVoted ? "✓ Voted" : "⚡ Vote"}
-              </button>
-              <button type="button" onClick={(event) => onMensEntry(slot.id, event)} className="ai-real-slot-btn-like">
-                ♡ {formatFreeLabel(freeEntryAmountUsd)}
-              </button>
-              <button
-                type="button"
-                onClick={(event) => onFireUp(slot.id, event)}
-                className="ai-real-slot-btn-fire"
-                aria-label={`Fire up ${displayName}`}
-              >
-                🔥
-              </button>
+              {ROOM_SLUG_BY_ISLAND_CODE[slot.islandCode] && (
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    router.push(`/rooms/${ROOM_SLUG_BY_ISLAND_CODE[slot.islandCode]}`);
+                  }}
+                  className="ai-real-slot-btn-enter"
+                >
+                  ENTER
+                </button>
+              )}
             </div>
           </>
         ) : isFrozen ? (
-          <h3 className="ai-real-slot-name ai-real-slot-name-frozen">{displayName}</h3>
-        ) : null}
+          <div className="ai-real-slot-info-head">
+            <h3 className="ai-real-slot-name ai-real-slot-name-frozen">{slot.country}</h3>
+            <p className="ai-real-slot-welcome-line">
+              {tabWelcome ?? `Welcome to ${slot.country} — ${slot.category}`}
+            </p>
+          </div>
+        ) : (
+          <div className="ai-real-slot-info-head">
+            <h3 className="ai-real-slot-name">{slot.country}</h3>
+            <p className="ai-real-slot-welcome-line">
+              {tabWelcome ?? `Welcome to ${slot.country} — ${slot.category}`}
+            </p>
+          </div>
+        )}
         {isActive ? null : isFrozen ? (
           <div className="ai-real-slot-frozen-foot">
-            <p className="ai-real-slot-meta ai-real-slot-meta-frozen">
-              {masterKeyActive
-                ? "Master key active · owner bypass · enter room"
-                : `Girl sign-in open · ${arenaSlotSignInOpenLabel} only`}
-            </p>
+            <p className="ai-real-slot-meta ai-real-slot-meta-frozen">FREEDOM</p>
             <div className="ai-real-slot-actions">
               {masterKeyActive ? (
                 <button
@@ -410,11 +379,11 @@ function CountryGirlSlotCard({
                     void handleMasterKeyEnter();
                   }}
                 >
-                  🔑 Enter {slot.country} room · master key
+                  FREEDOM
                 </button>
               ) : (
                 <button type="button" className="ai-real-slot-btn-frozen" disabled>
-                  ❄ {arenaSlotSignInFrozenShortCopy}
+                  FREEDOM
                 </button>
               )}
             </div>
@@ -433,99 +402,55 @@ function CountryGirlSlotCard({
                 openGirlSignIn();
               }}
             >
-              {masterKeyActive
-                ? `🔑 Enter ${slot.country} room · master key`
-                : `Girl sign-in · ${slot.country}`}
+              FREEDOM
             </button>
           </div>
         )}
 
-        {dropshipRoomHref ? (
-          <div className="ai-real-slot-dropship-foot">
-            <div className="ai-real-slot-slot-tabs">
-              <ArenaSlotDropshipTab mode="link" roomHref={dropshipRoomHref} label={tabLabels.dropshipping} />
-              {gamesRoomHref ? (
-                <ArenaSlotGamesTab mode="link" roomHref={gamesRoomHref} label={tabLabels.games} />
-              ) : null}
-              {fashionRoomHref ? (
-                <ArenaSlotFashionTab mode="link" roomHref={fashionRoomHref} label={tabLabels.fashion} />
-              ) : null}
-              {foodRoomHref ? (
-                <ArenaSlotFoodTab mode="link" roomHref={foodRoomHref} label={tabLabels.food} />
-              ) : null}
-              {studyHubRoomHref ? (
-                <ArenaSlotStudyHubTab mode="link" roomHref={studyHubRoomHref} label={tabLabels.studyHub} />
-              ) : null}
-            </div>
-            {tabWelcome ? (
-              <p className="ai-real-slot-tab-welcome">
-                <span className="ai-real-slot-tab-welcome-mark" aria-hidden="true">
-                  {slot.flag}
-                </span>
-                {tabWelcome}
+        {(() => {
+          const roomSlug = ROOM_SLUG_BY_ISLAND_CODE[slot.islandCode];
+          const roomBase = roomSlug ? `/rooms/${roomSlug}` : null;
+          const hasTabs = dropshipRoomHref || gamesRoomHref || fashionRoomHref || foodRoomHref || studyHubRoomHref || roomBase;
+          if (!hasTabs) return null;
+          return (
+            <div className="ai-real-slot-dropship-foot">
+              <div className="ai-real-slot-slot-tabs">
+                {dropshipRoomHref && isPublicDropshipVisible() ? (
+                  <ArenaSlotDropshipTab mode="link" roomHref={dropshipRoomHref} label={tabLabels.dropshipping} />
+                ) : null}
+                {gamesRoomHref ? (
+                  <ArenaSlotGamesTab mode="link" roomHref={gamesRoomHref} label={tabLabels.games} />
+                ) : roomBase ? (
+                  <ArenaSlotGamesTab mode="link" roomHref={roomBase} label={tabLabels.games} />
+                ) : null}
+                {fashionRoomHref ? (
+                  <ArenaSlotFashionTab mode="link" roomHref={fashionRoomHref} label={tabLabels.fashion} />
+                ) : roomBase ? (
+                  <ArenaSlotFashionTab mode="link" roomHref={roomBase} label={tabLabels.fashion} />
+                ) : null}
+                {foodRoomHref ? (
+                  <ArenaSlotFoodTab mode="link" roomHref={foodRoomHref} label={tabLabels.food} />
+                ) : roomBase ? (
+                  <ArenaSlotFoodTab mode="link" roomHref={roomBase} label={tabLabels.food} />
+                ) : null}
+                {studyHubRoomHref ? (
+                  <ArenaSlotStudyHubTab mode="link" roomHref={studyHubRoomHref} label={tabLabels.studyHub} />
+                ) : roomBase ? (
+                  <ArenaSlotStudyHubTab mode="link" roomHref={roomBase} label={tabLabels.studyHub} />
+                ) : null}
+                <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
+              </div>
+              {tabWelcome ? (
+                <p className="ai-real-slot-tab-welcome">
+                  <span className="ai-real-slot-tab-welcome-mark" aria-hidden="true">
+                    {slot.flag}
+                  </span>
+                  {tabWelcome}
               </p>
             ) : null}
           </div>
-        ) : (
-          <section className="ai-real-slot-country-panel" aria-label={`${slot.country} · ${tabLabels.dropshipping}`}>
-            <div className="ai-real-slot-country-panel-tab" aria-hidden="true">
-              {tabLabels.dropshipping}
-            </div>
-            <div className="ai-real-slot-country-panel-body">
-              <div className="ai-real-slot-country-panel-grid">
-                <p>
-                  <span>Country</span> {slot.flag} {slot.country}
-                </p>
-                <p>
-                  <span>Code</span> {slot.islandCode}
-                </p>
-                <p>
-                  <span>Capital</span> {countryMeta.capital}
-                </p>
-                <p>
-                  <span>Time zone</span> {countryMeta.tzAbbrev}
-                </p>
-                <p>
-                  <span>Sign-in</span> {signInStatus}
-                </p>
-                <p>
-                  <span>Category</span> {slot.category}
-                </p>
-              </div>
-
-              {suiteCountry ? (
-                <div className="ai-real-slot-country-panel-suite">
-                  <p className="ai-real-slot-country-panel-line">
-                    <span className="ai-real-slot-country-panel-label">Suite</span>
-                    {suiteCountry.region} · {suiteCountry.tagline}
-                  </p>
-                  <p className="ai-real-slot-country-panel-line">
-                    <span className="ai-real-slot-country-panel-label">Rooms</span>
-                    {openRooms.length > 0
-                      ? openRooms.map((room) => `${room.roomLabel} · ${getInternationalSuiteRoomHref(room)}`).join(" · ")
-                      : "No open room lane listed."}
-                  </p>
-                  <p className="ai-real-slot-country-panel-line">
-                    <span className="ai-real-slot-country-panel-label">Dropship</span>
-                    {dropshipProducts.length > 0
-                      ? dropshipProducts.map((product) => `${product.name} · ${product.shipsFrom}`).join(" · ")
-                      : "No dropship products listed yet."}
-                  </p>
-                </div>
-              ) : (
-                <p className="ai-real-slot-country-panel-line">Suite profile not found for this country yet.</p>
-              )}
-            </div>
-            {tabWelcome ? (
-              <p className="ai-real-slot-tab-welcome">
-                <span className="ai-real-slot-tab-welcome-mark" aria-hidden="true">
-                  {slot.flag}
-                </span>
-                {tabWelcome}
-              </p>
-            ) : null}
-          </section>
-        )}
+          );
+        })()}
       </div>
     </article>
   );
@@ -559,7 +484,7 @@ export function ArenaFront12EliteSlots({
 
   return (
     <>
-      <section className="ai-real-slot-section" aria-label="Open slots · pending until girl sign-in">
+      <section className="ai-real-slot-section" aria-label="FREEDOM">
       <div className="ai-real-slot-section-head">
         <ArenaSlotsCinematicPanel />
       </div>

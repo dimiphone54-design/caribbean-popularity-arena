@@ -63,13 +63,13 @@ export const arenaCountrySlotMetaByCode: Record<string, ArenaCountrySlotMeta> = 
     languageLabel: "Jamaican Patois",
     ...countryPhoto("/arena-real-people/jm.jpg")
   },
-  VE: {
-    islandCode: "VE",
-    capital: "Caracas",
-    timeZone: "America/Caracas",
-    tzAbbrev: "VET",
-    languageLabel: "Venezuelan Spanish",
-    ...countryPhoto("/arena-real-people/ve.jpg")
+  ES: {
+    islandCode: "ES",
+    capital: "Madrid",
+    timeZone: "Europe/Madrid",
+    tzAbbrev: "CET",
+    languageLabel: "Spanish",
+    ...countryPhoto("/arena-real-people/es.jpg")
   },
   PL: {
     islandCode: "PL",
@@ -126,7 +126,7 @@ const countryIdToIslandCode: Record<string, string> = {
   ecuador: "EC",
   trinidad: "TT",
   jamaica: "JM",
-  venezuela: "VE",
+  spain: "ES",
   poland: "PL",
   tunisia: "TN",
   guyana: "GY",

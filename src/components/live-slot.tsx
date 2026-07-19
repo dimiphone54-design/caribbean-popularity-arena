@@ -21,8 +21,9 @@ const DEFAULT_TITLE = "Arena Flash Live: Drop Exclusivo | Solo hoy";
 const DEFAULT_SUBTEXT = "Backstage con los artistas + merch limitada";
 const DEFAULT_NEXT_LIVE = "El próximo LIVE: Viernes 8PM";
 
+/** Deterministic formatting · avoids SSR/client Intl locale mismatches */
 function formatViewerCount(viewers: number) {
-  return new Intl.NumberFormat("es-EC").format(viewers);
+  return Math.max(0, Math.floor(viewers)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 export function LiveSlot({
@@ -140,7 +141,7 @@ export function LiveSlot({
             onClick={openLive}
             className="mt-4 w-full rounded-xl border border-[#fcd116]/45 bg-gradient-to-r from-[#ce1126]/90 to-[#fcd116]/25 px-4 py-3.5 text-sm font-black uppercase tracking-[0.12em] text-[#fef9c3] shadow-[0_0_22px_rgba(206,17,38,0.25)] transition hover:border-[#fcd116] hover:brightness-110 active:scale-[0.99]"
           >
-            Unirse al LIVE
+            Unirse al en vivo
           </button>
         </>
       ) : (

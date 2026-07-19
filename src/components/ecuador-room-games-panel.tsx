@@ -41,7 +41,7 @@ export function EcuadorRoomGamesPanel({
       emoji: "🏐",
       name: "Ecuavoley",
       host: `${ECUADOR_HOST} · Quito · Guayaquil`,
-      hint: ecuavoley?.hint ?? "Ecuador's three-player volleyball classic",
+      hint: ecuavoley?.hint ?? "Clásico de vóley a tres de Ecuador",
       ready: 88
     }
   ];
@@ -56,22 +56,22 @@ export function EcuadorRoomGamesPanel({
     <>
       <section
         id="ecuador-live-games"
-        className="ecuador-game-room-panel w-full rounded-2xl border border-[#fcd116]/35 bg-[#040a08]/65 p-4 backdrop-blur-md sm:p-5"
+        className="ecuador-game-room-panel w-full rounded-xl border border-[#fcd116]/35 bg-[#040a08]/65 p-2.5 backdrop-blur-md sm:p-3"
         aria-label="Ecuador (EC): Ecuavoley"
       >
         <header className="text-center">
-          <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#fcd116]">
-            Juegos virales · talk-show · en vivo
+          <p className="text-[8px] font-black uppercase tracking-[0.16em] text-[#fcd116]">
+            Juegos virales · en vivo
           </p>
-          <h2 className="ecuador-room-title mt-2 text-2xl font-black text-[#fef9c3] sm:text-3xl">
+          <h2 className="ecuador-room-title mt-1 text-lg font-black text-[#fef9c3] sm:text-xl">
             🇪🇨 Ecuador · Ecuavoley
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#d4d4d8]">
-            ¡Dale pues! · elige un juego · toca para jugar en la sala
+          <p className="mx-auto mt-0.5 max-w-md text-[11px] leading-4 text-[#d4d4d8]">
+            ¡Dale pues! · toca para jugar
           </p>
         </header>
 
-        <div className="cotswolds-game-board mt-4 space-y-2.5">
+        <div className="cotswolds-game-board mt-2 space-y-1.5">
           {playableRows.map((row) => {
             const playing = activeGame === row.id;
 
@@ -103,7 +103,7 @@ export function EcuadorRoomGamesPanel({
                     {playing ? "En simulador · juega en vivo" : `${row.ready}% listo · toca para jugar`}
                   </span>
                 </span>
-                <span className="cotswolds-game-cta">{playing ? "● PLAYING" : "▶ PLAY GAME"}</span>
+                <span className="cotswolds-game-cta">{playing ? "● EN CANCHA" : "▶ ENTRAR"}</span>
               </button>
             );
           })}

@@ -28,6 +28,16 @@ export function DropshipAiConverter({
   defaultUsd = 29,
   variant = "full"
 }: DropshipAiConverterProps) {
+  // Public clean rooms — never render LIVE AI / FX converter (ops only in Command Center)
+  if (
+    defaultCountryId === "japan" ||
+    defaultCountryId === "uk" ||
+    defaultCountryId === "ecuador" ||
+    defaultCountryId === "china"
+  ) {
+    return null;
+  }
+
   const compact = variant === "compact";
   const copy = getDropshipMarketCopy(defaultCountryId);
   const japanAi = isJapanDropshipMarket(defaultCountryId);

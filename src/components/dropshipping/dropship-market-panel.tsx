@@ -15,7 +15,8 @@ import {
   getDropshipProductDisplay,
   isChinaDropshipMarket,
   isEcuadorDropshipMarket,
-  isJapanDropshipMarket
+  isJapanDropshipMarket,
+  isUkDropshipMarket
 } from "@/lib/dropship-market-copy";
 import { DropshipAiConverter } from "@/components/dropshipping/dropship-ai-converter";
 import { DropshipBuyButton } from "@/components/dropshipping/dropship-buy-button";
@@ -24,9 +25,10 @@ import { DropshipHowItWorks } from "@/components/dropshipping/dropship-how-it-wo
 import { DropshipOrderTracker } from "@/components/dropshipping/dropship-order-tracker";
 import { ColombiaDropshipHeroPanel } from "@/components/dropshipping/colombia-dropship-hero-panel";
 import { ChinaDropshipHeroPanel } from "@/components/dropshipping/china-dropship-hero-panel";
-import { EcuadorDropshipHeroPanel } from "@/components/dropshipping/ecuador-dropship-hero-panel";
-import { EcuadorNoMercyWingIntro } from "@/components/ecuador-no-mercy-wing-intro";
+import { DirectDropshipLanePanel } from "@/components/dropshipping/direct-dropship-lane-panel";
 import { UkDropshipWomenPanel } from "@/components/dropshipping/uk-dropship-women-panel";
+import { UkTechAutoDropshipHero } from "@/components/dropshipping/uk-tech-auto-dropship-hero";
+import { isPublicDropshipVisible } from "@/lib/real-money";
 
 type DropshipMarketPanelProps = {
   countryId: string;
@@ -43,62 +45,16 @@ type DropshipMarketPanelProps = {
 };
 
 function DropshipMarketRoomIntroContent({
-  countryId,
-  countryName,
-  flag
+  countryId
 }: {
   countryId: string;
   countryName: string;
   flag: string;
 }) {
-  const copy = getDropshipMarketCopy(countryId);
-  const steps = copy.steps;
-  const ecuadorWing = isEcuadorDropshipMarket(countryId);
-  const chinaRoom = isChinaDropshipMarket(countryId);
-
-  if (ecuadorWing) {
-    return <EcuadorNoMercyWingIntro flag={flag} countryName={countryName} />;
-  }
-
+  /** One shared Direct Dropship template for every country */
   return (
-    <div className={`dropship-market-room-intro${chinaRoom ? " dropship-market-room-intro--china" : ""}`}>
-      <header className={`dropship-market-room-head${chinaRoom ? " dropship-market-room-head--china" : ""}`}>
-        {copy.roomHeaderTitleLead && copy.roomHeaderTitleTrail ? (
-          <h2 className="dropship-market-room-header-title" aria-label={copy.roomHeaderTitle ?? undefined}>
-            <span className="dropship-market-room-header-word">{copy.roomHeaderTitleLead}</span>
-            {copy.roomHeaderIconSrc ? (
-              <img
-                className="dropship-market-room-header-icon"
-                src={copy.roomHeaderIconSrc}
-                alt=""
-                aria-hidden="true"
-                width={32}
-                height={32}
-                decoding="async"
-              />
-            ) : null}
-            <span className="dropship-market-room-header-word">{copy.roomHeaderTitleTrail}</span>
-          </h2>
-        ) : copy.roomHeaderTitle ? (
-          <h2 className="dropship-market-room-header-title">{copy.roomHeaderTitle}</h2>
-        ) : null}
-        <div className="dropship-market-room-head-copy">
-          <p className="a2030-electric-flash a2030-micro dropship-market-room-kicker">
-            {`${flag} ${copy.title}`}
-          </p>
-          <p className="dropship-market-room-sub">{copy.roomSub(flag, countryName)}</p>
-        </div>
-        <span className="dropship-market-badge dropship-market-badge--room">{copy.marketOnlyBadge}</span>
-      </header>
-
-      <ol className="dropship-market-room-steps" role="list">
-        {steps.map((step) => (
-          <li key={step.title} className="dropship-market-room-step" role="listitem">
-            <p className="dropship-market-room-step-title">{step.title}</p>
-            <p className="dropship-market-room-step-body">{step.body}</p>
-          </li>
-        ))}
-      </ol>
+    <div className="dropship-market-room-intro">
+      <DirectDropshipLanePanel countryId={countryId} variant="compact" />
     </div>
   );
 }
@@ -121,6 +77,8 @@ export function DropshipMarketRoomIntroPanel({
   stackUnderAi = false,
   embedded = false
 }: DropshipMarketRoomIntroPanelProps) {
+  if (!isPublicDropshipVisible()) return null;
+
   if (embedded) {
     return <DropshipMarketRoomIntroContent countryId={countryId} countryName={countryName} flag={flag} />;
   }
@@ -170,6 +128,9 @@ export function DropshipMarketPanel({
   const japanMarket = isJapanDropshipMarket(countryId);
   const chinaMarket = isChinaDropshipMarket(countryId);
   const ecuadorMarket = isEcuadorDropshipMarket(countryId);
+  const ukMarket = isUkDropshipMarket(countryId);
+
+  if (!isPublicDropshipVisible()) return null;
 
   return (
     <section
@@ -178,9 +139,12 @@ export function DropshipMarketPanel({
         isRoom ? " dropship-market-panel--room dropship-market-panel--room-aligned country-room-section" : " mt-3"
       }${embeddedInUkStack ? " dropship-market-panel--uk-stack" : ""}${japanMarket ? " dropship-market-panel--japan" : ""}${
         chinaMarket ? " dropship-market-panel--china" : ""
-      }${ecuadorMarket ? " dropship-market-panel--no-mercy-wing" : ""}`}
+      }${ecuadorMarket ? " dropship-market-panel--no-mercy-wing" : ""}${
+        ukMarket ? " dropship-market-panel--uk-tech-auto" : ""
+      }`}
     >
-      {isRoom && !hideRoomIntro ? (
+      {isRoom && !hideRoomIntro && ukMarket ? <UkTechAutoDropshipHero compact /> : null}
+      {isRoom && !hideRoomIntro && !ukMarket ? (
         <DropshipMarketRoomIntroPanel
           countryId={countryId}
           countryName={countryName}
@@ -205,21 +169,69 @@ export function DropshipMarketPanel({
 
       {countryId === "colombia" ? <ColombiaDropshipHeroPanel compact={isRoom} /> : null}
       {countryId === "china" ? <ChinaDropshipHeroPanel compact={isRoom} /> : null}
-      {countryId === "ecuador" ? <EcuadorDropshipHeroPanel compact={isRoom} /> : null}
+      {/* Ecuador: clean public intro only — no hero slideshow / FX debug clutter */}
 
-      {!isRoom ? <DropshipHowItWorks /> : null}
+      {!isRoom ? <DropshipHowItWorks countryName={countryName} /> : null}
 
-      {embeddedInUkStack && countryId === "uk" ? (
+      {isRoom && countryId !== "uk" ? (
+        <>
+          <p className="dropship-section-label mt-3 text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">
+            Featured Products
+          </p>
+          <ul className="dropship-product-grid mt-2" role="list">
+            {(featuredProducts.length > 0 ? featuredProducts : visibleOptionProducts).slice(0, 5).map((product) => {
+              const display = getDropshipProductDisplay(product, countryId);
+              return (
+                <li key={product.id} className="dropship-product-card" role="listitem">
+                  <div
+                    className="dropship-product-thumb"
+                    style={{ backgroundImage: `url('${product.imageUrl}')` }}
+                    aria-hidden="true"
+                  />
+                  <div className="dropship-product-body">
+                    <p className="dropship-product-category">{display.name ?? product.name}</p>
+                    <p className="dropship-product-desc">{display.description ?? product.description}</p>
+                    <p className="dropship-product-ship">
+                      Ships from {display.shipsFrom ?? product.shipsFrom}
+                    </p>
+                    <p className="dropship-product-price">
+                      {formatDropshipPrice(product.price, product.currency, countryId)}
+                    </p>
+                    <DropshipBuyButton
+                      product={product}
+                      countryName={countryName}
+                      flag={flag}
+                      onOrderedAction={refreshOrders}
+                      compact={isRoom}
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      ) : embeddedInUkStack && countryId === "uk" ? (
         <UkDropshipWomenPanel countryName={countryName} onOrdered={refreshOrders} />
       ) : (
         <>
-          <DropshipCategoryLanes selectedLane={selectedLane} onSelectLane={setSelectedLane} compact={isRoom} countryId={countryId} />
+          {/* Category chips · always show 📱 Tech & Gadgets · 🚗 Automotive for UK (+ all other markets) */}
+          <p className="dropship-section-label mt-2 text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">
+            Shop by category
+          </p>
+          <DropshipCategoryLanes
+            selectedLane={selectedLane}
+            onSelectLane={setSelectedLane}
+            compact={isRoom}
+            countryId={countryId}
+          />
 
           {isRoom && countryId === "uk" && !selectedLane ? (
             <>
-              <p className="dropship-section-label mt-3 text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">Lane picks</p>
+              <p className="dropship-section-label mt-3 text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">
+                Featured Products
+              </p>
               <ul className="dropship-product-grid mt-2" role="list">
-                {visibleOptionProducts.map((product) => {
+                {(featuredProducts.length > 0 ? featuredProducts : visibleOptionProducts).map((product) => {
                   const display = getDropshipProductDisplay(product, countryId);
                   return (
                   <li key={product.id} className="dropship-product-card" role="listitem">
@@ -239,80 +251,9 @@ export function DropshipMarketPanel({
                   );
                 })}
               </ul>
-              {featuredProducts.length > 0 ? (
-                <>
-                  <p className="dropship-section-label mt-4 text-[10px] font-bold uppercase tracking-wider text-[#d7b46a]">UK picks</p>
-                  <ul className="dropship-product-grid mt-2" role="list">
-                    {featuredProducts.map((product) => {
-                      const display = getDropshipProductDisplay(product, countryId);
-                      return (
-                      <li key={product.id} className="dropship-product-card" role="listitem">
-                        <div
-                          className="dropship-product-thumb"
-                          style={{ backgroundImage: `url('${product.imageUrl}')` }}
-                          aria-hidden="true"
-                        />
-                        <div className="dropship-product-body">
-                          <p className="dropship-product-category">{display.name ?? display.category}</p>
-                          <p className="dropship-product-desc">{display.description}</p>
-                          <p className="dropship-product-ship">{copy.shipsFrom} {display.shipsFrom}</p>
-                          <p className="dropship-product-price">{formatDropshipPrice(product.price, product.currency, countryId)}</p>
-                          <DropshipBuyButton
-                            product={product}
-                            countryName={countryName}
-                            flag={flag}
-                            onOrderedAction={refreshOrders}
-                            compact={isRoom}
-                            footer={product.id === "uk-park-games-kit" ? (
-                              <div className="space-y-2">
-                                <div className="rounded-lg border border-[#b8ff3c]/15 bg-[#b8ff3c]/5 p-2.5">
-                                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#b8ff3c]">Live Slots</p>
-                                  <div className="mt-2 space-y-1.5">
-                                    <div className="rounded-lg border border-white/8 bg-[#0a0010]/50 px-2.5 py-2">
-                                      <div className="flex items-center justify-between">
-                                        <span className="text-[11px] font-bold text-[#fef9c3]">Slot 1</span>
-                                        <span className="rounded-full bg-[#b8ff3c]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#b8ff3c]">LIVE</span>
-                                      </div>
-                                      <p className="mt-1 text-[10px] text-[#8fa3c4]">Go Live · Show Your Makeup · Get Gifted</p>
-                                      <p className="mt-0.5 text-[9px] text-white/40">1hr slot · Most gifts = champion</p>
-                                    </div>
-                                    <div className="rounded-lg border border-white/8 bg-[#0a0010]/50 px-2.5 py-2">
-                                      <div className="flex items-center justify-between">
-                                        <span className="text-[11px] font-bold text-[#fef9c3]">Slot 2</span>
-                                        <span className="rounded-full border border-white/10 bg-white/5 px-1.5 py-0.5 text-[9px] text-white/40">OPEN</span>
-                                      </div>
-                                      <p className="mt-1 text-[10px] text-[#8fa3c4]">Waiting for creator</p>
-                                      <p className="mt-0.5 text-[9px] text-white/40">1hr slot · Claim to go live</p>
-                                    </div>
-                                    <div className="rounded-lg border border-[#d7b46a]/15 bg-[#d7b46a]/5 px-2.5 py-2">
-                                      <p className="text-[10px] font-bold text-[#d7b46a]">Gift Tiers</p>
-                                      <div className="mt-1.5 flex flex-wrap gap-1">
-                                        {["💄 £1", "🪞 £2", "💗 £5", "👑 £10", "💎 £25", "🏆 £50"].map((gift) => (
-                                          <span key={gift} className="rounded-full border border-white/10 bg-white/5 px-1.5 py-0.5 text-[9px] text-white/60">{gift}</span>
-                                        ))}
-                                      </div>
-                                    </div>
-                                    <div className="rounded-lg border border-white/8 bg-[#0a0010]/50 px-2.5 py-2">
-                                      <p className="text-[10px] font-bold text-[#fef9c3]">Champion</p>
-                                      <p className="mt-1 text-[10px] text-[#8fa3c4]">Jade Monroe · £184</p>
-                                      <div className="mt-1 flex flex-wrap gap-1">
-                                        {["Sienna Clarke £112", "Aaliyah Grant £87", "Priya Sharma £63", "Leila Dupont £41"].map((entry) => (
-                                          <span key={entry} className="text-[9px] text-white/40">{entry}</span>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            ) : undefined}
-                          />
-                        </div>
-                      </li>
-                      );
-                    })}
-                  </ul>
-                </>
-              ) : null}
+              <p className="mt-3 text-center text-[11px] leading-5 text-[#9fb4d4]">
+                Secure USD checkout on the Arena • UK supplier ships direct • Tracking provided
+              </p>
             </>
           ) : (
             <>
@@ -366,19 +307,22 @@ export function DropshipMarketPanel({
         </>
       )}
 
-      {!hideAiConverter ? (
+      {/* Public UK / Ecuador / Japan: clean lane only — no LIVE AI / CACHE FX / FX converter clutter */}
+      {!hideAiConverter && !ecuadorMarket && !ukMarket && !japanMarket ? (
         <DropshipAiConverter
           defaultCountryId={countryId}
           defaultUsd={sampleUsd}
-          variant={isRoom && !ecuadorMarket ? "compact" : "full"}
+          variant={isRoom ? "compact" : "full"}
         />
       ) : null}
 
-      <p className="dropship-country-legal-short mt-3 text-[10px] leading-relaxed text-[#b8ff3c]">{legalShort}</p>
+      {!ecuadorMarket && !ukMarket && !japanMarket ? (
+        <p className="dropship-country-legal-short mt-3 text-[10px] leading-relaxed text-[#b8ff3c]">{legalShort}</p>
+      ) : null}
 
       <DropshipOrderTracker countryId={countryId} countryName={countryName} flag={flag} refreshKey={orderTick} />
 
-      {!isRoom || ecuadorMarket ? (
+      {!isRoom && !ecuadorMarket && !ukMarket && !japanMarket ? (
         <p className="dropship-market-legal mt-4 text-[10px] leading-relaxed text-[#8fa3c4]">
           {legal.full} · {dropshipMarketMeta.legalNote}
         </p>

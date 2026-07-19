@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=VT323&display=swap");
 @import "tailwindcss";
 @import "./dropship-market.css";
 
@@ -248,6 +248,22 @@ a {
     radial-gradient(ellipse 92% 78% at 50% 40%, transparent 0%, rgba(4, 8, 18, 0.08) 100%);
 }
 
+/* Lounges rail inside Command Center · keep arena-2030 tokens, no dark page fill */
+.command-center-room-content .arena-2030 {
+  background: transparent;
+  color: inherit;
+}
+
+.command-center-room-content .a2030-lounge-jackpot-pulse--hero {
+  width: 100%;
+  max-width: 100%;
+}
+
+.command-center-room-content .a2030-lounge-scroll-shell-hero {
+  width: 100%;
+  max-width: 100%;
+}
+
 .command-center-room-content {
   position: relative;
   z-index: 2;
@@ -329,6 +345,44 @@ a {
 .command-center-room-shell .command-center-room-content section > div.command-center-room-panel > * {
   position: relative;
   z-index: 2;
+}
+
+.cc-matrix-char {
+  cursor: pointer;
+  transition: transform 0.2s ease, text-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.cc-matrix-char:hover {
+  opacity: 1 !important;
+  transform: scale(1.15) translateY(-2px);
+  text-shadow:
+    0 0 8px rgba(0, 255, 65, 0.8),
+    0 0 20px rgba(0, 255, 65, 0.5),
+    0 0 40px rgba(0, 255, 65, 0.3);
+}
+
+.cc-quantum-card {
+  background: rgba(10, 16, 32, 0.5);
+  border-color: rgba(34, 211, 238, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  min-height: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.cc-quantum-card-sheen {
+  display: none;
+}
+
+.cc-quantum-card--gold {
+  background: rgba(245, 200, 66, 0.12);
+  border-color: rgba(245, 200, 66, 0.35);
+}
+
+.cc-quantum-card-gold-glow {
+  display: none;
 }
 
 .luxury-glass-card {
@@ -459,7 +513,7 @@ a {
 .luxury-plan-elders-gift-panel:hover::before,
 .luxury-plan-elders-gift-panel:focus-visible::before {
   opacity: 1;
-  animation: luxuryPlanEldersGiftBorderTrace 0.85s linear infinite;
+  animation: none;
 }
 
 .luxury-plan-elders-gift-shine {
@@ -494,7 +548,7 @@ a {
 
 .luxury-plan-elders-gift-panel:hover .luxury-plan-elders-gift-shine::after,
 .luxury-plan-elders-gift-panel:focus-visible .luxury-plan-elders-gift-shine::after {
-  animation: luxuryPlanEldersGiftShineSweep 0.72s ease-out forwards;
+  animation: none;
 }
 
 .luxury-plan-elders-gift-ticker {
@@ -516,13 +570,13 @@ a {
   display: flex;
   width: max-content;
   padding: 0.38rem 0;
-  animation: luxuryPlanEldersGiftTicker 26s linear infinite;
+  animation: none;
   will-change: transform;
 }
 
 .luxury-plan-elders-gift-panel:hover .luxury-plan-elders-gift-ticker-track,
 .luxury-plan-elders-gift-panel:focus-visible .luxury-plan-elders-gift-ticker-track {
-  animation-duration: 11s;
+  animation: none;
 }
 
 .luxury-plan-elders-gift-ticker-item {
@@ -727,7 +781,7 @@ a {
     0 0 28px rgba(215, 180, 106, 0.82),
     0 0 44px rgba(201, 162, 39, 0.58),
     0 0 64px rgba(138, 100, 32, 0.38);
-  animation: luxuryPlanGoldGlowPulse 3.2s ease-in-out infinite;
+  animation: none;
 }
 
 @keyframes luxuryPlanGoldGlowPulse {
@@ -925,7 +979,7 @@ a {
     0 0 18px rgba(186, 230, 253, 0.28);
   opacity: 0;
   will-change: transform, opacity;
-  animation: luxuryPlanSnowDropDrip cubic-bezier(0.28, 0.04, 0.42, 0.98) infinite;
+  animation: none;
   filter: blur(0.2px);
   mix-blend-mode: screen;
 }
@@ -2717,22 +2771,121 @@ a {
 .arena-2030-china-room .a2030-photo-scrim {
   background: linear-gradient(
     180deg,
-    rgba(1, 2, 8, 0.18) 0%,
+    rgba(1, 2, 8, 0.06) 0%,
     transparent 12%,
     transparent 82%,
-    rgba(1, 2, 8, 0.28) 100%
+    rgba(1, 2, 8, 0.12) 100%
   );
 }
 
 .arena-2030-china-room .a2030-bottom-fade--photo {
   height: 6rem;
   opacity: 1;
-  background: linear-gradient(0deg, rgba(1, 2, 8, 0.5) 0%, transparent 100%);
+  background: linear-gradient(0deg, rgba(1, 2, 8, 0.22) 0%, transparent 100%);
 }
 
 .arena-2030-china-room {
   --a2030-glass: rgba(4, 6, 14, 0.14);
   --glass-blur: 11px;
+}
+
+/* China room · tight aligned stack · no big gaps */
+.arena-2030-china-room .china-room-page-shell {
+  gap: 0;
+}
+
+.arena-2030-china-room .china-room-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 0.55rem;
+}
+
+.arena-2030-china-room .china-room-stack-head {
+  margin: 0;
+  padding: 0;
+}
+
+.arena-2030-china-room .china-room-stack-head .mt-6 {
+  margin-top: 0.35rem;
+}
+
+.arena-2030-china-room .china-room-stack-head .a2030-atmo-copy {
+  margin-top: 0.45rem;
+  margin-bottom: 0;
+  max-width: none;
+}
+
+.arena-2030-china-room .china-room-block {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.arena-2030-china-room .china-room-block-label {
+  margin: 0 0 0.35rem;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff4466;
+}
+
+.arena-2030-china-room .country-room-section {
+  margin-top: 0;
+}
+
+.arena-2030-china-room .china-room-games-tab-panel,
+.arena-2030-china-room .china-room-fashion-tab-panel,
+.arena-2030-china-room .china-room-food-tab-panel,
+.arena-2030-china-room .china-study-hub-tab-panel {
+  width: 100%;
+}
+
+.arena-2030-china-room .china-room-games-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.arena-2030-china-room .china-wushu-octagon-panel {
+  margin-top: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.arena-2030-china-room .china-wushu-octagon-panel .china-wushu-octagon-shell,
+.arena-2030-china-room .china-wushu-octagon-panel .china-wushu-octagon-copy {
+  width: 100%;
+}
+
+.arena-2030-china-room .room-sports-stack,
+.arena-2030-china-room .east-asia-game-panel--china,
+.arena-2030-china-room .room-china-gaming-hub,
+.arena-2030-china-room .arena-agora-live-stage,
+.arena-2030-china-room .country-room-live-gate-underneath {
+  width: 100%;
+  max-width: none;
+  gap: 0.45rem;
+}
+
+.arena-2030-china-room .ai-real-slot-country-panel--room {
+  margin-top: 0;
+  width: 100%;
+}
+
+.arena-2030-china-room .room-sports-stack.space-y-6 {
+  row-gap: 0.5rem;
+}
+
+.arena-2030-china-room .dropship-market-panel--room,
+.arena-2030-china-room .dropship-market-room-intro-panel,
+.arena-2030-china-room .a2030-holo-panel {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .arena-2030-china-room .a2030-holo-panel,
@@ -5325,6 +5478,19 @@ a {
 
 .arena-2030 .a2030-nav-actions {
   max-width: min(100%, 52rem);
+  /* Pack remaining actions tight after Dashboard removal — no empty slot */
+  flex-wrap: nowrap;
+  column-gap: 0.35rem;
+}
+
+.arena-2030 .a2030-nav-actions > :empty {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .arena-2030 .a2030-nav-actions {
+    column-gap: 0.45rem;
+  }
 }
 
 .arena-2030 .a2030-brand {
@@ -19291,6 +19457,37 @@ a {
   filter: drop-shadow(0 0 14px rgba(251, 191, 36, 0.75));
 }
 
+/* Mini clapping hands · same reel window / spin as the old numbers */
+.ai-real-slot-cine-jackpot-reel--clap {
+  min-width: calc(var(--reel-h) + 0.28rem);
+  padding: 0.04rem 0.1rem 0.06rem;
+}
+
+.ai-real-slot-cine-jackpot-reel-digit--clap {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: clamp(1.05rem, 3.4vw, 1.45rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: inherit;
+  -webkit-text-stroke: 0;
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.7)) drop-shadow(0 0 4px rgba(255, 255, 255, 0.25));
+  transform-origin: center;
+  animation: aiRealSlotCineJackpotClapPulse 0.85s ease-in-out infinite;
+}
+
+@keyframes aiRealSlotCineJackpotClapPulse {
+  0%,
+  100% {
+    transform: scale(0.92) rotate(-6deg);
+  }
+  50% {
+    transform: scale(1.08) rotate(6deg);
+  }
+}
+
 .ai-real-slot-cine-title-num {
   font-family: "Bebas Neue", "Orbitron", sans-serif;
   font-size: clamp(1.35rem, 4.2vw, 1.85rem);
@@ -19323,10 +19520,10 @@ a {
 
 .ai-real-slot-cine-scroll-row-sub .ai-real-slot-cine-scroll-item {
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.38rem, 0.95vw, 0.48rem);
+  font-size: clamp(0.42rem, 1.05vw, 0.54rem);
   font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: rgba(125, 211, 252, 0.92);
   text-shadow:
     0 0 10px rgba(56, 189, 248, 0.35),
@@ -19448,12 +19645,17 @@ a {
   .ai-real-slot-cine-scroll-track,
   .ai-real-slot-cine-movie-project,
   .ai-real-slot-cine-jackpot-reel-strip,
+  .ai-real-slot-cine-jackpot-reel-digit--clap,
   .ai-real-slot-cine-birthday-inline {
     animation: none;
   }
 
   .ai-real-slot-cine-jackpot-reel-strip {
     transform: translateY(calc(-11 * var(--reel-h)));
+  }
+
+  .ai-real-slot-cine-jackpot-reel-digit--clap {
+    transform: none;
   }
 
   .ai-real-slot-cine-movie-project {
@@ -23677,17 +23879,38 @@ a {
 
 .ai-real-slot-info-head {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.14rem 0.32rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
 }
 
 .ai-real-slot-info-head .ai-real-slot-name {
   margin: 0;
 }
 
+/* FREEDOM panel welcome · under title, full width, readable */
+.ai-real-slot-welcome-line {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  font-size: 0.62rem;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  color: rgba(186, 230, 253, 0.95);
+  text-wrap: pretty;
+}
+
 .ai-real-slot.ai-real-slot-dense .ai-real-slot-info-head {
   margin-top: 0;
+  gap: 0.16rem;
+}
+
+.ai-real-slot.ai-real-slot-dense .ai-real-slot-welcome-line {
+  margin-top: 0;
+  font-size: 0.54rem;
+  line-height: 1.35;
+  color: rgba(186, 230, 253, 0.96);
 }
 
 .ai-real-slot.ai-real-slot-dense .ai-real-slot-meta,
@@ -24106,6 +24329,24 @@ a {
   background: rgba(255, 92, 43, 0.16);
   color: #fb923c;
   border: 1px solid rgba(255, 92, 43, 0.28);
+}
+
+.ai-real-slot-btn-enter {
+  flex: 1 1 auto;
+  padding: 0.42rem 0.5rem;
+  background: rgba(251, 191, 36, 0.14);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 0.45rem;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.ai-real-slot-btn-enter:hover {
+  background: rgba(251, 191, 36, 0.28);
+  transform: scale(1.04);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -25320,8 +25561,993 @@ a {
   background: #0d0104;
 }
 
+/* Tight stack · no big gaps between Colombia room panels */
+.colombia-room-romantic .country-room-section {
+  margin-top: 0;
+}
+
+.colombia-room-romantic .colombia-room-body {
+  gap: 0.65rem;
+}
+
+.colombia-room-romantic .colombia-room-access-status {
+  margin-top: 0.5rem;
+}
+
+.colombia-room-romantic .room-country-games-panel,
+.colombia-room-romantic .cotswolds-game-board {
+  margin-top: 0.5rem;
+}
+
+.colombia-room-romantic .cotswolds-game-row {
+  margin-bottom: 0.35rem;
+}
+
+.colombia-game-room-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent !important;
+  border-radius: 1.25rem !important;
+  background:
+    linear-gradient(rgba(8, 12, 24, 0.52), rgba(6, 10, 20, 0.46)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(251, 113, 133, 0.45),
+      rgba(244, 63, 94, 0.2),
+      rgba(251, 113, 133, 0.35)
+    ) border-box !important;
+  box-shadow:
+    0 0 0 1px rgba(251, 113, 133, 0.08),
+    0 0 40px rgba(251, 113, 133, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 32px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+}
+
+.colombia-game-room-panel-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1200&q=80&fit=crop&crop=center");
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.18;
+  filter: saturate(1.3) brightness(0.8);
+}
+
+.colombia-game-room-panel-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 4, 12, 0.6) 0%,
+    rgba(8, 4, 12, 0.3) 40%,
+    rgba(8, 4, 12, 0.7) 100%
+  );
+}
+
+.colombia-game-room-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    165deg,
+    rgba(251, 113, 133, 0.12) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(251, 113, 133, 0.06) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.colombia-game-room-panel::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(251, 113, 133, 0.04) 60deg,
+    transparent 120deg
+  );
+  animation: colombiaCardSpin 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes colombiaCardSpin {
+  to { transform: rotate(360deg); }
+}
+
+.colombia-game-room-panel > * {
+  position: relative;
+  z-index: 2;
+}
+
+.colombia-game-room-panel header {
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.colombia-game-room-panel header h2 {
+  font-size: 0.55rem;
+  margin-top: 0;
+  line-height: 1;
+  letter-spacing: 0.12em;
+}
+
+.colombia-game-room-panel header p:first-child {
+  font-size: 4px;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.colombia-game-room-panel .cotswolds-game-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 0.5rem;
+}
+
+.colombia-game-room-row {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent !important;
+  border-radius: 0.85rem !important;
+  background:
+    linear-gradient(rgba(10, 4, 8, 0.65), rgba(6, 4, 8, 0.55)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(251, 113, 133, 0.35),
+      rgba(244, 63, 94, 0.15),
+      rgba(251, 113, 133, 0.25)
+    ) border-box !important;
+  box-shadow:
+    0 0 0 1px rgba(251, 113, 133, 0.06),
+    0 0 24px rgba(251, 113, 133, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px) saturate(110%);
+  -webkit-backdrop-filter: blur(4px) saturate(110%);
+  padding: 0.75rem;
+  gap: 0.25rem;
+  margin-bottom: 0;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 160px;
+  justify-content: flex-end;
+}
+
+.colombia-game-room-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    165deg,
+    rgba(251, 113, 133, 0.08) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.colombia-game-room-row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(251, 113, 133, 0.25), transparent);
+  pointer-events: none;
+}
+
+.colombia-game-room-row:hover {
+  border-color: rgba(251, 113, 133, 0.45) !important;
+  box-shadow:
+    0 0 0 1px rgba(251, 113, 133, 0.12),
+    0 0 32px rgba(251, 113, 133, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.colombia-game-room-row.cotswolds-game-row--live {
+  border-color: rgba(251, 113, 133, 0.55) !important;
+  box-shadow:
+    0 0 0 1px rgba(251, 113, 133, 0.15),
+    0 0 36px rgba(251, 113, 133, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.colombia-game-room-row .cotswolds-hero-rank {
+  display: none;
+}
+
+.colombia-game-room-row .cotswolds-game-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  width: 100%;
+}
+
+.colombia-game-room-row .cotswolds-game-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fecdd3;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.colombia-game-room-row .cotswolds-game-flag {
+  font-size: 1.2rem;
+}
+
+.colombia-game-room-row .cotswolds-game-tag {
+  font-size: 7px;
+  color: rgba(251, 113, 133, 0.7);
+  text-align: center;
+}
+
+.colombia-game-room-row .cotswolds-game-host {
+  font-size: 7px;
+  color: rgba(216, 222, 239, 0.5);
+  text-align: center;
+}
+
+.colombia-game-room-row .cotswolds-game-graph {
+  width: 60%;
+  margin-top: 0.15rem;
+}
+
+.colombia-game-room-row .cotswolds-game-graph-fill {
+  background: linear-gradient(90deg, rgba(251, 113, 133, 0.4), rgba(244, 63, 94, 0.6));
+}
+
+.colombia-game-room-row .cotswolds-game-meter {
+  font-size: 7px;
+  color: rgba(251, 113, 133, 0.6);
+}
+
+.colombia-game-room-row .cotswolds-game-cta {
+  font-size: 0.55rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.5rem;
+  background: rgba(251, 113, 133, 0.15);
+  border: 1px solid rgba(251, 113, 133, 0.25);
+  color: #fecdd3;
+  margin-top: 0.15rem;
+}
+
+.colombia-game-room-row .cotswolds-game-cta--live {
+  background: rgba(251, 113, 133, 0.3);
+  border-color: rgba(251, 113, 133, 0.5);
+}
+
+.colombia-game-room-row .cotswolds-game-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.95;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.colombia-game-room-row:hover .cotswolds-game-bg {
+  opacity: 1;
+}
+
+.colombia-game-room-row > *:not(.cotswolds-game-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+.colombia-game-room-row .cotswolds-game-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 4, 8, 0.05) 0%,
+    transparent 40%,
+    rgba(10, 4, 8, 0.2) 100%
+  );
+}
+
 .colombia-room-live-hero {
   width: 100%;
+}
+
+/* ═══════════ SPAIN GAME PANEL ═══════════ */
+.spain-game-panel {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(0, 200, 255, 0.3) !important;
+  border-radius: 1.25rem !important;
+  background:
+    linear-gradient(rgba(4, 8, 18, 0.8), rgba(2, 6, 14, 0.75)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(0, 200, 255, 0.5),
+      rgba(120, 80, 255, 0.25),
+      rgba(0, 255, 180, 0.4)
+    ) border-box !important;
+  box-shadow:
+    0 0 0 1px rgba(0, 200, 255, 0.1),
+    0 0 60px rgba(0, 200, 255, 0.08),
+    0 0 120px rgba(120, 80, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 200, 255, 0.1),
+    0 10px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  animation: quantumBorder 4s ease-in-out infinite, quantumBreath 6s ease-in-out infinite;
+}
+
+@keyframes quantumBorder {
+  0%, 100% { border-color: rgba(0, 200, 255, 0.3); }
+  33% { border-color: rgba(120, 80, 255, 0.4); }
+  66% { border-color: rgba(0, 255, 180, 0.35); }
+}
+
+@keyframes quantumBreath {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(0, 200, 255, 0.1), 0 0 60px rgba(0, 200, 255, 0.08), 0 0 120px rgba(120, 80, 255, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 200, 255, 0.1), 0 10px 40px rgba(0, 0, 0, 0.4); }
+  50% { box-shadow: 0 0 0 1px rgba(0, 200, 255, 0.18), 0 0 80px rgba(0, 200, 255, 0.12), 0 0 160px rgba(120, 80, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 200, 255, 0.15), 0 10px 40px rgba(0, 0, 0, 0.4); }
+}
+
+.spain-game-panel-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1400&q=90&fit=crop&crop=center");
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.3;
+  filter: saturate(1.5) brightness(0.7);
+  animation: quantumBgShift 8s ease-in-out infinite;
+}
+
+@keyframes quantumBgShift {
+  0%, 100% { filter: saturate(1.5) brightness(0.7); opacity: 0.3; }
+  50% { filter: saturate(1.8) brightness(0.75); opacity: 0.35; }
+}
+
+.spain-game-panel-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 8, 18, 0.65) 0%,
+    rgba(4, 8, 18, 0.35) 40%,
+    rgba(4, 8, 18, 0.75) 100%
+  );
+}
+
+.spain-game-panel-bg::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 10%, rgba(0, 200, 255, 0.6) 50%, transparent 90%);
+  filter: blur(1px);
+  z-index: 1;
+  animation: quantumHScan 4s linear infinite;
+}
+
+@keyframes quantumHScan {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: calc(100% + 2px); opacity: 0; }
+}
+
+.spain-game-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    165deg,
+    rgba(0, 200, 255, 0.15) 0%,
+    transparent 35%,
+    transparent 65%,
+    rgba(120, 80, 255, 0.08) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: spainPanelPulse 3s ease-in-out infinite;
+}
+
+@keyframes spainPanelPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.spain-game-panel::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(0, 200, 255, 0.06) 60deg,
+    transparent 120deg,
+    rgba(120, 80, 255, 0.04) 180deg,
+    transparent 240deg
+  );
+  animation: colombiaCardSpin 12s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.spain-game-panel > * {
+  position: relative;
+  z-index: 2;
+}
+
+.spain-game-panel header {
+  margin-bottom: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 1rem;
+  background:
+    linear-gradient(rgba(4, 8, 18, 0.6), rgba(2, 6, 14, 0.55)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(0, 200, 255, 0.45),
+      rgba(120, 80, 255, 0.2),
+      rgba(0, 255, 180, 0.35)
+    ) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 0.85rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 20px rgba(0, 200, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  animation: headerQuantumFlicker 6s ease-in-out infinite;
+}
+
+@keyframes headerQuantumFlicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.88; }
+  94% { opacity: 1; }
+  95% { opacity: 0.92; }
+  96% { opacity: 1; }
+}
+
+.spain-game-panel header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    rgba(0, 200, 255, 0.12) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(120, 80, 255, 0.06) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.spain-game-panel header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.7), transparent);
+  pointer-events: none;
+  animation: quantumScanLine 3s linear infinite;
+}
+
+@keyframes quantumScanLine {
+  0% { left: -60%; }
+  100% { left: 160%; }
+}
+
+.spain-game-panel header p:first-child {
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.22em !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+  background: linear-gradient(90deg, #c9a84c 0%, #f0d780 30%, #c9a84c 60%, #a8893a 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: euroKickerShimmer 6s linear infinite;
+}
+
+@keyframes euroKickerShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.spain-game-panel header h2 {
+  font-size: 2rem !important;
+  margin-top: 0 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.2em !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  background: linear-gradient(180deg, #f5f0e0 0%, #d4c9a0 40%, #b8a870 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 8px rgba(201, 168, 76, 0.2));
+}
+
+.spain-game-panel header p:last-of-type {
+  font-size: 11px !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.12em !important;
+  color: #5c3d1e !important;
+  text-shadow:
+    0 1px 0 #a07850,
+    0 -1px 0 #3a2510,
+    0 0 4px rgba(92, 61, 30, 0.3);
+  -webkit-text-fill-color: #5c3d1e;
+  animation: treeBarkPulse 6s ease-in-out infinite;
+}
+
+@keyframes treeBarkPulse {
+  0%, 100% { text-shadow: 0 1px 0 #a07850, 0 -1px 0 #3a2510, 0 0 4px rgba(92, 61, 30, 0.3); color: #5c3d1e; }
+  50% { text-shadow: 0 1px 0 #b08860, 0 -1px 0 #4a3018, 0 0 6px rgba(139, 111, 71, 0.4); color: #6b4a28; }
+}
+
+.panel-flag-glow {
+  position: relative;
+  display: inline-block;
+  filter: drop-shadow(0 0 6px rgba(0, 51, 153, 0.5)) drop-shadow(0 0 12px rgba(201, 168, 76, 0.3));
+  animation: euroFlagGlow 5s ease-in-out infinite;
+}
+
+@keyframes euroFlagGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(0, 51, 153, 0.5)) drop-shadow(0 0 12px rgba(201, 168, 76, 0.3)); }
+  50% { filter: drop-shadow(0 0 9px rgba(0, 51, 153, 0.65)) drop-shadow(0 0 16px rgba(201, 168, 76, 0.4)); }
+}
+
+.euro-locale-picker .room-locale-picker-summary {
+  background: linear-gradient(135deg, rgba(0, 51, 153, 0.15), rgba(201, 168, 76, 0.08));
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  color: #f5f0e0;
+  backdrop-filter: blur(8px);
+}
+
+.euro-locale-picker .room-locale-picker-summary:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  background: linear-gradient(135deg, rgba(0, 51, 153, 0.2), rgba(201, 168, 76, 0.12));
+}
+
+.euro-locale-picker .room-locale-picker-label {
+  color: rgba(201, 168, 76, 0.7);
+}
+
+.euro-locale-picker .room-locale-picker-current {
+  color: #f5f0e0;
+}
+
+.euro-locale-picker .room-locale-picker-panel {
+  background: linear-gradient(135deg, rgba(10, 8, 18, 0.95), rgba(6, 8, 14, 0.9));
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.euro-locale-picker .room-locale-picker-search {
+  background: rgba(0, 51, 153, 0.1);
+  border-color: rgba(201, 168, 76, 0.15);
+  color: #f5f0e0;
+}
+
+.euro-locale-picker .room-locale-picker-search::placeholder {
+  color: rgba(201, 168, 76, 0.4);
+}
+
+.euro-locale-picker .room-locale-picker-select {
+  background: rgba(0, 51, 153, 0.1);
+  border-color: rgba(201, 168, 76, 0.15);
+  color: #f5f0e0;
+}
+
+.euro-locale-picker .room-locale-picker-meta {
+  color: rgba(201, 168, 76, 0.5);
+}
+
+.room-sign-in-lang-panel {
+  background: linear-gradient(135deg, rgba(0, 51, 153, 0.12), rgba(201, 168, 76, 0.06));
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  backdrop-filter: blur(8px);
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.room-sign-in-lang-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.room-sign-in-lang-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(201, 168, 76, 0.6);
+}
+
+.room-sign-in-lang-status {
+  font-size: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(0, 51, 153, 0.6);
+}
+
+.room-sign-in-lang-detected {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 51, 153, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.room-sign-in-lang-flag {
+  font-size: 1.25rem;
+}
+
+.room-sign-in-lang-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f5f0e0;
+  flex: 1;
+}
+
+.room-sign-in-lang-arrow {
+  font-size: 10px;
+  color: rgba(201, 168, 76, 0.5);
+}
+
+.room-sign-in-lang-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(135deg, rgba(0, 51, 153, 0.3), rgba(0, 51, 153, 0.15));
+  border: 1.5px solid rgba(0, 51, 153, 0.4);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.room-sign-in-lang-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 51, 153, 0.45), rgba(0, 51, 153, 0.25));
+  border-color: rgba(201, 168, 76, 0.4);
+  box-shadow: 0 0 16px rgba(0, 51, 153, 0.2);
+}
+
+.room-sign-in-lang-btn-text {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #f5f0e0;
+}
+
+.room-sign-in-lang-btn-free {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(201, 168, 76, 0.8);
+  background: rgba(201, 168, 76, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.room-sign-in-lang-hint {
+  font-size: 9px;
+  color: rgba(201, 168, 76, 0.4);
+  text-align: center;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.spain-game-panel .cotswolds-game-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.6rem;
+}
+
+.spain-game-row {
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(0, 200, 255, 0.25) !important;
+  border-radius: 0.85rem !important;
+  background:
+    linear-gradient(rgba(10, 8, 4, 0.65), rgba(8, 6, 4, 0.55)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(250, 204, 21, 0.35),
+      rgba(234, 179, 8, 0.15),
+      rgba(250, 204, 21, 0.25)
+    ) border-box !important;
+  box-shadow:
+    0 0 0 1px rgba(250, 204, 21, 0.06),
+    0 0 24px rgba(250, 204, 21, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px) saturate(110%);
+  -webkit-backdrop-filter: blur(4px) saturate(110%);
+  padding: 0.75rem;
+  gap: 0.25rem;
+  margin-bottom: 0;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 160px;
+  justify-content: flex-end;
+}
+
+.spain-game-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(165deg, rgba(250, 204, 21, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.spain-game-row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(250, 204, 21, 0.25), transparent);
+  pointer-events: none;
+}
+
+.spain-game-row:hover {
+  border-color: rgba(0, 200, 255, 0.5) !important;
+  box-shadow: 0 0 0 1px rgba(0, 200, 255, 0.15), 0 0 40px rgba(0, 200, 255, 0.12), 0 0 80px rgba(120, 80, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px) scale(1.03);
+}
+
+.spain-game-row.cotswolds-game-row--live {
+  border-color: rgba(0, 200, 255, 0.6) !important;
+  box-shadow: 0 0 0 1px rgba(0, 200, 255, 0.2), 0 0 50px rgba(0, 200, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  animation: spainLivePulse 2s ease-in-out infinite;
+}
+
+@keyframes spainLivePulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(0, 200, 255, 0.2), 0 0 50px rgba(0, 200, 255, 0.15); }
+  50% { box-shadow: 0 0 0 1px rgba(0, 200, 255, 0.35), 0 0 70px rgba(0, 200, 255, 0.22); }
+}
+
+.spain-game-row .cotswolds-hero-rank { display: none; }
+.spain-game-row .cotswolds-game-main { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; width: 100%; }
+.spain-game-row .cotswolds-game-name { font-size: 0.72rem; font-weight: 800; color: #e0f7ff; display: flex; align-items: center; gap: 0.25rem; text-shadow: 0 0 8px rgba(0, 200, 255, 0.3); }
+.spain-game-row .cotswolds-game-flag { font-size: 1.3rem; }
+.spain-game-row .cotswolds-game-tag { font-size: 7.5px; color: rgba(0, 200, 255, 0.7); text-align: center; letter-spacing: 0.05em; }
+.spain-game-row .cotswolds-game-host { font-size: 7px; color: rgba(216, 222, 239, 0.5); text-align: center; }
+.spain-game-row .cotswolds-game-graph { width: 60%; margin-top: 0.15rem; }
+.spain-game-row .cotswolds-game-graph-fill { background: linear-gradient(90deg, rgba(0, 200, 255, 0.4), rgba(120, 80, 255, 0.6)); }
+.spain-game-row .cotswolds-game-meter { font-size: 7px; color: rgba(0, 200, 255, 0.6); }
+.spain-game-row .cotswolds-game-cta {
+  font-size: 0.58rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.18), rgba(120, 80, 255, 0.12));
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  color: #e0f7ff;
+  margin-top: 0.15rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+.spain-game-row .cotswolds-game-cta:hover {
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.3), rgba(120, 80, 255, 0.2));
+  border-color: rgba(0, 200, 255, 0.55);
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.2);
+}
+.spain-game-row .cotswolds-game-cta--live { background: linear-gradient(135deg, rgba(0, 200, 255, 0.35), rgba(120, 80, 255, 0.25)); border-color: rgba(0, 200, 255, 0.55); }
+
+.spain-game-row .cotswolds-game-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.95;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+  background-size: cover !important;
+  background-position: center !important;
+}
+.spain-game-row:hover .cotswolds-game-bg { opacity: 1; }
+.spain-game-row > *:not(.cotswolds-game-bg) { position: relative; z-index: 1; }
+.spain-game-row .cotswolds-game-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 4, 2, 0.3) 0%,
+    rgba(6, 4, 2, 0.1) 30%,
+    rgba(6, 4, 2, 0.2) 70%,
+    rgba(6, 4, 2, 0.5) 100%
+  );
+}
+
+/* ═══════════ ECUADOR GAME PANEL ═══════════ */
+.ecuador-game-room-panel--badass {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent !important;
+  border-radius: 1.25rem !important;
+  box-shadow:
+    0 0 0 1px rgba(252, 209, 22, 0.08),
+    0 0 40px rgba(252, 209, 22, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 32px rgba(0, 0, 0, 0.32);
+}
+
+.ecuador-game-room-panel--badass > * {
+  position: relative;
+  z-index: 2;
+}
+
+.ecuador-game-room-panel--badass header {
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ecuador-game-room-panel--badass header h2 {
+  font-size: 0.55rem;
+  margin-top: 0;
+  line-height: 1;
+  letter-spacing: 0.12em;
+}
+
+.ecuador-game-room-panel--badass header p:first-child {
+  font-size: 4px;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.ecuador-game-room-panel--badass .cotswolds-game-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 0.5rem;
+}
+
+.ecuador-game-room-row {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent !important;
+  border-radius: 0.85rem !important;
+  background:
+    linear-gradient(rgba(10, 8, 4, 0.65), rgba(8, 6, 4, 0.55)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(252, 209, 22, 0.35),
+      rgba(206, 17, 38, 0.15),
+      rgba(252, 209, 22, 0.25)
+    ) border-box !important;
+  box-shadow:
+    0 0 0 1px rgba(252, 209, 22, 0.06),
+    0 0 24px rgba(252, 209, 22, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px) saturate(110%);
+  -webkit-backdrop-filter: blur(4px) saturate(110%);
+  padding: 0.75rem;
+  gap: 0.25rem;
+  margin-bottom: 0;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 160px;
+  justify-content: flex-end;
+}
+
+.ecuador-game-room-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(165deg, rgba(252, 209, 22, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.ecuador-game-room-row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(252, 209, 22, 0.25), transparent);
+  pointer-events: none;
+}
+
+.ecuador-game-room-row:hover {
+  border-color: rgba(252, 209, 22, 0.45) !important;
+  box-shadow: 0 0 0 1px rgba(252, 209, 22, 0.12), 0 0 32px rgba(252, 209, 22, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.ecuador-game-room-row.cotswolds-game-row--live {
+  border-color: rgba(252, 209, 22, 0.55) !important;
+  box-shadow: 0 0 0 1px rgba(252, 209, 22, 0.15), 0 0 36px rgba(252, 209, 22, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.ecuador-game-room-row .cotswolds-hero-rank { display: none; }
+.ecuador-game-room-row .cotswolds-game-main { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; width: 100%; }
+.ecuador-game-room-row .cotswolds-game-name { font-size: 0.7rem; font-weight: 700; color: #fef9c3; display: flex; align-items: center; gap: 0.25rem; }
+.ecuador-game-room-row .cotswolds-game-flag { font-size: 1.2rem; }
+.ecuador-game-room-row .cotswolds-game-tag { font-size: 7px; color: rgba(252, 209, 22, 0.7); text-align: center; }
+.ecuador-game-room-row .cotswolds-game-host { font-size: 7px; color: rgba(216, 222, 239, 0.5); text-align: center; }
+.ecuador-game-room-row .cotswolds-game-graph { width: 60%; margin-top: 0.15rem; }
+.ecuador-game-room-row .cotswolds-game-graph-fill { background: linear-gradient(90deg, rgba(252, 209, 22, 0.4), rgba(206, 17, 38, 0.6)); }
+.ecuador-game-room-row .cotswolds-game-meter { font-size: 7px; color: rgba(252, 209, 22, 0.6); }
+.ecuador-game-room-row .cotswolds-game-cta { font-size: 0.55rem; padding: 0.2rem 0.6rem; border-radius: 0.5rem; background: rgba(252, 209, 22, 0.15); border: 1px solid rgba(252, 209, 22, 0.25); color: #fef9c3; margin-top: 0.15rem; }
+.ecuador-game-room-row .cotswolds-game-cta--live { background: rgba(252, 209, 22, 0.3); border-color: rgba(252, 209, 22, 0.5); }
+
+.ecuador-game-room-row .cotswolds-game-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.95;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+  background-size: cover !important;
+  background-position: center !important;
+}
+.ecuador-game-room-row:hover .cotswolds-game-bg { opacity: 1; }
+.ecuador-game-room-row > *:not(.cotswolds-game-bg) { position: relative; z-index: 1; }
+.ecuador-game-room-row .cotswolds-game-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(10, 8, 4, 0.05) 0%, transparent 40%, rgba(10, 8, 4, 0.2) 100%);
 }
 
 .colombia-room-live-hero .relative {
@@ -26691,6 +27917,53 @@ a {
     0 0 24px rgba(252, 209, 22, 0.08);
 }
 
+.ecuador-game-room-panel--badass {
+  position: relative;
+  overflow: hidden;
+}
+
+.ecuador-game-room-panel--badass::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, #ce1126, #fcd116, #0066a1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ecuador-room .ecuador-the-pit-badass .ecuador-game-room-row {
+  border-width: 1.5px;
+  border-color: rgba(252, 209, 22, 0.4);
+  background: linear-gradient(135deg, rgba(12, 6, 6, 0.92), rgba(28, 12, 8, 0.85));
+  box-shadow: 0 0 18px rgba(206, 17, 38, 0.12);
+}
+
+.ecuador-room .ecuador-the-pit-badass .ecuador-game-room-row:hover,
+.ecuador-room .ecuador-the-pit-badass .ecuador-game-room-row.cotswolds-game-row--live {
+  border-color: rgba(252, 209, 22, 0.7);
+  box-shadow:
+    0 0 28px rgba(206, 17, 38, 0.28),
+    0 0 16px rgba(252, 209, 22, 0.18);
+  transform: translateY(-1px);
+}
+
+.ecuador-room .ecuador-the-pit-badass .cotswolds-game-cta {
+  border-color: rgba(252, 209, 22, 0.55);
+  background: linear-gradient(145deg, rgba(206, 17, 38, 0.9), rgba(120, 10, 20, 0.85));
+  color: #fef9c3;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 0 16px rgba(206, 17, 38, 0.4);
+}
+
+.ecuador-room .ecuador-the-pit-badass .cotswolds-hero-rank {
+  border-color: rgba(252, 209, 22, 0.45);
+  background: rgba(206, 17, 38, 0.2);
+  color: #fcd116;
+}
+
 .ecuador-live-slot-video {
   display: block;
   background: #0a1410;
@@ -26734,6 +28007,79 @@ a {
   width: 100%;
 }
 
+.ecuador-flash-live-panel {
+  width: 100%;
+}
+
+/* Nudge shell further right under Bienvenidos */
+.ecuador-room .ecuador-flash-live-panel {
+  margin-left: 9rem;
+  margin-right: 0;
+  width: calc(100% - 9rem);
+}
+
+@media (min-width: 640px) {
+  .ecuador-room .ecuador-flash-live-panel {
+    margin-left: 13rem;
+    width: calc(100% - 13rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ecuador-room .ecuador-flash-live-panel {
+    margin-left: 16.5rem;
+    width: calc(100% - 16.5rem);
+  }
+}
+
+.ecuador-live-slots-row {
+  width: 100%;
+  align-items: stretch;
+}
+
+.ecuador-live-slots-row .ecuador-live-slot-half,
+.ecuador-live-slots-row [id^="ecuador-live-slot"] {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.ecuador-room .ecuador-live-slot-badass.live-slot-root {
+  border-color: rgba(252, 209, 22, 0.5);
+  background:
+    radial-gradient(circle at top right, rgba(206, 17, 38, 0.18), transparent 50%),
+    linear-gradient(155deg, rgba(8, 4, 4, 0.96), rgba(14, 10, 4, 0.94));
+  box-shadow:
+    0 0 28px rgba(206, 17, 38, 0.22),
+    0 0 16px rgba(252, 209, 22, 0.12),
+    inset 0 1px 0 rgba(252, 209, 22, 0.18);
+}
+
+.ecuador-room .ecuador-live-slot-badass .text-red-400 {
+  color: #ff6b6b;
+  text-shadow: 0 0 14px rgba(206, 17, 38, 0.55);
+  letter-spacing: 0.18em;
+}
+
+.ecuador-room .ecuador-live-slot-badass button.mt-4.w-full.rounded-xl {
+  border-width: 2px;
+  border-color: #fcd116;
+  background: linear-gradient(145deg, #ce1126, #a00e1e 55%, #6b0a14);
+  box-shadow:
+    0 0 24px rgba(206, 17, 38, 0.55),
+    0 0 12px rgba(252, 209, 22, 0.25);
+  letter-spacing: 0.14em;
+}
+
+.ecuador-room .ecuador-live-slot-badass button.mt-4.w-full.rounded-xl:hover {
+  filter: brightness(1.1);
+  box-shadow:
+    0 0 32px rgba(206, 17, 38, 0.7),
+    0 0 16px rgba(252, 209, 22, 0.3);
+}
+
 .ecuador-live-slot {
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.35),
@@ -26766,9 +28112,94 @@ a {
   background: rgba(4, 10, 8, 0.55);
 }
 
-/* Ecuador room · stacked panels · gate under gate · full width */
+/* Ecuador room · tight aligned stack · no big gaps */
+.ecuador-room .ecuador-room-page-shell {
+  gap: 0;
+}
+
+.ecuador-room .ecuador-room-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 0.55rem;
+}
+
+.ecuador-room .ecuador-room-stack-head {
+  margin: 0;
+  padding: 0;
+}
+
+.ecuador-room .ecuador-room-tagline {
+  margin-top: 0.4rem;
+  margin-bottom: 0;
+}
+
+/* Welcome + live flash glued as one unit under the title */
+.ecuador-room .ecuador-welcome-live-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 0.4rem;
+}
+
+.ecuador-room .ecuador-welcome-live-cluster .ecuador-room-block.country-room-live-stack {
+  margin-top: 0;
+}
+
+.ecuador-room .ecuador-room-block {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ecuador-room .country-room-live-stack {
+  margin-top: 0;
+}
+
+.ecuador-room .country-room-section {
+  margin-top: 0;
+}
+
+.ecuador-room .ecuador-room-games-tab-panel,
+.ecuador-room .ecuador-room-fashion-tab-panel,
+.ecuador-room .ecuador-room-food-tab-panel,
+.ecuador-room .ecuador-study-hub-tab-panel {
+  width: 100%;
+}
+
+.ecuador-room .ecuador-room-games-tab-panel.space-y-2,
+.ecuador-room .ecuador-room-fashion-tab-panel.space-y-2,
+.ecuador-room .ecuador-room-food-tab-panel.space-y-2,
+.ecuador-room .ecuador-study-hub-tab-panel.space-y-2,
+.ecuador-room .ecuador-room-games-tab-panel.space-y-4,
+.ecuador-room .ecuador-room-fashion-tab-panel.space-y-4,
+.ecuador-room .ecuador-room-food-tab-panel.space-y-4,
+.ecuador-room .ecuador-study-hub-tab-panel.space-y-4 {
+  gap: 0.55rem;
+}
+
+.ecuador-room .ecuador-room-games-tab-panel > :not([hidden]) ~ :not([hidden]),
+.ecuador-room .ecuador-room-fashion-tab-panel > :not([hidden]) ~ :not([hidden]),
+.ecuador-room .ecuador-room-food-tab-panel > :not([hidden]) ~ :not([hidden]),
+.ecuador-room .ecuador-study-hub-tab-panel > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0.55rem;
+}
+
+.ecuador-room .ecuador-room-block .country-room-section,
+.ecuador-room .ecuador-room-block > * {
+  width: 100%;
+  max-width: none;
+}
+
+.ecuador-room .ecuador-stat-panels-grid {
+  gap: 0.55rem;
+}
+
 .ecuador-room .ecuador-room-body {
   width: 100%;
+  gap: 0.55rem;
 }
 
 .ecuador-room .country-room-live-gate-underneath,
@@ -26963,6 +28394,74 @@ a {
   font-size: clamp(1.25rem, 3.8vw, 1.75rem);
 }
 
+/* Ecuador · cities & culture — distinct indigo / violet (not gold fashion / red food) */
+.ecuador-cities-culture-panel {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(160deg, rgba(8, 10, 28, 0.96), rgba(18, 8, 36, 0.94), rgba(4, 12, 24, 0.95)) padding-box,
+    linear-gradient(
+        135deg,
+        rgba(99, 102, 241, 0.65),
+        rgba(167, 139, 250, 0.55),
+        rgba(56, 189, 248, 0.42),
+        rgba(129, 140, 248, 0.5)
+      )
+      border-box;
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.14),
+    0 0 52px rgba(129, 140, 248, 0.18),
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(199, 210, 254, 0.1);
+}
+
+.ecuador-cities-culture-panel-shine {
+  background: linear-gradient(
+    135deg,
+    rgba(165, 180, 252, 0.12) 0%,
+    transparent 38%,
+    transparent 62%,
+    rgba(56, 189, 248, 0.08) 100%
+  );
+}
+
+.ecuador-cities-culture-panel-grid {
+  background-image:
+    linear-gradient(rgba(129, 140, 248, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 88%);
+}
+
+.ecuador-cities-culture-title {
+  background: linear-gradient(90deg, #818cf8 0%, #e0e7ff 45%, #38bdf8 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(99, 102, 241, 0.4));
+}
+
+.ecuador-cities-culture-chip {
+  border-color: rgba(129, 140, 248, 0.32);
+  background: linear-gradient(160deg, rgba(20, 16, 48, 0.88), rgba(8, 12, 28, 0.78));
+  box-shadow: inset 0 1px 0 rgba(199, 210, 254, 0.06);
+}
+
+.ecuador-cities-culture-chip:hover {
+  border-color: rgba(165, 180, 252, 0.55);
+  box-shadow:
+    0 0 18px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(199, 210, 254, 0.1);
+}
+
+.ecuador-cities-culture-chip .ecuador-elite-2028-chip-photo {
+  border-color: rgba(129, 140, 248, 0.4);
+}
+
+.ecuador-cities-culture-chip .ecuador-elite-2028-chip-label {
+  color: #c7d2fe;
+}
+
 .ecuador-food-panel-chip {
   border-color: rgba(239, 68, 68, 0.28);
   background: linear-gradient(160deg, rgba(24, 8, 8, 0.82), rgba(4, 10, 8, 0.72));
@@ -26999,7 +28498,7 @@ a {
 .ecuador-stat-panels-grid {
   display: grid;
   width: 100%;
-  gap: 0.75rem;
+  gap: 0.55rem;
   align-items: stretch;
   grid-template-columns: minmax(0, 1fr);
 }
@@ -27019,26 +28518,30 @@ a {
 .ecuador-stat-panel-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
   height: 100%;
   min-height: 100%;
 }
 
+.ecuador-stat-panel-card--pro {
+  overflow: hidden;
+}
+
 .ecuador-stat-panel-card-head {
   display: flex;
   width: 100%;
-  min-height: 3.35rem;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  min-height: auto;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .ecuador-stat-panel-card-media {
   display: flex;
   width: 100%;
-  justify-content: center;
-  margin-top: 0.75rem;
+  justify-content: stretch;
+  margin-top: 0;
 }
 
 .ecuador-stat-panel-card-foot {
@@ -27046,25 +28549,23 @@ a {
   width: 100%;
   flex: 1 1 auto;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
-  margin-top: 0.75rem;
+  margin-top: 0;
 }
 
 .ecuador-stat-panel-card-detail {
-  display: flex;
+  display: block;
   width: 100%;
-  min-height: 2.6rem;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  min-height: 0;
+  text-align: left;
 }
 
 .ecuador-iron-fang-stat-panel {
-  border-color: rgba(161, 161, 170, 0.32) !important;
+  border-color: rgba(252, 209, 22, 0.28) !important;
   background:
-    linear-gradient(165deg, rgba(24, 24, 27, 0.82), rgba(9, 9, 11, 0.72)) padding-box,
-    linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(161, 161, 170, 0.2), rgba(250, 204, 21, 0.22))
+    linear-gradient(165deg, rgba(8, 22, 16, 0.92), rgba(4, 10, 8, 0.88)) padding-box,
+    linear-gradient(135deg, rgba(206, 17, 38, 0.28), rgba(252, 209, 22, 0.2), rgba(0, 201, 167, 0.12))
       border-box !important;
 }
 
@@ -27072,7 +28573,7 @@ a {
   width: 100%;
   height: 100%;
   cursor: pointer;
-  text-align: center;
+  text-align: left;
   transition:
     border-color 0.2s ease,
     transform 0.2s ease,
@@ -27081,8 +28582,8 @@ a {
 
 .ecuador-stat-panel--playable:hover {
   transform: translateY(-2px);
-  border-color: rgba(252, 209, 22, 0.45) !important;
-  box-shadow: 0 0 22px rgba(206, 17, 38, 0.16);
+  border-color: rgba(252, 209, 22, 0.5) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 20px rgba(252, 209, 22, 0.08);
 }
 
 .ecuador-stat-panel--playable:focus-visible {
@@ -27093,10 +28594,10 @@ a {
 .ecuador-stat-panel-game-video-wrap {
   position: relative;
   width: 100%;
-  max-width: 11.5rem;
+  max-width: none;
   overflow: hidden;
   border-radius: 0.75rem;
-  border: 1px solid rgba(252, 209, 22, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background: #0a1410;
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.42),
@@ -27104,7 +28605,7 @@ a {
 }
 
 .ecuador-stat-panel-card-media .ecuador-stat-panel-game-video-wrap {
-  margin-inline: auto;
+  margin-inline: 0;
 }
 
 .ecuador-stat-panel-game-video {
@@ -27119,33 +28620,21 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(4, 10, 8, 0.55) 0%, transparent 52%);
+  background: linear-gradient(to top, rgba(4, 10, 8, 0.45) 0%, transparent 48%);
   pointer-events: none;
 }
 
 .ecuador-stat-panel-game-video-live {
-  position: absolute;
-  left: 0.35rem;
-  top: 0.35rem;
-  z-index: 2;
-  border-radius: 999px;
-  border: 1px solid rgba(239, 68, 68, 0.45);
-  background: rgba(24, 6, 8, 0.78);
-  padding: 0.12rem 0.42rem;
-  font-size: 7px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  color: #fca5a5;
-  text-shadow: 0 0 8px rgba(239, 68, 68, 0.45);
+  display: none;
 }
 
 .ecuador-iron-fang-kicker {
-  color: #fca5a5;
+  color: rgba(252, 209, 22, 0.9);
   letter-spacing: 0.16em;
 }
 
 .ecuador-iron-fang-stat-title {
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   line-height: 1.2;
   text-wrap: balance;
 }
@@ -27332,6 +28821,475 @@ a {
 .ecuador-live-cta--live {
   color: #86efac;
   text-shadow: 0 0 10px rgba(52, 211, 153, 0.45);
+}
+
+/* ── Trinidad Room ── */
+.trinidad-room-slideshow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #0a0608;
+}
+
+.trinidad-room-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 1.5s ease,
+    transform 6s ease;
+}
+
+.trinidad-room-slide--active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.trinidad-room-backdrop-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 6, 8, 0.35) 0%,
+    rgba(10, 6, 8, 0.15) 32%,
+    rgba(10, 6, 8, 0.2) 68%,
+    rgba(10, 6, 8, 0.55) 100%
+  );
+}
+
+/* ── Trinidad Showcase — Lost Tribe Hero Movement ── */
+@keyframes trinidadShowcaseKenBurns {
+  0% { transform: scale(1) translate(0, 0); }
+  25% { transform: scale(1.08) translate(-1.5%, -0.8%); }
+  50% { transform: scale(1.12) translate(1%, -1.5%); }
+  75% { transform: scale(1.06) translate(-0.5%, 0.5%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+@keyframes trinidadShowcaseFloatParticle {
+  0% { opacity: 0; transform: translateY(0) translateX(0) scale(0.5); }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-80px) translateX(12px) scale(1.2); }
+}
+
+@keyframes trinidadShowcaseShimmerSweep {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(200%) rotate(25deg); }
+}
+
+@keyframes trinidadShowcaseGlowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(251,191,36,0.15), 0 0 40px rgba(251,191,36,0.08), inset 0 0 20px rgba(251,191,36,0.03); }
+  50% { box-shadow: 0 0 30px rgba(251,191,36,0.3), 0 0 60px rgba(251,191,36,0.15), inset 0 0 30px rgba(251,191,36,0.06); }
+}
+
+.trinidad-showcase-hero-img {
+  animation: trinidadShowcaseKenBurns 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.trinidad-showcase-hero-card {
+  animation: trinidadShowcaseGlowPulse 3s ease-in-out infinite;
+  will-change: box-shadow;
+}
+
+.trinidad-showcase-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fbbf24, transparent);
+  pointer-events: none;
+  animation: trinidadShowcaseFloatParticle 3s ease-in-out infinite;
+}
+
+.trinidad-showcase-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.trinidad-showcase-shimmer::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(251,191,36,0.06) 40%,
+    rgba(251,191,36,0.12) 50%,
+    rgba(251,191,36,0.06) 60%,
+    transparent 100%
+  );
+  animation: trinidadShowcaseShimmerSweep 4s ease-in-out infinite;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .trinidad-showcase-hero-img,
+  .trinidad-showcase-hero-card,
+  .trinidad-showcase-particle,
+  .trinidad-showcase-shimmer::after {
+    animation: none !important;
+  }
+}
+
+/* ── Trinidad Games — SEGA Arcade Cabinet ── */
+.trinidad-arcade-panel {
+  position: relative;
+  border: 2px solid #4502ff;
+  border-radius: 0;
+  background: #0a0c1a;
+  padding: 1.25rem;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 2px #4502ff,
+    0 0 0 4px #ffda14,
+    0 0 0 6px #16a34a,
+    0 0 0 8px #dc2626,
+    0 0 28px rgba(69, 2, 255, 0.25);
+}
+
+.trinidad-arcade-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  z-index: 1;
+}
+
+.trinidad-arcade-header {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.trinidad-arcade-label {
+  font-family: "VT323", monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffda14;
+}
+
+.trinidad-arcade-title {
+  font-family: "VT323", monospace;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(105deg, #4502ff 0%, #7c3aed 30%, #ffda14 70%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 14px rgba(69, 2, 255, 0.5)) drop-shadow(0 0 28px rgba(255, 218, 20, 0.3));
+  margin-top: 0.25rem;
+}
+
+.trinidad-arcade-subtitle {
+  font-family: "VT323", monospace;
+  font-size: 0.8rem;
+  color: rgba(125, 211, 252, 0.7);
+  margin-top: 0.25rem;
+  letter-spacing: 0.05em;
+}
+
+.trinidad-arcade-divider {
+  height: 2px;
+  margin: 0.75rem auto;
+  width: 60%;
+  background: linear-gradient(90deg, transparent, #4502ff, #ffda14, #4502ff, transparent);
+  border: none;
+}
+
+/* Game row — arcade style */
+.trinidad-arcade-row {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  border: 2px solid rgba(69, 2, 255, 0.4);
+  border-radius: 0;
+  background: linear-gradient(135deg, rgba(10, 12, 26, 0.95), rgba(6, 8, 18, 0.9));
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.trinidad-arcade-row:hover {
+  border-color: #ffda14;
+  box-shadow:
+    0 0 16px rgba(255, 218, 20, 0.2),
+    0 0 0 1px rgba(255, 218, 20, 0.1);
+  transform: translateY(-1px);
+}
+
+.trinidad-arcade-row--live {
+  border-color: #16a34a;
+  box-shadow:
+    0 0 18px rgba(22, 163, 74, 0.25),
+    inset 0 0 20px rgba(22, 163, 74, 0.05);
+}
+
+/* Rank badge — pixel style */
+.trinidad-arcade-rank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 2px solid rgba(255, 218, 20, 0.45);
+  border-radius: 0;
+  background: rgba(69, 2, 255, 0.15);
+  font-family: "VT323", monospace;
+  color: #ffda14;
+  flex-shrink: 0;
+}
+
+.trinidad-arcade-rank-hash {
+  font-size: 0.6rem;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.trinidad-arcade-rank-num {
+  font-size: 1.3rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+/* Game content */
+.trinidad-arcade-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.trinidad-arcade-tag {
+  font-family: "VT323", monospace;
+  font-size: 0.7rem;
+  color: rgba(125, 211, 252, 0.65);
+  letter-spacing: 0.05em;
+}
+
+.trinidad-arcade-name {
+  font-family: "VT323", monospace;
+  font-size: 1.15rem;
+  color: #ffda14;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.trinidad-arcade-emoji {
+  font-size: 1rem;
+}
+
+.trinidad-arcade-host {
+  font-family: "VT323", monospace;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.03em;
+}
+
+/* XP bar */
+.trinidad-arcade-xp {
+  width: 100%;
+  height: 6px;
+  background: rgba(69, 2, 255, 0.2);
+  border: 1px solid rgba(69, 2, 255, 0.35);
+  border-radius: 0;
+  overflow: hidden;
+  margin-top: 0.2rem;
+}
+
+.trinidad-arcade-xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4502ff, #ffda14);
+  transition: width 0.6s ease;
+  border-radius: 0;
+}
+
+.trinidad-arcade-xp-fill--live {
+  background: linear-gradient(90deg, #16a34a, #4ade80);
+}
+
+.trinidad-arcade-meter {
+  font-family: "VT323", monospace;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.1rem;
+}
+
+/* CTA button — chunky pill with offset block */
+.trinidad-arcade-cta {
+  position: relative;
+  font-family: "VT323", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0a0c1a;
+  background: #ffda14;
+  border: 2px solid #ffda14;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  z-index: 1;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+  box-shadow: 3px 3px 0 0 rgba(69, 2, 255, 0.7);
+}
+
+.trinidad-arcade-cta:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 0 rgba(69, 2, 255, 0.7);
+}
+
+.trinidad-arcade-cta:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 0 rgba(69, 2, 255, 0.7);
+}
+
+.trinidad-arcade-cta--live {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #fff;
+  box-shadow: 3px 3px 0 0 rgba(22, 163, 74, 0.5);
+  animation: trinidadArcadeLivePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes trinidadArcadeLivePulse {
+  0%, 100% { box-shadow: 3px 3px 0 0 rgba(22, 163, 74, 0.5), 0 0 12px rgba(22, 163, 74, 0.3); }
+  50% { box-shadow: 3px 3px 0 0 rgba(22, 163, 74, 0.5), 0 0 20px rgba(22, 163, 74, 0.5); }
+}
+
+/* Viral games pills */
+.trinidad-arcade-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  position: relative;
+  z-index: 2;
+}
+
+.trinidad-arcade-pill {
+  font-family: "VT323", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: #7dd3fc;
+  border: 1px solid rgba(69, 2, 255, 0.4);
+  border-radius: 0;
+  padding: 0.2rem 0.55rem;
+  background: rgba(69, 2, 255, 0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .trinidad-arcade-cta--live {
+    animation: none !important;
+  }
+}
+
+/* ── Trinidad Study Hub — Teacher Live Slots ── */
+.trinidad-teacher-slot {
+  position: relative;
+}
+
+.trinidad-teacher-card {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trinidad-teacher-card:hover {
+  transform: translateY(-2px);
+}
+
+.trinidad-teacher-live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: trinidadTeacherLivePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes trinidadTeacherLivePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(239, 68, 68, 0.6); }
+  50% { opacity: 0.5; box-shadow: 0 0 10px rgba(239, 68, 68, 0.8); }
+}
+
+.trinidad-teacher-avatar {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trinidad-teacher-card:hover .trinidad-teacher-avatar {
+  transform: scale(1.05);
+}
+
+.trinidad-teacher-join-btn {
+  position: relative;
+  box-shadow: 0 0 12px rgba(134, 239, 172, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.trinidad-teacher-join-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(134, 239, 172, 0.5);
+}
+
+.trinidad-teacher-join-btn:active {
+  transform: translateY(0);
+}
+
+.trinidad-teacher-apply-btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.trinidad-teacher-apply-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.25);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .trinidad-teacher-live-dot {
+    animation: none !important;
+  }
 }
 
 /* Built country rooms · aligned section rhythm */
@@ -27674,7 +29632,7 @@ a {
 @keyframes east-asia-spark-ring {
   0% {
     transform: scale(0.5);
-    opacity: 0.8;
+  opacity: 0.95;
   }
   100% {
     transform: scale(1.6);
@@ -28020,20 +29978,24 @@ a {
 }
 
 .china-wushu-octagon-panel {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
 
 .china-wushu-octagon-shell {
   position: relative;
   overflow: hidden;
-  border-radius: 1.1rem;
+  border-radius: 0.9rem;
   border: 1px solid rgba(56, 189, 248, 0.35);
-  aspect-ratio: 16 / 11;
-  min-height: clamp(420px, 72vw, 640px);
+  aspect-ratio: 21 / 9;
+  min-height: clamp(160px, 28vw, 240px);
+  max-height: 260px;
   background: #020617;
   box-shadow:
-    0 24px 64px rgba(0, 0, 0, 0.62),
-    0 0 48px rgba(37, 99, 235, 0.18),
+    0 16px 40px rgba(0, 0, 0, 0.55),
+    0 0 32px rgba(37, 99, 235, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -28091,11 +30053,11 @@ a {
 
 .china-wushu-octagon-cage {
   position: absolute;
-  top: 15%;
+  top: 8%;
   left: 50%;
   z-index: 2;
-  width: min(30vw, 220px);
-  max-width: 34%;
+  width: min(22vw, 150px);
+  max-width: 28%;
   aspect-ratio: 1 / 1;
   transform: translateX(-50%);
 }
@@ -28134,23 +30096,23 @@ a {
 .china-wushu-octagon-4k-badge {
   position: absolute;
   left: 50%;
-  bottom: -0.55rem;
+  bottom: -0.35rem;
   z-index: 3;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
   transform: translateX(-50%);
   border-radius: 999px;
   border: 1px solid rgba(56, 189, 248, 0.55);
   background: rgba(2, 6, 23, 0.88);
-  padding: 0.28rem 0.7rem;
-  font-size: 8px;
+  padding: 0.18rem 0.5rem;
+  font-size: 7px;
   font-weight: 900;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #bae6fd;
   white-space: nowrap;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.28);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.28);
 }
 
 .china-wushu-octagon-live-dot {
@@ -28163,21 +30125,21 @@ a {
 }
 
 .china-wushu-octagon-copy {
-  position: absolute;
-  inset: auto 0 0;
+  position: relative;
   z-index: 4;
-  padding: 0.85rem 0.9rem 1rem;
+  flex-shrink: 0;
+  padding: 0;
   perspective: 900px;
 }
 
 .china-wushu-octagon-neural-shell {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 0.65rem;
-  border: 1px solid rgba(56, 189, 248, 0.28);
-  background: rgba(2, 6, 23, 0.74);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: rgba(2, 6, 23, 0.94);
   box-shadow:
-    0 0 24px rgba(56, 189, 248, 0.12),
+    0 0 24px rgba(56, 189, 248, 0.16),
     inset 0 0 28px rgba(15, 23, 42, 0.55);
   animation: china-wushu-neural-shell-pulse 3.2s ease-in-out infinite;
   transform-style: preserve-3d;
@@ -28260,45 +30222,54 @@ a {
 .china-wushu-octagon-neural-inner {
   position: relative;
   z-index: 3;
-  padding: 0.75rem 0.85rem;
+  padding: 0.65rem 0.85rem 0.75rem;
+  overflow: visible;
 }
 
 .china-wushu-octagon-origin-title {
-  margin: 0 0 0.55rem;
+  margin: 0 0 0.4rem;
   text-align: center;
-  font-size: clamp(1rem, 3.8vw, 1.2rem);
+  font-size: clamp(1.05rem, 3.2vw, 1.25rem);
   font-weight: 900;
   letter-spacing: 0.06em;
   text-transform: none;
   color: #f8fafc;
   text-shadow:
-    0 0 20px rgba(56, 189, 248, 0.35),
-    0 2px 6px rgba(0, 0, 0, 0.75);
+    0 0 20px rgba(56, 189, 248, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.85);
 }
 
 .china-wushu-octagon-origin-lead,
 .china-wushu-octagon-origin-line {
   margin: 0;
-  font-size: 12px;
+  font-size: clamp(0.78rem, 1.9vw, 0.88rem);
   font-weight: 500;
-  line-height: 1.65;
-  color: rgba(241, 245, 249, 0.94);
+  line-height: 1.5;
+  color: #e2e8f0;
+  text-align: left;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+}
+
+.china-wushu-octagon-origin-lead {
+  margin-bottom: 0.35rem;
+  text-align: center;
+  font-weight: 600;
 }
 
 .china-wushu-octagon-origin-line {
-  margin-top: 0.55rem;
+  margin-top: 0.45rem;
 }
 
 .china-wushu-octagon-origin-line strong {
   font-weight: 800;
-  color: #e0f2fe;
+  color: #bae6fd;
 }
 
 @media (min-width: 720px) {
   .china-wushu-octagon-cage {
-    top: 14%;
-    width: min(26vw, 240px);
-    max-width: 30%;
+    top: 6%;
+    width: min(18vw, 160px);
+    max-width: 24%;
   }
 }
 
@@ -28460,4 +30431,346 @@ a {
 /* Back one step */
 .site-footer-terms {
   margin-top: -0.75rem;
+}
+
+/* Spain kitchen · Paella + Jamón Ibérico only · steam on hover (visible) */
+.spain-food-steam-card {
+  isolation: isolate;
+  z-index: 1;
+}
+
+.spain-food-steam-card:hover {
+  z-index: 5;
+}
+
+.spain-food-emoji {
+  isolation: isolate;
+}
+
+.spain-food-steam {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  bottom: 70%;
+  width: 2.8rem;
+  height: 2.6rem;
+  margin-left: -1.4rem;
+  z-index: 3;
+  overflow: visible;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.spain-food-steam-card:hover .spain-food-steam,
+.spain-food-steam-card:focus-within .spain-food-steam {
+  opacity: 1;
+}
+
+.spain-food-steam-wisp {
+  position: absolute;
+  bottom: 0;
+  width: 0.85rem;
+  height: 1.1rem;
+  border-radius: 999px 999px 40% 40%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.55) 35%,
+    rgba(255, 248, 230, 0.35) 70%,
+    transparent 100%
+  );
+  filter: blur(3px);
+  opacity: 0;
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+}
+
+.spain-food-steam-card:hover .spain-food-steam-wisp,
+.spain-food-steam-card:focus-within .spain-food-steam-wisp {
+  animation: spain-food-steam-rise 1.35s ease-out infinite;
+}
+
+.spain-food-steam-wisp--1 {
+  left: 0.15rem;
+  animation-delay: 0s;
+}
+
+.spain-food-steam-wisp--2 {
+  left: 0.85rem;
+  width: 1rem;
+  height: 1.25rem;
+  animation-delay: 0.22s;
+}
+
+.spain-food-steam-wisp--3 {
+  left: 1.55rem;
+  animation-delay: 0.45s;
+}
+
+.spain-food-steam-wisp--4 {
+  left: 0.55rem;
+  width: 0.75rem;
+  height: 1rem;
+  animation-delay: 0.68s;
+}
+
+@keyframes spain-food-steam-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0.2rem, 0) scaleX(0.7) scaleY(0.55);
+  }
+  12% {
+    opacity: 0.85;
+  }
+  45% {
+    opacity: 0.55;
+    transform: translate3d(0.12rem, -1.1rem, 0) scaleX(1) scaleY(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0.28rem, -2.1rem, 0) scaleX(1.2) scaleY(1.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spain-food-steam-card:hover .spain-food-steam-wisp,
+  .spain-food-steam-card:focus-within .spain-food-steam-wisp {
+    animation: none;
+    opacity: 0.55;
+    transform: translateY(-0.55rem);
+  }
+}
+
+/* Spain kitchen · Churros con Chocolate only · dripping chocolate on hover */
+.spain-food-chocolate-card {
+  isolation: isolate;
+  z-index: 1;
+}
+
+.spain-food-chocolate-card:hover {
+  z-index: 5;
+}
+
+.spain-food-chocolate {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 2.4rem;
+  height: 2.8rem;
+  margin-left: -1.2rem;
+  z-index: 3;
+  overflow: visible;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.spain-food-chocolate-card:hover .spain-food-chocolate,
+.spain-food-chocolate-card:focus-within .spain-food-chocolate {
+  opacity: 1;
+}
+
+/* Thick chocolate drip blobs falling down from the cup */
+.spain-food-chocolate-drop {
+  position: absolute;
+  top: 0;
+  width: 0.38rem;
+  height: 0.7rem;
+  border-radius: 45% 45% 55% 55% / 35% 35% 65% 65%;
+  background:
+    radial-gradient(circle at 40% 25%, rgba(160, 95, 45, 0.95) 0%, transparent 55%),
+    linear-gradient(
+      to bottom,
+      rgba(92, 48, 22, 0.98) 0%,
+      rgba(62, 32, 14, 0.95) 55%,
+      rgba(40, 20, 8, 0.9) 100%
+    );
+  box-shadow:
+    0 0 3px rgba(50, 25, 10, 0.5),
+    inset 0 1px 1px rgba(180, 110, 55, 0.35);
+  opacity: 0;
+  transform-origin: top center;
+  will-change: transform, opacity, height;
+}
+
+.spain-food-chocolate-card:hover .spain-food-chocolate-drop,
+.spain-food-chocolate-card:focus-within .spain-food-chocolate-drop {
+  animation: spain-food-chocolate-drip 1.25s ease-in infinite;
+}
+
+.spain-food-chocolate-drop--1 {
+  left: 0.45rem;
+  animation-delay: 0s;
+}
+
+.spain-food-chocolate-drop--2 {
+  left: 1rem;
+  width: 0.48rem;
+  height: 0.85rem;
+  animation-delay: 0.28s;
+}
+
+.spain-food-chocolate-drop--3 {
+  left: 1.55rem;
+  width: 0.34rem;
+  height: 0.62rem;
+  animation-delay: 0.52s;
+}
+
+.spain-food-chocolate-drop--4 {
+  left: 0.75rem;
+  width: 0.3rem;
+  height: 0.55rem;
+  animation-delay: 0.78s;
+}
+
+@keyframes spain-food-chocolate-drip {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -0.1rem, 0) scaleY(0.4) scaleX(0.85);
+  }
+  12% {
+    opacity: 1;
+    transform: translate3d(0, 0.15rem, 0) scaleY(0.85) scaleX(1);
+  }
+  35% {
+    opacity: 0.95;
+    transform: translate3d(0.04rem, 0.75rem, 0) scaleY(1.15) scaleX(0.92);
+  }
+  70% {
+    opacity: 0.55;
+    transform: translate3d(0.08rem, 1.55rem, 0) scaleY(1.05) scaleX(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0.1rem, 2.2rem, 0) scaleY(0.7) scaleX(0.65);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spain-food-chocolate-card:hover .spain-food-chocolate-drop,
+  .spain-food-chocolate-card:focus-within .spain-food-chocolate-drop {
+    animation: none;
+    opacity: 0.7;
+    transform: translateY(0.45rem);
+  }
+}
+
+/* Spain kitchen · Croquetas only · grated cheese falling on hover */
+.spain-food-cheese-card {
+  isolation: isolate;
+  z-index: 1;
+}
+
+.spain-food-cheese-card:hover {
+  z-index: 5;
+}
+
+.spain-food-cheese {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  width: 2.8rem;
+  height: 2.6rem;
+  margin-left: -1.4rem;
+  z-index: 3;
+  overflow: visible;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.spain-food-cheese-card:hover .spain-food-cheese,
+.spain-food-cheese-card:focus-within .spain-food-cheese {
+  opacity: 1;
+}
+
+/* Shredded cheese flakes · grate falling down */
+.spain-food-cheese-flake {
+  position: absolute;
+  top: 0;
+  width: 0.55rem;
+  height: 0.14rem;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 236, 170, 0.95) 0%,
+    rgba(250, 204, 80, 0.98) 40%,
+    rgba(240, 180, 50, 0.9) 100%
+  );
+  box-shadow: 0 0 2px rgba(255, 220, 120, 0.35);
+  opacity: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.spain-food-cheese-card:hover .spain-food-cheese-flake,
+.spain-food-cheese-card:focus-within .spain-food-cheese-flake {
+  animation: spain-food-cheese-grate 1.15s linear infinite;
+}
+
+.spain-food-cheese-flake--1 {
+  left: 0.25rem;
+  width: 0.65rem;
+  animation-delay: 0s;
+}
+
+.spain-food-cheese-flake--2 {
+  left: 0.85rem;
+  width: 0.45rem;
+  transform: rotate(-12deg);
+  animation-delay: 0.12s;
+}
+
+.spain-food-cheese-flake--3 {
+  left: 1.4rem;
+  width: 0.58rem;
+  animation-delay: 0.28s;
+}
+
+.spain-food-cheese-flake--4 {
+  left: 0.5rem;
+  width: 0.4rem;
+  transform: rotate(8deg);
+  animation-delay: 0.45s;
+}
+
+.spain-food-cheese-flake--5 {
+  left: 1.1rem;
+  width: 0.7rem;
+  animation-delay: 0.62s;
+}
+
+.spain-food-cheese-flake--6 {
+  left: 1.75rem;
+  width: 0.38rem;
+  transform: rotate(-6deg);
+  animation-delay: 0.8s;
+}
+
+@keyframes spain-food-cheese-grate {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -0.15rem, 0) rotate(0deg) scaleX(0.8);
+  }
+  10% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.85;
+    transform: translate3d(0.15rem, 1.1rem, 0) rotate(18deg) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0.28rem, 2.15rem, 0) rotate(32deg) scaleX(0.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spain-food-cheese-card:hover .spain-food-cheese-flake,
+  .spain-food-cheese-card:focus-within .spain-food-cheese-flake {
+    animation: none;
+    opacity: 0.65;
+    transform: translateY(0.5rem);
+  }
 }

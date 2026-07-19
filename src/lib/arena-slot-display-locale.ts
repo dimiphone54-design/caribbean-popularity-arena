@@ -10,7 +10,7 @@ export type ArenaSlotDisplayLabels = {
 };
 
 const chinaSlotDisplay: ArenaSlotDisplayLabels = {
-  country: "China",
+  country: "中国",
   capital: "上海",
   liveBadge: "直播",
   pendingBadge: "待定",
@@ -36,7 +36,7 @@ const ecuadorSlotDisplay: ArenaSlotDisplayLabels = {
   capital: "Quito",
   liveBadge: "EN VIVO",
   pendingBadge: "Pendiente",
-  languageLabel: "Español ecuatoriano",
+  languageLabel: "Español (Ecuador)",
   clockLocale: "es-EC",
   votesLiveLabel: "EN VIVO",
   metaLiveLabel: "En vivo"
@@ -70,6 +70,7 @@ export type ArenaSlotTabLabels = {
   fashion: string;
   food: string;
   studyHub: string;
+  aiPowerhouse: string;
 };
 
 const spanishTabLabels: ArenaSlotTabLabels = {
@@ -77,7 +78,8 @@ const spanishTabLabels: ArenaSlotTabLabels = {
   games: "Juegos",
   fashion: "Moda",
   food: "Comida",
-  studyHub: "Centro de estudio"
+  studyHub: "Centro de estudio",
+  aiPowerhouse: "AI Powerhouse"
 };
 
 const polishTabLabels: ArenaSlotTabLabels = {
@@ -85,7 +87,8 @@ const polishTabLabels: ArenaSlotTabLabels = {
   games: "Gry",
   fashion: "Moda",
   food: "Jedzenie",
-  studyHub: "Centrum nauki"
+  studyHub: "Centrum nauki",
+  aiPowerhouse: "AI Powerhouse"
 };
 
 const lithuanianTabLabels: ArenaSlotTabLabels = {
@@ -93,7 +96,8 @@ const lithuanianTabLabels: ArenaSlotTabLabels = {
   games: "Žaidimai",
   fashion: "Mada",
   food: "Maistas",
-  studyHub: "Mokymosi centras"
+  studyHub: "Mokymosi centras",
+  aiPowerhouse: "AI Powerhouse"
 };
 
 const chinaTabLabels: ArenaSlotTabLabels = {
@@ -101,7 +105,8 @@ const chinaTabLabels: ArenaSlotTabLabels = {
   games: "游戏",
   fashion: "时尚",
   food: "美食",
-  studyHub: "学习中心"
+  studyHub: "学习中心",
+  aiPowerhouse: "AI POWERHOUSE"
 };
 
 const japanTabLabels: ArenaSlotTabLabels = {
@@ -109,7 +114,17 @@ const japanTabLabels: ArenaSlotTabLabels = {
   games: "ゲーム",
   fashion: "ファッション",
   food: "グルメ",
-  studyHub: "学習ハブ"
+  studyHub: "学習ハブ",
+  aiPowerhouse: "AI POWERHOUSE"
+};
+
+const trinidadTabLabels: ArenaSlotTabLabels = {
+  dropshipping: "Dropship",
+  games: "Games",
+  fashion: "Culture",
+  food: "Food",
+  studyHub: "Study Hub",
+  aiPowerhouse: "AI Powerhouse"
 };
 
 const japanSlotDisplay: ArenaSlotDisplayLabels = {
@@ -135,6 +150,7 @@ const displayByIslandCode: Partial<Record<string, ArenaSlotDisplayLabels>> = {
 const tabLabelsByIslandCode: Partial<Record<string, ArenaSlotTabLabels>> = {
   CN: chinaTabLabels,
   JP: japanTabLabels,
+  TT: trinidadTabLabels,
   CO: spanishTabLabels,
   EC: spanishTabLabels,
   PL: polishTabLabels,
@@ -146,10 +162,13 @@ const defaultTabLabels: ArenaSlotTabLabels = {
   games: "Games",
   fashion: "Fashion",
   food: "Food",
-  studyHub: "Study Hub"
+  studyHub: "Study Hub",
+  aiPowerhouse: "AI Powerhouse"
 };
 
-export function getArenaSlotTabLabels(islandCode: string) {
+export function getArenaSlotTabLabels(islandCode: string, options?: { english?: boolean }) {
+  // MASTER / English UI · default English tab labels even on CO / EC rooms.
+  if (options?.english) return defaultTabLabels;
   return tabLabelsByIslandCode[islandCode] ?? defaultTabLabels;
 }
 

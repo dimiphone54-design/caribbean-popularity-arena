@@ -1,6 +1,8 @@
 "use client";
 
 import { RoomCountryGamesPanel } from "@/components/room-country-games-panel";
+import { RoomChinaGamingHub } from "@/components/room-china-gaming-hub";
+import { RoomColombiaFootballPanel } from "@/components/room-colombia-football-panel";
 import { RoomFootballStrip } from "@/components/room-football-strip";
 import { getRoomGamesConfig, ROOM_FOOTBALL_BY_SLUG } from "@/lib/room-games-registry";
 
@@ -29,8 +31,23 @@ export function RoomSportsStack({
   const games = getRoomGamesConfig(roomSlug);
 
   return (
-    <div className="room-sports-stack space-y-6 w-full">
-      {football && !gamesOnly ? (
+    <div
+      className={`room-sports-stack w-full ${
+        roomSlug === "colombia-room" || roomSlug === "china-room" ? "space-y-2" : "space-y-6"
+      }`}
+    >
+      {roomSlug === "china-room" && !gamesOnly ? <RoomChinaGamingHub /> : null}
+
+      {/* Colombia · dedicated badass club board (no generic match-day strip) */}
+      {roomSlug === "colombia-room" && !gamesOnly ? <RoomColombiaFootballPanel /> : null}
+
+      {/* Other rooms · shared football strip · skip China/Ecuador/Colombia */}
+      {roomSlug !== "china-room" &&
+      roomSlug !== "ecuador-room" &&
+      roomSlug !== "colombia-room" &&
+      roomSlug !== "trinidad-room" &&
+      football &&
+      !gamesOnly ? (
         <RoomFootballStrip
           countryId={football.countryId}
           countryName={football.countryName}

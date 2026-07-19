@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
 import { capturePayPalOrder } from "@/lib/paypal";
 import { markArenaMemberPaid } from "@/lib/arena-member-registry";
+import { REAL_MONEY_FREEZE_MESSAGE, isRealMoneyEnabled } from "@/lib/real-money";
 
 type CaptureOrderBody = {
   orderId?: string;
 };
 
 export async function POST(request: Request) {
+  if (!isRealMoneyEnabled()) {
+    return NextResponse.json(
+      { ok: false, error: REAL_MONEY_FREEZE_MESSAGE, frozen: true },
+      { status: 503 }
+    );
+  }
+
   let body: CaptureOrderBody = {};
   try {
     body = (await request.json()) as CaptureOrderBody;

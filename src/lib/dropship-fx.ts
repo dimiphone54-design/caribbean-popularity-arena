@@ -113,24 +113,33 @@ export function convertCountryToCountry(usdAmount: number, fromCountryId: string
   };
 }
 
+/** Normalize ICU narrow NBSP so Node SSR and browser client always match */
+function normalizeIntlMoney(value: string) {
+  return value.replace(/[\u00a0\u202f]/g, " ").trim();
+}
+
 export function formatDropshipCurrency(amount: number, currencyCode: string) {
   const zeroDecimal = currencyCode === "JPY";
   const fractionDigits = zeroDecimal ? 0 : currencyCode === "TND" ? 3 : 2;
 
   try {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: currencyCode,
-      minimumFractionDigits: fractionDigits,
-      maximumFractionDigits: fractionDigits
-    }).format(amount);
+    return normalizeIntlMoney(
+      new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: currencyCode,
+        minimumFractionDigits: fractionDigits,
+        maximumFractionDigits: fractionDigits
+      }).format(amount)
+    );
   } catch {
-    return `${amount.toFixed(2)} ${currencyCode}`;
+    return `${amount.toFixed(fractionDigits)} ${currencyCode}`;
   }
 }
 
 export function formatUsd(amount: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
+  return normalizeIntlMoney(
+    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
+  );
 }
 
 export function formatDropshipDualPrice(usd: number, countryId: string) {

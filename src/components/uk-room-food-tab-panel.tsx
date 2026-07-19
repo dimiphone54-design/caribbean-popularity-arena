@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { getAllDropshipProductsForCountry } from "@/lib/dropshipping";
+import { isPublicDropshipVisible } from "@/lib/real-money";
 import { UK_ROOM_PANEL } from "@/lib/uk-room-panel";
 
 export const ukFoodScenes = [
@@ -38,24 +39,49 @@ export const ukFoodLanes = [
   { emoji: "🍟", label: "Bench Lunch · Games Night Fuel", hint: "Cotswolds park · live eat-along" }
 ] as const;
 
-/** UK room · dishes + dropship food inside Food tab */
-export function UkRoomFoodTabPanel() {
-  const foodProducts = getAllDropshipProductsForCountry("uk").filter((product) =>
+/** Owner freeze catalog · food dropship SKUs (not priced on public panel) */
+export function getUkFoodDropshipFreezeProducts() {
+  return getAllDropshipProductsForCountry("uk").filter((product) =>
     product.category.toLowerCase().includes("food")
   );
+}
+
+export const UK_FOOD_FREEZE_CATALOG = {
+  panelTitle: "🇬🇧 UK food · park lunch · national dish",
+  publicStatus: "LIVE for public · culture scenes free · dropship food prices frozen/hidden",
+  room: "/rooms/uk-flag-cotswolds · UK food panel + Food tab",
+  freePublic: [
+    "Fish & chips · Sunday roast · afternoon tea · bench lunch scenes",
+    "Food culture lanes (Full English · tea · roast · games-night fuel)",
+    "Browse-only food stories · no checkout on public panel"
+  ],
+  frozenMoney: [
+    "Food kits dropship lane with USD prices",
+    "Buy / platform checkout for food SKUs",
+    "Any paid picnic / delivery commerce on this panel"
+  ],
+  reopenNote:
+    "When ready: set NEXT_PUBLIC_SHOW_DROPSHIP_PANELS=true and real-money flags to restore food kit checkout."
+} as const;
+
+/** UK room · dishes free · dropship food only if public dropship enabled */
+export function UkRoomFoodTabPanel() {
+  const foodProducts = getUkFoodDropshipFreezeProducts();
+  const showDropshipFood = isPublicDropshipVisible() && foodProducts.length > 0;
 
   return (
     <div className="uk-room-food-tab-panel space-y-5">
       <section className={`uk-room-food-panel ${UK_ROOM_PANEL}`} aria-label="United Kingdom food">
         <header className="text-center">
           <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#fbbf24]">
-            UK food · park lunch · national dish
+            UK food · park lunch · national dish · free browse
           </p>
           <h2 className="mt-2 font-['Bebas_Neue',sans-serif] text-2xl tracking-widest text-[#eef6ff] sm:text-3xl">
             United Kingdom · fish & chips
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#c4d4ef]/90">
-            Classic UK national dish, park bench lunches, and food kits wired for the Cotswolds room.
+            Classic UK national dish and park bench lunches for the Cotswolds room — free culture lane.
+            Paid food kits stay in Command Center until launch.
           </p>
         </header>
 
@@ -97,7 +123,7 @@ export function UkRoomFoodTabPanel() {
         </div>
       </section>
 
-      {foodProducts.length > 0 ? (
+      {showDropshipFood ? (
         <section className={UK_ROOM_PANEL}>
           <p className="a2030-electric-flash a2030-micro text-[10px] font-bold uppercase text-[#b8ff3c] sm:text-xs">
             Food kits · dropship lane

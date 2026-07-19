@@ -11,6 +11,8 @@ import {
   ROOM_LOCALE_CHANGED_EVENT,
   type RoomLocaleId
 } from "@/lib/room-locale";
+import { isArenaPrimaryMasterRecognized } from "@/lib/arena-master-identity";
+import { ensurePrimaryMasterDeviceRecognized } from "@/lib/arena-master-key";
 import { getRoomTranslations, type RoomTranslationBundle } from "@/lib/room-translations";
 
 type RoomLocaleContextValue = {
@@ -24,15 +26,41 @@ const RoomLocaleContext = createContext<RoomLocaleContextValue | null>(null);
 
 export function RoomLocaleProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  // Always start as "en" so server HTML and first client paint match.
+  // Auto-detect / saved locale apply only after mount.
   const [locale, setLocaleState] = useState<RoomLocaleId>("en");
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    setHydrated(true);
+    // Recognize THE MASTER on this device before room language rules run.
+    ensurePrimaryMasterDeviceRecognized();
+
+    const masterEnglishLocale = (auto: RoomLocaleId): RoomLocaleId => {
+      // THE MASTER · always English UI (prefer browser en-GB / en when available).
+      const tag = auto.trim().toLowerCase().replace("_", "-");
+      if (tag === "en-gb") return "en-GB";
+      if (tag === "en" || tag.startsWith("en-")) return auto;
+      return "en";
+    };
+
     const sync = () => {
-      let next = resolveArenaAutoLocale();
-      if (pathname?.includes("/rooms/china-room")) {
-        next = "zh-CN";
+      ensurePrimaryMasterDeviceRecognized();
+      const auto = resolveArenaAutoLocale();
+      const isMaster = isArenaPrimaryMasterRecognized();
+      let next = auto;
+
+      // Country rooms: public → local language. MASTER detected → English auto.
+      if (pathname?.includes("/rooms/colombia-room")) {
+        next = isMaster ? masterEnglishLocale(auto) : "es-CO";
+      } else if (pathname?.includes("/rooms/ecuador-room")) {
+        next = isMaster ? masterEnglishLocale(auto) : "es-EC";
+      } else if (pathname?.includes("/rooms/spain-room")) {
+        next = isMaster ? masterEnglishLocale(auto) : "es";
+      } else if (pathname?.includes("/rooms/china-room")) {
+        if (!isMaster) next = "zh-CN";
       } else if (pathname?.includes("/rooms/japan-room")) {
-        next = "ja";
+        if (!isMaster) next = "ja";
       }
       setLocaleState(next);
       syncDocumentHtmlLang(next);
@@ -44,14 +72,19 @@ export function RoomLocaleProvider({ children }: { children: ReactNode }) {
     window.addEventListener(ARENA_AUTO_LOCALE_SAVED_EVENT, sync);
     window.addEventListener("cpa:member-username", sync);
     window.addEventListener("storage", sync);
+    window.addEventListener("cpa:arena-master-key", sync);
 
     return () => {
       window.removeEventListener(ROOM_LOCALE_CHANGED_EVENT, sync);
       window.removeEventListener(ARENA_AUTO_LOCALE_SAVED_EVENT, sync);
       window.removeEventListener("cpa:member-username", sync);
       window.removeEventListener("storage", sync);
+      window.removeEventListener("cpa:arena-master-key", sync);
     };
   }, [pathname]);
+
+  // Keep locale fixed at "en" until hydrated to prevent first-client-paint drift.
+  const activeLocale = hydrated ? locale : "en";
 
   const setLocale = (next: RoomLocaleId) => {
     storeRoomLocale(next);
@@ -61,12 +94,12 @@ export function RoomLocaleProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(
     () => ({
-      locale,
+      locale: activeLocale,
       setLocale,
-      t: getRoomTranslations(locale),
-      localeOption: findRoomLocaleOption(locale)
+      t: getRoomTranslations(activeLocale),
+      localeOption: findRoomLocaleOption(activeLocale)
     }),
-    [locale]
+    [activeLocale]
   );
 
   return <RoomLocaleContext.Provider value={value}>{children}</RoomLocaleContext.Provider>;

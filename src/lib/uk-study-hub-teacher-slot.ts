@@ -1,10 +1,12 @@
 /**
  * UK Study Hub · Teacher Live Slot config
- * First month: platform takes 0% — teacher keeps 100% of all gifts.
+ * Public room = free campus (apply · teach · join) — no charges.
+ * Gift tiers / cut % kept for Command Center FREEZE COMING SOON only (not public UI).
  */
 
-export const PLATFORM_GIFT_CUT_PERCENT = 0;   // first month · free
-export const TEACHER_GIFT_PAYOUT_PERCENT = 100; // teacher keeps everything
+/** Command Center freeze catalog only — not shown on public UK Study Hub */
+export const PLATFORM_GIFT_CUT_PERCENT = 0;   // first month plan · 0% cut when money returns
+export const TEACHER_GIFT_PAYOUT_PERCENT = 100;
 
 export type UKTeacherSubject = {
   id: string;
@@ -53,12 +55,6 @@ export type UKTeacherApplicationForm = {
   yearsTeaching: string;
   availability: string;
   shortBio: string;
-  /** Payment — card to receive gifts */
-  cardholderName: string;
-  cardNumber: string;       // masked on submission, stored via payment processor
-  cardExpiry: string;
-  cardCvc: string;
-  payoutEmail: string;      // email tied to payout (Stripe Connect / PayPal)
 };
 
 export const EMPTY_TEACHER_APPLICATION: UKTeacherApplicationForm = {
@@ -73,13 +69,9 @@ export const EMPTY_TEACHER_APPLICATION: UKTeacherApplicationForm = {
   yearsTeaching:        "",
   availability:         "",
   shortBio:             "",
-  cardholderName:       "",
-  cardNumber:           "",
-  cardExpiry:           "",
-  cardCvc:              "",
-  payoutEmail:          "",
 };
 
+/** Command Center FREEZE COMING SOON · not rendered on public UK Study Hub */
 export type UKTeacherGiftTier = {
   id: string;
   emoji: string;
@@ -102,6 +94,7 @@ function makeGiftTier(
   return { id, emoji, label, amountGbp, teacherReceivesGbp, platformCutGbp, effect };
 }
 
+/** Frozen money catalog · Command Center only */
 export const UK_TEACHER_GIFT_TIERS: UKTeacherGiftTier[] = [
   makeGiftTier("pencil",     "✏️",  "Pencil",         1,  "Chat highlight · name flash"),
   makeGiftTier("book",       "📚",  "Book",           3,  "Book animation · name in chat"),
@@ -182,13 +175,37 @@ export const UK_TEACHER_SLOTS: UKTeacherProfile[] = [
 ];
 
 export const ukTeacherSlotMeta = {
-  kicker:       "UK Study Hub · Creator Tutor Slots",
+  kicker:       "UK Study Hub · Creator Tutor Slots · London",
   title:        "Teach Live · Free to Go Live",
   description:
-    "Caribbean Freedom Arena partners with qualified UK educators to deliver live study sessions " +
-    "directly to students. Teachers broadcast at no cost. Student gifts are processed through platform checkout and teacher payouts are handled by the platform.",
+    "Caribbean Freedom Arena partners with UK educators for live study sessions. " +
+    "Teachers apply free · go live free · students join free. Campus lane is open for public testing — no payments on this panel.",
   hostFreeNote: "✅ Free to go live — no cost to teachers",
-  giftNote:     "🎁 Student gifts use platform checkout and approved teacher payouts are handled by the platform",
+  giftNote:     "", // money path frozen · Command Center FREEZE COMING SOON holds gift catalog
   applyLabel:   "Apply to teach here →",
-  applyHint:    "Fill in your profile and payout details. We review and add you to the hub.",
+  applyHint:    "Free · no card · no payout form on public Study Hub",
+} as const;
+
+/** Owner freeze detail for Command Center FREEZE COMING SOON panel */
+export const UK_STUDY_HUB_FREEZE_CATALOG = {
+  panelTitle: "📚 UK Study Hub · London · campus lane",
+  publicStatus: "LIVE for public · money removed",
+  room: "/rooms/uk-flag-cotswolds",
+  freePublic: [
+    "Browse UK Study Hub campus panel",
+    "4 open teacher live slots (apply placeholders)",
+    "Apply to teach — Personal · Academic · Teaching only",
+    "Join live session button (UI ready)",
+    "GCSE · A-Level · Uni prep · ESL · coding subjects"
+  ],
+  frozenMoney: [
+    "Student gifts (Pencil £1 → Diamond £50)",
+    "Platform gift checkout / PayPal charge path",
+    "Teacher payout form (card · CVC · PayPal email)",
+    "Gift session totals on teacher cards",
+    "Platform cut % when gifts return (catalog keeps 0% first-month plan)"
+  ],
+  giftTiersNote: "Gift tier table lives only in Command Center (this freeze panel + Gift ops).",
+  reopenNote:
+    "When ready: restore gift UI + payout step from Command Center freeze catalog; set NEXT_PUBLIC_REAL_MONEY_ENABLED=true."
 } as const;

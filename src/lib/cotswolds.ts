@@ -264,46 +264,34 @@ export const cotswoldsHampsteadHeathFeed: CotswoldsParkFeed = {
 };
 
 export const cotswoldsHeroQuarterSet: CotswoldsParkFeed[] = [
-  cotswoldsLondonParkGirlsFeed,
-  cotswoldsHollandParkWomenFeed,
-  cotswoldsOxfordPartyDronesFeed,
-  cotswoldsNationalDishCrowdFeed
+  cotswoldsParkFeeds[3],
+  cotswoldsHampsteadHeathFeed,
+  cotswoldsLondonSummerWomenFeed,
+  cotswoldsParkSeasonFeeds[1]
 ];
 
 export const cotswoldsQuarterSlideSets: CotswoldsParkFeed[][] = [
-  cotswoldsHeroQuarterSet,
   [
-    {
-      ...cotswoldsSixPhotoSlideshow[0],
-      location: "Hyde Park, London",
-      region: "England · Westminster",
-      timeZone: "Europe/London"
-    },
-    cotswoldsGreenwichParkFeed,
-    {
-      ...cotswoldsSixPhotoSlideshow[4],
-      location: "Hyde Park, London",
-      region: "England · Westminster",
-      timeZone: "Europe/London"
-    },
-    {
-      ...cotswoldsSixPhotoSlideshow[5],
-      location: "Hyde Park, London",
-      region: "England · Westminster",
-      timeZone: "Europe/London"
-    }
-  ],
-  [
-    cotswoldsHampsteadHeathFeed,
-    cotswoldsLondonSummerWomenFeed,
-    {
-      ...cotswoldsParkSeasonFeeds[1],
-      location: "Hyde Park, London",
-      region: "England · Westminster",
-      timeZone: "Europe/London"
-    },
     {
       ...cotswoldsParkFeeds[3],
+      location: "Hyde Park, London",
+      region: "England · Westminster",
+      timeZone: "Europe/London"
+    },
+    {
+      ...cotswoldsHampsteadHeathFeed,
+      location: "Hampstead Heath, London",
+      region: "England · Camden",
+      timeZone: "Europe/London"
+    },
+    {
+      ...cotswoldsLondonSummerWomenFeed,
+      location: "Leeds, England",
+      region: "England · Yorkshire",
+      timeZone: "Europe/London"
+    },
+    {
+      ...cotswoldsParkSeasonFeeds[1],
       location: "Hyde Park, London",
       region: "England · Westminster",
       timeZone: "Europe/London"
@@ -418,11 +406,21 @@ export const cotswoldsDroneSnowGirls: CotswoldsParkMember[] = [
   { id: 38, name: "Skye Winter", age: 19, area: "South Bank", flag: "🇬🇧", group: "drone-snow-girls", game: "Drone Laugh Run" }
 ];
 
+/** Standalone Best Makeup Look lane · not mixed into park outdoor games */
+export const cotswoldsBestMakeupLook: CotswoldsParkMember = {
+  id: 88,
+  name: "Bella Soho",
+  age: 23,
+  area: "Hyde Park",
+  flag: "🇬🇧",
+  group: "london-park-girls",
+  game: "Best Makeup Look"
+};
+
 export const cotswoldsLondonParkGirls: CotswoldsParkMember[] = [
-  { id: 88, name: "Bella Soho", age: 23, area: "Hyde Park", flag: "🇬🇧", group: "london-park-girls", game: "Game 1 · Best Makeup Look" },
-  { id: 39, name: "Tessa Camden", age: 24, area: "London", flag: "🇬🇧", group: "london-park-girls", game: "Game 2 · Rounders" },
-  { id: 40, name: "Polly Shoreditch", age: 23, area: "London", flag: "🇬🇧", group: "london-park-girls", game: "Game 3 · Frisbee" },
-  { id: 41, name: "Gwen Islington", age: 22, area: "London", flag: "🇬🇧", group: "london-park-girls", game: "Game 4 · Sack Race" }
+  { id: 39, name: "Tessa Camden", age: 24, area: "London", flag: "🇬🇧", group: "london-park-girls", game: "Game 1 · Rounders" },
+  { id: 40, name: "Polly Shoreditch", age: 23, area: "London", flag: "🇬🇧", group: "london-park-girls", game: "Game 2 · Frisbee" },
+  { id: 41, name: "Gwen Islington", age: 22, area: "London", flag: "🇬🇧", group: "london-park-girls", game: "Game 3 · Sack Race" }
 ];
 
 export const cotswoldsHollandParkWomen: CotswoldsParkMember[] = [
@@ -466,6 +464,7 @@ export const cotswoldsGamePairs: CotswoldsGamePair[] = [
 
 export const cotswoldsAllMembers = [
   ...cotswoldsWhiteGirls,
+  cotswoldsBestMakeupLook,
   ...cotswoldsLondonParkGirls,
   ...cotswoldsHollandParkWomen,
   ...cotswoldsOxfordPartyMen,

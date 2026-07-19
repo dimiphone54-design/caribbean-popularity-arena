@@ -1,6 +1,7 @@
 "use client";
 
 import { getArenaSlotStudyHubPanel } from "@/lib/arena-slot-study-hub-lanes";
+import { EcuadorStudyHubTabPanel } from "@/components/ecuador-study-hub-tab-panel";
 import { JapanStudyHubTeacherLiveSlot } from "@/components/japan-study-hub-teacher-live-slot";
 import { UKStudyHubTeacherLiveSlot } from "@/components/uk-study-hub-teacher-live-slot";
 
@@ -10,6 +11,10 @@ type CountryRoomStudyHubTabPanelProps = {
 
 /** Country room · Study Hub lanes inside Study Hub tab */
 export function CountryRoomStudyHubTabPanel({ countryId }: CountryRoomStudyHubTabPanelProps) {
+  if (countryId === "ecuador") {
+    return <EcuadorStudyHubTabPanel />;
+  }
+
   const panel = getArenaSlotStudyHubPanel(countryId);
   const isJapan = countryId === "japan";
   const borderColor = isJapan ? "border-[#ff4466]/20" : "border-[#fbbf24]/20";
@@ -56,7 +61,7 @@ export function CountryRoomStudyHubTabPanel({ countryId }: CountryRoomStudyHubTa
         </div>
       </section>
 
-      {/* UK: teacher live slots with gift system */}
+      {/* UK: teacher live slots · free public campus (money frozen → Command Center) */}
       {countryId === "uk" && (
         <section
           className="country-room-section relative overflow-hidden rounded-[1.25rem] border border-[#fbbf24]/20"

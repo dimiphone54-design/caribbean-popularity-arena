@@ -21,15 +21,16 @@ function resetOriginPanelTilt(event: MouseEvent<HTMLDivElement>) {
   event.currentTarget.style.transform = "";
 }
 
-/** China room · octagon arena 4K · real Wushu Sanda combat + origin copy */
+/** China room · octagon arena 4K + full Wushu Duilian origin copy (all text visible) */
 export function ChinaWushuWarfarePanel() {
   const { panelTitle, lead, sections } = wushuDuilianOriginStory;
   const embedSrc = getWushuDuilianPreviewEmbedSrc(wushuCombatOctagonPreview.youtubeId);
 
   return (
     <section
-      className="china-wushu-octagon-panel country-room-section mx-auto w-full max-w-4xl"
-      aria-label="Wushu Duilian octagon arena origin"
+      className="china-wushu-octagon-panel w-full"
+      aria-label="武术对练 · 八角笼起源"
+      lang="zh-CN"
     >
       <div className="china-wushu-octagon-shell">
         <img
@@ -62,26 +63,27 @@ export function ChinaWushuWarfarePanel() {
             {wushuCombatOctagonPreview.badgeLabel}
           </span>
         </div>
+      </div>
 
-        <div className="china-wushu-octagon-copy">
-          <div
-            className="china-wushu-octagon-neural-shell"
-            onMouseMove={applyOriginPanelTilt}
-            onMouseLeave={resetOriginPanelTilt}
-          >
-            <span className="china-wushu-octagon-neural-grid" aria-hidden="true" />
-            <span className="china-wushu-octagon-neural-bar-trail" aria-hidden="true" />
-            <span className="china-wushu-octagon-neural-bar" aria-hidden="true" />
+      {/* Full origin text · outside shell so nothing is clipped */}
+      <div className="china-wushu-octagon-copy">
+        <div
+          className="china-wushu-octagon-neural-shell"
+          onMouseMove={applyOriginPanelTilt}
+          onMouseLeave={resetOriginPanelTilt}
+        >
+          <span className="china-wushu-octagon-neural-grid" aria-hidden="true" />
+          <span className="china-wushu-octagon-neural-bar-trail" aria-hidden="true" />
+          <span className="china-wushu-octagon-neural-bar" aria-hidden="true" />
 
-            <div className="china-wushu-octagon-neural-inner">
-              <h2 className="china-wushu-octagon-origin-title">{panelTitle}</h2>
-              <p className="china-wushu-octagon-origin-lead">{lead}</p>
-              {sections.map((section) => (
-                <p key={section.title} className="china-wushu-octagon-origin-line">
-                  <strong>{section.title}:</strong> {section.body}
-                </p>
-              ))}
-            </div>
+          <div className="china-wushu-octagon-neural-inner">
+            <h2 className="china-wushu-octagon-origin-title">{panelTitle}</h2>
+            <p className="china-wushu-octagon-origin-lead">{lead}</p>
+            {sections.map((section) => (
+              <p key={section.title} className="china-wushu-octagon-origin-line">
+                <strong>{section.title}:</strong> {section.body}
+              </p>
+            ))}
           </div>
         </div>
       </div>

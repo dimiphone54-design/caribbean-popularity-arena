@@ -285,22 +285,24 @@ export function Arena2030Header({
           {liveBadge}
         </span>
       </div>
-      <h1 className="mt-5 text-4xl font-black sm:text-6xl">
-        {resolvedVariant === "japan" ? (
-          <>
-            <p className="japan-room-title-kicker">{japanTitleKicker}</p>
-            <JapanJumpingTitle text={title} />
-          </>
-        ) : resolvedVariant === "vertical" ? (
-          <VerticalStackTitle text={title} />
-        ) : resolvedVariant === "jump" ? (
-          <JumpingTitle text={title} />
-        ) : resolvedVariant === "china" ? (
-          <ChinaWarFearFlashTitle text={title} />
-        ) : (
-          <span className="a2030-title a2030-title-breathe inline-block">{title}</span>
-        )}
-      </h1>
+      {title ? (
+        <h1 className="mt-5 text-4xl font-black sm:text-6xl">
+          {resolvedVariant === "japan" ? (
+            <>
+              <p className="japan-room-title-kicker">{japanTitleKicker}</p>
+              <JapanJumpingTitle text={title} />
+            </>
+          ) : resolvedVariant === "vertical" ? (
+            <VerticalStackTitle text={title} />
+          ) : resolvedVariant === "jump" ? (
+            <JumpingTitle text={title} />
+          ) : resolvedVariant === "china" ? (
+            <ChinaWarFearFlashTitle text={title} />
+          ) : (
+            <span className="a2030-title a2030-title-breathe inline-block">{title}</span>
+          )}
+        </h1>
+      ) : null}
       <p className="a2030-atmo-copy mt-4 max-w-2xl text-sm leading-7">{description}</p>
     </>
   );
