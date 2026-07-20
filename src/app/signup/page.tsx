@@ -16,7 +16,12 @@ export default function SignupPage() {
         Free · No credit information
       </p>
 
-      <MemberRegistrationWizard title="Member" onSubmitted={() => undefined} />
+      <MemberRegistrationWizard
+        title="Member"
+        onSubmitted={() => {
+          window.location.href = "/#home";
+        }}
+      />
     </main>
   );
 }
