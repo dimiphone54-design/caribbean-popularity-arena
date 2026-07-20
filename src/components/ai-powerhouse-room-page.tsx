@@ -12,7 +12,7 @@ const AI_JOBS = [
   {
     emoji: "🧠",
     title: "AI Research Scientist",
-    location: "Barcelona, Spain",
+    location: "Remote · Worldwide",
     type: "Full-time · Remote OK",
 
     description: "Push the boundaries of machine learning. Work on next-gen models, publish papers, and build systems that scale to millions.",
@@ -21,7 +21,7 @@ const AI_JOBS = [
   {
     emoji: "⚡",
     title: "ML Engineer",
-    location: "Madrid, Spain",
+    location: "Remote · Global",
     type: "Full-time · Hybrid",
 
     description: "Deploy production ML pipelines. Optimize inference, build data flows, and ship models that power real products.",
@@ -30,8 +30,8 @@ const AI_JOBS = [
   {
     emoji: "🎨",
     title: "AI Product Designer",
-    location: "Barcelona, Spain",
-    type: "Full-time · On-site",
+    location: "Remote · Worldwide",
+    type: "Full-time · Remote",
 
     description: "Design intelligent interfaces. Shape how humans interact with AI — from chatbots to generative tools to dashboards.",
     tags: ["Figma", "UX Research", "AI UI"]
@@ -39,7 +39,7 @@ const AI_JOBS = [
   {
     emoji: "🔐",
     title: "AI Safety Engineer",
-    location: "Remote · EU",
+    location: "Remote · Global",
     type: "Full-time · Remote",
 
     description: "Build guardrails for frontier models. Alignment research, red-teaming, and responsible deployment at scale.",
@@ -48,7 +48,7 @@ const AI_JOBS = [
   {
     emoji: "📊",
     title: "Data Platform Lead",
-    location: "Madrid, Spain",
+    location: "Remote · Worldwide",
     type: "Full-time · Hybrid",
 
     description: "Architect the data backbone. Build real-time pipelines, feature stores, and governance frameworks for AI workloads.",
@@ -57,7 +57,7 @@ const AI_JOBS = [
   {
     emoji: "🤖",
     title: "Robotics Software Engineer",
-    location: "Barcelona, Spain",
+    location: "Remote · Global",
     type: "Full-time · On-site",
 
     description: "Write the code that moves machines. Perception, planning, and control for autonomous robotic systems.",
@@ -66,7 +66,7 @@ const AI_JOBS = [
   {
     emoji: "💼",
     title: "AI Partnerships Manager",
-    location: "Madrid, Spain",
+    location: "Remote · Worldwide",
     type: "Full-time · Hybrid",
 
     description: "Forge alliances with global tech giants. Drive integrations, close deals, and expand the AI POWERHOUSE ecosystem.",
@@ -131,10 +131,10 @@ export function AiPowerhouseRoomPage() {
                 </span>
               </h1>
               <p className="mt-1 text-xs font-black uppercase tracking-[0.3em] text-cyan-400/80">
-                Europe&apos;s Next Innovation Giant · est. 2026
+                The World&apos;s AI &amp; Work Powerhouse · Global · est. 2026
               </p>
               <p className="mt-3 mx-auto max-w-2xl text-center text-sm italic leading-7 text-white/50 sm:text-base">
-                &ldquo;Barcelona &amp; Madrid — where artificial intelligence meets Mediterranean ambition. Building the future, one model at a time.&rdquo;
+                &ldquo;One powerhouse. Every nation. Post what you need, offer what you do — talent from every country, all in one place. Building the future together.&rdquo;
               </p>
             </header>
 
@@ -146,24 +146,24 @@ export function AiPowerhouseRoomPage() {
                     ABOUT US
                   </h2>
                   <span className="ml-auto text-xs font-black uppercase tracking-wider text-blue-400/70">
-                    Madrid · Barcelona
+                    Worldwide
                   </span>
                 </div>
                 <p className="mt-1 text-[11px] text-white/40">
-                  AI-first · Deep tech · Building for the world
+                  AI-first · Deep tech · Built by every nation, for the world
                 </p>
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
                   <div className="rounded-xl border border-cyan-500/20 bg-black/40 p-4 text-center">
-                    <p className="text-3xl font-black text-cyan-400">€125B</p>
-                    <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-white/50">Spain Tech Ecosystem</p>
+                    <p className="text-3xl font-black text-cyan-400">190+</p>
+                    <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-white/50">Countries Connected</p>
                   </div>
                   <div className="rounded-xl border border-cyan-500/20 bg-black/40 p-4 text-center">
-                    <p className="text-3xl font-black text-cyan-400">10,000+</p>
-                    <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-white/50">Tech Companies</p>
+                    <p className="text-3xl font-black text-cyan-400">0%</p>
+                    <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-white/50">Platform Fees</p>
                   </div>
                   <div className="rounded-xl border border-cyan-500/20 bg-black/40 p-4 text-center">
-                    <p className="text-3xl font-black text-cyan-400">3.7x</p>
-                    <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-white/50">AI Growth Since 2020</p>
+                    <p className="text-3xl font-black text-cyan-400">100%</p>
+                    <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-white/50">Direct Connections</p>
                   </div>
                 </div>
               </div>
@@ -230,7 +230,7 @@ export function AiPowerhouseRoomPage() {
                     type="button"
                     className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-8 py-3 text-sm font-black uppercase tracking-wider text-cyan-300 transition hover:bg-cyan-500/20"
                   >
-                    Apply Now → ai-powerhouse.com/careers
+                    Post &amp; Find Work Below ↓
                   </button>
                 </div>
               </div>
