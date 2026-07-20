@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
 import { WorkMarketplacePanel } from "@/components/work-marketplace-panel";
@@ -8,82 +8,18 @@ import { ProofWallPanel } from "@/components/proof-wall-panel";
 
 const AP_BG = "#030712";
 
-const AI_JOBS = [
-  {
-    emoji: "🧠",
-    title: "AI Research Scientist",
-    location: "Remote · Worldwide",
-    type: "Full-time · Remote OK",
-
-    description: "Push the boundaries of machine learning. Work on next-gen models, publish papers, and build systems that scale to millions.",
-    tags: ["PyTorch", "LLMs", "Research"]
-  },
-  {
-    emoji: "⚡",
-    title: "ML Engineer",
-    location: "Remote · Global",
-    type: "Full-time · Hybrid",
-
-    description: "Deploy production ML pipelines. Optimize inference, build data flows, and ship models that power real products.",
-    tags: ["MLOps", "Kubernetes", "Python"]
-  },
-  {
-    emoji: "🎨",
-    title: "AI Product Designer",
-    location: "Remote · Worldwide",
-    type: "Full-time · Remote",
-
-    description: "Design intelligent interfaces. Shape how humans interact with AI — from chatbots to generative tools to dashboards.",
-    tags: ["Figma", "UX Research", "AI UI"]
-  },
-  {
-    emoji: "🔐",
-    title: "AI Safety Engineer",
-    location: "Remote · Global",
-    type: "Full-time · Remote",
-
-    description: "Build guardrails for frontier models. Alignment research, red-teaming, and responsible deployment at scale.",
-    tags: ["Alignment", "Red-teaming", "Ethics"]
-  },
-  {
-    emoji: "📊",
-    title: "Data Platform Lead",
-    location: "Remote · Worldwide",
-    type: "Full-time · Hybrid",
-
-    description: "Architect the data backbone. Build real-time pipelines, feature stores, and governance frameworks for AI workloads.",
-    tags: ["Spark", "Kafka", "dbt"]
-  },
-  {
-    emoji: "🤖",
-    title: "Robotics Software Engineer",
-    location: "Remote · Global",
-    type: "Full-time · On-site",
-
-    description: "Write the code that moves machines. Perception, planning, and control for autonomous robotic systems.",
-    tags: ["ROS2", "C++", "Computer Vision"]
-  },
-  {
-    emoji: "💼",
-    title: "AI Partnerships Manager",
-    location: "Remote · Worldwide",
-    type: "Full-time · Hybrid",
-
-    description: "Forge alliances with global tech giants. Drive integrations, close deals, and expand the AI POWERHOUSE ecosystem.",
-    tags: ["BizDev", "Strategy", "Enterprise"]
-  },
-  {
-    emoji: "🌐",
-    title: "Full-Stack AI Developer",
-    location: "Remote · Global",
-    type: "Full-time · Remote",
-
-    description: "Build end-to-end AI apps. From model APIs to polished frontends — ship products that users love.",
-    tags: ["React", "FastAPI", "OpenAI"]
-  }
+const CATEGORIES = [
+  { name: "Design", emoji: "🎨", blurb: "Logos, UI, branding, graphics", color: "border-pink-500/30 hover:border-pink-400 from-pink-500/10", text: "text-pink-200" },
+  { name: "Coding", emoji: "💻", blurb: "Apps, sites, scripts, automation", color: "border-cyan-500/30 hover:border-cyan-400 from-cyan-500/10", text: "text-cyan-200" },
+  { name: "Writing", emoji: "✍️", blurb: "Copy, articles, scripts, editing", color: "border-amber-500/30 hover:border-amber-400 from-amber-500/10", text: "text-amber-200" },
+  { name: "Video", emoji: "🎬", blurb: "Editing, motion, reels, animation", color: "border-red-500/30 hover:border-red-400 from-red-500/10", text: "text-red-200" },
+  { name: "Marketing", emoji: "📣", blurb: "Ads, social, SEO, growth", color: "border-emerald-500/30 hover:border-emerald-400 from-emerald-500/10", text: "text-emerald-200" },
+  { name: "AI/ML", emoji: "🧠", blurb: "Models, chatbots, data, automation", color: "border-purple-500/30 hover:border-purple-400 from-purple-500/10", text: "text-purple-200" },
 ];
 
 export function AiPowerhouseRoomPage() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
@@ -96,6 +32,12 @@ export function AiPowerhouseRoomPage() {
       body.style.backgroundColor = prevBody;
     };
   }, []);
+
+  function pickCategory(cat: string) {
+    setSelectedCategory(cat);
+    const el = document.getElementById("work-marketplace");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   return (
     <>
@@ -169,74 +111,49 @@ export function AiPowerhouseRoomPage() {
               </div>
             </section>
 
-            <section className="w-full" aria-label="Open Positions">
+            <section className="w-full" aria-label="Categories">
               <div className="mt-6 overflow-hidden rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-900/20 via-[#030712]/90 to-cyan-900/20 p-4 sm:p-6">
                 <div className="flex items-center gap-2">
-                  <img
-                    src="https://images.unsplash.com/photo-1546776310-eef45dd6d63c?w=200&q=80"
-                    alt="AI Agent"
-                    className="h-10 w-10 rounded-lg object-cover ring-2 ring-red-500/50"
-                  />
+                  <span className="text-2xl">🗂️</span>
                   <h2 className="font-['Bebas_Neue',sans-serif] text-2xl tracking-wider text-cyan-300 sm:text-3xl">
-                    OPEN POSITIONS
+                    PICK YOUR LANE
                   </h2>
                   <span className="ml-auto text-xs font-black uppercase tracking-wider text-blue-400/70">
-                    {AI_JOBS.length} Roles
+                    Tap to enter
                   </span>
                 </div>
                 <p className="mt-1 text-[11px] text-white/40">
-                  Join the mission · Shape the future · Build with AI
+                  Choose a category — jump straight to the jobs and talent in your lane.
                 </p>
 
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {AI_JOBS.map((job) => (
-                    <article
-                      key={job.title}
-                      className="group overflow-hidden rounded-xl border border-white/10 bg-black/40 p-4 transition-all hover:border-cyan-500/30 hover:bg-black/60"
+                <div className="mt-5 grid gap-3 grid-cols-2 sm:grid-cols-3">
+                  {CATEGORIES.map((cat) => (
+                    <button
+                      key={cat.name}
+                      type="button"
+                      onClick={() => pickCategory(cat.name)}
+                      className={`group text-left overflow-hidden rounded-xl border ${cat.color} bg-gradient-to-br to-black/40 p-4 transition-all`}
                     >
-                      <div className="flex items-start gap-3">
-                        <span className="text-3xl">{job.emoji}</span>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-sm font-bold text-white">{job.title}</h3>
-                          <p className="mt-0.5 text-[10px] font-black uppercase tracking-wider text-cyan-400/70">
-                            {job.location}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="mt-2 flex items-center gap-2">
-                        <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[9px] font-bold text-white/60">
-                          {job.type}
-                        </span>
-                      </div>
-                      <p className="mt-2 text-[11px] leading-5 text-white/50">
-                        {job.description}
-                      </p>
-                      <div className="mt-2 flex flex-wrap gap-1">
-                        {job.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full border border-cyan-500/20 bg-cyan-500/5 px-2 py-0.5 text-[9px] font-bold text-cyan-400/60"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </article>
+                      <span className="text-3xl">{cat.emoji}</span>
+                      <h3 className={`mt-2 text-sm font-black ${cat.text}`}>{cat.name}</h3>
+                      <p className="mt-0.5 text-[10px] leading-4 text-white/50">{cat.blurb}</p>
+                    </button>
                   ))}
                 </div>
 
-                <div className="mt-6 text-center">
+                <div className="mt-4 text-center">
                   <button
                     type="button"
+                    onClick={() => pickCategory("All")}
                     className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-8 py-3 text-sm font-black uppercase tracking-wider text-cyan-300 transition hover:bg-cyan-500/20"
                   >
-                    Post &amp; Find Work Below ↓
+                    See Everything ↓
                   </button>
                 </div>
               </div>
             </section>
 
-            <WorkMarketplacePanel />
+            <WorkMarketplacePanel selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
 
             <ProofWallPanel />
 

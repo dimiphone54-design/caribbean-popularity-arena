@@ -1,15 +1,21 @@
 import { NextResponse } from "next/server";
 import { getSupabaseClient } from "@/lib/supabase/client";
 
-export async function GET() {
+export async function GET(request: Request) {
   const client = getSupabaseClient();
   if (!client) return NextResponse.json([]);
-  const { data, error } = await client
+  const { searchParams } = new URL(request.url);
+  const category = searchParams.get("category");
+  let query = client
     .from("work_profiles")
     .select("*")
     .eq("is_public", true)
     .order("created_at", { ascending: false })
     .limit(50);
+  if (category && category !== "All") {
+    query = query.eq("category", category);
+  }
+  const { data, error } = await query;
   if (error) return NextResponse.json([]);
   return NextResponse.json(data ?? []);
 }
@@ -32,6 +38,7 @@ export async function POST(request: Request) {
     description: body.description?.trim() || null,
     contact_url: body.contact_url?.trim() || null,
     availability: body.availability?.trim() || null,
+    category: body.category?.trim() || null,
     is_public: true,
   });
   if (error) {
