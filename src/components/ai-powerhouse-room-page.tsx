@@ -17,6 +17,17 @@ const CATEGORIES = [
   { name: "AI/ML", emoji: "🧠", blurb: "Models, chatbots, data, automation", color: "border-purple-500/30 hover:border-purple-400 from-purple-500/10", text: "text-purple-200" },
 ];
 
+const AI_COMPONENTS = [
+  { emoji: "🧮", name: "Data", tag: "What AI learns from" },
+  { emoji: "⚡", name: "Compute", tag: "The power that trains it" },
+  { emoji: "🧠", name: "Neural Nets", tag: "The brain structure" },
+  { emoji: "🔢", name: "Algorithms", tag: "The math that learns" },
+  { emoji: "📚", name: "Training", tag: "How it gets smart" },
+  { emoji: "🎯", name: "Models", tag: "The trained result" },
+  { emoji: "🔌", name: "APIs", tag: "How apps plug in" },
+  { emoji: "☁️", name: "Cloud", tag: "Where it all runs" },
+];
+
 export function AiPowerhouseRoomPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -157,34 +168,23 @@ export function AiPowerhouseRoomPage() {
 
             <ProofWallPanel />
 
-            <section className="w-full" aria-label="Tech Stack">
+            <section className="w-full" aria-label="Our Stack">
               <div className="mt-6 overflow-hidden rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-900/20 via-[#030712]/90 to-cyan-900/20 p-4 sm:p-6">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">⚙️</span>
                   <h2 className="font-['Bebas_Neue',sans-serif] text-2xl tracking-wider text-purple-300 sm:text-3xl">
                     OUR STACK
                   </h2>
-                  <span className="ml-auto text-xs font-black uppercase tracking-wider text-purple-400/70">
-                    Built for Scale
-                  </span>
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                  {[
-                    { emoji: "🔥", name: "PyTorch" },
-                    { emoji: "🟢", name: "Python" },
-                    { emoji: "☸️", name: "Kubernetes" },
-                    { emoji: "📊", name: "Spark" },
-                    { emoji: "🧠", name: "CUDA" },
-                    { emoji: "🌐", name: "FastAPI" },
-                    { emoji: "🐳", name: "Docker" },
-                    { emoji: "📈", name: "Grafana" }
-                  ].map((tech) => (
+                  {AI_COMPONENTS.map((c) => (
                     <div
-                      key={tech.name}
-                      className="rounded-xl border border-white/10 bg-black/40 p-3 text-center transition-all hover:border-purple-500/30"
+                      key={c.name}
+                      className="rounded-xl border border-white/10 bg-black/40 p-3 text-center transition-all hover:border-purple-500/40 hover:bg-black/60"
                     >
-                      <span className="text-2xl">{tech.emoji}</span>
-                      <p className="mt-1 text-[10px] font-bold text-white/70">{tech.name}</p>
+                      <span className="text-2xl">{c.emoji}</span>
+                      <p className="mt-1 text-[11px] font-black text-white/80">{c.name}</p>
+                      <p className="mt-0.5 text-[9px] leading-3 text-white/40">{c.tag}</p>
                     </div>
                   ))}
                 </div>
