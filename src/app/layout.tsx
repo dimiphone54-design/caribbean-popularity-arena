@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { ComplianceShell } from "@/components/compliance-shell";
+import { GAScript } from "@/components/ga-script";
 import { caribbeanFreedomArenaApp } from "@/lib/caribbean-freedom-arena-app";
 import "./globals.css";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        <GAScript />
         <ComplianceShell>{children}</ComplianceShell>
       </body>
     </html>
