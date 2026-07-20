@@ -4,18 +4,12 @@ import { useCallback, useEffect, useState } from "react";
 
 type MemberRow = {
   id: string;
-  displayName: string;
+  display_name: string;
   email: string;
-  country: string;
-  islandCode: string;
-  bankName: string;
-  accountHolderName: string;
-  accountNumber: string;
-  bankCountry: string;
-  accessPaid: boolean;
-  amountUsd: number;
-  customReference?: string;
-  createdAt: string;
+  country: string | null;
+  island_code: string | null;
+  terms_agreed_at: string | null;
+  created_at: string;
 };
 
 type CreatorRow = {
@@ -80,8 +74,7 @@ export function ArenaRegistryAdminPanel() {
             Member + women creator database
           </h2>
           <p className="mt-2 text-sm leading-6 text-[#9aa8c6]">
-            Live reads from <code className="text-[#f7e7aa]">.data/arena-members.json</code> and{" "}
-            <code className="text-[#f7e7aa]">.data/arena-women-creators.json</code>
+            Live reads from the Supabase members and women creator tables.
           </p>
         </div>
         <button
@@ -103,7 +96,7 @@ export function ArenaRegistryAdminPanel() {
               Members · {members.length}
             </p>
             {members.length === 0 ? (
-              <p className="mt-3 text-sm text-[#7a82a8]">No members saved yet · test at /signup or home bank panel</p>
+              <p className="mt-3 text-sm text-[#7a82a8]">No members saved yet · test the SIGN IN panel</p>
             ) : (
               <div className="mt-4 overflow-x-auto">
                 <table className="w-full min-w-[640px] text-left text-sm">
@@ -111,8 +104,7 @@ export function ArenaRegistryAdminPanel() {
                     <tr className="border-b border-white/10 text-[0.65rem] uppercase tracking-[0.12em] text-[#7a82a8]">
                       <th className="py-2 pr-4">Name</th>
                       <th className="py-2 pr-4">Country</th>
-                      <th className="py-2 pr-4">Bank</th>
-                      <th className="py-2 pr-4">Paid</th>
+                      <th className="py-2 pr-4">Terms agreed</th>
                       <th className="py-2">Joined</th>
                     </tr>
                   </thead>
@@ -120,28 +112,24 @@ export function ArenaRegistryAdminPanel() {
                     {members.map((member) => (
                       <tr key={member.id} className="border-b border-white/5 text-[#d9e4f2]">
                         <td className="py-3 pr-4">
-                          <span className="font-bold text-[#eef6ff]">{member.displayName}</span>
+                          <span className="font-bold text-[#eef6ff]">{member.display_name}</span>
                           <span className="mt-0.5 block text-xs text-[#7a82a8]">{member.email}</span>
                         </td>
                         <td className="py-3 pr-4">
                           {member.country}
-                          <span className="block text-xs text-[#7a82a8]">{member.islandCode}</span>
+                          <span className="block text-xs text-[#7a82a8]">{member.island_code}</span>
                         </td>
                         <td className="py-3 pr-4">
-                          {member.bankName}
-                          <span className="block text-xs text-[#7a82a8]">
-                            {member.accountHolderName} · {member.accountNumber}
-                          </span>
-                        </td>
-                        <td className="py-3 pr-4">
-                          {member.accessPaid ? (
-                            <span className="text-[#00c9a7]">✓ ${member.amountUsd}</span>
+                          {member.terms_agreed_at ? (
+                            <span className="text-[#00c9a7]">
+                              ✓ {new Date(member.terms_agreed_at).toLocaleDateString()}
+                            </span>
                           ) : (
-                            <span className="text-[#f59e0b]">Pending</span>
+                            <span className="text-[#f59e0b]">Not recorded</span>
                           )}
                         </td>
                         <td className="py-3 text-xs text-[#7a82a8]">
-                          {new Date(member.createdAt).toLocaleString()}
+                          {new Date(member.created_at).toLocaleString()}
                         </td>
                       </tr>
                     ))}

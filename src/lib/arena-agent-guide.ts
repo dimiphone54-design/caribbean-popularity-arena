@@ -17,7 +17,7 @@ type GuideEntry = {
 };
 
 const SITE = caribbeanFreedomArenaApp.name;
-const SITE_URL = "http://localhost:3004/#home";
+const SITE_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "https://caribbeanfreedomarena.com"}/#home`;
 const countryLiveGift = "Free";
 const eldersGift = "Free";
 

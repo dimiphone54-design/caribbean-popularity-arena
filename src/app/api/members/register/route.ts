@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { upsertArenaMember, findArenaMemberById } from "@/lib/arena-member-registry";
+import { createMember } from "@/lib/marketplace/members-store";
 
 type RegisterBody = {
-  memberId?: string;
   displayName?: string;
   email?: string;
   country?: string;
@@ -11,49 +10,45 @@ type RegisterBody = {
   dropshippingItemName?: string;
   dropshippingStoreUrl?: string;
   dropshippingNotes?: string;
-  bankName?: string;
-  accountHolderName?: string;
-  accountNumber?: string;
-  bankCountry?: string;
   voiceLanguage?: string;
+  termsAgreed?: boolean;
 };
 
 export async function POST(request: Request) {
   let body: RegisterBody = {};
-
   try {
     body = (await request.json()) as RegisterBody;
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid request body" }, { status: 400 });
   }
 
-  const existing = body.memberId ? await findArenaMemberById(body.memberId) : null;
+  const displayName = body.displayName?.trim() ?? "";
+  const email = body.email?.trim() ?? "";
+  const country = body.country?.trim() ?? "";
 
-  const draft = {
-    displayName: body.displayName?.trim() || existing?.displayName || "",
-    email: body.email?.trim() || existing?.email || "",
-    country: body.country?.trim() || existing?.country || "",
-    islandCode: body.islandCode?.trim() || existing?.islandCode || "",
-    liveFocus: body.liveFocus?.trim() || existing?.liveFocus || "",
-    dropshippingItemName: body.dropshippingItemName?.trim() || existing?.dropshippingItemName || "",
-    dropshippingStoreUrl: body.dropshippingStoreUrl?.trim() || existing?.dropshippingStoreUrl || "",
-    dropshippingNotes: body.dropshippingNotes?.trim() || existing?.dropshippingNotes || "",
-    bankName: body.bankName?.trim() || existing?.bankName || "",
-    accountHolderName: body.accountHolderName?.trim() || existing?.accountHolderName || "",
-    accountNumber: body.accountNumber?.trim() || existing?.accountNumber || "",
-    bankCountry: body.bankCountry?.trim() || existing?.bankCountry || "",
-    voiceLanguage: body.voiceLanguage || existing?.voiceLanguage
-  };
-
-  if (draft.displayName.length < 2 || !draft.email.includes("@") || draft.country.length < 2) {
+  if (displayName.length < 2 || !email.includes("@") || country.length < 2) {
     return NextResponse.json({ ok: false, error: "Name, email, and country required" }, { status: 400 });
   }
 
-  const member = await upsertArenaMember(draft, body.memberId);
+  if (!body.termsAgreed) {
+    return NextResponse.json({ ok: false, error: "You must agree to the terms to join" }, { status: 400 });
+  }
 
-  return NextResponse.json({
-    ok: true,
-    memberId: member.id,
-    accessPaid: member.accessPaid
-  });
+  try {
+    const member = await createMember({
+      display_name: displayName,
+      email,
+      country,
+      island_code: body.islandCode?.trim() || undefined,
+      live_focus: body.liveFocus?.trim() || undefined,
+      dropship_item_name: body.dropshippingItemName?.trim() || undefined,
+      dropship_store_url: body.dropshippingStoreUrl?.trim() || undefined,
+      dropship_notes: body.dropshippingNotes?.trim() || undefined,
+      voice_language: body.voiceLanguage?.trim() || undefined,
+      terms_agreed: true,
+    });
+    return NextResponse.json({ ok: true, memberId: member.id });
+  } catch {
+    return NextResponse.json({ ok: false, error: "Failed to register member" }, { status: 500 });
+  }
 }

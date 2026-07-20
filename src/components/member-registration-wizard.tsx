@@ -132,12 +132,12 @@ export function MemberRegistrationWizard({ title, onSubmitted, embedded = false 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          memberId: memberId ?? undefined,
           displayName: displayName.trim(),
           email: email.trim(),
           country: countryEntry.country,
           islandCode,
-          voiceLanguage: language
+          voiceLanguage: language,
+          termsAgreed: acceptedTerms
         })
       });
 
