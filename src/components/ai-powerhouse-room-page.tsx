@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
 import { WorkMarketplacePanel } from "@/components/work-marketplace-panel";
+import { ProofWallPanel } from "@/components/proof-wall-panel";
 
 const AP_BG = "#030712";
 
@@ -236,6 +237,8 @@ export function AiPowerhouseRoomPage() {
             </section>
 
             <WorkMarketplacePanel />
+
+            <ProofWallPanel />
 
             <section className="w-full" aria-label="Tech Stack">
               <div className="mt-6 overflow-hidden rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-900/20 via-[#030712]/90 to-cyan-900/20 p-4 sm:p-6">
