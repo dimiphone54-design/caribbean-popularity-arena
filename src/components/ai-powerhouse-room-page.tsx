@@ -5,6 +5,7 @@ import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
 import { WorkMarketplacePanel } from "@/components/work-marketplace-panel";
 import { ProofWallPanel } from "@/components/proof-wall-panel";
+import { DirectShipPanel } from "@/components/direct-ship-panel";
 
 const AP_BG = "#030712";
 
@@ -191,87 +192,8 @@ export function AiPowerhouseRoomPage() {
               </div>
             </section>
 
-            <section className="w-full" aria-label="Direct Ship Marketplace">
-              <div className="mt-6 overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/20 via-[#030712]/90 to-cyan-900/20 p-4 sm:p-6">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">📦</span>
-                  <h2 className="font-['Bebas_Neue',sans-serif] text-2xl tracking-wider text-emerald-300 sm:text-3xl">
-                    DIRECT SHIP MARKETPLACE
-                  </h2>
-                  <span className="ml-auto text-xs font-black uppercase tracking-wider text-emerald-400/70">
-                    Free · No Fees
-                  </span>
-                </div>
-                <p className="mt-1 text-[11px] text-white/40">
-                  Browse AI gear · Supplier ships direct · Platform info is free
-                </p>
+            <DirectShipPanel />
 
-                <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2">
-                  <span className="text-sm">✅</span>
-                  <p className="text-[11px] font-bold text-emerald-300">
-                    Zero commission · Zero listing fees · Free product info · Supplier ships direct to buyer
-                  </p>
-                </div>
-
-                <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {[
-                    { emoji: "🎧", name: "AI Noise-Cancel Headset", price: "$89", supplier: "Barcelona, ES", desc: "Active noise cancellation with AI-adaptive ANC. 40hr battery. Bluetooth 5.3.", tag: "Audio" },
-                    { emoji: "⌨️", name: "Mechanical AI Keyboard", price: "$129", supplier: "Madrid, ES", desc: "Programmable macro keys for AI workflows. Cherry MX switches. RGB backlit.", tag: "Peripherals" },
-                    { emoji: "🖥️", name: "4K AI Monitor 27\"", price: "$349", supplier: "Shanghai, CN", desc: "IPS panel, 144Hz, built-in KVM switch. USB-C 96W passthrough for laptop docking.", tag: "Displays" },
-                    { emoji: "🔌", name: "USB-C AI Dock Hub", price: "$59", supplier: "Tokyo, JP", desc: "12-in-1 hub: HDMI 4K, ethernet, SD card, 3x USB-A, 2x USB-C PD 100W.", tag: "Accessories" },
-                    { emoji: "🖱️", name: "Ergonomic AI Mouse", price: "$45", supplier: "Bogotá, CO", desc: "Vertical design, 16000 DPI sensor, 8 programmable buttons. Wireless + wired.", tag: "Peripherals" },
-                    { emoji: "💡", name: "Smart Desk Lamp AI", price: "$67", supplier: "London, UK", desc: "Auto-adjusting color temperature based on time of day. USB charging port. Touch controls.", tag: "Smart Home" },
-                    { emoji: "🔊", name: "AI Speaker Pod", price: "$79", supplier: "Barcelona, ES", desc: "360° sound with room-calibrating AI. Multi-room sync. Voice assistant compatible.", tag: "Audio" },
-                    { emoji: "📷", name: "Webcam AI Pro", price: "$99", supplier: "Madrid, ES", desc: "4K@30fps, AI auto-framing, background blur, noise reduction. Plug and play.", tag: "Cameras" },
-                    { emoji: "🛡️", name: "Privacy Screen Filter", price: "$35", supplier: "London, UK", desc: "27\" magnetic privacy filter. Anti-glare coating. Blocks side-angle viewing.", tag: "Accessories" }
-                  ].map((product) => (
-                    <article
-                      key={product.name}
-                      className="group overflow-hidden rounded-xl border border-white/10 bg-black/40 p-4 transition-all hover:border-emerald-500/30 hover:bg-black/60"
-                    >
-                      <div className="flex items-start gap-3">
-                        <span className="text-3xl">{product.emoji}</span>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-sm font-bold text-white">{product.name}</h3>
-                          <p className="mt-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-400/70">
-                            {product.supplier}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="mt-2 flex items-center gap-2">
-                        <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold text-emerald-400">
-                          {product.price}
-                        </span>
-                        <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[9px] font-bold text-white/60">
-                          {product.tag}
-                        </span>
-                        <span className="ml-auto rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2 py-0.5 text-[9px] font-bold text-cyan-400">
-                          Direct Ship
-                        </span>
-                      </div>
-                      <p className="mt-2 text-[11px] leading-5 text-white/50">
-                        {product.desc}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-
-                <div className="mt-6 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4 text-center">
-                  <p className="text-xs font-bold text-emerald-300">
-                    🚀 Want to list your products? AI POWERHOUSE provides free product info — you ship direct, keep your margins.
-                  </p>
-                  <p className="mt-1 text-[10px] text-white/40">
-                    No platform fees · No commission · No inventory required · Just list and ship
-                  </p>
-                  <button
-                    type="button"
-                    className="mt-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-6 py-2 text-[11px] font-black uppercase tracking-wider text-emerald-300 transition hover:bg-emerald-500/20"
-                  >
-                    List Your Products Free →
-                  </button>
-                </div>
-              </div>
-            </section>
           </RoomCountryPageShell>
         </div>
       </main>
