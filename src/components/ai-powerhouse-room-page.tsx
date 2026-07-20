@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
+import { WorkMarketplacePanel } from "@/components/work-marketplace-panel";
 
 const AP_BG = "#030712";
 
@@ -231,137 +232,10 @@ export function AiPowerhouseRoomPage() {
                     Apply Now → ai-powerhouse.com/careers
                   </button>
                 </div>
-
-                <div className="my-6 border-t border-white/10" />
-
-                <div className="flex items-center gap-2">
-                  <img
-                    src="https://images.unsplash.com/photo-1546776310-eef45dd6d63c?w=200&q=80"
-                    alt="AI Agent"
-                    className="h-8 w-8 rounded-lg object-cover ring-2 ring-red-500/50"
-                  />
-                  <h3 className="font-['Bebas_Neue',sans-serif] text-xl tracking-wider text-white sm:text-2xl">
-                    GLOBAL JOB BOARD
-                  </h3>
-                  <span className="ml-auto rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-400">
-                    Free · Worldwide
-                  </span>
-                </div>
-                <p className="mt-1 text-[11px] text-white/40">
-                  Post any job · Search talent globally · Zero fees forever
-                </p>
-
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {/* Post a Job */}
-                  <div className="rounded-xl border border-emerald-500/20 bg-black/40 p-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl">📋</span>
-                      <h4 className="text-sm font-bold text-white">Post a Job</h4>
-                    </div>
-                    <p className="mt-1 text-[11px] text-white/50">
-                      List your opening worldwide. Reach AI talent in 190+ countries. Free forever — no hidden costs.
-                    </p>
-                    <div className="mt-3 space-y-2">
-                      <input
-                        type="text"
-                        placeholder="Job title"
-                        className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 outline-none focus:border-emerald-500/50"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Company name"
-                        className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 outline-none focus:border-emerald-500/50"
-                      />
-                      <select className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/50 outline-none focus:border-emerald-500/50">
-                        <option>Remote</option>
-                        <option>On-site</option>
-                        <option>Hybrid</option>
-                      </select>
-                      <textarea
-                        placeholder="Job description..."
-                        rows={3}
-                        className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 outline-none focus:border-emerald-500/50"
-                      />
-                      <button
-                        type="button"
-                        className="w-full rounded-lg border border-emerald-500/30 bg-emerald-500/10 py-2 text-[11px] font-black uppercase tracking-wider text-emerald-300 transition hover:bg-emerald-500/20"
-                      >
-                        Post Job Free →
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Find Talent */}
-                  <div className="rounded-xl border border-cyan-500/20 bg-black/40 p-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl">🔍</span>
-                      <h4 className="text-sm font-bold text-white">Find Talent</h4>
-                    </div>
-                    <p className="mt-1 text-[11px] text-white/50">
-                      Search available professionals by skill, location, and availability. Connect directly — no middleman.
-                    </p>
-                    <div className="mt-3 space-y-2">
-                      <input
-                        type="text"
-                        placeholder="Search skills (e.g. Python, React, AI)"
-                        className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 outline-none focus:border-cyan-500/50"
-                      />
-                      <div className="flex gap-2">
-                        <select className="flex-1 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/50 outline-none focus:border-cyan-500/50">
-                          <option>All Countries</option>
-                          <option>Spain</option>
-                          <option>United Kingdom</option>
-                          <option>Colombia</option>
-                          <option>Trinidad</option>
-                          <option>Japan</option>
-                          <option>China</option>
-                          <option>Ecuador</option>
-                        </select>
-                        <select className="flex-1 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/50 outline-none focus:border-cyan-500/50">
-                          <option>Any Availability</option>
-                          <option>Available Now</option>
-                          <option>Open to Offers</option>
-                          <option>Contract Only</option>
-                        </select>
-                      </div>
-                      <button
-                        type="button"
-                        className="w-full rounded-lg border border-cyan-500/30 bg-cyan-500/10 py-2 text-[11px] font-black uppercase tracking-wider text-cyan-300 transition hover:bg-cyan-500/20"
-                      >
-                        Search Talent →
-                      </button>
-                    </div>
-
-                    <div className="mt-3 space-y-2">
-                      {[
-                        { name: "Maria G.", skill: "ML Engineer", location: "Barcelona, ES", status: "Available Now" },
-                        { name: "James K.", skill: "Full-Stack Dev", location: "London, UK", status: "Open to Offers" },
-                        { name: "Yuki T.", skill: "AI Researcher", location: "Tokyo, JP", status: "Available Now" }
-                      ].map((person) => (
-                        <div
-                          key={person.name}
-                          className="flex items-center justify-between rounded-lg border border-white/5 bg-white/5 px-3 py-2"
-                        >
-                          <div>
-                            <p className="text-[11px] font-bold text-white">{person.name}</p>
-                            <p className="text-[9px] text-white/40">{person.skill} · {person.location}</p>
-                          </div>
-                          <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[8px] font-bold text-emerald-400">
-                            {person.status}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 rounded-xl border border-white/10 bg-black/30 p-3 text-center">
-                  <p className="text-[11px] text-white/40">
-                    🌍 <span className="font-bold text-white/60">12,847 jobs posted</span> · <span className="font-bold text-white/60">4,291 talent profiles</span> · <span className="font-bold text-white/60">190+ countries</span> · <span className="font-bold text-emerald-400">Always free</span>
-                  </p>
-                </div>
               </div>
             </section>
+
+            <WorkMarketplacePanel />
 
             <section className="w-full" aria-label="Tech Stack">
               <div className="mt-6 overflow-hidden rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-900/20 via-[#030712]/90 to-cyan-900/20 p-4 sm:p-6">
