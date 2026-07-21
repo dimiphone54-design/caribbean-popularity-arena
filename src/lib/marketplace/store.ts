@@ -64,7 +64,7 @@ export async function createSeller(data: CreateSellerInput): Promise<void> {
   const client = requireClient();
   const { error } = await client
     .from("sellers")
-    .insert({ ...data, status: "pending", is_public: false });
+    .insert({ ...data, status: "live", is_public: true });
   if (error) {
     console.error("createSeller error:", error);
     throw new Error(error.message);
@@ -97,7 +97,7 @@ export async function createTeacher(data: CreateTeacherInput): Promise<void> {
   const client = requireClient();
   const { error } = await client
     .from("teachers")
-    .insert({ ...data, status: "pending", is_public: false });
+    .insert({ ...data, status: "live", is_public: true });
   if (error) {
     console.error("createTeacher error:", error);
     throw new Error(error.message);
@@ -130,7 +130,7 @@ export async function createCreator(data: CreateCreatorInput): Promise<void> {
   const client = requireClient();
   const { error } = await client
     .from("creators")
-    .insert({ ...data, status: "pending", is_public: false });
+    .insert({ ...data, status: "live", is_public: true });
   if (error) {
     console.error("createCreator error:", error);
     throw new Error(error.message);
