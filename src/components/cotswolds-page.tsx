@@ -91,6 +91,11 @@ export function CotswoldsPage() {
               </div>
             </section>
 
+            {/* ── 🤖 AI Powerhouse · right under Study Hub ── */}
+            <section className="w-full px-1" aria-label="AI Powerhouse · United Kingdom">
+              <ArenaSlotAiPowerhouseTab mode="link" label="AI POWERHOUSE" />
+            </section>
+
             <figure className="cotswolds-museum-box country-room-section">
               <div className="cotswolds-museum-box-inner">
                 <figcaption className="cotswolds-museum-box-label">{uk.cotswoldsMuseumLabel}</figcaption>
@@ -171,10 +176,6 @@ export function CotswoldsPage() {
             {/* ── Tournament · free activity board (gift £ totals → Command Center freeze) ── */}
             <section className="country-room-section w-full" aria-label="UK Tournament">
               <UkFashionPanel />
-            </section>
-
-            <section className="w-full px-1" aria-label="AI Powerhouse · United Kingdom">
-              <ArenaSlotAiPowerhouseTab mode="link" label="AI POWERHOUSE" />
             </section>
           </RoomCountryPageShell>
         </div>

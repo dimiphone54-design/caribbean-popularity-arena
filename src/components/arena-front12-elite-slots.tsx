@@ -438,7 +438,6 @@ function CountryGirlSlotCard({
                 ) : roomBase ? (
                   <ArenaSlotStudyHubTab mode="link" roomHref={roomBase} label={tabLabels.studyHub} />
                 ) : null}
-                <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
               </div>
               {tabWelcome ? (
                 <p className="ai-real-slot-tab-welcome">

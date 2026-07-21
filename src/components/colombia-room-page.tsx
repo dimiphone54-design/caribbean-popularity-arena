@@ -171,6 +171,11 @@ export function ColombiaRoomPage() {
                 <ColombiaRoomFoodTabPanel />
               </section>
 
+              {/* 🤖 AI Powerhouse — middle placement */}
+              <section className="w-full px-1" aria-label="AI Powerhouse · Colombia">
+                <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
+              </section>
+
               {/* 📚 Centro de estudio — always-open full panel (not a collapse tab) */}
               <section
                 id={COLOMBIA_STUDY_HUB_TAB_HASH}
@@ -187,10 +192,6 @@ export function ColombiaRoomPage() {
                 aria-label={`${tabLabels.fashion} · Colombia`}
               >
                 <ColombiaRoomFashionTabPanel />
-              </section>
-
-              <section className="w-full px-1" aria-label="AI Powerhouse · Colombia">
-                <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
               </section>
             </div>
           </div>

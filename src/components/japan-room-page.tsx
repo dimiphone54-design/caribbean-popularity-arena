@@ -20,7 +20,7 @@ import { RoomCountryPageShell } from "@/components/room-country-page-shell";
 import { SiteFooter } from "@/components/site-footer";
 import { japanRoomGameLane } from "@/lib/east-asia-room-games";
 
-/** Japan room · standalone panels: header → dropship → gacha → anime → jbeauty → study hub → games → stationery → snacks → fashion → food */
+/** Japan room · standalone panels: header → dropship → gacha → anime → jbeauty → study hub → AI powerhouse → food → games → stationery → snacks → fashion */
 export function JapanRoomPage() {
   const lane = japanRoomGameLane;
 
@@ -91,6 +91,11 @@ export function JapanRoomPage() {
               <CountryRoomStudyHubTabPanel countryId="japan" />
             </section>
 
+            {/* ── AI Powerhouse · middle placement ── */}
+            <section className="w-full px-1" aria-label="AI Powerhouse · Japan">
+              <ArenaSlotAiPowerhouseTab mode="link" label="AI POWERHOUSE" />
+            </section>
+
             <section className="w-full px-1 -mt-12" aria-label="Japan Food close to study hub">
               <JapanRoomFoodTabPanel />
             </section>
@@ -116,10 +121,6 @@ export function JapanRoomPage() {
                 <JapanRoomFashionTabPanel />
               </section>
             </div>
-
-            <section className="w-full px-1" aria-label="AI Powerhouse · Japan">
-              <ArenaSlotAiPowerhouseTab mode="link" label="AI POWERHOUSE" />
-            </section>
             </div>
           </RoomCountryPageShell>
         </div>

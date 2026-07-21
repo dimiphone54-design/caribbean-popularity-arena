@@ -62,6 +62,11 @@ export function TrinidadRoomPage() {
               </p>
             </header>
 
+            {/* 🤖 AI Powerhouse · right under the tagline */}
+            <section className="w-full px-1" aria-label="AI Powerhouse · Trinidad & Tobago">
+              <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
+            </section>
+
             <section className="w-full">
               <TrinidadRoomGamesPanel />
             </section>
@@ -103,10 +108,6 @@ export function TrinidadRoomPage() {
               aria-label={`${tabLabels.studyHub} · Trinidad & Tobago`}
             >
               <TrinidadStudyHubTabPanel />
-            </section>
-
-            <section className="w-full px-1" aria-label="AI Powerhouse · Trinidad & Tobago">
-              <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
             </section>
           </RoomCountryPageShell>
         </div>

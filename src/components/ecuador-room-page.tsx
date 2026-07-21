@@ -141,6 +141,11 @@ export function EcuadorRoomPage() {
                 />
               </section>
 
+              {/* 🤖 AI Powerhouse — right under Games/Dominó */}
+              <section className="w-full px-1" aria-label="AI Powerhouse · Ecuador">
+                <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
+              </section>
+
               <section
                 id={ECUADOR_STUDY_HUB_TAB_HASH}
                 className="ecuador-room-block ecuador-study-hub-section w-full scroll-mt-24"
@@ -184,10 +189,6 @@ export function EcuadorRoomPage() {
                 aria-label={`${tabLabels.food} · Ecuador`}
               >
                 <EcuadorRoomFoodTabPanel />
-              </section>
-
-              <section className="w-full px-1" aria-label="AI Powerhouse · Ecuador">
-                <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
               </section>
             </div>
           </RoomCountryPageShell>

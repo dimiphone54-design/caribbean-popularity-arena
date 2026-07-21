@@ -94,6 +94,12 @@ export function ChinaRoomPage() {
                 <ChinaRoomGamesTabPanel />
               </section>
 
+              {/* 🤖 AI Powerhouse — right under Games */}
+              <section className="china-room-block w-full" aria-label="AI Powerhouse · China">
+                <p className="china-room-block-label">{tabLabels.aiPowerhouse}</p>
+                <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
+              </section>
+
               <section id={CHINA_FOOD_TAB_HASH} className="china-room-block w-full">
                 <p className="china-room-block-label">{tabLabels.food}</p>
                 <ChinaRoomFoodTabPanel />
@@ -102,11 +108,6 @@ export function ChinaRoomPage() {
               <section id={CHINA_STUDY_HUB_TAB_HASH} className="china-room-block w-full">
                 <p className="china-room-block-label">{tabLabels.studyHub}</p>
                 <ChinaStudyHubTabPanel />
-              </section>
-
-              <section className="china-room-block w-full" aria-label="AI Powerhouse · China">
-                <p className="china-room-block-label">{tabLabels.aiPowerhouse}</p>
-                <ArenaSlotAiPowerhouseTab mode="link" label={tabLabels.aiPowerhouse} />
               </section>
             </div>
           </RoomCountryPageShell>
