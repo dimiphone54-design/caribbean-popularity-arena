@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       product_description: body.product_description?.trim() || undefined,
       price_label: body.price_label?.trim() || undefined,
     });
-    return NextResponse.json({ ok: true, status: "pending" });
+    return NextResponse.json({ ok: true, status: "live" });
   } catch {
     return NextResponse.json({ ok: false, error: "Failed to create seller" }, { status: 500 });
   }

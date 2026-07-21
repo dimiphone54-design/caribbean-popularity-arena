@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       university: body.university?.trim() || undefined,
       subject: body.subject?.trim() || undefined,
     });
-    return NextResponse.json({ ok: true, status: "pending" });
+    return NextResponse.json({ ok: true, status: "live" });
   } catch {
     return NextResponse.json({ ok: false, error: "Failed to create teacher" }, { status: 500 });
   }

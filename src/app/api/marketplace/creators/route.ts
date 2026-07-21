@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       lane: body.lane?.trim() || undefined,
       project_description: body.project_description?.trim() || undefined,
     });
-    return NextResponse.json({ ok: true, status: "pending" });
+    return NextResponse.json({ ok: true, status: "live" });
   } catch {
     return NextResponse.json({ ok: false, error: "Failed to create creator" }, { status: 500 });
   }
