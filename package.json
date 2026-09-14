@@ -20,6 +20,9 @@
     "clean:hard": "npm run clean && find . -type d -name '__pycache__' -not -path './node_modules/*' -prune -exec rm -rf {} + 2>/dev/null; true"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/cli": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
     "@paypal/react-paypal-js": "^10.1.2",
     "@supabase/supabase-js": "^2.108.2",
     "agora-rtc-sdk-ng": "^4.24.5",
