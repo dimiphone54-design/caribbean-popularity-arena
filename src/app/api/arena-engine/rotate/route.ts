@@ -3,6 +3,9 @@ import { ARENA_ENGINE_BOT_SECRET_HEADER } from "@/lib/arena-engine/constants";
 import { isArenaBotSecretValid } from "@/lib/arena-engine/config";
 import { runArenaEngineRotation, runArenaEngineRotationIfDue } from "@/lib/arena-engine";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 type RotateBody = {
   source?: string;
   force?: boolean;
