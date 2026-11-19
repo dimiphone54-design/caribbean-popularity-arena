@@ -6,26 +6,27 @@ import {
   isInternationalSuiteCountryActiveByIslandCode
 } from "@/lib/international-suite";
 
-/** UI-safe · pass masterKeyActive from useArenaMasterKeyActive (false during SSR). */
+/** UI may additionally allow owner preview through the browser-only master key. */
 export function isArenaSlotSignInOpenForUi(islandCode: string, masterKeyActive = false) {
   if (masterKeyActive) return true;
-  // Front 12 nation slots · all READY for girl sign-in (same card style)
-  if (isArenaFront12VisibleSlot(islandCode)) return true;
-  return isInternationalSuiteCountryActiveByIslandCode(islandCode);
+  return isArenaSlotSignInOpen(islandCode);
 }
 
 export function isArenaSlotFrozenForUi(islandCode: string, masterKeyActive = false) {
   return !isArenaSlotSignInOpenForUi(islandCode, masterKeyActive);
 }
 
-/** Front 12 · girl sign-in open · mirrors International SUITE active countries only */
+/** Public sign-in lanes: visible Front 12 slots plus active International SUITE countries. */
 export const arenaSlotSignInOpenIslandCodes = getInternationalSuiteActiveIslandCodes();
 
 export type ArenaSlotSignInOpenIslandCode = (typeof arenaSlotSignInOpenIslandCodes)[number];
 
+/** Server authorization is deterministic and does not trust browser sessionStorage. */
 export function isArenaSlotSignInOpen(islandCode: string) {
-  if (isArenaMasterKeyActive()) return true;
-  return isInternationalSuiteCountryActiveByIslandCode(islandCode);
+  return (
+    isArenaFront12VisibleSlot(islandCode) ||
+    isInternationalSuiteCountryActiveByIslandCode(islandCode)
+  );
 }
 
 export function isArenaSlotFrozen(islandCode: string) {
@@ -130,7 +131,6 @@ export const legalBotFrozenFrontQueueSlots: ArenaNationSlotRow[] = [
     name: "Jasmine Hodge",
     country: "British Virgin Islands",
     flag: "🇻🇬",
-    islandCode: "VG",
     meta: "Age 24 · Sailing"
   },
   {
@@ -138,7 +138,6 @@ export const legalBotFrozenFrontQueueSlots: ArenaNationSlotRow[] = [
     name: "Leah Francis",
     country: "U.S. Virgin Islands",
     flag: "🇻🇮",
-    islandCode: "VI",
     meta: "Age 23 · Culture"
   }
 ];
