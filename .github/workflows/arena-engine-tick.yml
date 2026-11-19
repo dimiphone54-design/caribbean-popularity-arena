@@ -20,13 +20,19 @@ jobs:
       - name: Call protected Arena Engine tick
         env:
           ARENA_ENGINE_BOT_SECRET: ${{ secrets.ARENA_ENGINE_BOT_SECRET }}
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
         run: |
           set -euo pipefail
           if [ -z "${ARENA_ENGINE_BOT_SECRET:-}" ]; then
             echo "Missing repository secret ARENA_ENGINE_BOT_SECRET."
             exit 1
           fi
+          if [ -z "${VERCEL_AUTOMATION_BYPASS_SECRET:-}" ]; then
+            echo "Missing repository secret VERCEL_AUTOMATION_BYPASS_SECRET."
+            exit 1
+          fi
           curl --fail --silent --show-error \
             --max-time 30 \
+            -H "x-vercel-protection-bypass: ${VERCEL_AUTOMATION_BYPASS_SECRET}" \
             -H "x-caribbean-slots-secret: ${ARENA_ENGINE_BOT_SECRET}" \
             "https://caribbean-freedom-arena.vercel.app/api/arena-engine/tick"
