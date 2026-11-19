@@ -73,7 +73,7 @@ export function SellerSignupForm() {
       <input placeholder="Product title" value={form.product_title} onChange={(e) => update("product_title", e.target.value)} style={inputStyle} />
       <textarea placeholder="Product description" value={form.product_description} onChange={(e) => update("product_description", e.target.value)} style={{ ...inputStyle, minHeight: 80 }} />
       <input placeholder="Price (e.g. $25)" value={form.price_label} onChange={(e) => update("price_label", e.target.value)} style={inputStyle} />
-      <input placeholder="Your payment link — PayPal, Stripe, your store, WhatsApp, etc." value={form.payment_url} onChange={(e) => update("payment_url", e.target.value)} style={inputStyle} />
+      <input placeholder="Your payment link — Stripe, your store, WhatsApp, etc." value={form.payment_url} onChange={(e) => update("payment_url", e.target.value)} style={inputStyle} />
       <span style={{ fontSize: 12, color: "#666", marginTop: -6 }}>
         Paste any secure link (must start with https://) where buyers pay you directly. The platform never handles the money.
       </span>

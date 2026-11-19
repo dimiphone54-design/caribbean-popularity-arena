@@ -62,7 +62,7 @@ export function TeacherSignupForm() {
       <input placeholder="Country" value={form.country} onChange={(e) => update("country", e.target.value)} style={inputStyle} />
       <input placeholder="University / school" value={form.university} onChange={(e) => update("university", e.target.value)} style={inputStyle} />
       <input placeholder="Subject you teach" value={form.subject} onChange={(e) => update("subject", e.target.value)} style={inputStyle} />
-      <input placeholder="Your payment link — PayPal, Stripe, WhatsApp, etc." value={form.payment_url} onChange={(e) => update("payment_url", e.target.value)} style={inputStyle} />
+      <input placeholder="Your payment link — Stripe, WhatsApp, etc." value={form.payment_url} onChange={(e) => update("payment_url", e.target.value)} style={inputStyle} />
       <span style={{ fontSize: 12, color: "#666", marginTop: -6 }}>
         Paste any secure link (must start with https://) where students pay you directly.
       </span>

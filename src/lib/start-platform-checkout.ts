@@ -1,8 +1,7 @@
 "use client";
 
-import type { PlatformPayKind } from "@/lib/platform-paypal";
+import type { PlatformPayKind } from "@/lib/platform-payments";
 import { REAL_MONEY_FREEZE_MESSAGE, isRealMoneyEnabled } from "@/lib/real-money";
-import { startPlatformPaypalCheckout } from "@/lib/start-platform-paypal-checkout";
 
 export type StartPlatformCheckoutInput = {
   kind: PlatformPayKind;
@@ -32,22 +31,16 @@ export type StartPlatformCheckoutResult =
     }
   | {
       ok: true;
-      mode: "paypal";
-      orderId: string;
-      approveUrl: string;
+      mode: "polar";
+      checkoutId: string;
+      checkoutUrl: string;
       amountUsd: string;
-      merchant: string;
       countryId: string;
-      vaultId?: string;
+      vaultId: string;
+      message: string;
     }
   | { ok: false; error: string };
 
-/**
- * Always records a platform vault entry (orders pile up).
- * If server checkout mode is paypal and credentials work, also opens PayPal.
- * Default server mode is vault until you set PLATFORM_CHECKOUT_MODE=paypal.
- * Hard freeze when NEXT_PUBLIC_REAL_MONEY_ENABLED is not "true".
- */
 export async function startPlatformCheckout(
   input: StartPlatformCheckoutInput
 ): Promise<StartPlatformCheckoutResult> {
@@ -55,8 +48,13 @@ export async function startPlatformCheckout(
     return { ok: false, error: REAL_MONEY_FREEZE_MESSAGE };
   }
 
-  let vaultId: string | undefined;
-  let checkoutMode: "vault" | "paypal" = "vault";
+  let vaultData: {
+    ok?: boolean;
+    entry?: { id: string; amountUsd: number; countryId: string };
+    message?: string;
+    error?: string;
+    summary?: { checkoutMode?: "vault" | "polar" | "off" };
+  };
 
   try {
     const vaultRes = await fetch("/api/platform-vault", {
@@ -75,74 +73,97 @@ export async function startPlatformCheckout(
         platformUsd: input.platformUsd,
         counterpartUsd: input.counterpartUsd,
         counterpartLabel: input.counterpartLabel,
-        note: input.description
-      })
+        note: input.description,
+      }),
     });
 
-    const vaultData = (await vaultRes.json()) as {
+    vaultData = (await vaultRes.json()) as typeof vaultData;
+    if (!vaultRes.ok || !vaultData.ok || !vaultData.entry) {
+      return {
+        ok: false,
+        error: vaultData.error ?? "Could not save the pending platform record.",
+      };
+    }
+  } catch {
+    return { ok: false, error: "Network error saving the platform record." };
+  }
+
+  const vaultId = vaultData.entry.id;
+  const amountUsd = Number(vaultData.entry.amountUsd).toFixed(2);
+  const countryId = vaultData.entry.countryId;
+  const checkoutMode = vaultData.summary?.checkoutMode ?? "vault";
+
+  if (checkoutMode !== "polar") {
+    return {
+      ok: true,
+      mode: "vault",
+      vaultId,
+      amountUsd,
+      countryId,
+      message:
+        vaultData.message ??
+        "Saved as pending. No payment has been collected and no purchase benefits have been activated.",
+    };
+  }
+
+  try {
+    const checkoutRes = await fetch("/api/payments/polar/create-checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        kind: input.kind,
+        sku: input.sku,
+        memberId: input.memberId,
+        buyerEmail: input.buyerEmail,
+        itemLabel: input.itemLabel,
+        countryId: input.countryId,
+        countryName: input.countryName,
+        vaultId,
+      }),
+    });
+
+    const checkoutData = (await checkoutRes.json()) as {
       ok?: boolean;
-      entry?: { id: string; amountUsd: number; countryId: string };
-      message?: string;
       error?: string;
-      summary?: { checkoutMode?: "vault" | "paypal" };
+      checkoutId?: string;
+      checkoutUrl?: string;
     };
 
-    if (!vaultRes.ok || !vaultData.ok || !vaultData.entry) {
-      return { ok: false, error: vaultData.error ?? "Could not save to platform vault" };
-    }
-
-    vaultId = vaultData.entry.id;
-    checkoutMode = vaultData.summary?.checkoutMode ?? "vault";
-
-    if (checkoutMode === "vault") {
+    if (
+      !checkoutRes.ok ||
+      !checkoutData.ok ||
+      !checkoutData.checkoutId ||
+      !checkoutData.checkoutUrl
+    ) {
       return {
         ok: true,
         mode: "vault",
         vaultId,
-        amountUsd: Number(vaultData.entry.amountUsd).toFixed(2),
-        message:
-          vaultData.message ??
-          "Saved to platform vault · pending collection · no real charge yet.",
-        countryId: vaultData.entry.countryId
+        amountUsd,
+        countryId,
+        message: `Saved as pending. Polar checkout was not started: ${checkoutData.error ?? "unknown error"}. No benefits activated.`,
       };
     }
+
+    window.location.assign(checkoutData.checkoutUrl);
+    return {
+      ok: true,
+      mode: "polar",
+      checkoutId: checkoutData.checkoutId,
+      checkoutUrl: checkoutData.checkoutUrl,
+      amountUsd,
+      countryId,
+      vaultId,
+      message: "Checkout opened. Benefits remain pending until Polar confirms payment.",
+    };
   } catch {
-    return { ok: false, error: "Network error saving platform vault" };
-  }
-
-  // Optional real charge path (only when PLATFORM_CHECKOUT_MODE=paypal)
-  const paypal = await startPlatformPaypalCheckout({
-    kind: input.kind,
-    amountUsd: input.amountUsd,
-    itemLabel: input.itemLabel,
-    countryId: input.countryId,
-    countryName: input.countryName,
-    city: input.city,
-    sku: input.sku,
-    memberId: input.memberId,
-    description: input.description
-  });
-
-  if (!paypal.ok) {
-    // Vault already saved — business still piles up
     return {
       ok: true,
       mode: "vault",
-      vaultId: vaultId ?? "unknown",
-      amountUsd: Number(input.amountUsd).toFixed(2),
-      message: `Vault saved · PayPal unavailable (${paypal.error}). No real charge yet.`,
-      countryId: input.countryId ?? "global"
+      vaultId,
+      amountUsd,
+      countryId,
+      message: "Saved as pending. Polar checkout could not be reached. No benefits activated.",
     };
   }
-
-  return {
-    ok: true,
-    mode: "paypal",
-    orderId: paypal.orderId,
-    approveUrl: paypal.approveUrl,
-    amountUsd: paypal.amountUsd,
-    merchant: paypal.merchant,
-    countryId: paypal.countryId,
-    vaultId
-  };
 }

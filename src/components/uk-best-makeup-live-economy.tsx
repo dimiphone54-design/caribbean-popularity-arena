@@ -14,7 +14,6 @@ import {
   type MakeupVoteLogItem,
   type UkMakeupLiveQueueEntry
 } from "@/lib/uk-best-makeup-look";
-import { PLATFORM_COMMERCE_COPY } from "@/lib/platform-commerce";
 import { startPlatformCheckout } from "@/lib/start-platform-checkout";
 
 type UkBestMakeupLiveEconomyProps = {
@@ -87,6 +86,10 @@ export function UkBestMakeupLiveEconomy({
       setPayError(result.error);
       return;
     }
+    if (result.mode === "vault" || result.mode === "polar") {
+      setPayError(result.message);
+      return;
+    }
     const weight = tier.amountGbp >= 5 ? 2 : 1;
     setVoteUnlocked(true);
     setVoteWeight(weight);
@@ -112,76 +115,70 @@ export function UkBestMakeupLiveEconomy({
 
   async function sendGift(giftId: string) {
     if (playLocked || payBusy) return;
+
     const gift = MAKEUP_LIVE_GIFT_TIERS.find((g) => g.id === giftId);
     if (!gift) return;
+
     setPayBusy(true);
     setPayError(null);
-    const result = await startPlatformCheckout({
-      kind: "gift",
-      amountUsd: gift.amountGbp,
-      itemLabel: `${gift.label} gift · ${hostName}`,
-      countryId: "uk",
-      countryName: "United Kingdom",
-      city: "London",
-      flag: "🇬🇧",
-      sku: gift.id
-    });
-    setPayBusy(false);
-    if (!result.ok) {
-      setPayError(result.error);
-      return;
+
+    try {
+      const result = await startPlatformCheckout({
+        kind: "gift",
+        amountUsd: gift.amountGbp,
+        itemLabel: `${gift.label} gift · ${hostName}`,
+        countryId: "uk",
+        countryName: "United Kingdom",
+        city: "London",
+        flag: "🇬🇧",
+        sku: gift.id
+      });
+
+      if (!result.ok) {
+        setPayError(result.error);
+        return;
+      }
+
+      setPayError(result.message);
+    } catch {
+      setPayError("Checkout could not be started. No gift was recorded.");
+    } finally {
+      setPayBusy(false);
     }
-    const split = splitMakeupGiftGbp(gift.amountGbp);
-    setGiftGrossGbp((v) => v + split.grossGbp);
-    setGiftPlatformGbp((v) => v + split.platformGbp);
-    setGiftCreatorGbp((v) => v + split.creatorGbp);
-    const payTag = result.mode === "vault" ? "Vault" : "PayPal";
-    setLastGiftNote(
-      `${payTag} · ${gift.emoji} ${gift.label} ${formatMakeupGbp(split.grossGbp)} · ${hostName} ${formatMakeupGbp(split.creatorGbp)} · platform ${formatMakeupGbp(split.platformGbp)}`
-    );
-    setGiftLog((prev) =>
-      [
-        {
-          id: `g-${Date.now()}`,
-          giftId: gift.id,
-          emoji: gift.emoji,
-          label: gift.label,
-          amountGbp: split.grossGbp,
-          platformGbp: split.platformGbp,
-          creatorGbp: split.creatorGbp,
-          tsLabel: londonTimeLabel()
-        },
-        ...prev
-      ].slice(0, 10)
-    );
   }
 
   async function payBoost(entryId: string, boostId: MakeupBoostId, entryName: string) {
     if (playLocked || payBusy) return;
+
     const boost = MAKEUP_PREMIUM_BOOSTS.find((b) => b.id === boostId);
     if (!boost) return;
+
     setPayBusy(true);
     setPayError(null);
-    const result = await startPlatformCheckout({
-      kind: "boost",
-      amountUsd: boost.amountGbp,
-      itemLabel: `${boost.label} · ${entryName}`,
-      countryId: "uk",
-      countryName: "United Kingdom",
-      city: "London",
-      flag: "🇬🇧",
-      sku: boost.id
-    });
-    setPayBusy(false);
-    if (!result.ok) {
-      setPayError(result.error);
-      return;
+
+    try {
+      const result = await startPlatformCheckout({
+        kind: "boost",
+        amountUsd: boost.amountGbp,
+        itemLabel: `${boost.label} · ${entryName}`,
+        countryId: "uk",
+        countryName: "United Kingdom",
+        city: "London",
+        flag: "🇬🇧",
+        sku: boost.id
+      });
+
+      if (!result.ok) {
+        setPayError(result.error);
+        return;
+      }
+
+      setPayError(result.message);
+    } catch {
+      setPayError("Checkout could not be started. No boost was applied.");
+    } finally {
+      setPayBusy(false);
     }
-    onBoostQueue(entryId, boost.id);
-    const payTag = result.mode === "vault" ? "Vault" : "PayPal";
-    setBoostNote(
-      `${payTag} · ${boost.label} → ${entryName} · +${boost.visibilityPoints} vis · ${formatMakeupGbp(boost.amountGbp)}`
-    );
   }
 
   return (
@@ -272,7 +269,7 @@ export function UkBestMakeupLiveEconomy({
                 type="button"
                 disabled={playLocked || payBusy}
                 onClick={() => void sendGift(gift.id)}
-                title={`PayPal · ${hostName} ${formatMakeupGbp(split.creatorGbp)} · platform ${formatMakeupGbp(split.platformGbp)}`}
+                title={`Platform checkout · ${hostName} ${formatMakeupGbp(split.creatorGbp)} · platform ${formatMakeupGbp(split.platformGbp)}`}
                 className="flex flex-col items-center gap-0.5 rounded-xl border border-[#ff2bd6]/20 bg-[#0a0010]/80 py-2 transition hover:border-[#ff2bd6]/50 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <span className="text-lg" aria-hidden="true">

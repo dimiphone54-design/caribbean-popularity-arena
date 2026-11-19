@@ -200,8 +200,8 @@ export const UK_STUDY_HUB_FREEZE_CATALOG = {
   ],
   frozenMoney: [
     "Student gifts (Pencil £1 → Diamond £50)",
-    "Platform gift checkout / PayPal charge path",
-    "Teacher payout form (card · CVC · PayPal email)",
+    "Platform gift checkout / Polar charge path",
+    "Teacher payout details (managed separately from platform checkout)",
     "Gift session totals on teacher cards",
     "Platform cut % when gifts return (catalog keeps 0% first-month plan)"
   ],

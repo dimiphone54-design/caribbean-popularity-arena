@@ -12,7 +12,7 @@ function hasUsableConfig(values: Array<string | undefined>) {
   return values.every(hasUsableValue);
 }
 
-/** Platform env — payment via PayPal. */
+/** Platform environment configuration. */
 export const env = {
   app: {
     name: readEnv("NEXT_PUBLIC_APP_NAME", "CaribbeanFreedomArena"),
@@ -34,9 +34,8 @@ export const env = {
     r2SecretAccessKey: readEnv("CLOUDFLARE_R2_SECRET_ACCESS_KEY"),
     r2BucketName: readEnv("CLOUDFLARE_R2_BUCKET_NAME")
   },
-  paypal: {
-    clientId: readEnv("PAYPAL_CLIENT_ID"),
-    env: readEnv("PAYPAL_ENV", "sandbox")
+  polar: {
+    server: readEnv("POLAR_SERVER", "sandbox")
   },
   analytics: {
     gaMeasurementId: readEnv("NEXT_PUBLIC_GA_MEASUREMENT_ID"),
@@ -51,8 +50,7 @@ export const env = {
     enableMembershipCheckout:
       readEnv("NEXT_PUBLIC_REAL_MONEY_ENABLED", "false") === "true" &&
       readEnv("NEXT_PUBLIC_ENABLE_MEMBERSHIP_CHECKOUT", "false") === "true" &&
-      hasUsableValue(readEnv("PAYPAL_CLIENT_ID")) &&
-      hasUsableValue(readEnv("PAYPAL_CLIENT_SECRET")),
+      hasUsableValue(readEnv("POLAR_ACCESS_TOKEN")),
     enableDropshipPurchases:
       readEnv("NEXT_PUBLIC_REAL_MONEY_ENABLED", "false") === "true" &&
       readEnv("NEXT_PUBLIC_ENABLE_DROPSHIP_PURCHASES", "false") === "true",

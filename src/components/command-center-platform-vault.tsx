@@ -8,8 +8,8 @@ type VaultSummary = {
   totalPendingUsd: number;
   platformPendingUsd: number;
   counterpartPendingUsd: number;
-  checkoutMode: "vault" | "paypal" | "off";
-  paypalConfigured: boolean;
+  checkoutMode: "vault" | "polar" | "off";
+  polarConfigured: boolean;
   realMoneyEnabled?: boolean;
   byCountry: Array<{
     countryId: string;
@@ -42,7 +42,7 @@ type VaultEntry = {
 
 /**
  * Command Center · Platform Vault
- * Pending orders + owed amounts until real PayPal collection
+ * Pending orders + owed amounts until verified Polar collection
  */
 export function CommandCenterPlatformVault() {
   const [summary, setSummary] = useState<VaultSummary | null>(null);
@@ -86,7 +86,7 @@ export function CommandCenterPlatformVault() {
             COMMAND CENTER · Platform Vault
           </p>
           <p className="mt-1 text-[11px] text-[#8fa3bf]">
-            Orders + gifts + votes pile up here · pending collection · no real charge until PayPal is live
+            Orders + gifts + votes pile up here · pending collection · no real charge until verified Polar payments are enabled
           </p>
         </div>
         <button
@@ -123,7 +123,7 @@ export function CommandCenterPlatformVault() {
               Mode: {summary.checkoutMode}
             </span>
             <span className="rounded-full border border-white/15 bg-black/30 px-2.5 py-1 font-bold text-[#c5d4ec]">
-              PayPal keys: {summary.paypalConfigured ? "present (not used in vault mode)" : "none"}
+              Polar access token: {summary.polarConfigured ? "present (not used in vault mode)" : "none"}
             </span>
           </div>
 

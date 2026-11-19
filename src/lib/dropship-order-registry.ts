@@ -1,5 +1,6 @@
-import { randomUUID } from "crypto";
-import { isPayPalConfigured } from "@/lib/paypal";
+import { randomUUID } from "node:crypto";
+import "server-only";
+import { adminDb } from "@/lib/firebase-admin";
 import type { DropshipProduct } from "@/lib/dropshipping";
 import { getDropshipRevenueSplitForCountry } from "@/lib/dropship-pricing";
 
@@ -9,7 +10,6 @@ export type DropshipOrderRecord = {
   id: string;
   orderToken: string;
   orderId?: string;
-  paypalOrderId?: string;
   buyerEmail: string;
   countryId: string;
   countryName: string;
@@ -26,6 +26,10 @@ export type DropshipOrderRecord = {
   status: DropshipOrderStatus;
   createdAt: string;
   updatedAt: string;
+  polarOrderId?: string;
+  paidAt?: string;
+  vaultId?: string;
+  polarProductId?: string;
 };
 
 type CreateDropshipOrderInput = {
@@ -36,55 +40,18 @@ type CreateDropshipOrderInput = {
   product: DropshipProduct;
 };
 
-type UpdateOrderInput = {
-  paypalOrderId?: string;
-  orderId?: string;
-  status?: DropshipOrderStatus;
-};
-
-type DropshipOrderStore = {
-  byId: Map<string, DropshipOrderRecord>;
-  byToken: Map<string, string>;
-  byPayPalOrderId: Map<string, string>;
-};
-
-function getStore(): DropshipOrderStore {
-  const globalKey = "__CARIBBEAN_DROPSHIP_ORDERS__";
-  const globalStore = globalThis as typeof globalThis & {
-    __CARIBBEAN_DROPSHIP_ORDERS__?: DropshipOrderStore;
-  };
-
-  if (!globalStore[globalKey]) {
-    globalStore[globalKey] = {
-      byId: new Map<string, DropshipOrderRecord>(),
-      byToken: new Map<string, string>(),
-      byPayPalOrderId: new Map<string, string>()
-    };
-  }
-
-  return globalStore[globalKey]!;
-}
-
 function normalizeEmail(email: string) {
   return email.trim().toLowerCase();
 }
 
-function createOrderToken() {
-  return randomUUID();
-}
-
-export function canAcceptDropshipPayments() {
-  return isPayPalConfigured();
-}
-
-export function createDropshipOrder(input: CreateDropshipOrderInput) {
+export async function createDropshipOrder(input: CreateDropshipOrderInput): Promise<DropshipOrderRecord> {
   const now = new Date().toISOString();
   const id = `dso_${randomUUID()}`;
-  const orderToken = createOrderToken();
   const split = getDropshipRevenueSplitForCountry(input.product.price, input.countryId);
+
   const record: DropshipOrderRecord = {
     id,
-    orderToken,
+    orderToken: randomUUID(),
     buyerEmail: normalizeEmail(input.buyerEmail),
     countryId: input.countryId,
     countryName: input.countryName,
@@ -98,61 +65,40 @@ export function createDropshipOrder(input: CreateDropshipOrderInput) {
     platformAmount: split.platformUsd.toFixed(2),
     supplierPct: split.supplierPct,
     platformPct: split.platformPct,
-    status: canAcceptDropshipPayments() ? "pending_payment" : "ordered",
+    status: "pending_payment",
     createdAt: now,
     updatedAt: now
   };
 
-  const store = getStore();
-  store.byId.set(record.id, record);
-  store.byToken.set(record.orderToken, record.id);
+  await adminDb.collection("dropshipOrders").doc(id).create(record);
   return record;
 }
 
-export function updateDropshipOrderByToken(orderToken: string, update: UpdateOrderInput) {
-  const store = getStore();
-  const orderId = store.byToken.get(orderToken);
-  if (!orderId) return null;
-  const existing = store.byId.get(orderId);
-  if (!existing) return null;
-
-  const next: DropshipOrderRecord = {
-    ...existing,
-    ...update,
-    updatedAt: new Date().toISOString()
-  };
-
-  store.byId.set(next.id, next);
-  if (update.paypalOrderId) {
-    store.byPayPalOrderId.set(update.paypalOrderId, next.id);
-  }
-  return next;
+export async function setDropshipCheckoutReferences(
+  id: string,
+  refs: { vaultId: string; polarProductId: string }
+): Promise<void> {
+  await adminDb.collection("dropshipOrders").doc(id).update({
+    vaultId: refs.vaultId,
+    polarProductId: refs.polarProductId,
+    updatedAt: new Date().toISOString(),
+  });
 }
 
-export function markDropshipOrderPaid(paypalOrderId: string, capturedOrderId?: string) {
-  const store = getStore();
-  const localId = store.byPayPalOrderId.get(paypalOrderId);
-  if (!localId) return null;
-  const existing = store.byId.get(localId);
-  if (!existing) return null;
+/**
+ * Retrieve one order using its high-entropy access token.
+ * The API route must expose only an explicit public allowlist of fields.
+ */
+export async function getDropshipOrderByToken(
+  token: string
+): Promise<DropshipOrderRecord | null> {
+  const snapshot = await adminDb
+    .collection("dropshipOrders")
+    .where("orderToken", "==", token)
+    .limit(1)
+    .get();
 
-  const next: DropshipOrderRecord = {
-    ...existing,
-    orderId: capturedOrderId ?? existing.orderId,
-    paypalOrderId,
-    status: "ordered",
-    updatedAt: new Date().toISOString()
-  };
+  if (snapshot.empty) return null;
 
-  store.byId.set(next.id, next);
-  return next;
-}
-
-export function listDropshipOrdersByEmail(email: string, countryId?: string) {
-  const normalized = normalizeEmail(email);
-  const store = getStore();
-  return Array.from(store.byId.values())
-    .filter((order) => order.buyerEmail === normalized)
-    .filter((order) => !countryId || order.countryId === countryId)
-    .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+  return snapshot.docs[0].data() as DropshipOrderRecord;
 }

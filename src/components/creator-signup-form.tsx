@@ -62,7 +62,7 @@ export function CreatorSignupForm() {
       <input placeholder="Country" value={form.country} onChange={(e) => update("country", e.target.value)} style={inputStyle} />
       <input placeholder="Your lane (e.g. design, music, video)" value={form.lane} onChange={(e) => update("lane", e.target.value)} style={inputStyle} />
       <textarea placeholder="Describe what you create" value={form.project_description} onChange={(e) => update("project_description", e.target.value)} style={{ ...inputStyle, minHeight: 80 }} />
-      <input placeholder="Your payment link — PayPal, Stripe, WhatsApp, etc." value={form.payment_url} onChange={(e) => update("payment_url", e.target.value)} style={inputStyle} />
+      <input placeholder="Your payment link — Stripe, WhatsApp, etc." value={form.payment_url} onChange={(e) => update("payment_url", e.target.value)} style={inputStyle} />
       <span style={{ fontSize: 12, color: "#666", marginTop: -6 }}>
         Paste any secure link (must start with https://) where clients pay you directly.
       </span>

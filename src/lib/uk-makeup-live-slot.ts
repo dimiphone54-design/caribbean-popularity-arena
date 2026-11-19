@@ -37,14 +37,7 @@ export type MakeupSlotSignupForm = {
   fullName: string;
   email: string;
   country: string;
-  /** Payout — how she receives her money */
-  payoutMethod: "paypal" | "bank" | "card" | "";
-  paypalEmail: string;
-  bankIban: string;
-  cardholderName: string;
-  cardNumber: string;
-  cardExpiry: string;
-  cardCvc: string;
+
   /** Profile */
   instagramHandle: string;
   makeupStyle: string;
@@ -54,22 +47,10 @@ export const EMPTY_MAKEUP_SIGNUP: MakeupSlotSignupForm = {
   fullName:        "",
   email:           "",
   country:         "",
-  payoutMethod:    "",
-  paypalEmail:     "",
-  bankIban:        "",
-  cardholderName:  "",
-  cardNumber:      "",
-  cardExpiry:      "",
-  cardCvc:         "",
   instagramHandle: "",
   makeupStyle:     "",
 };
 
-export const MAKEUP_PAYOUT_METHODS = [
-  { id: "paypal", label: "PayPal",       emoji: "💙" },
-  { id: "bank",   label: "Bank / IBAN",  emoji: "🏦" },
-  { id: "card",   label: "Debit card",   emoji: "💳" },
-] as const;
 
 export const MAKEUP_STYLES = [
   "Natural glam",
@@ -95,7 +76,6 @@ export type MakeupLiveSlot = {
     makeupStyle: string;
     country: string;
     email: string;
-    payoutMethod: string;
   } | null;
   startedAt: number | null; // Date.now() when they went live
   totalGiftsGbp: number;

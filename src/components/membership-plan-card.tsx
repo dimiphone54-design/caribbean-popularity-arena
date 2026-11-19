@@ -1,12 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { ArenaPlusIceFrostOverlay } from "@/components/arena-plus-ice-frost-overlay";
 import { EldersTableLockPanel } from "@/components/elders-table-lock-panel";
-import { PayPalCheckoutButton } from "@/components/paypal-checkout-button";
-import { isRealMoneyEnabled } from "@/lib/real-money";
 
 type Plan = {
   name: string;
@@ -27,7 +24,6 @@ const PLAN_MAP: Record<string, { priceUsd: string; planId: string }> = {
 };
 
 export function MembershipPlanCard({ plan }: { plan: Plan }) {
-  const [paid, setPaid] = useState(false);
   const payConfig = PLAN_MAP[plan.name];
 
   return (
@@ -84,32 +80,13 @@ export function MembershipPlanCard({ plan }: { plan: Plan }) {
       </ul>
 
       <div className="relative z-[1] mt-8">
-        {paid ? (
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-sm font-bold text-green-400">Payment complete!</p>
-            {plan.href && (
-              <Link
-                href={plan.href}
-                className="inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-bold transition luxury-gold-outline"
-              >
-                Enter {plan.name}
-              </Link>
-            )}
-          </div>
-        ) : plan.comingSoon ? (
+        {plan.comingSoon ? (
           <span className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full border border-[var(--luxury-mist)]/20 bg-black/25 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--luxury-mist)]">
             Coming Soon
           </span>
-        ) : payConfig && isRealMoneyEnabled() ? (
-          <PayPalCheckoutButton
-            plan={payConfig.planId}
-            amountUsd={payConfig.priceUsd}
-            label={`Pay $${payConfig.priceUsd} — ${plan.name}`}
-            onSuccess={() => setPaid(true)}
-          />
         ) : payConfig ? (
           <span className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full border border-[var(--luxury-mist)]/20 bg-black/25 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--luxury-mist)]">
-            Payments frozen
+            Polar checkout coming soon
           </span>
         ) : (
           <Link

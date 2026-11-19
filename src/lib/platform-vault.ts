@@ -1,16 +1,15 @@
 /**
- * Platform Vault — pending ledger (no real charge until PayPal is live)
+ * Platform Vault — pending ledger (no real charge until Polar is enabled)
  * Piles up orders + owed amounts for London · Japan · China · Ecuador · all lanes
  */
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { adminDb } from "@/lib/firebase-admin";
 import { randomUUID } from "node:crypto";
-import { isPayPalConfigured } from "@/lib/paypal";
-import type { PlatformPayKind } from "@/lib/platform-paypal";
+import { isPolarConfigured } from "@/lib/polar";
+import type { PlatformPayKind } from "@/lib/platform-payments";
 import { isRealMoneyEnabled } from "@/lib/real-money";
 
-export type VaultEntryStatus = "pending_collection" | "collected" | "cancelled" | "converted_to_paypal";
+export type VaultEntryStatus = "pending_collection" | "collected" | "cancelled" | "converted_to_polar";
 
 export type PlatformVaultEntry = {
   id: string;
@@ -54,41 +53,21 @@ export type PlatformVaultSummary = {
     counterpartUsd: number;
   }>;
   byKind: Array<{ kind: string; count: number; totalUsd: number }>;
-  checkoutMode: "vault" | "paypal" | "off";
-  paypalConfigured: boolean;
+  checkoutMode: "vault" | "polar" | "off";
+  polarConfigured: boolean;
   realMoneyEnabled: boolean;
 };
-
-const DATA_FILE = path.join(process.cwd(), ".data", "platform-vault.json");
-
-type VaultFile = { entries: PlatformVaultEntry[] };
-
-async function readFileStore(): Promise<VaultFile> {
-  try {
-    const raw = await readFile(DATA_FILE, "utf8");
-    const parsed = JSON.parse(raw) as VaultFile;
-    if (!parsed?.entries || !Array.isArray(parsed.entries)) return { entries: [] };
-    return parsed;
-  } catch {
-    return { entries: [] };
-  }
-}
-
-async function writeFileStore(file: VaultFile) {
-  await mkdir(path.dirname(DATA_FILE), { recursive: true });
-  await writeFile(DATA_FILE, JSON.stringify({ entries: file.entries.slice(0, 8000) }, null, 2), "utf8");
-}
 
 /**
  * off    = real-money freeze (no charges, no purchase ledger writes from checkout)
  * vault  = pile orders (no real charge)
- * paypal = only when real money enabled + PLATFORM_CHECKOUT_MODE=paypal + credentials
+ * polar = only when real money enabled + PLATFORM_CHECKOUT_MODE=polar + credentials
  */
-export function getPlatformCheckoutMode(): "vault" | "paypal" | "off" {
+export function getPlatformCheckoutMode(): "vault" | "polar" | "off" {
   if (!isRealMoneyEnabled()) return "off";
   const forced = (process.env.PLATFORM_CHECKOUT_MODE ?? "vault").toLowerCase().trim();
   if (forced === "off" || forced === "frozen" || forced === "disabled") return "off";
-  if (forced === "paypal" && isPayPalConfigured()) return "paypal";
+  if (forced === "polar" && isPolarConfigured()) return "polar";
   return "vault";
 }
 
@@ -179,26 +158,27 @@ export async function createVaultEntry(input: CreateVaultEntryInput): Promise<Pl
     status: "pending_collection",
     note:
       input.note ||
-      "Pending collection · no real charge yet · platform vault until PayPal live",
+      "Pending collection · no real charge yet · platform vault until Polar is enabled",
     createdAt: now,
     updatedAt: now,
     refId: input.refId
   };
 
-  const file = await readFileStore();
-  file.entries.unshift(entry);
-  await writeFileStore(file);
+  await adminDb.collection("platformVault").doc(entry.id).create(entry);
   return entry;
 }
 
 export async function listVaultEntries(limit = 100): Promise<PlatformVaultEntry[]> {
-  const file = await readFileStore();
-  return file.entries.slice(0, limit);
+  const snapshot = await adminDb.collection("platformVault").get();
+  return snapshot.docs
+    .map((doc) => doc.data() as PlatformVaultEntry)
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    .slice(0, Math.max(0, limit));
 }
 
 export async function getVaultSummary(): Promise<PlatformVaultSummary> {
-  const file = await readFileStore();
-  const pending = file.entries.filter((e) => e.status === "pending_collection");
+  const entries = await listVaultEntries(8000);
+  const pending = entries.filter((e) => e.status === "pending_collection");
 
   const byCountryMap = new Map<
     string,
@@ -242,7 +222,7 @@ export async function getVaultSummary(): Promise<PlatformVaultSummary> {
   const round2 = (n: number) => Math.round(n * 100) / 100;
 
   return {
-    entryCount: file.entries.length,
+    entryCount: entries.length,
     pendingCount: pending.length,
     totalPendingUsd: round2(pending.reduce((s, e) => s + e.amountUsd, 0)),
     platformPendingUsd: round2(pending.reduce((s, e) => s + e.platformUsd, 0)),
@@ -259,7 +239,7 @@ export async function getVaultSummary(): Promise<PlatformVaultSummary> {
       .map((k) => ({ ...k, totalUsd: round2(k.totalUsd) }))
       .sort((a, b) => b.totalUsd - a.totalUsd),
     checkoutMode: getPlatformCheckoutMode(),
-    paypalConfigured: isPayPalConfigured(),
+    polarConfigured: isPolarConfigured(),
     realMoneyEnabled: isRealMoneyEnabled()
   };
 }

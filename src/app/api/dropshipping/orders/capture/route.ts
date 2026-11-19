@@ -1,41 +1,12 @@
 import { NextResponse } from "next/server";
-import { capturePayPalOrder } from "@/lib/paypal";
-import { markDropshipOrderPaid } from "@/lib/dropship-order-registry";
-import { REAL_MONEY_FREEZE_MESSAGE, isRealMoneyEnabled } from "@/lib/real-money";
 
-type CaptureBody = {
-  paypalOrderId?: string;
-};
-
-export async function POST(request: Request) {
-  if (!isRealMoneyEnabled()) {
-    return NextResponse.json(
-      { ok: false, error: REAL_MONEY_FREEZE_MESSAGE, frozen: true },
-      { status: 503 }
-    );
-  }
-
-  let body: CaptureBody = {};
-  try {
-    body = (await request.json()) as CaptureBody;
-  } catch {
-    return NextResponse.json({ ok: false, error: "Invalid request body" }, { status: 400 });
-  }
-
-  if (!body.paypalOrderId) {
-    return NextResponse.json({ ok: false, error: "paypalOrderId required" }, { status: 400 });
-  }
-
-  try {
-    const result = await capturePayPalOrder(body.paypalOrderId);
-    if (result.status !== "COMPLETED") {
-      return NextResponse.json({ ok: false, error: `Order not completed: ${result.status}` }, { status: 400 });
-    }
-
-    const order = markDropshipOrderPaid(body.paypalOrderId, result.id);
-    return NextResponse.json({ ok: true, order, capture: result });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "PayPal capture error";
-    return NextResponse.json({ ok: false, error: message }, { status: 500 });
-  }
+export async function POST() {
+  return NextResponse.json(
+    {
+      ok: false,
+      provider: "polar",
+      error: "This legacy capture endpoint is disabled. Payment confirmation requires a verified Polar webhook.",
+    },
+    { status: 410 }
+  );
 }

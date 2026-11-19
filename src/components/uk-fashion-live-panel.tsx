@@ -18,7 +18,7 @@ const VOTE_GIFT_TIERS = [
   { id: "rocket",  emoji: "🚀",  label: "Rocket",  amountGbp: 20, effect: "Rocket launch · arena spotlight" },
 ];
 
-const DEFAULT_SHOP_ITEMS = [
+const DEFAULT_SHOP_ITEMS: Array<{ label: string; price: string; hint: string }> = [
   { label: "Statement piece · UK edit", price: "£19", hint: "Ships this week" },
   { label: "Arena fit essential",       price: "£29", hint: "Cotswolds style lane" },
 ];
@@ -72,7 +72,7 @@ function LookCard({
   const [toast, setToast] = useState<{ emoji: string; label: string } | null>(
     null
   );
-  const shopItems = LOOK_SHOP_ITEMS[look.id] ?? DEFAULT_SHOP_ITEMS;
+  const shopItems = DEFAULT_SHOP_ITEMS;
 
   return (
     <article className="relative overflow-hidden rounded-2xl border border-[#ff2bd6]/25 bg-gradient-to-br from-[#0a0010]/90 to-[#1a0020]/80 p-4 shadow-[0_0_18px_rgba(255,43,214,0.06)] transition hover:border-[#ff2bd6]/50 hover:shadow-[0_0_28px_rgba(255,43,214,0.14)]">

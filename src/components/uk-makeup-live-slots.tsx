@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import {
   EMPTY_MAKEUP_SIGNUP,
   MAKEUP_GIFT_TIERS,
-  MAKEUP_PAYOUT_METHODS,
   MAKEUP_SLOT_DURATION_MS,
   MAKEUP_STYLES,
   MAKEUP_TOURNAMENT_SEED,
@@ -127,34 +126,7 @@ function SlotSignupForm({ slotNumber, onSubmit, onCancel }: {
             <p className="text-[10px] font-bold text-[#fbbf24]">🎁 Gifts are processed through the platform this month</p>
             <p className="mt-1 text-[10px] text-[#94a3b8]">Choose how you want to receive your creator payout — the platform sends your share worldwide after your session ends.</p>
           </div>
-          <div className="flex flex-col gap-1">
-            <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#94a3b8]">Payout method<span className="text-red-400 ml-0.5">*</span></p>
-            <div className="grid grid-cols-3 gap-2">
-              {MAKEUP_PAYOUT_METHODS.map((m) => (
-                <button key={m.id} type="button"
-                  onClick={() => set("payoutMethod")(m.id)}
-                  className={`rounded-xl border py-2 text-xs font-black transition ${form.payoutMethod === m.id ? "border-[#ff2bd6]/70 bg-[#1a0020] text-[#ff2bd6]" : "border-[#2d0040] text-[#64748b] hover:border-[#ff2bd6]/30"}`}>
-                  {m.emoji} {m.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          {form.payoutMethod === "paypal" && (
-            <FieldInput id="ms-paypal" label="PayPal email" placeholder="paypal@yourmail.com" type="email" value={form.paypalEmail} onChange={set("paypalEmail")} />
-          )}
-          {form.payoutMethod === "bank" && (
-            <FieldInput id="ms-iban" label="Bank IBAN / account number" placeholder="GB29 NWBK 6016 1331 9268 19" value={form.bankIban} onChange={set("bankIban")} />
-          )}
-          {form.payoutMethod === "card" && (
-            <div className="space-y-3">
-              <FieldInput id="ms-cardholder" label="Cardholder name" placeholder="Name on card" value={form.cardholderName} onChange={set("cardholderName")} />
-              <FieldInput id="ms-cardnum" label="Card number" placeholder="1234 5678 9012 3456" value={form.cardNumber} onChange={set("cardNumber")} />
-              <div className="grid grid-cols-2 gap-3">
-                <FieldInput id="ms-expiry" label="Expiry" placeholder="MM / YY" value={form.cardExpiry} onChange={set("cardExpiry")} />
-                <FieldInput id="ms-cvc" label="CVC" placeholder="123" value={form.cardCvc} onChange={set("cardCvc")} />
-              </div>
-            </div>
-          )}
+          <p className="rounded-xl border border-[#fbbf24]/20 bg-[#1c1200]/50 p-3 text-xs text-[#94a3b8]">Creator payouts are handled separately by the platform. No bank or card details are collected in this signup.</p>
         </div>
       )}
 
@@ -412,7 +384,7 @@ export function UKMakeupLiveSlots() {
     if (!claimingSlot) return;
     setSlots((prev) => prev.map((s) =>
       s.slotNumber === claimingSlot
-        ? { ...s, status: "live", creator: { fullName: form.fullName, instagramHandle: form.instagramHandle, makeupStyle: form.makeupStyle, country: form.country, email: form.email, payoutMethod: form.payoutMethod }, startedAt: Date.now(), totalGiftsGbp: 0, giftLog: [] }
+        ? { ...s, status: "live", creator: { fullName: form.fullName, instagramHandle: form.instagramHandle, makeupStyle: form.makeupStyle, country: form.country, email: form.email }, startedAt: Date.now(), totalGiftsGbp: 0, giftLog: [] }
         : s
     ));
     setClaimingSlot(null);

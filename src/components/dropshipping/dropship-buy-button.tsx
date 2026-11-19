@@ -5,6 +5,9 @@ import type { DropshipProduct } from "@/lib/dropshipping";
 
 type DropshipBuyButtonProps = {
   product: DropshipProduct;
+  countryName?: string;
+  flag?: string;
+  onOrderedAction?: () => void;
   compact?: boolean;
   footer?: ReactNode;
 };

@@ -1,15 +1,25 @@
 import { NextResponse } from "next/server";
-import { createPayPalOrder } from "@/lib/paypal";
+
+import { createPolarCheckoutSession, isPolarConfigured } from "@/lib/polar";
 import {
   createDropshipOrder,
-  updateDropshipOrderByToken
+  setDropshipCheckoutReferences,
 } from "@/lib/dropship-order-registry";
-import { getDropshipProductsForCountry, getDropshipOptionProductsForCountry } from "@/lib/dropshipping";
-import { createVaultEntry, getPlatformCheckoutMode, getVaultSummary } from "@/lib/platform-vault";
+import {
+  getDropshipProductsForCountry,
+  getDropshipOptionProductsForCountry,
+} from "@/lib/dropshipping";
+import {
+  createVaultEntry,
+  getPlatformCheckoutMode,
+  getVaultSummary,
+} from "@/lib/platform-vault";
 import {
   DROPSHIP_PURCHASE_FREEZE_MESSAGE,
-  isDropshipPurchaseEnabled
+  isDropshipPurchaseEnabled,
 } from "@/lib/real-money";
+
+export const dynamic = "force-dynamic";
 
 type CreateBody = {
   email?: string;
@@ -20,8 +30,28 @@ type CreateBody = {
 };
 
 function getProduct(countryId: string, productId: string) {
-  const all = [...getDropshipOptionProductsForCountry(countryId), ...getDropshipProductsForCountry(countryId)];
+  const all = [
+    ...getDropshipOptionProductsForCountry(countryId),
+    ...getDropshipProductsForCountry(countryId),
+  ];
+
   return all.find((product) => product.id === productId) ?? null;
+}
+
+function toCustomerOrder(order: Awaited<ReturnType<typeof createDropshipOrder>>) {
+  return {
+    id: order.id,
+    orderToken: order.orderToken,
+    productName: order.productName,
+    productCategory: order.productCategory,
+    amount: order.amount,
+    currency: order.currency,
+    countryName: order.countryName,
+    flag: order.flag,
+    status: order.status,
+    createdAt: order.createdAt,
+    updatedAt: order.updatedAt
+  };
 }
 
 export async function POST(request: Request) {
@@ -33,10 +63,14 @@ export async function POST(request: Request) {
   }
 
   let body: CreateBody = {};
+
   try {
     body = (await request.json()) as CreateBody;
   } catch {
-    return NextResponse.json({ ok: false, error: "Invalid request body" }, { status: 400 });
+    return NextResponse.json(
+      { ok: false, error: "Invalid request body." },
+      { status: 400 }
+    );
   }
 
   const email = body.email?.trim().toLowerCase() ?? "";
@@ -46,23 +80,29 @@ export async function POST(request: Request) {
   const productId = body.productId?.trim() ?? "";
 
   if (!email || !countryId || !countryName || !flag || !productId) {
-    return NextResponse.json({ ok: false, error: "Missing order fields" }, { status: 400 });
+    return NextResponse.json(
+      { ok: false, error: "Missing order fields." },
+      { status: 400 }
+    );
   }
 
   const product = getProduct(countryId, productId);
+
   if (!product) {
-    return NextResponse.json({ ok: false, error: "Product not found" }, { status: 404 });
+    return NextResponse.json(
+      { ok: false, error: "Product not found." },
+      { status: 404 }
+    );
   }
 
-  const localOrder = createDropshipOrder({
+  const localOrder = await createDropshipOrder({
     buyerEmail: email,
     countryId,
     countryName,
     flag,
-    product
+    product,
   });
 
-  // Always pile into platform vault (orders + owed amounts)
   const vaultEntry = await createVaultEntry({
     kind: "dropship",
     countryId,
@@ -76,53 +116,114 @@ export async function POST(request: Request) {
     counterpartLabel: "supplier",
     buyerEmail: email,
     refId: localOrder.id,
-    note: `Dropship vault · ${countryName} · pending collection`
+    note: `Dropship vault · ${countryName} · pending collection`,
   });
 
   const mode = getPlatformCheckoutMode();
   const summary = await getVaultSummary();
 
-  if (mode === "vault") {
+  if (mode !== "polar") {
     return NextResponse.json({
       ok: true,
       mode: "vault",
-      order: localOrder,
+      order: toCustomerOrder(localOrder),
       vaultId: vaultEntry.id,
       summary,
-      message: `Saved to platform vault · ${flag} ${countryName} · $${localOrder.amount} pending · no real charge yet. Pay when PayPal is live.`
+      message: `Saved as pending · ${flag} ${countryName} · no payment collected.`,
+    });
+  }
+
+  if (!isPolarConfigured()) {
+    return NextResponse.json({
+      ok: true,
+      mode: "vault",
+      order: toCustomerOrder(localOrder),
+      vaultId: vaultEntry.id,
+      summary,
+      message: "Order saved as pending. Polar is not configured; no payment collected.",
+    });
+  }
+
+  const skuKey = product.id
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, "_")
+    .replace(/^_|_$/g, "");
+
+  const polarProductId =
+    process.env[`POLAR_PRODUCT_ID_DROPSHIP_${skuKey}`]?.trim() ||
+    process.env.POLAR_PRODUCT_ID_DROPSHIP?.trim();
+
+  if (!polarProductId) {
+    return NextResponse.json({
+      ok: true,
+      mode: "vault",
+      order: toCustomerOrder(localOrder),
+      vaultId: vaultEntry.id,
+      summary,
+      message: `Order saved as pending. No Polar product is configured for ${product.id}; no payment collected.`,
     });
   }
 
   try {
-    const paypal = await createPayPalOrder({
-      amountUsd: localOrder.amount,
-      description: `Caribbean Freedom Arena · ${countryName} dropship · ${product.name} · platform merchant`,
-      customId: `cfa:dropship:${countryId}:${localOrder.id}`.slice(0, 127)
+    const origin = new URL(request.url).origin;
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, "") || origin;
+
+    if (getPlatformCheckoutMode() !== "polar") {
+      return NextResponse.json({
+        ok: true,
+        mode: "vault",
+        order: toCustomerOrder(localOrder),
+        vaultId: vaultEntry.id,
+        summary,
+        message: "Order saved as pending. Polar is not the active payment mode; no payment collected.",
+      });
+    }
+
+    await setDropshipCheckoutReferences(localOrder.id, {
+      vaultId: vaultEntry.id,
+      polarProductId,
     });
 
-    const updated = updateDropshipOrderByToken(localOrder.orderToken, {
-      paypalOrderId: paypal.id
+    const checkout = await createPolarCheckoutSession({
+      productId: polarProductId,
+      externalOrderId: localOrder.id,
+      successUrl: `${siteUrl}/dashboard?polar_checkout_id={CHECKOUT_ID}`,
+      customerEmail: email,
+      metadata: {
+        platform: "caribbean-freedom-arena",
+        kind: "dropship",
+        sku: product.id,
+        local_order_id: localOrder.id,
+        vault_id: vaultEntry.id,
+        country_id: countryId,
+        country_name: countryName,
+      },
     });
 
     return NextResponse.json({
       ok: true,
-      mode: "paypal",
-      order: updated ?? localOrder,
+      mode: "polar",
+      provider: "polar",
+      order: toCustomerOrder(localOrder),
       vaultId: vaultEntry.id,
-      approveUrl: paypal.approveUrl,
-      paypalOrderId: paypal.id,
-      summary
+      checkoutId: checkout.id,
+      checkoutUrl: checkout.url,
+      summary,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Checkout unavailable";
-    // Vault already has the order — business keeps piling up
+    console.error(
+      "[Polar dropship checkout]",
+      error instanceof Error ? error.message : error
+    );
+
     return NextResponse.json({
       ok: true,
       mode: "vault",
-      order: localOrder,
+      order: toCustomerOrder(localOrder),
       vaultId: vaultEntry.id,
       summary,
-      message: `Vault saved · PayPal error (${message}). No real charge yet.`
+      message: "Order saved as pending. Polar checkout could not be started; no payment collected.",
     });
   }
 }

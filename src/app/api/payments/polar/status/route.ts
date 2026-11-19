@@ -1,20 +1,23 @@
 import { NextResponse } from "next/server";
-import { getPayPalPublicStatus } from "@/lib/paypal";
-import { PLATFORM_PAYPAL_MERCHANT, PLATFORM_PAY_LANES } from "@/lib/platform-paypal";
+
+import { getPolarPublicStatus } from "@/lib/polar";
 import { getRealMoneyPublicStatus } from "@/lib/real-money";
 import { getPlatformCheckoutMode } from "@/lib/platform-vault";
+import { PLATFORM_PAY_LANES } from "@/lib/platform-payments";
 
-/** Owner / client status · does not expose secrets */
+/** Public payment status; never returns provider credentials. */
 export async function GET() {
-  const status = getPayPalPublicStatus();
+  const status = getPolarPublicStatus();
   const money = getRealMoneyPublicStatus();
+
   return NextResponse.json({
     ok: true,
     ...status,
     ...money,
     checkoutMode: getPlatformCheckoutMode(),
-    brandName: PLATFORM_PAYPAL_MERCHANT.brandName,
-    settlementNote: PLATFORM_PAYPAL_MERCHANT.settlementNote,
+    brandName: "Caribbean Freedom Arena",
+    settlementNote:
+      "Customer payments are processed through the platform's Polar checkout. Supplier and creator payouts are handled separately.",
     lanes: PLATFORM_PAY_LANES.map((lane) => ({
       id: lane.id,
       flag: lane.flag,

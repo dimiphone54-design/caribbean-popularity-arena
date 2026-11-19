@@ -1,17 +1,4 @@
-/**
- * Platform merchant PayPal — ONE Caribbean Freedom Arena account
- * All country rooms (London UK · Japan · China · Ecuador …) settle here.
- * Creators/suppliers are paid out later via platform payout (not customer→seller direct).
- */
-
-export const PLATFORM_PAYPAL_MERCHANT = {
-  brandName: "Caribbean Freedom Arena",
-  label: "Platform merchant checkout · Caribbean Freedom Arena PayPal",
-  currency: "USD" as const,
-  /** Customer pays platform · creator/supplier share via ops payout */
-  settlementNote:
-    "Customer pays the platform PayPal merchant. Creator/supplier share is paid out by the platform after reconciliation."
-} as const;
+/** Shared platform payment categories and country-lane examples. */
 
 export type PlatformPayLaneId = "uk" | "japan" | "china" | "ecuador" | "colombia" | "global";
 
@@ -28,7 +15,7 @@ export type PlatformPayLane = {
   flag: string;
   city: string;
   countryName: string;
-  /** Example SKUs that all hit the same PayPal merchant */
+  /** Example SKUs that all hit the same platform checkout */
   examples: Array<{
     kind: PlatformPayKind;
     label: string;
@@ -38,7 +25,7 @@ export type PlatformPayLane = {
 };
 
 /**
- * Examples only — same PayPal merchant for every lane.
+ * Examples only — same platform checkout for every lane.
  * London = UK room · Japan · China · Ecuador
  */
 export const PLATFORM_PAY_LANES: PlatformPayLane[] = [
@@ -179,36 +166,3 @@ export const PLATFORM_PAY_LANES: PlatformPayLane[] = [
     ]
   }
 ];
-
-export function buildPlatformPayCustomId(input: {
-  kind: PlatformPayKind;
-  countryId?: string;
-  sku?: string;
-  ref?: string;
-}) {
-  const parts = [
-    "cfa",
-    input.kind,
-    (input.countryId ?? "global").toLowerCase(),
-    input.sku ?? "item",
-    input.ref ?? String(Date.now())
-  ];
-  return parts.join(":").slice(0, 127);
-}
-
-export function formatPlatformPayDescription(input: {
-  kind: PlatformPayKind;
-  countryId?: string;
-  countryName?: string;
-  city?: string;
-  itemLabel: string;
-}) {
-  const place =
-    input.city && input.countryName
-      ? `${input.countryName} · ${input.city}`
-      : input.countryName ?? input.countryId ?? "Arena";
-  return `${PLATFORM_PAYPAL_MERCHANT.brandName} · ${place} · ${input.kind} · ${input.itemLabel}`.slice(
-    0,
-    120
-  );
-}

@@ -8,7 +8,7 @@ import { MatrixPanelAccordion, type MatrixPanelRoom } from "@/components/matrix-
 import { CommandCenterEcuadorStudyHub } from "@/components/command-center-ecuador-study-hub";
 import { CommandCenterDropshipLanes } from "@/components/command-center-dropship-lanes";
 import { CommandCenterGiftOps } from "@/components/command-center-gift-ops";
-import { CommandCenterPaypalMerchant } from "@/components/command-center-paypal-merchant";
+import { CommandCenterPolarPayments } from "@/components/command-center-polar-payments";
 import { CommandCenterPlatformVault } from "@/components/command-center-platform-vault";
 import { CommandCenterUkDropship } from "@/components/command-center-uk-dropship";
 import { CommandCenterFreezeComingSoon } from "@/components/command-center-freeze-coming-soon";
@@ -227,7 +227,7 @@ export function CommandCenterPage() {
                       { label: "What", body: "All public real-money + dropship freezes in one place — every country detailed below." },
                       { label: "Public", body: "Payments · gifts · vote unlocks · boosts · dropship panels/purchases · membership pay OFF." },
                       { label: "Still on", body: "Browse · live rooms · chat · free UI · visual vote (no charge)." },
-                      { label: "Private", body: "PayPal keys stay in .env.local · owner tools only in Command Center." }
+                      { label: "Private", body: "Polar credentials stay server-side · owner tools only in Command Center." }
                     ],
                     rooms: CC_ACTIVE_ROOMS
                   },
@@ -316,7 +316,7 @@ export function CommandCenterPage() {
                       { label: "Public freeze", body: "Real-money is OFF on the public site. Vault stays owner-visible here only." },
                       { label: "London 🇬🇧", body: "Dropship + makeup gifts/votes/boosts → vault ledger when re-enabled." },
                       { label: "Japan 🇯🇵 · China 🇨🇳 · Ecuador 🇪🇨", body: "Dropship buys → same vault · pending collection (when unfrozen)." },
-                      { label: "Re-open later", body: "NEXT_PUBLIC_REAL_MONEY_ENABLED=true · PLATFORM_CHECKOUT_MODE=paypal (keys already stored)." }
+                      { label: "Re-open later", body: "NEXT_PUBLIC_REAL_MONEY_ENABLED=true · PLATFORM_CHECKOUT_MODE=polar (keys already stored)." }
                     ],
                     rooms: [CC_ROOM.uk, CC_ROOM.japan, CC_ROOM.china, CC_ROOM.ecuador, CC_ROOM.colombia, CC_ROOM.spain],
                     footer: <CommandCenterPlatformVault />
@@ -324,19 +324,19 @@ export function CommandCenterPage() {
                   {
                     char: "06",
                     emoji: "💳",
-                    title: "PayPal Private",
-                    tone: "text-[#0070ba]",
-                    border: "border-[#0070ba]/40",
+                    title: "Polar Private",
+                    tone: "text-[#9fb4d4]",
+                    border: "border-white/20",
                     numberOnly: true,
                     items: [
-                      { label: "Not lost", body: "Client ID + Secret stay in private .env.local. Public rooms cannot charge while frozen." },
-                      { label: "Merchant", body: "Caribbean Freedom Arena PayPal — every country room settles here when live." },
+                      { label: "Not lost", body: "Polar access token must remain server-side. Public checkout stays frozen until payment verification is complete." },
+                      { label: "Merchant", body: "Caribbean Freedom Arena Polar account — platform checkout for every country room when enabled." },
                       { label: "London 🇬🇧", body: "Dropship tech/auto · makeup gifts · vote · boosts (frozen publicly)." },
                       { label: "Japan 🇯🇵 · China 🇨🇳 · Ecuador 🇪🇨", body: "Dropship · gifts · memberships → same merchant when unfrozen." },
                       { label: "Payouts", body: "Customer → platform merchant. Creators/suppliers paid later (70/30 gifts, etc.)." }
                     ],
                     rooms: CC_ACTIVE_ROOMS,
-                    footer: <CommandCenterPaypalMerchant />
+                    footer: <CommandCenterPolarPayments />
                   },
                   {
                     char: "07",

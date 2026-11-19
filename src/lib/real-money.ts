@@ -3,7 +3,7 @@
  *
  * Default: FROZEN unless NEXT_PUBLIC_REAL_MONEY_ENABLED is exactly "true".
  * Keeps browse / live / chat / free UI testing on while blocking charges,
- * PayPal orders, dropship purchases, paid gifts, vote-unlock fees, and tips.
+ * Polar orders, dropship purchases, paid gifts, vote-unlock fees, and tips.
  *
  * Public dropship panels default HIDDEN — owner tools stay in Command Center.
  * Set NEXT_PUBLIC_SHOW_DROPSHIP_PANELS=true to show country-room dropship again.

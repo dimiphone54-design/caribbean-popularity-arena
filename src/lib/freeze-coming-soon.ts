@@ -1,14 +1,14 @@
 /**
  * Command Center · FREEZE COMING SOON catalog
  * One place listing everything frozen on the public site, by country.
- * Re-enable via .env.local flags (keys stay private in .env.local).
+ * Keep real-money features frozen until Polar checkout, persistent payment records, and verified webhooks are implemented and tested.
  */
 
 import { getAllDropshipCountryConfigs } from "@/lib/dropship-country-config";
 import { getDropshipHubCity, getDropshipCountryRoomHref } from "@/lib/dropship-lane-template";
 import { getDropshipProductsForCountry } from "@/lib/dropshipping";
 import { internationalSuiteCountries } from "@/lib/international-suite";
-import { PLATFORM_PAY_LANES } from "@/lib/platform-paypal";
+import { PLATFORM_PAY_LANES } from "@/lib/platform-payments";
 
 export const FREEZE_COMING_SOON_TITLE = "FREEZE COMING SOON";
 
@@ -16,12 +16,12 @@ export const FREEZE_GLOBAL_FLAGS = [
   {
     key: "NEXT_PUBLIC_REAL_MONEY_ENABLED",
     value: "false",
-    means: "Blocks all real PayPal charges, gifts, vote unlocks, boosts, membership pay"
+    means: "Blocks all real platform charges, gifts, vote unlocks, boosts, and membership payments"
   },
   {
     key: "PLATFORM_CHECKOUT_MODE",
     value: "off",
-    means: "Checkout engine off (no vault pile-up from public, no PayPal capture path)"
+    means: "Checkout engine off (no public vault pile-up and no unverified payment capture)"
   },
   {
     key: "NEXT_PUBLIC_SHOW_DROPSHIP_PANELS",
@@ -36,17 +36,17 @@ export const FREEZE_GLOBAL_FLAGS = [
   {
     key: "NEXT_PUBLIC_ENABLE_MEMBERSHIP_CHECKOUT",
     value: "false",
-    means: "Membership PayPal buttons stay off"
+    means: "Membership checkout stays off"
   }
 ] as const;
 
 /** Sitewide freezes that apply to every country */
 export const FREEZE_SITEWIDE_ITEMS = [
   {
-    id: "paypal-charges",
-    label: "PayPal real charges",
+    id: "polar-charges",
+    label: "Polar real charges",
     detail:
-      "create-order / capture-order / platform vault POST rejected. Live keys remain stored privately in .env.local only."
+      "Platform checkout and vault payment requests remain frozen. Polar credentials must stay server-side."
   },
   {
     id: "gifts-tips",
@@ -190,7 +190,7 @@ const COUNTRY_NOTES: Record<string, string[]> = {
     "UK park games money removed (tips · votes · VIP · per-game monetization) → see FREEZE panel Park games section",
     "UK food kit prices removed · Tournament gift £ catalog → FREEZE panel Food + Tournament sections",
     "Still live: park free play · food browse · free Tournament · football free predict · Study Hub · Makeup free queue",
-    "Command Center keeps: Dropship · Gift ops · Vault · PayPal · Study Hub + Prediction + Makeup + Park + Food + Tournament catalogs"
+    "Command Center keeps: Dropship · Gift ops · Vault · Polar · Study Hub + Prediction + Makeup + Park + Food + Tournament catalogs"
   ],
   japan: [
     "Room: /rooms/japan-room",
@@ -218,7 +218,7 @@ const COUNTRY_NOTES: Record<string, string[]> = {
     "Hidden: Dropshipping room tab + market panel (SHOW_DROPSHIP_PANELS=false)",
     "Frozen paid: food kit USD prices ($28/$35/$32) · dropship checkout · Study Hub premium model",
     "Still live: romantic live stack · games · fashion culture · food free browse · Study Hub free campus",
-    "Command Center FREEZE COMING SOON · full Colombia food + Study Hub + PayPal lane catalogs"
+    "Command Center FREEZE COMING SOON · full Colombia food + Study Hub + Polar payment catalogs"
   ],
   lithuania: [
     "REMOVED from public main Front 12 + International SUITE nav",
@@ -228,7 +228,7 @@ const COUNTRY_NOTES: Record<string, string[]> = {
   ],
   trinidad: [
     "Caribbean lane · dropship public panels hidden",
-    "Purchases frozen · WiPay/PayPal public charge paths off",
+    "Purchases frozen · public platform charge paths off",
     "Still live: suite country card · free room browse if open"
   ],
   jamaica: [
@@ -265,7 +265,7 @@ const DEFAULT_FROZEN_FEATURES = [
   "Paid gifts & tips (platform checkout)",
   "Paid vote unlocks",
   "Premium boosts",
-  "Membership PayPal checkout"
+  "Membership Polar checkout"
 ];
 
 const DEFAULT_STILL_LIVE = [
@@ -331,9 +331,9 @@ export function buildFreezeCountryDetails(): FreezeCountryDetail[] {
 
 export function getFreezeReopenSteps(): string[] {
   return [
-    "1. Keep PayPal Client ID + Secret in private .env.local (already stored).",
+    "1. Configure POLAR_ACCESS_TOKEN and POLAR_SERVER as server-side environment variables. Never expose credentials to the browser.",
     "2. Set NEXT_PUBLIC_SHOW_DROPSHIP_PANELS=true to show country dropship panels again.",
-    "3. Set NEXT_PUBLIC_REAL_MONEY_ENABLED=true and PLATFORM_CHECKOUT_MODE=paypal for real charges.",
+    "3. Do NOT enable real money until persistent order records, verified Polar order.paid webhooks, and idempotency tests are implemented and verified. Only then review the real-money flags.",
     "4. Set NEXT_PUBLIC_ENABLE_DROPSHIP_PURCHASES=true to allow Buy now.",
     "5. Optionally NEXT_PUBLIC_ENABLE_MEMBERSHIP_CHECKOUT=true for memberships.",
     "6. Restart npm run dev:arena (or production process) so NEXT_PUBLIC_* flags reload."

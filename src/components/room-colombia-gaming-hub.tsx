@@ -6,6 +6,7 @@ import { useRoomLocale } from "@/components/room-locale-provider";
 import { isSpanishContentLocale } from "@/lib/room-locale";
 
 const COLOMBIA_HOST = "Sala CO";
+const COLOMBIA_ROOM_KICKER = "COLOMBIA · JUEGOS Y COMUNIDAD";
 
 const COLOMBIA_LIVE_LANES = [
   { emoji: "⚽", title: "Fútbol", gameName: "Fútbol" as string | null },

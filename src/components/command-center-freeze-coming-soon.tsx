@@ -53,7 +53,7 @@ import {
 import { JAPAN_SPORTS_EARN_LANES_FROZEN } from "@/components/japan-sports-trends-panel";
 import { GACHA_COIN_CONFIG } from "@/lib/japan-gacha-data";
 import { getAllDropshipProductsForCountry } from "@/lib/dropshipping";
-import { PLATFORM_PAY_LANES } from "@/lib/platform-paypal";
+import { PLATFORM_PAY_LANES } from "@/lib/platform-payments";
 import { CHINA_STUDY_HUB_FREEZE_CATALOG } from "@/components/china-study-hub-tab-panel";
 import {
   CHINA_FOOD_FREEZE_CATALOG,
@@ -79,7 +79,6 @@ type LiveStatus = {
   configured?: boolean;
   secretStored?: boolean;
   mode?: string;
-  clientIdPrefix?: string;
 };
 
 /**
@@ -93,7 +92,7 @@ export function CommandCenterFreezeComingSoon() {
   const [openId, setOpenId] = useState<string | null>(countries[0]?.countryId ?? null);
 
   useEffect(() => {
-    void fetch("/api/payments/paypal/status")
+    void fetch("/api/payments/polar/status")
       .then((r) => r.json())
       .then((data) => setStatus(data as LiveStatus))
       .catch(() => setStatus({ frozen: true, configured: false }));
@@ -106,7 +105,7 @@ export function CommandCenterFreezeComingSoon() {
           ❄️ {FREEZE_COMING_SOON_TITLE}
         </p>
         <p className="mt-1.5 text-[12px] font-semibold leading-5 text-[#fde68a]">
-          Everything frozen on the public site lives here — one owner panel. PayPal keys &amp; dropship
+          Everything frozen on the public site lives here — one owner panel. Polar configuration &amp; dropship
           ops stay private. Fans still browse, live, chat, and use free UI. Poland &amp; Lithuania
           nation slots live here only (removed from main Front 12).
         </p>
@@ -123,8 +122,8 @@ export function CommandCenterFreezeComingSoon() {
           />
           <StatusPill
             ok={status?.configured === true}
-            yes="PayPal keys stored"
-            no="PayPal keys missing"
+            yes="Polar configured"
+            no="Polar not configured"
           />
           <span className="rounded-full border border-white/15 bg-black/35 px-2.5 py-1 text-[#c5d4ec]">
             Checkout: {status?.checkoutMode ?? "off"}
@@ -132,11 +131,7 @@ export function CommandCenterFreezeComingSoon() {
           <span className="rounded-full border border-white/15 bg-black/35 px-2.5 py-1 text-[#c5d4ec]">
             API: {status?.mode ?? "…"}
           </span>
-          {status?.clientIdPrefix ? (
-            <span className="rounded-full border border-white/15 bg-black/35 px-2.5 py-1 text-[#c5d4ec]">
-              ID {status.clientIdPrefix}
-            </span>
-          ) : null}
+
         </div>
       </header>
 
@@ -862,7 +857,7 @@ export function CommandCenterFreezeComingSoon() {
               <li>Sports “How creators earn” paid entry / gifting</li>
               <li>Gacha creator earn + live gifts messaging</li>
               <li>Anime / J-beauty USD prices &amp; checkout</li>
-              <li>Membership / gift / dropship PayPal examples</li>
+              <li>Membership / gift / dropship Polar examples</li>
             </ul>
           </div>
         </div>
@@ -916,7 +911,7 @@ export function CommandCenterFreezeComingSoon() {
         </p>
 
         <p className="mt-3 text-[9px] font-black uppercase tracking-[0.12em] text-[#67e8f9]">
-          Japan PayPal lane examples
+          Japan Polar lane examples
         </p>
         <ul className="mt-1.5 space-y-1" role="list">
           {(PLATFORM_PAY_LANES.find((l) => l.id === "japan")?.examples ?? []).map((ex) => (
@@ -1057,7 +1052,7 @@ export function CommandCenterFreezeComingSoon() {
         </ul>
 
         <p className="mt-3 text-[9px] font-black uppercase tracking-[0.12em] text-[#c084fc]">
-          China PayPal lane examples
+          China Polar lane examples
         </p>
         <ul className="mt-1.5 space-y-1" role="list">
           {(PLATFORM_PAY_LANES.find((l) => l.id === "china")?.examples ?? []).map((ex) => (
@@ -1184,7 +1179,7 @@ export function CommandCenterFreezeComingSoon() {
         </ul>
 
         <p className="mt-3 text-[9px] font-black uppercase tracking-[0.12em] text-[#c084fc]">
-          Ecuador PayPal lane examples
+          Ecuador Polar lane examples
         </p>
         <ul className="mt-1.5 space-y-1" role="list">
           {(PLATFORM_PAY_LANES.find((l) => l.id === "ecuador")?.examples ?? []).map((ex) => (
@@ -1288,7 +1283,7 @@ export function CommandCenterFreezeComingSoon() {
         </ul>
 
         <p className="mt-3 text-[9px] font-black uppercase tracking-[0.12em] text-[#c084fc]">
-          Colombia PayPal lane examples
+          Colombia Polar lane examples
         </p>
         <ul className="mt-1.5 space-y-1" role="list">
           {(PLATFORM_PAY_LANES.find((l) => l.id === "colombia")?.examples ?? []).map((ex) => (

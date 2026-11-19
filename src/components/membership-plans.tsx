@@ -22,7 +22,7 @@ export function MembershipPlans() {
         </div>
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-xs leading-5 text-[var(--luxury-mist)]">
-          Payments processed securely via PayPal. Community and entertainment only.
+          Polar will be the platform checkout provider when payments are enabled. Payments are currently frozen. Community and entertainment only.
         </p>
       </div>
     </section>

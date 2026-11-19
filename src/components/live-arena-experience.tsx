@@ -812,7 +812,7 @@ function FreeDemoPanel({
     <div>
       {panel === "apply" ? (
         <>
-          <div className={`text-center${panel === "bank" ? " a2030-signup-panel-head" : ""}`}>
+          <div className="text-center">
             <div className="text-5xl">{content.icon}</div>
             <h2 className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#f5c842] to-[#ff5c2b]">
               {content.title}
@@ -834,7 +834,7 @@ function FreeDemoPanel({
         />
       ) : (
         <>
-          <div className={`text-center${panel === "bank" ? " a2030-signup-panel-head" : ""}`}>
+          <div className="text-center">
             <div className="text-5xl">{content.icon}</div>
             <h2 className="mt-3 font-['Bebas_Neue',sans-serif] text-4xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#f5c842] to-[#ff5c2b]">
               {content.title}
