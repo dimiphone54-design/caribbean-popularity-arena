@@ -14,16 +14,54 @@ function getStateReference() {
 function validateState(value: unknown): ArenaEngineState {
   const state = value as ArenaEngineState;
 
+  const validDate = (value: unknown) =>
+    value === null || (typeof value === "string" && Number.isFinite(Date.parse(value)));
+
+  const validLiveSessions =
+    Boolean(state?.liveSessions) &&
+    typeof state.liveSessions === "object" &&
+    !Array.isArray(state.liveSessions) &&
+    Object.entries(state.liveSessions).every(([key, session]) =>
+      Boolean(session) &&
+      key === String(session.slotId) &&
+      Number.isInteger(session.slotId) &&
+      session.slotId >= 1 &&
+      session.slotId <= 12 &&
+      typeof session.islandCode === "string" &&
+      typeof session.displayName === "string" &&
+      validDate(session.signedInAt) &&
+      session.signedInAt !== null &&
+      validDate(session.expiresAt) &&
+      session.expiresAt !== null
+    );
+
   if (
     !state ||
     state.version !== 1 ||
     !Array.isArray(state.frontSlots) ||
     state.frontSlots.length !== 12 ||
+    !state.frontSlots.every((slot, index) =>
+      Boolean(slot) &&
+      slot.slotRank === index + 1 &&
+      typeof slot.templateIslandCode === "string" &&
+      slot.templateIslandCode.length === 2
+    ) ||
     !Array.isArray(state.waitingSlots) ||
     state.waitingSlots.length !== 12 ||
-    !state.liveSessions ||
-    typeof state.liveSessions !== "object" ||
-    Array.isArray(state.liveSessions)
+    !state.waitingSlots.every((slot, index) =>
+      Boolean(slot) && slot.queuePosition === index + 1
+    ) ||
+    !validLiveSessions ||
+    !Array.isArray(state.openLiveIslandCodes) ||
+    !state.openLiveIslandCodes.every((code) => typeof code === "string") ||
+    !Number.isFinite(state.rotationIntervalHours) ||
+    state.rotationIntervalHours <= 0 ||
+    !Number.isFinite(state.liveSessionHours) ||
+    state.liveSessionHours <= 0 ||
+    !validDate(state.lastRotationAt) ||
+    !validDate(state.nextRotationAt) ||
+    !validDate(state.updatedAt) ||
+    state.updatedAt === null
   ) {
     throw new Error(
       "Firestore Arena Engine state is invalid. Refusing to overwrite it."
