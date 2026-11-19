@@ -3,7 +3,6 @@ import {
   isArenaFront12VisibleSlot
 } from "@/lib/arena-front12-slot-order";
 import {
-  getInternationalSuiteActiveCountryLabel,
   getInternationalSuiteActiveIslandCodes,
   isInternationalSuiteCountryActiveByIslandCode
 } from "@/lib/international-suite";
