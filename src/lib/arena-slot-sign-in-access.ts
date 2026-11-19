@@ -1,5 +1,8 @@
 import { isArenaMasterKeyActive } from "@/lib/arena-master-key";
-import { isArenaFront12VisibleSlot } from "@/lib/arena-front12-slot-order";
+import {
+  ARENA_FRONT12_SLOT_DISPLAY_ORDER,
+  isArenaFront12VisibleSlot
+} from "@/lib/arena-front12-slot-order";
 import {
   getInternationalSuiteActiveCountryLabel,
   getInternationalSuiteActiveIslandCodes,
