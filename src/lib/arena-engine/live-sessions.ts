@@ -20,7 +20,7 @@ export function claimArenaEngineLiveSession(
   if (name.length < 2 || name.length > 40) {
     return { ok: false, error: "Display name must be between 2 and 40 characters." };
   }
-  if (/[\\u0000-\\u001F\\u007F]/.test(name)) {
+  if (/[\x00-\x1F\x7F]/.test(name)) {
     return { ok: false, error: "Display name contains unsupported characters." };
   }
 
