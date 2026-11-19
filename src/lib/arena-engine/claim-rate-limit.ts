@@ -8,9 +8,11 @@ const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 8;
 
 function getClientAddress(request: Request) {
-  const forwarded = request.headers.get("x-forwarded-for");
-  const vercelForwarded = request.headers.get("x-vercel-forwarded-for");
-  const address = forwarded?.split(",")[0]?.trim() || vercelForwarded?.trim() || "unknown";
+  const address =
+    request.headers.get("x-real-ip")?.trim() ||
+    request.headers.get("x-vercel-forwarded-for")?.trim() ||
+    request.headers.get("cf-connecting-ip")?.trim() ||
+    "unknown";
   return createHash("sha256").update(address).digest("hex");
 }
 
