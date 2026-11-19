@@ -1,6 +1,15 @@
 name: Arena Engine validation
 
 on:
+  push:
+    branches:
+      - fix/arena-engine-production-safety
+    paths:
+      - "src/lib/arena-engine/**"
+      - "src/app/api/arena-engine/**"
+      - "src/lib/arena-slot-sign-in-access.ts"
+      - "src/lib/arena-front12-slot-order.ts"
+      - ".github/workflows/arena-engine-validation.yml"
   pull_request:
     branches:
       - main
