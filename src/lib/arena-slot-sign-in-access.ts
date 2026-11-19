@@ -1,42 +1,49 @@
-import { isArenaMasterKeyActive } from "@/lib/arena-master-key";
-import { isArenaFront12VisibleSlot } from "@/lib/arena-front12-slot-order";
 import {
-  getInternationalSuiteActiveCountryLabel,
+  ARENA_FRONT12_SLOT_DISPLAY_ORDER,
+  isArenaFront12VisibleSlot
+} from "@/lib/arena-front12-slot-order";
+import {
   getInternationalSuiteActiveIslandCodes,
   isInternationalSuiteCountryActiveByIslandCode
 } from "@/lib/international-suite";
 
-/** UI-safe · pass masterKeyActive from useArenaMasterKeyActive (false during SSR). */
+/** UI may additionally allow owner preview through the browser-only master key. */
 export function isArenaSlotSignInOpenForUi(islandCode: string, masterKeyActive = false) {
   if (masterKeyActive) return true;
-  // Front 12 nation slots · all READY for girl sign-in (same card style)
-  if (isArenaFront12VisibleSlot(islandCode)) return true;
-  return isInternationalSuiteCountryActiveByIslandCode(islandCode);
+  return isArenaSlotSignInOpen(islandCode);
 }
 
 export function isArenaSlotFrozenForUi(islandCode: string, masterKeyActive = false) {
   return !isArenaSlotSignInOpenForUi(islandCode, masterKeyActive);
 }
 
-/** Front 12 · girl sign-in open · mirrors International SUITE active countries only */
-export const arenaSlotSignInOpenIslandCodes = getInternationalSuiteActiveIslandCodes();
+/** Public sign-in lanes: visible Front 12 slots plus active International SUITE countries. */
+export const arenaSlotSignInOpenIslandCodes = [
+  ...ARENA_FRONT12_SLOT_DISPLAY_ORDER,
+  ...getInternationalSuiteActiveIslandCodes().filter(
+    (islandCode) => !isArenaFront12VisibleSlot(islandCode)
+  )
+] as const;
 
 export type ArenaSlotSignInOpenIslandCode = (typeof arenaSlotSignInOpenIslandCodes)[number];
 
+/** Server authorization is deterministic and does not trust browser sessionStorage. */
 export function isArenaSlotSignInOpen(islandCode: string) {
-  if (isArenaMasterKeyActive()) return true;
-  return isInternationalSuiteCountryActiveByIslandCode(islandCode);
+  return (
+    isArenaFront12VisibleSlot(islandCode) ||
+    isInternationalSuiteCountryActiveByIslandCode(islandCode)
+  );
 }
 
 export function isArenaSlotFrozen(islandCode: string) {
   return !isArenaSlotSignInOpen(islandCode);
 }
 
-export const arenaSlotSignInFrozenCopy = `Slot frozen · girl sign-in open · ${getInternationalSuiteActiveCountryLabel()} only`;
+export const arenaSlotSignInFrozenCopy = `Slot frozen · girl sign-in open for Front 12 + active International SUITE lanes only`;
 
-export const arenaSlotSignInFrozenShortCopy = `Frozen · ${getInternationalSuiteActiveCountryLabel({ short: true })} only`;
+export const arenaSlotSignInFrozenShortCopy = "Frozen · Front 12 + active SUITE lanes only";
 
-export const arenaSlotSignInOpenLabel = getInternationalSuiteActiveCountryLabel();
+export const arenaSlotSignInOpenLabel = "Front 12 + active International SUITE lanes";
 
 export type ArenaNationSlotRow = {
   position: number;

@@ -9,7 +9,11 @@ export function toArenaEnginePublicState(
   nowMs = Date.now()
 ): ArenaEnginePublicState {
   const liveSessions = getActiveLiveSessions(state, nowMs);
-  const openLiveCount = state.openLiveIslandCodes.length;
+  const openLiveIslandCodes = Array.from(new Set([
+    ...state.openLiveIslandCodes,
+    ...state.frontSlots.map((slot) => slot.templateIslandCode)
+  ])).filter(isArenaSlotSignInOpen);
+  const openLiveCount = openLiveIslandCodes.length;
   const frozenFrontCount = state.frontSlots.filter(
     (slot) => !isArenaSlotSignInOpen(slot.templateIslandCode)
   ).length;
@@ -26,7 +30,7 @@ export function toArenaEnginePublicState(
     shouldRotate: shouldRotateArenaEngine(state, nowMs),
     rotationIntervalHours: state.rotationIntervalHours,
     liveSessionHours: state.liveSessionHours,
-    openLiveIslandCodes: state.openLiveIslandCodes,
+    openLiveIslandCodes,
     openLiveCount,
     frozenFrontCount,
     stats: {

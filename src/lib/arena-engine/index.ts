@@ -19,17 +19,12 @@ import {
   rotateArenaEngineState,
   shouldRotateArenaEngine
 } from "@/lib/arena-engine/rotate";
-import { updateArenaEngineState } from "@/lib/arena-engine/store";
+import { loadArenaEngineState, updateArenaEngineState } from "@/lib/arena-engine/store";
 
+/** Read-only snapshot for public polling. Expired sessions are filtered for display, not pruned here. */
 export async function getArenaEnginePublicState() {
-  return updateArenaEngineState((current) => {
-    const state = pruneExpiredLiveSessions(current);
-
-    return {
-      state,
-      result: toArenaEnginePublicState(state)
-    };
-  });
+  const state = await loadArenaEngineState();
+  return toArenaEnginePublicState(state);
 }
 
 export async function runArenaEngineRotation(source = "legal_placeholder_bot") {

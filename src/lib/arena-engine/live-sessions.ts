@@ -14,8 +14,19 @@ export function claimArenaEngineLiveSession(
   now = new Date()
 ): { ok: true; state: ArenaEngineState; session: ArenaEngineLiveSession } | { ok: false; error: string } {
   const name = input.displayName.trim();
-  if (name.length < 2) {
-    return { ok: false, error: "Display name is too short." };
+  if (!Number.isInteger(input.slotId) || input.slotId < 1 || input.slotId > 12) {
+    return { ok: false, error: "Invalid slot id." };
+  }
+  if (name.length < 2 || name.length > 40) {
+    return { ok: false, error: "Display name must be between 2 and 40 characters." };
+  }
+  if (/[\x00-\x1F\x7F]/.test(name)) {
+    return { ok: false, error: "Display name contains unsupported characters." };
+  }
+
+  const targetSlot = state.frontSlots.find((slot) => slot.slotRank === input.slotId);
+  if (!targetSlot || targetSlot.templateIslandCode !== input.islandCode) {
+    return { ok: false, error: "Slot and country do not match." };
   }
 
   if (!isArenaSlotSignInOpen(input.islandCode)) {

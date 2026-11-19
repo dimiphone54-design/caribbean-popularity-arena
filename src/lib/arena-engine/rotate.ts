@@ -3,6 +3,7 @@ import {
   ARENA_ENGINE_ROTATION_HOURS,
   ARENA_ENGINE_WAITING_COUNT
 } from "@/lib/arena-engine/constants";
+import { shouldKeepArenaActiveSlotsOpen } from "@/lib/arena-slot-keep-open";
 import type {
   ArenaEngineFrontSlot,
   ArenaEngineRotationEvent,
@@ -99,6 +100,8 @@ export function rotateArenaEngineState(
 }
 
 export function pruneExpiredLiveSessions(state: ArenaEngineState, nowMs = Date.now()) {
+  if (shouldKeepArenaActiveSlotsOpen()) return state;
+
   const liveSessions: ArenaEngineState["liveSessions"] = {};
   let changed = false;
 
