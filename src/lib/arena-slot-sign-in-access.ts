@@ -1,4 +1,3 @@
-import { isArenaMasterKeyActive } from "@/lib/arena-master-key";
 import {
   ARENA_FRONT12_SLOT_DISPLAY_ORDER,
   isArenaFront12VisibleSlot
@@ -139,6 +138,7 @@ export const legalBotFrozenFrontQueueSlots: ArenaNationSlotRow[] = [
     name: "Jasmine Hodge",
     country: "British Virgin Islands",
     flag: "🇻🇬",
+    islandCode: "VG",
     meta: "Age 24 · Sailing"
   },
   {
@@ -146,6 +146,7 @@ export const legalBotFrozenFrontQueueSlots: ArenaNationSlotRow[] = [
     name: "Leah Francis",
     country: "U.S. Virgin Islands",
     flag: "🇻🇮",
+    islandCode: "VI",
     meta: "Age 23 · Culture"
   }
 ];
