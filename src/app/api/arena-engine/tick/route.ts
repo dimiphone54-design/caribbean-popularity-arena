@@ -3,6 +3,9 @@ import { ARENA_ENGINE_BOT_SECRET_HEADER } from "@/lib/arena-engine/constants";
 import { arenaEngineConfig, isArenaBotSecretValid } from "@/lib/arena-engine/config";
 import { runArenaEngineRotationIfDue, getArenaEnginePublicState } from "@/lib/arena-engine";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 /** Scheduled tick · rotates only when due · requires the configured bot secret header. */
 export async function GET(request: Request) {
   const secret = request.headers.get(ARENA_ENGINE_BOT_SECRET_HEADER);
