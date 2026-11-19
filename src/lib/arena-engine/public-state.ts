@@ -11,10 +11,8 @@ export function toArenaEnginePublicState(
   const liveSessions = getActiveLiveSessions(state, nowMs);
   const openLiveIslandCodes = Array.from(new Set([
     ...state.openLiveIslandCodes,
-    ...state.frontSlots
-      .filter((slot) => isArenaSlotSignInOpen(slot.templateIslandCode))
-      .map((slot) => slot.templateIslandCode)
-  ]));
+    ...state.frontSlots.map((slot) => slot.templateIslandCode)
+  ])).filter(isArenaSlotSignInOpen);
   const openLiveCount = openLiveIslandCodes.length;
   const frozenFrontCount = state.frontSlots.filter(
     (slot) => !isArenaSlotSignInOpen(slot.templateIslandCode)
