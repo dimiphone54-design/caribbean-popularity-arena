@@ -1,62 +1,114 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
-import { arenaEngineConfig } from "@/lib/arena-engine/config";
+import "server-only";
+
+import { adminDb } from "@/lib/firebase-admin";
 import { createArenaEngineSeed } from "@/lib/arena-engine/seed";
 import type { ArenaEngineState } from "@/lib/arena-engine/types";
 
-const globalStore = globalThis as typeof globalThis & {
-  __arenaEngineState?: ArenaEngineState;
-};
+const COLLECTION = "arena_engine";
+const DOCUMENT = "state";
 
-function resolveDataPath() {
-  return path.isAbsolute(arenaEngineConfig.dataFile)
-    ? arenaEngineConfig.dataFile
-    : path.join(process.cwd(), arenaEngineConfig.dataFile);
+function getStateReference() {
+  return adminDb.collection(COLLECTION).doc(DOCUMENT);
 }
 
-async function readStateFromDisk(): Promise<ArenaEngineState | null> {
-  try {
-    const raw = await readFile(resolveDataPath(), "utf8");
-    const parsed = JSON.parse(raw) as ArenaEngineState;
-    if (parsed?.version !== 1 || !Array.isArray(parsed.frontSlots)) {
-      return null;
-    }
-    return parsed;
-  } catch {
-    return null;
+function validateState(value: unknown): ArenaEngineState {
+  const state = value as ArenaEngineState;
+
+  if (
+    !state ||
+    state.version !== 1 ||
+    !Array.isArray(state.frontSlots) ||
+    state.frontSlots.length !== 12 ||
+    !Array.isArray(state.waitingSlots) ||
+    state.waitingSlots.length !== 12 ||
+    !state.liveSessions ||
+    typeof state.liveSessions !== "object" ||
+    Array.isArray(state.liveSessions)
+  ) {
+    throw new Error(
+      "Firestore Arena Engine state is invalid. Refusing to overwrite it."
+    );
   }
-}
 
-async function writeStateToDisk(state: ArenaEngineState) {
-  const filePath = resolveDataPath();
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, JSON.stringify(state, null, 2), "utf8");
+  return state;
 }
 
 export async function loadArenaEngineState(): Promise<ArenaEngineState> {
-  if (globalStore.__arenaEngineState) {
-    return globalStore.__arenaEngineState;
-  }
+  const ref = getStateReference();
 
-  const fromDisk = await readStateFromDisk();
-  const state = fromDisk ?? createArenaEngineSeed();
-  globalStore.__arenaEngineState = state;
+  return adminDb.runTransaction(async (transaction) => {
+    const snapshot = await transaction.get(ref);
 
-  if (!fromDisk) {
-    await writeStateToDisk(state);
-  }
+    if (snapshot.exists) {
+      return validateState(snapshot.data());
+    }
 
-  return state;
+    const seed = createArenaEngineSeed();
+    transaction.create(ref, seed);
+    return seed;
+  });
 }
 
 export async function saveArenaEngineState(state: ArenaEngineState) {
-  globalStore.__arenaEngineState = state;
-  await writeStateToDisk(state);
-  return state;
+  const validated = validateState(state);
+  const ref = getStateReference();
+
+  await adminDb.runTransaction(async (transaction) => {
+    const snapshot = await transaction.get(ref);
+
+    if (!snapshot.exists) {
+      throw new Error(
+        "Arena Engine Firestore document disappeared. Refusing to recreate it during save."
+      );
+    }
+
+    validateState(snapshot.data());
+    transaction.set(ref, validated);
+  });
+
+  return validated;
+}
+
+export async function updateArenaEngineState<
+  T extends {
+    state: ArenaEngineState;
+    result: unknown;
+  }
+>(
+  updater: (state: ArenaEngineState) => T
+): Promise<T["result"]> {
+  const ref = getStateReference();
+
+  return adminDb.runTransaction(async (transaction) => {
+    const snapshot = await transaction.get(ref);
+    const current = snapshot.exists
+      ? validateState(snapshot.data())
+      : createArenaEngineSeed();
+
+    const updated = updater(current);
+    const nextState = validateState(updated.state);
+
+    transaction.set(ref, nextState);
+    return updated.result;
+  });
 }
 
 export async function resetArenaEngineState() {
   const state = createArenaEngineSeed();
-  await saveArenaEngineState(state);
+  const ref = getStateReference();
+
+  await adminDb.runTransaction(async (transaction) => {
+    const snapshot = await transaction.get(ref);
+
+    if (!snapshot.exists) {
+      throw new Error(
+        "Arena Engine Firestore document is missing. Refusing to reset."
+      );
+    }
+
+    validateState(snapshot.data());
+    transaction.set(ref, state);
+  });
+
   return state;
 }
