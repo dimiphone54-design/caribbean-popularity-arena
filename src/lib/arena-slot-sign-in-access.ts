@@ -17,7 +17,12 @@ export function isArenaSlotFrozenForUi(islandCode: string, masterKeyActive = fal
 }
 
 /** Public sign-in lanes: visible Front 12 slots plus active International SUITE countries. */
-export const arenaSlotSignInOpenIslandCodes = getInternationalSuiteActiveIslandCodes();
+export const arenaSlotSignInOpenIslandCodes = [
+  ...ARENA_FRONT12_SLOT_DISPLAY_ORDER,
+  ...getInternationalSuiteActiveIslandCodes().filter(
+    (islandCode) => !isArenaFront12VisibleSlot(islandCode)
+  )
+] as const;
 
 export type ArenaSlotSignInOpenIslandCode = (typeof arenaSlotSignInOpenIslandCodes)[number];
 
