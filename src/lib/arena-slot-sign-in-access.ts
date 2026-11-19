@@ -40,11 +40,11 @@ export function isArenaSlotFrozen(islandCode: string) {
   return !isArenaSlotSignInOpen(islandCode);
 }
 
-export const arenaSlotSignInFrozenCopy = `Slot frozen · girl sign-in open · ${getInternationalSuiteActiveCountryLabel()} only`;
+export const arenaSlotSignInFrozenCopy = `Slot frozen · girl sign-in open for Front 12 + active International SUITE lanes only`;
 
-export const arenaSlotSignInFrozenShortCopy = `Frozen · ${getInternationalSuiteActiveCountryLabel({ short: true })} only`;
+export const arenaSlotSignInFrozenShortCopy = "Frozen · Front 12 + active SUITE lanes only";
 
-export const arenaSlotSignInOpenLabel = getInternationalSuiteActiveCountryLabel();
+export const arenaSlotSignInOpenLabel = "Front 12 + active International SUITE lanes";
 
 export type ArenaNationSlotRow = {
   position: number;
