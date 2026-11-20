@@ -1,4 +1,5 @@
 import { getSupabaseClient } from "@/lib/supabase/client";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 
 export type MemberRow = {
   id: string;
@@ -61,13 +62,23 @@ export async function createMember(draft: MemberDraft): Promise<{ id: string }> 
   return { id };
 }
 
-export async function listMembers(): Promise<MemberRow[]> {
-  const client = getSupabaseClient();
-  if (!client) return [];
+export type MemberRegistryRow = Pick<
+  MemberRow,
+  "id" | "display_name" | "email" | "country" |
+  "island_code" | "terms_agreed_at" | "created_at"
+>;
+
+export async function listMembers(): Promise<MemberRegistryRow[]> {
+  const client = getSupabaseAdminClient();
   const { data, error } = await client
     .from("members")
-    .select("*")
+    .select("id,display_name,email,country,island_code,terms_agreed_at,created_at")
     .order("created_at", { ascending: false });
-  if (error) return [];
-  return (data ?? []) as MemberRow[];
+
+  if (error) {
+    console.error("listMembers error:", error);
+    throw new Error("Unable to read member registry");
+  }
+
+  return (data ?? []) as MemberRegistryRow[];
 }

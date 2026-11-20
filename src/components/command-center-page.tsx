@@ -1,4 +1,5 @@
 "use client";
+import { ArenaRegistryAdminPanel } from "@/components/arena-registry-admin-panel";
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
@@ -92,10 +93,23 @@ function MasterKeyUnlockFooter() {
     }
   }
 
-  function lock() {
-    window.sessionStorage.removeItem("cfa_arena_master_key_value");
-    setArenaMasterKeyActive(false);
-    setActive(false);
+  async function lock() {
+    try {
+      const response = await fetch("/api/arena-master-key/lock", {
+        method: "POST",
+        credentials: "same-origin",
+        cache: "no-store"
+      });
+      if (!response.ok) {
+        setError("Server lock failed. Please try again.");
+        return;
+      }
+      window.sessionStorage.removeItem("cfa_arena_master_key_value");
+      setArenaMasterKeyActive(false);
+      setActive(false);
+    } catch {
+      setError("Unable to contact the server. Still unlocked.");
+    }
   }
 
   if (active) {
@@ -753,7 +767,8 @@ export function CommandCenterPage() {
               />
             </div>
           </div>
-        </main>
+              <ArenaRegistryAdminPanel />
+</main>
       </div>
       <SiteFooter />
     </>

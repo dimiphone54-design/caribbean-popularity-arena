@@ -12,7 +12,9 @@ export async function GET() {
       ok: true,
       firebaseAdmin: "connected",
     });
-  } catch {
+  } catch (error) {
+    console.error("Firebase health check failed:", error);
+
     return NextResponse.json(
       {
         ok: false,

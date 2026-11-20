@@ -33,13 +33,11 @@ export function clearArenaOwnerSessionCookie() {
   return `${ARENA_OWNER_COOKIE}=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict${secure}`;
 }
 
-export function hasArenaOwnerSession(request: Request) {
+export function hasArenaOwnerSessionCookie(cookieHeader: string) {
   try {
-    const cookieHeader = request.headers.get("cookie") ?? "";
     const cookie = cookieHeader.split(";")
       .map((part) => part.trim())
       .find((part) => part.startsWith(`${ARENA_OWNER_COOKIE}=`));
-
     if (!cookie) return false;
 
     const value = cookie.slice(ARENA_OWNER_COOKIE.length + 1);
@@ -67,4 +65,8 @@ export function hasArenaOwnerSession(request: Request) {
   } catch {
     return false;
   }
+}
+
+export function hasArenaOwnerSession(request: Request) {
+  return hasArenaOwnerSessionCookie(request.headers.get("cookie") ?? "");
 }
